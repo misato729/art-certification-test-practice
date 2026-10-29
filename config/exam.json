@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "site": {
+    "id": "sample-exam",
+    "name": "資格試験ラボ",
+    "short_name": "資格ラボ",
+    "exam_name": "サンプル資格試験",
+    "description": "資格試験の知識を、1問ずつ確認できる学習サービスです。",
+    "tagline": "毎日の演習で、理解を積み重ねる。",
+    "logo_path": "/images/logo.svg",
+    "primary_color": "#2563eb",
+    "contact_email": "",
+    "overview": [
+      {
+        "title": "このサンプルについて",
+        "body": "動作確認用の架空の試験です。試験名・分類・問題データを差し替えて利用してください。"
+      },
+      {
+        "title": "学習方法",
+        "body": "問題を1問ずつ解き、回答後に正答・解説・出典を確認できます。ログインすると回答履歴を保存できます。"
+      }
+    ]
+  },
+  "exam": {
+    "set_count": 2,
+    "questions_per_exam": 3,
+    "choice_labels": [
+      "ア",
+      "イ",
+      "ウ",
+      "エ"
+    ]
+  },
+  "categories": {
+    "major": [
+      {
+        "value": "fundamentals",
+        "label": "基礎知識"
+      },
+      {
+        "value": "application",
+        "label": "応用知識"
+      }
+    ],
+    "minor": [
+      {
+        "value": "numbers",
+        "label": "数と計算",
+        "major_category_value": "fundamentals"
+      },
+      {
+        "value": "logic",
+        "label": "論理と思考",
+        "major_category_value": "application"
+      }
+    ]
+  },
+  "payments": {
+    "enabled": false,
+    "free_exam_count": 2,
+    "amount": 500,
+    "currency": "jpy"
+  }
+}

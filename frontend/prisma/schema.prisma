@@ -1,0 +1,220 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// CHECK constraints and partial unique indexes are retained in migration.sql.
+model User {
+  id BigInt @id @default(autoincrement())
+  name String @db.VarChar(100)
+  email String @unique(map: "index_users_on_email") @db.VarChar(255)
+  role String @default("user") @db.VarChar(20)
+  email_verified Boolean @default(false)
+  image String? @db.Text
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  sessions AuthSession[]
+  accounts AuthAccount[]
+  histories AnswerHistory[]
+  favorites Favorite[]
+  payments Payment[]
+  membership Membership?
+  verification_access VerificationAccessGrant?
+  @@map("users")
+}
+model Question {
+  id BigInt @id @default(autoincrement())
+  exam_number Int
+  question_number Int
+  major_category_code String @db.VarChar(50)
+  category_code String @db.VarChar(100)
+  content_blocks Json @default("[]") @db.JsonB
+  explanation_blocks Json @default("[]") @db.JsonB
+  source_text String? @db.Text
+  publication_status String @default("draft") @db.VarChar(20)
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  choices QuestionChoice[]
+  histories AnswerHistory[]
+  favorites Favorite[]
+  @@unique([exam_number, question_number], map: "index_questions_on_exam_number_and_question_number")
+  @@index([exam_number, publication_status, question_number], map: "index_questions_for_practice")
+  @@index([major_category_code], map: "index_questions_on_major_category_code")
+  @@index([category_code], map: "index_questions_on_category_code")
+  @@index([publication_status, id], map: "index_questions_on_publication_status_and_id")
+  @@map("questions")
+}
+model QuestionChoice {
+  id BigInt @id @default(autoincrement())
+  question_id BigInt
+  choice_label String @db.VarChar(10)
+  content_blocks Json @default("[]") @db.JsonB
+  is_correct Boolean @default(false)
+  display_order Int
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  question Question @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_rails_e0c1562c5c")
+  histories AnswerHistory[]
+  @@index([question_id], map: "index_question_choices_on_question_id")
+  @@unique([question_id, choice_label], map: "index_question_choices_on_question_id_and_choice_label")
+  @@unique([question_id, display_order], map: "index_question_choices_on_question_id_and_display_order")
+  @@map("question_choices")
+}
+model AnswerHistory {
+  id BigInt @id @default(autoincrement())
+  user_id BigInt
+  question_id BigInt
+  selected_choice_id BigInt
+  is_correct Boolean
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_rails_1439fadf00")
+  question Question @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_rails_7417220f32")
+  selected_choice QuestionChoice @relation(fields: [selected_choice_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_00d219ace5")
+  @@index([user_id], map: "index_answer_histories_on_user_id")
+  @@index([question_id], map: "index_answer_histories_on_question_id")
+  @@index([selected_choice_id], map: "index_answer_histories_on_selected_choice_id")
+  @@index([user_id, question_id], map: "index_answer_histories_on_user_id_and_question_id")
+  @@index([user_id, created_at(sort: Desc)], map: "index_answer_histories_on_user_id_and_created_at")
+  @@map("answer_histories")
+}
+model Favorite {
+  id BigInt @id @default(autoincrement())
+  user_id BigInt
+  question_id BigInt
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_rails_d15744e438")
+  question Question @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_rails_81d281162e")
+  @@index([user_id], map: "index_favorites_on_user_id")
+  @@index([question_id], map: "index_favorites_on_question_id")
+  @@index([user_id, created_at], map: "index_favorites_on_user_id_and_created_at")
+  @@unique([user_id, question_id], map: "index_favorites_on_user_id_and_question_id")
+  @@map("favorites")
+}
+model Payment {
+  id BigInt @id @default(autoincrement())
+  user_id BigInt?
+  stripe_checkout_session_id String @unique(map: "index_payments_on_stripe_checkout_session_id") @db.VarChar
+  stripe_payment_intent_id String? @db.VarChar
+  stripe_charge_id String? @db.VarChar
+  stripe_price_id String @db.VarChar
+  amount Int @default(500)
+  refunded_amount Int @default(0)
+  currency String @default("jpy") @db.VarChar(3)
+  status String @default("pending") @db.VarChar(30)
+  paid_at DateTime? @db.Timestamp(6)
+  refunded_at DateTime? @db.Timestamp(6)
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  stripe_dispute_id String? @db.VarChar
+  dispute_status String? @db.VarChar(30)
+  dispute_closed_at DateTime? @db.Timestamp(6)
+  last_refund_failure_reason String? @db.VarChar(100)
+  last_refund_failed_at DateTime? @db.Timestamp(6)
+  user User? @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: NoAction, map: "fk_rails_081dc04a02")
+  membership Membership?
+  @@index([user_id], map: "index_payments_on_user_id")
+  @@index([user_id, created_at], map: "index_payments_on_user_id_and_created_at")
+  @@index([status, updated_at], map: "index_payments_on_status_and_updated_at")
+  @@map("payments")
+}
+model Membership {
+  id BigInt @id @default(autoincrement())
+  user_id BigInt @unique(map: "index_memberships_on_user_id")
+  source_payment_id BigInt @unique(map: "index_memberships_on_source_payment_id")
+  status String @default("active") @db.VarChar(20)
+  activated_at DateTime @db.Timestamp(6)
+  revoked_at DateTime? @db.Timestamp(6)
+  revocation_reason String? @db.VarChar(30)
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_rails_99326fb65d")
+  source_payment Payment @relation(fields: [source_payment_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rails_62e780d01c")
+  @@map("memberships")
+}
+model StripeWebhookEvent {
+  id BigInt @id @default(autoincrement())
+  stripe_event_id String @unique(map: "index_stripe_webhook_events_on_stripe_event_id") @db.VarChar
+  event_type String @db.VarChar
+  livemode Boolean
+  processed_at DateTime @db.Timestamp(6)
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  @@index([event_type, processed_at], map: "index_stripe_webhook_events_on_event_type_and_processed_at")
+  @@map("stripe_webhook_events")
+}
+model VerificationAccessGrant {
+  id BigInt @id @default(autoincrement())
+  user_id BigInt @unique(map: "index_verification_access_grants_on_user_id")
+  reason String @db.VarChar(255)
+  granted_by String @db.VarChar(100)
+  expires_at DateTime @db.Timestamp(6)
+  revoked_at DateTime? @db.Timestamp(6)
+  created_at DateTime @db.Timestamp(6)
+  updated_at DateTime @db.Timestamp(6)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_rails_8eb7837753")
+  @@map("verification_access_grants")
+}
+model ApiRateLimitBucket {
+  key String @id @db.VarChar(64)
+  request_count BigInt
+  expires_at DateTime @db.Timestamp(6)
+  @@index([expires_at], map: "index_api_rate_limit_buckets_on_expires_at")
+  @@map("api_rate_limit_buckets")
+}
+model AuthSession {
+  id BigInt @id @default(autoincrement())
+  expires_at DateTime @db.Timestamp(6)
+  token String @unique(map: "auth_sessions_token_unique") @db.Text
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  updated_at DateTime @default(now()) @db.Timestamp(6)
+  ip_address String? @db.Text
+  user_agent String? @db.Text
+  user_id BigInt
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "auth_sessions_user_id_fkey")
+  @@index([user_id], map: "auth_sessions_user_id_index")
+  @@map("auth_sessions")
+}
+model AuthAccount {
+  id BigInt @id @default(autoincrement())
+  account_id String @db.Text
+  provider_id String @db.Text
+  user_id BigInt
+  access_token String? @db.Text
+  refresh_token String? @db.Text
+  id_token String? @db.Text
+  access_token_expires_at DateTime? @db.Timestamp(6)
+  refresh_token_expires_at DateTime? @db.Timestamp(6)
+  scope String? @db.Text
+  password String? @db.Text
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  updated_at DateTime @default(now()) @db.Timestamp(6)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "auth_accounts_user_id_fkey")
+  @@unique([provider_id, account_id], map: "auth_accounts_provider_account_unique")
+  @@index([user_id], map: "auth_accounts_user_id_index")
+  @@map("auth_accounts")
+}
+model AuthVerification {
+  id BigInt @id @default(autoincrement())
+  identifier String @db.Text
+  value String @db.Text
+  expires_at DateTime @db.Timestamp(6)
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  updated_at DateTime @default(now()) @db.Timestamp(6)
+  @@index([identifier], map: "auth_verifications_identifier_index")
+  @@map("auth_verifications")
+}
+
+// Standard rate-limiter-flexible PostgreSQL store; Prisma Migrate owns its DDL.
+model RateLimiterFlexible {
+  key String @id @db.VarChar(255)
+  points Int @default(0)
+  expire BigInt?
+  @@index([expire], map: "index_rate_limiter_flexible_on_expire")
+  @@map("rate_limiter_flexible")
+}

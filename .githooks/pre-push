@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+repo_root=$(git rev-parse --show-toplevel)
+if ! command -v node >/dev/null 2>&1; then
+  printf '%s\n' 'Node.jsがないため、ローカル専用資料の送信検査を実行できません。pushを中止します。' >&2
+  exit 1
+fi
+exec node "$repo_root/scripts/check-private-sources.mjs" --pre-push

@@ -1,0 +1,39 @@
+{
+  "id": "service_setup",
+  "context": "development",
+  "title": "対象サービスの初期設定を確認する例",
+  "status": "waiting_for_request",
+  "depends_on": [],
+  "authorization": "not_requested",
+  "request_ref": null,
+  "next_action": "実際の依頼が来たら対象と受入条件を具体化し、依頼の根拠を記録する",
+  "evidence": [],
+  "last_verified_at": null,
+  "verification_scope": "未実施。例示ファイルは自動でタスクに登録されない。",
+  "acceptance": [
+    {
+      "id": "checks",
+      "kind": "automated",
+      "description": "依頼された変更範囲の検査が成功する",
+      "verification": "対象に必要な既存検査を選び、結果と根拠を記録する",
+      "status": "pending",
+      "evidence": [],
+      "checked_at": null
+    },
+    {
+      "id": "review",
+      "kind": "review",
+      "description": "実装担当以外が受入条件と成果物を確認する",
+      "verification": "別担当のレビューで未解決の問題がないことを確認する",
+      "status": "pending",
+      "evidence": [],
+      "checked_at": null,
+      "reviewer": null
+    }
+  ],
+  "execution": {
+    "worker": "assign_before_work",
+    "max_attempts": 3,
+    "attempts": []
+  }
+}

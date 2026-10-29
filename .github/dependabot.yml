@@ -1,0 +1,92 @@
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "build"
+      include: "scope"
+    groups:
+      # Keep related framework/UI changes together; major updates stay separate.
+      nuxt-ui:
+        applies-to: "version-updates"
+        patterns:
+          - "nuxt"
+          - "@nuxt/*"
+          - "vue"
+          - "h3"
+          - "tailwindcss"
+          - "@iconify-json/lucide"
+        update-types:
+          - "minor"
+          - "patch"
+      development-tools:
+        applies-to: "version-updates"
+        dependency-type: "development"
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "@iconify-json/lucide"
+        update-types:
+          - "minor"
+          - "patch"
+    # Auth, DB, validation and payment libraries remain individual PRs.
+    # Do not ignore node-forge: its existing patch guard must remain visible.
+
+  - package-ecosystem: "docker"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "build"
+      include: "scope"
+
+  - package-ecosystem: "docker-compose"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "build"
+      include: "scope"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    groups:
+      actions-minor-patch:
+        applies-to: "version-updates"
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"

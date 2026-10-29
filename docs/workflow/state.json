@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "revision": 0,
+  "updated_at": null,
+  "workspace_relative_to_repo": ".",
+  "active_context": "development",
+  "last_checkpoint": null,
+  "gate_policy": {
+    "version": 1,
+    "legacy_task_ids": []
+  },
+  "contexts": [
+    {
+      "id": "product",
+      "title": "学習設計・サービスの方針",
+      "card": "docs/workflow/contexts/product.md"
+    },
+    {
+      "id": "development",
+      "title": "実装・検証",
+      "card": "docs/workflow/contexts/development.md"
+    },
+    {
+      "id": "operations",
+      "title": "資料・データ・配信の運用",
+      "card": "docs/workflow/contexts/operations.md"
+    }
+  ],
+  "watch_files": [
+    "AGENTS.md",
+    "README.md",
+    "docs/testing.md",
+    "docs/workflow/README.md",
+    "docs/workflow/policy.json",
+    "docs/workflow/task.example.json",
+    "docs/workflow/contexts/product.md",
+    "docs/workflow/contexts/development.md",
+    "docs/workflow/contexts/operations.md",
+    "scripts/context.mjs",
+    "scripts/context.test.mjs",
+    "scripts/workflow-policy.mjs",
+    "scripts/workflow-policy.test.mjs",
+    "scripts/workspace-policy.mjs",
+    "scripts/workspace-policy.test.mjs",
+    "scripts/check-private-sources.mjs",
+    "scripts/check-private-sources.test.mjs",
+    ".gitignore",
+    ".dockerignore",
+    ".githooks/pre-push"
+  ],
+  "tasks": []
+}

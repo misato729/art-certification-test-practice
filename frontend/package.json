@@ -1,0 +1,62 @@
+{
+  "name": "exam-practice-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "typecheck": "nuxt typecheck",
+    "postinstall": "node scripts/patch-node-forge.mjs && nuxt prepare && prisma generate",
+    "test:server": "node scripts/test-server.mjs",
+    "db:migrate": "node --experimental-strip-types server/operations/cli.ts db:migrate",
+    "db:seed": "node --experimental-strip-types server/operations/cli.ts db:seed",
+    "admin:create": "node --experimental-strip-types server/operations/cli.ts admin:create",
+    "operations": "node --experimental-strip-types server/operations/cli.ts",
+    "prebuild": "node scripts/patch-node-forge.mjs --check && prisma generate",
+    "predev": "node scripts/patch-node-forge.mjs --check && prisma generate",
+    "security:patch": "node scripts/patch-node-forge.mjs",
+    "security:check": "node scripts/patch-node-forge.mjs --check",
+    "pregenerate": "node scripts/patch-node-forge.mjs --check",
+    "prepreview": "node scripts/patch-node-forge.mjs --check",
+    "test:e2e": "node scripts/run-e2e.mjs",
+    "schema:generate": "node --experimental-strip-types ../scripts/generate-config-schema.mjs",
+    "schema:check": "node --experimental-strip-types ../scripts/generate-config-schema.mjs --check",
+    "db:generate": "prisma generate",
+    "db:validate": "prisma validate",
+    "db:migrate:dev": "prisma migrate dev",
+    "db:baseline": "node --experimental-strip-types server/operations/cli.ts db:baseline"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^4.6.1",
+    "better-auth": "1.7.12",
+    "h3": "^1.15.10",
+    "nuxt": "^4.5.1",
+    "pg": "^8.16.3",
+    "stripe": "^23.0.1",
+    "tailwindcss": "^4.1.18",
+    "vue": "^3.5.42",
+    "zod": "^4.1.12",
+    "@prisma/client": "7.10.1",
+    "@prisma/adapter-pg": "7.10.1",
+    "rate-limiter-flexible": "11.2.3",
+    "@sentry/node": "11.9.0"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.124",
+    "@playwright/test": "1.64.1",
+    "@types/node": "^26.6.5",
+    "@types/pg": "^8.15.6",
+    "typescript": "^5.5.3",
+    "vue-tsc": "^3.3.12",
+    "prisma": "7.10.1"
+  },
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  },
+  "overrides": {
+    "esbuild": "0.28.2"
+  }
+}

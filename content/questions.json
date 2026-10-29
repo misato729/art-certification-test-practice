@@ -1,0 +1,401 @@
+{
+  "schema_version": 1,
+  "questions": [
+    {
+      "exam_number": 1,
+      "question_number": 1,
+      "major_category_code": "fundamentals",
+      "category_code": "numbers",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "12個の品物を3人で同じ数ずつ分ける。一人分の個数として正しいものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "12 ÷ 3 = 4なので、正答はイです。アの3個ずつでは合計9個となります。ウの6個ずつでは18個、エの9個ずつでは27個となり、いずれも12個を等しく分けた結果ではありません。"
+        }
+      ],
+      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "3個"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "4個"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "6個"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "9個"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 2,
+      "major_category_code": "application",
+      "category_code": "logic",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "「箱に入っているカードは全て青い」と分かっている。ここから確実にいえることを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はウです。「箱に入っている」ならば「青い」という条件を、そのまま一枚のカードに適用しています。アは条件と結論を逆にしています。イは箱の外にあるカードについて条件にない結論を出しています。エは青くないカードを加えるため、「全て青い」という条件が成り立たなくなります。"
+        }
+      ],
+      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "青いカードは全て箱に入っている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "箱の外に青いカードはない。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "箱に入っているカードを1枚取り出せば、そのカードは青い。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "青くないカードを箱に追加しても、最初の条件は変わらない。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 3,
+      "major_category_code": "fundamentals",
+      "category_code": "numbers",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ある品物の価格は200円である。この価格から25％引きした金額として正しいものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はエです。値引き額は200 × 0.25 = 50円なので、支払額は200 − 50 = 150円です。アは値引き額そのもの、イは50％引きの場合の金額です。ウは割合の25％を金額の25円として引いています。"
+        }
+      ],
+      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "50円"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "100円"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "175円"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "150円"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 2,
+      "question_number": 1,
+      "major_category_code": "application",
+      "category_code": "logic",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "数列 2，5，8，11，… は、同じ数を順に足して作られている。次の数として正しいものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はアです。隣り合う数の差はいずれも3なので、11 + 3 = 14となります。イの13は2を足した値、ウの15は4を足した値、エの22は11を2倍した値であり、示された規則と一致しません。"
+        }
+      ],
+      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "14"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "13"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "15"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "22"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 2,
+      "question_number": 2,
+      "major_category_code": "fundamentals",
+      "category_code": "numbers",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "4，6，8の三つの数の算術平均として正しいものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はイです。算術平均は合計を個数で割って求めるので、(4 + 6 + 8) ÷ 3 = 6です。アの5とウの7は三つ全ての数の平均ではありません。エの18は合計であり、個数で割っていません。"
+        }
+      ],
+      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "5"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "6"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "7"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "18"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 2,
+      "question_number": 3,
+      "major_category_code": "application",
+      "category_code": "logic",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "P、Q、Rの3人が並ぶ。PはQより前、QはRより前にいる。この条件を満たす並びを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はウです。PがQより前で、さらにQがRより前なので、P → Q → Rとなります。アはPとQの前後が逆です。イはQとRの前後が逆です。エは両方の条件と逆の順序です。"
+        }
+      ],
+      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "Q → P → R"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "P → R → Q"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "P → Q → R"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "R → Q → P"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    }
+  ]
+}

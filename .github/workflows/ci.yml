@@ -1,0 +1,97 @@
+name: Template checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  harness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Reject local-only materials in tracked files and history
+        run: node scripts/check-private-sources.mjs
+      - name: Check progress, completion gates, and source protection
+        run: node --test --test-concurrency=1 scripts/context.test.mjs scripts/workflow-policy.test.mjs scripts/workspace-policy.test.mjs scripts/check-private-sources.test.mjs
+      - name: Validate the portable workflow state
+        run: node scripts/context.mjs check
+  verify:
+    needs: harness
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare isolated development settings
+        run: cp .env.example .env
+      - name: Build containers
+        run: docker compose build
+      - name: Validate shared schemas and sample content
+        run: docker compose run --rm frontend sh -c 'npm run db:generate && npm run db:validate && npm run schema:check && node --experimental-strip-types ../scripts/check-template.mjs'
+      - name: Create isolated PostgreSQL test database
+        run: |
+          docker compose up -d db --wait
+          docker compose exec -T db sh -c 'createdb -U "$POSTGRES_USER" exam_practice_test'
+      - name: Check PostgreSQL API and security regressions
+        run: docker compose run --rm -e APP_ENV=test -e DB_NAME=exam_practice_test frontend sh -c 'npm run db:migrate && npm run test:server'
+      - name: Check frontend and production build
+        run: docker compose run --rm frontend sh -c 'npm run security:check && npm test && npm run typecheck && npm run build'
+      - name: Stop isolated services
+        if: always()
+        run: docker compose down
+  browser:
+    needs: harness
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: exam_practice_e2e_test
+          POSTGRES_USER: exam_e2e
+          # Synthetic credentials for this disposable CI database only.
+          POSTGRES_PASSWORD: ci-e2e-disposable
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U exam_e2e -d exam_practice_e2e_test"
+          --health-interval 3s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      E2E_DATABASE_URL: postgresql://exam_e2e:ci-e2e-disposable@127.0.0.1:5432/exam_practice_e2e_test
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Generate Prisma Client and validate database schema
+        run: npm run db:generate && npm run db:validate
+      - name: Check generated schema
+        run: npm run schema:check
+      - name: Check desktop and mobile browser flows
+        run: npm run test:e2e
+      - name: Save browser test diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-test-diagnostics
+          path: |
+            frontend/playwright-report/
+            frontend/test-results/
+          retention-days: 7
+          if-no-files-found: ignore
