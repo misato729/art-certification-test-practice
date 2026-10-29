@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 7,
-  "updated_at": "2026-10-29T18:46:28.165Z",
+  "revision": 9,
+  "updated_at": "2026-10-29T18:48:45.365Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-10-29T18-46-28-165Z-r7.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-10-29T18-48-45-365Z-r9.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -166,41 +166,55 @@
       "id": "art_questions_10_push",
       "context": "operations",
       "title": "10問の作成結果をコミット・pushする",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "art_questions_10"
       ],
       "authorization": "requested",
       "request_ref": "2026-10-30 ユーザー明示依頼: コミット・pushしてください",
-      "next_action": "原資料を除外した送信対象を確定し、作成結果をコミットする",
-      "evidence": [],
-      "last_verified_at": null,
-      "verification_scope": "未実施。既存の問題検証結果と今回の送信検査を分けて記録する。公開と本番DB変更は依頼範囲外。",
+      "next_action": "追加依頼を待つ。一般公開・本番DB変更は未実施",
+      "evidence": [
+        "docs/verification.md"
+      ],
+      "last_verified_at": "2026-10-29T18:48:44Z",
+      "verification_scope": "送信前の共有設定・10問の整合・資料保護・差分検査が成功。別担当の送信差分レビューは指摘なし。10問と関連設定を70cdc32260ed635ff540bda005ba3db01c4d0c86としてorigin/mainへpushし、リモートHEAD一致と作業ツリーの清浄を確認。原資料送信・一般公開・本番DB変更は未実施。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "作成済み10問と関連設定だけをコミットし、保護資料を含めずorigin/mainへpushしてコミット一致を確認する",
           "verification": "差分・共有設定検査・check-private-sources・コミット対象一覧・push結果・リモートHEAD一致を確認する",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-29T18:48:44Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "別担当が送信差分と原資料除外を確認し、未解決の指摘がない",
           "verification": "既存の内容レビューを前提に、送信対象と保護設定を別担当が確認する",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-29T18:48:44Z",
+          "reviewer": "template_local_check"
         }
       ],
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "10問のコミット・pushとリモートHEAD一致を確認。原資料除外、送信検査、独立レビューが成功",
+            "at": "2026-10-29T18:48:44.702Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]
