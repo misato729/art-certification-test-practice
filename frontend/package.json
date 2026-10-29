@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@nuxt/ui": "^4.6.1",
-    "better-auth": "1.7.12",
+    "better-auth": "1.7.13",
     "h3": "^1.15.10",
     "nuxt": "^4.5.1",
     "pg": "^8.16.3",
