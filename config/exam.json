@@ -5,7 +5,7 @@
     "name": "美術検定ラボ",
     "short_name": "美術ラボ",
     "exam_name": "美術検定2級",
-    "description": "美術検定2級に向けて、西洋美術と日本美術の知識を1問ずつ確認。現在は動作確認用の自作サンプル6問を掲載しています。",
+    "description": "美術検定2級に向けて、美術史・技法・デザイン・美術館の知識を1問ずつ確認。解説と出典付きのオリジナル問題10問を掲載しています。",
     "tagline": "一問から広がる、美術の世界。",
     "logo_path": "/images/logo.svg",
     "primary_color": "#7c3f63",
@@ -16,8 +16,8 @@
         "body": "美術検定2級の学習に向けて準備中の、非公式の問題演習サイトです。主催団体が運営・監修するサービスではありません。"
       },
       {
-        "title": "現在の仮問題",
-        "body": "西洋美術と日本美術を題材とする自作サンプルを2セット、各3問掲載しています。公式の過去問ではなく、実際の出題範囲・難易度・出題形式を再現したものではありません。"
+        "title": "今回の演習セット",
+        "body": "西洋・日本・東洋美術、現代美術、工芸・デザイン、美術館に関する10問です。技法や時代背景の理解に加え、展示計画の資料を読み取る問題や、保存対応を判断する問題を含みます。提供資料の分野と傾向を参考に作成した独自問題で、公式過去問の転載ではありません。全問4択で、図版を使う問題や本試験全体を再現するものではありません。"
       },
       {
         "title": "学習方法",
@@ -26,8 +26,8 @@
     ]
   },
   "exam": {
-    "set_count": 2,
-    "questions_per_exam": 3,
+    "set_count": 1,
+    "questions_per_exam": 10,
     "choice_labels": [
       "ア",
       "イ",
@@ -39,34 +39,93 @@
     "major": [
       {
         "value": "western",
-        "label": "西洋美術"
+        "label": "西洋美術史"
       },
       {
         "value": "japanese",
-        "label": "日本美術"
+        "label": "日本美術史"
+      },
+      {
+        "value": "contemporary",
+        "label": "現代美術"
+      },
+      {
+        "value": "asian",
+        "label": "東洋美術"
+      },
+      {
+        "value": "design",
+        "label": "工芸・デザイン"
+      },
+      {
+        "value": "museum",
+        "label": "美術館・展覧会"
+      },
+      {
+        "value": "application",
+        "label": "知識・情報の活用"
+      },
+      {
+        "value": "practice",
+        "label": "美術館の実践"
       }
     ],
     "minor": [
       {
-        "value": "renaissance",
-        "label": "ルネサンス",
+        "value": "ancient",
+        "label": "古代の建築",
         "major_category_value": "western"
       },
       {
         "value": "modern",
-        "label": "近代美術",
+        "label": "近代の美術運動",
         "major_category_value": "western"
       },
       {
-        "value": "edo",
-        "label": "江戸時代の美術",
+        "value": "medieval",
+        "label": "中世の仏像彫刻",
         "major_category_value": "japanese"
+      },
+      {
+        "value": "edo",
+        "label": "江戸時代の版画",
+        "major_category_value": "japanese"
+      },
+      {
+        "value": "installation",
+        "label": "空間とインスタレーション",
+        "major_category_value": "contemporary"
+      },
+      {
+        "value": "ceramics",
+        "label": "東アジアの陶磁器",
+        "major_category_value": "asian"
+      },
+      {
+        "value": "modern_design",
+        "label": "近代のデザイン教育",
+        "major_category_value": "design"
+      },
+      {
+        "value": "institutions",
+        "label": "美術館と建物の活用",
+        "major_category_value": "museum"
+      },
+      {
+        "value": "display_data",
+        "label": "展示計画の資料読解",
+        "major_category_value": "application"
+      },
+      {
+        "value": "collection_care",
+        "label": "収蔵品の保存対応",
+        "major_category_value": "practice"
       }
     ]
   },
   "payments": {
     "enabled": false,
-    "free_exam_count": 2,
+    "free_exam_count": 1,
     "amount": 500,
     "currency": "jpy"
   }

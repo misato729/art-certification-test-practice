@@ -5,31 +5,35 @@
       "exam_number": 1,
       "question_number": 1,
       "major_category_code": "western",
-      "category_code": "renaissance",
+      "category_code": "ancient",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "レオナルド・ダ・ヴィンチの《モナ・リザ》に見られる、輪郭を煙のようにぼかして柔らかな明暗を表す技法を一つ選びなさい。"
+          "text": "古代ローマでは、パンテオンや大浴場などで大きな内部空間が実現した。こうした空間と建築技術の関係について、最も適切な説明を一つ選びなさい。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "正答はアのスフマートです。《モナ・リザ》では輪郭や明暗の境目を柔らかくつなぐ表現が用いられています。ルーヴル美術館の作品解説でも、この技法が紹介されています。"
+          "text": "正答はイです。古代ローマのコンクリートは、石材とモルタルなどを組み合わせた材料で、さまざまな形に成形できました。ローマの建築家はその性質をヴォールトやドームに生かし、内部を柱で細かく区切らずに広い空間を覆う構成を発達させました。パンテオンのドームはその代表例です。"
+        },
+        {
+          "type": "text",
+          "text": "アは水平梁による構造だけに限定し、曲面をもつ屋根の技術を除外しているため誤りです。ウも、コンクリートが大規模な構造そのものに使われた点を捉えていません。エは発明と発展を混同しています。ローマ人はコンクリートの最初の発明者ではなく、既存の材料の可能性を発展させたのです。"
         }
       ],
-      "source_text": "ルーヴル美術館「From the Mona Lisa to The Wedding Feast at Cana」 | https://www.louvre.fr/en/explore/the-palace/from-the-mona-lisa-to-the-wedding-feast-at-cana",
+      "source_text": "メトロポリタン美術館「Roman Art: A Resource for Educators」建築・コンクリートの解説 | https://resources.metmuseum.org/resources/metpublications/pdf/Roman_Art_A_Resource_for_Educators.pdf\nメトロポリタン美術館「Immaterial: Concrete」 | https://www.metmuseum.org/perspectives/immaterial-concrete",
       "choices": [
         {
           "choice_label": "ア",
           "content_blocks": [
             {
               "type": "text",
-              "text": "スフマート"
+              "text": "長い水平の石梁だけで屋根を支える柱梁構造を徹底し、曲面を用いる構造は避けた。"
             }
           ],
-          "is_correct": true,
+          "is_correct": false,
           "display_order": 1
         },
         {
@@ -37,10 +41,10 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "点描"
+              "text": "コンクリートを多様な形に成形する性質を生かし、ヴォールトやドームで広い空間を覆った。"
             }
           ],
-          "is_correct": false,
+          "is_correct": true,
           "display_order": 2
         },
         {
@@ -48,7 +52,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "コラージュ"
+              "text": "コンクリートは屋根を支える構造には使わず、列柱の表面を飾る薄い仕上げにだけ用いた。"
             }
           ],
           "is_correct": false,
@@ -59,7 +63,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "フロッタージュ"
+              "text": "ローマ人がコンクリートを初めて発明したため、それ以前には存在しなかった材料を使えた。"
             }
           ],
           "is_correct": false,
@@ -70,95 +74,33 @@
     {
       "exam_number": 1,
       "question_number": 2,
-      "major_category_code": "western",
-      "category_code": "renaissance",
-      "publication_status": "published",
-      "content_blocks": [
-        {
-          "type": "text",
-          "text": "ウフィツィ美術館が所蔵する《ヴィーナスの誕生》を描いた画家を一つ選びなさい。"
-        }
-      ],
-      "explanation_blocks": [
-        {
-          "type": "text",
-          "text": "正答はウのサンドロ・ボッティチェリです。《ヴィーナスの誕生》は15世紀のイタリアで制作された作品で、ウフィツィ美術館の作品情報に作者と技法が掲載されています。"
-        }
-      ],
-      "source_text": "ウフィツィ美術館「The birth of Venus」 | https://www.uffizi.it/en/artworks/birth-of-venus",
-      "choices": [
-        {
-          "choice_label": "ア",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "ラファエロ"
-            }
-          ],
-          "is_correct": false,
-          "display_order": 1
-        },
-        {
-          "choice_label": "イ",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "ミケランジェロ"
-            }
-          ],
-          "is_correct": false,
-          "display_order": 2
-        },
-        {
-          "choice_label": "ウ",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "サンドロ・ボッティチェリ"
-            }
-          ],
-          "is_correct": true,
-          "display_order": 3
-        },
-        {
-          "choice_label": "エ",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "カラヴァッジョ"
-            }
-          ],
-          "is_correct": false,
-          "display_order": 4
-        }
-      ]
-    },
-    {
-      "exam_number": 1,
-      "question_number": 3,
       "major_category_code": "western",
       "category_code": "modern",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "ニューヨーク近代美術館（MoMA）が所蔵する《星月夜》の作者を一つ選びなさい。"
+          "text": "ピカソとブラックらによる分析的キュビスムでは、楽器や瓶などが細かな面へと分けられ、浅い奥行きのなかで組み直されている。この表現を理解する説明として、最も適切なものを一つ選びなさい。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "正答はイのフィンセント・ファン・ゴッホです。《星月夜》は渦巻くような夜空が描かれた油彩画で、MoMAのコレクションに含まれます。"
+          "text": "正答はエです。キュビスムは、一つの視点から自然を写したように見せる従来の方法を問い直しました。分析的キュビスムでは、物体を幾何学的な面に分けて組み直し、異なる角度から見た形を重ねることで、対象と平らな画面との関係を探っています。"
+        },
+        {
+          "type": "text",
+          "text": "アは単一視点の遠近法を守る説明なので、この試みと逆です。イの色点による色彩表現は、本問で注目する形と視点の分析を説明していません。ウも誤りです。新聞紙などを貼るパピエ・コレは後に総合的キュビスムへつながる重要な手法ですが、それだけを分析的キュビスムの定義とし、対象を面に分ける操作を否定することはできません。"
         }
       ],
-      "source_text": "MoMA「Vincent van Gogh. The Starry Night」 | https://www.moma.org/collection/works/79802",
+      "source_text": "メトロポリタン美術館「Cubism」 | https://www.metmuseum.org/essays/cubism\nメトロポリタン美術館「Cubism: The Leonard A. Lauder Collection」 | https://www.metmuseum.org/press-releases/cubism-the-leonard-lauder-collection-2014-exhibitions",
       "choices": [
         {
           "choice_label": "ア",
           "content_blocks": [
             {
               "type": "text",
-              "text": "クロード・モネ"
+              "text": "一つの固定した視点から見える形を、一点透視図法に従って矛盾なく再現しようとした。"
             }
           ],
           "is_correct": false,
@@ -169,73 +111,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "フィンセント・ファン・ゴッホ"
-            }
-          ],
-          "is_correct": true,
-          "display_order": 2
-        },
-        {
-          "choice_label": "ウ",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "ポール・セザンヌ"
-            }
-          ],
-          "is_correct": false,
-          "display_order": 3
-        },
-        {
-          "choice_label": "エ",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "エドガー・ドガ"
-            }
-          ],
-          "is_correct": false,
-          "display_order": 4
-        }
-      ]
-    },
-    {
-      "exam_number": 2,
-      "question_number": 1,
-      "major_category_code": "japanese",
-      "category_code": "edo",
-      "publication_status": "published",
-      "content_blocks": [
-        {
-          "type": "text",
-          "text": "葛飾北斎の《神奈川沖浪裏》が含まれる連作を一つ選びなさい。"
-        }
-      ],
-      "explanation_blocks": [
-        {
-          "type": "text",
-          "text": "正答はエの《冨嶽三十六景》です。《神奈川沖浪裏》では大きな波と舟、その奥に小さく見える富士山が組み合わされています。メトロポリタン美術館の作品情報にも連作名が示されています。"
-        }
-      ],
-      "source_text": "メトロポリタン美術館「Under the Wave off Kanagawa」 | https://www.metmuseum.org/art/collection/search/45434",
-      "choices": [
-        {
-          "choice_label": "ア",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "東海道五拾三次"
-            }
-          ],
-          "is_correct": false,
-          "display_order": 1
-        },
-        {
-          "choice_label": "イ",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "名所江戸百景"
+              "text": "対象の立体的な形の分析よりも、色点の並置によって光の色彩を再現することを中心とした。"
             }
           ],
           "is_correct": false,
@@ -246,7 +122,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "木曾海道六拾九次"
+              "text": "分析的キュビスムとは、対象を面に分けず、印刷物の紙片を貼ることだけで成立する表現である。"
             }
           ],
           "is_correct": false,
@@ -257,7 +133,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "冨嶽三十六景"
+              "text": "複数の視点から捉えた形を一つの画面に組み込み、画面の平面性も意識した構成を試みた。"
             }
           ],
           "is_correct": true,
@@ -266,100 +142,38 @@
       ]
     },
     {
-      "exam_number": 2,
-      "question_number": 2,
-      "major_category_code": "japanese",
-      "category_code": "edo",
-      "publication_status": "published",
-      "content_blocks": [
-        {
-          "type": "text",
-          "text": "《名所江戸百景》の一図《大はしあたけの夕立》を手がけた浮世絵師を一つ選びなさい。"
-        }
-      ],
-      "explanation_blocks": [
-        {
-          "type": "text",
-          "text": "正答はアの歌川広重です。《大はしあたけの夕立》は1857年の木版画で、橋を渡る人々と雨を描いた《名所江戸百景》の一図です。"
-        }
-      ],
-      "source_text": "メトロポリタン美術館「Sudden Shower over Shin-Ōhashi Bridge and Atake」 | https://www.metmuseum.org/art/collection/search/55433",
-      "choices": [
-        {
-          "choice_label": "ア",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "歌川広重"
-            }
-          ],
-          "is_correct": true,
-          "display_order": 1
-        },
-        {
-          "choice_label": "イ",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "喜多川歌麿"
-            }
-          ],
-          "is_correct": false,
-          "display_order": 2
-        },
-        {
-          "choice_label": "ウ",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "東洲斎写楽"
-            }
-          ],
-          "is_correct": false,
-          "display_order": 3
-        },
-        {
-          "choice_label": "エ",
-          "content_blocks": [
-            {
-              "type": "text",
-              "text": "菱川師宣"
-            }
-          ],
-          "is_correct": false,
-          "display_order": 4
-        }
-      ]
-    },
-    {
-      "exam_number": 2,
+      "exam_number": 1,
       "question_number": 3,
       "major_category_code": "japanese",
-      "category_code": "edo",
+      "category_code": "medieval",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "根津美術館が所蔵する国宝《燕子花図屏風》の作者を一つ選びなさい。"
+          "text": "鎌倉時代の木彫像について、次のような調査記録を想定する。頭部と体幹の主要部分が複数の木材を接いで構成され、内部はくり抜かれていることが分かった。主要な形を漆の層で盛り上げてはいない。この構造に最もよく合う技法の説明を一つ選びなさい。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "正答はウの尾形光琳です。《燕子花図屏風》は江戸時代の作品で、金地に燕子花を描いた六曲一双の屏風です。根津美術館のコレクション情報で作者と形式を確認できます。"
+          "text": "正答はアです。寄木造は、像の主要な部分を複数の材から構成する木彫技法です。内部をくり抜く内刳りには、木の干割れを抑え、重さを減らす効果があります。ただし内刳りは一木造にもあるため、空洞だけで決めず、頭部や体幹の主要部分が複数材かどうかを見ることが大切です。"
+        },
+        {
+          "type": "text",
+          "text": "イは主要部分を一材から彫る説明で、今回の接合構造に合いません。ウとエは漆を用いて形をつくる乾漆技法です。木の芯を残す木心乾漆と、土の原型を抜く脱活乾漆の違いはありますが、いずれも今回示された木彫主体の構造とは異なります。寄木造は平安時代後半にも用いられており、鎌倉時代に初めて生まれた技法ではありません。"
         }
       ],
-      "source_text": "根津美術館「燕子花図」 | https://www.nezu-muse.or.jp/jp/collection/detail.php?id=10301",
+      "source_text": "京都国立博物館「仏像は何からつくられているの？」 | https://www.kyohaku.go.jp/jp/learn/home/dictio/choukoku/198/\n東京国立博物館「仏像 一木にこめられた祈り」一木彫・内刳りの解説 | https://www.tnm.jp/jp/misc/press/docs/20061003butsuzo_release.pdf\n奈良国立博物館 正倉院展用語解説「乾漆」 | https://shosointen-glossary.narahaku.go.jp/kanshitsu/",
       "choices": [
         {
           "choice_label": "ア",
           "content_blocks": [
             {
               "type": "text",
-              "text": "雪舟等楊"
+              "text": "寄木造であり、複数の木材を組み合わせて像の主要部分を構成する。"
             }
           ],
-          "is_correct": false,
+          "is_correct": true,
           "display_order": 1
         },
         {
@@ -367,7 +181,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "狩野永徳"
+              "text": "一木造であり、像の主要部分を一本の木材から連続して彫り出す。"
             }
           ],
           "is_correct": false,
@@ -378,7 +192,77 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "尾形光琳"
+              "text": "木心乾漆造であり、木の芯に漆を用いた材料を盛って主要な形をつくる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "脱活乾漆造であり、土の原型に布と漆を重ね、後で原型を取り除く。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 4,
+      "major_category_code": "japanese",
+      "category_code": "edo",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "江戸時代の錦絵を、絵を描いた一人の作者の仕事だけで説明すると、制作の実態を捉えきれない。一般的な出版・制作の分担を正しく説明しているものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はウです。一般的な錦絵の制作では、版元が企画や制作、販売をまとめ、絵師の版下絵をもとに彫師が版木を彫り、摺師が絵具を紙へ移しました。絵柄の発想に加えて彫りや摺りの技術も仕上がりを左右するため、完成品は複数の担い手の協働から生まれたと理解できます。"
+        },
+        {
+          "type": "text",
+          "text": "アは版元と絵師の基本的な役割を、イは彫師と摺師の作業を入れ替えています。エのように作家自身が描画・彫版・摺りを担う考え方は、近代の創作版画の「自画・自刻・自摺」と区別して考える必要があります。例外のない絶対的な職種区分という意味ではありませんが、江戸の錦絵の一般的な分業体制を説明する選択肢としては適切ではありません。"
+        }
+      ],
+      "source_text": "太田記念美術館「浮世絵 ベルギーロイヤルコレクション展」彫り・摺りの解説 | https://www.ukiyoe-ota-muse.jp/2008_belgium/\n太田記念美術館「蔦屋重三郎と版元列伝」 | https://www.ukiyoe-ota-muse.jp/tsutaya-juzaburo-and-the-chronicles-of-publishers/\n国立国会図書館「創作版画と新版画」 | https://www.ndl.go.jp/imagebank/column/shinhanga",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "版元が版下絵を描き、絵師が出版全体の企画や販売を取り仕切った。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "彫師が版木から紙へ絵具を移し、摺師が版下絵に基づいて版木を彫った。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "版元が企画などを統括し、絵師が版下絵を描き、彫師が版木を彫り、摺師が紙に摺った。"
             }
           ],
           "is_correct": true,
@@ -389,10 +273,480 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "円山応挙"
+              "text": "絵師が下絵・彫り・摺りをすべて単独で担うことを原則とし、職人の分担を避けた。"
             }
           ],
           "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 5,
+      "major_category_code": "contemporary",
+      "category_code": "installation",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ドリス・サルセドは《Shibboleth（シボレス）》（2007年）で、テート・モダンのタービン・ホールの床に長い裂け目をつくった。この作品と展示空間の関係について、作者や関係者の説明を踏まえた理解として最も適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はイです。シカゴ現代美術館が公開する作者や関係者の説明では、この作品は社会の分断や、異なる集団を排除する境界の問題と結びつけられています。美術館の床そのものを裂く介入によって、普段は通り過ぎる空間と鑑賞者の関係を揺さぶる作品として読むことができます。"
+        },
+        {
+          "type": "text",
+          "text": "アは特定の建築空間に働きかけた作品を、場所から独立した可搬の物体と取り違えています。ウも誤りで、裂け目は偶然の災害痕ではなく、制作された介入です。エは装飾の効果だけに意味を限定していますが、作者たちが語る排除や社会的格差への関心と一致しません。作品の意味を、素材の見え方とその置かれた場所や社会から切り離さずに考えることが要点です。"
+        }
+      ],
+      "source_text": "シカゴ現代美術館「Doris Salcedo’s Public Works」作者・関係者のインタビュー | https://mcachicago.org/stories/editorial/doris-salcedos-public-works/\nシカゴ現代美術館「Doris Salcedo」回顧展・作品情報 | https://mcachicago.org/whats-on/exhibitions/doris-salcedo/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "建築から独立した持ち運べる彫刻として制作され、展示場所を替えても同じ空間体験になる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "会場の床を分断する介入が鑑賞者と場所の関係を変え、社会の排除や境界の問題を考える契機となる。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "自然災害による偶然の破損をそのまま展示したもので、作者は裂け目の制作に関与していない。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "建築の表面に純粋な装飾効果を加えることを目的とし、社会的な分断の問題とは切り離されている。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 6,
+      "major_category_code": "asian",
+      "category_code": "ceramics",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "高麗時代の青磁に用いられた象嵌（ぞうがん）の技法について、制作工程の説明として最も適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はエです。高麗の象嵌青磁では、素地に設けた文様のくぼみに白や黒の化粧土を埋めます。半透明の釉を通して、青緑の地に白・黒の文様が現れる点が特徴です。単に文様を彫るだけでなく、異なる土を埋める工程を押さえましょう。"
+        },
+        {
+          "type": "text",
+          "text": "アは金属線で区切る工程で、土を埋める象嵌の説明ではありません。イは顔料で描く工程であり、彫ったくぼみに化粧土を埋めていません。ウの型押しも文様を作る方法ですが、異なる土を埋めるという象嵌の要件を満たしません。"
+        }
+      ],
+      "source_text": "メトロポリタン美術館「Goryeo Celadon」 | https://www.metmuseum.org/essays/goryeo-celadon",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "金属線で表面を区画し、その区画ごとに異なる色の釉を流し入れる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "素地にコバルト顔料で文様を描き、透明な釉をかけて焼成する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "文様を刻んだ型を素地に押し当て、異なる土を埋めずに凹凸を作る。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "素地に文様を彫り、白や黒の化粧土を埋め、釉をかけて焼成する。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 7,
+      "major_category_code": "design",
+      "category_code": "modern_design",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "バウハウスの教育理念とその展開に関する説明として、最も適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はアです。グロピウスが1919年に創設したバウハウスは、当初、手工芸を通じて建築・彫刻・絵画を統合しようとしました。1923年には量産を見据えたデザインを重視する方向が明確になります。「手仕事か工業か」の二者択一ではなく、その変化と接続が要点です。"
+        },
+        {
+          "type": "text",
+          "text": "イは場所の順序が逆で、ワイマールで開校し、1925年にデッサウへ移転しました。ウも誤りで、学生は材料・色彩などの基礎課程を経て専門工房へ進みました。エは創立時の統合という理念に反します。"
+        }
+      ],
+      "source_text": "メトロポリタン美術館「The Bauhaus, 1919–1933」 | https://www.metmuseum.org/essays/the-bauhaus-1919-1933",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "創立時は手工芸を通じた芸術の統合を目指し、のちに工業生産に適したデザインも重視した。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1919年にデッサウで開校し、1925年にワイマールへ移転して工房教育を始めた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "学生は入学直後から一つの専門工房だけで学び、材料や色彩を扱う基礎課程は設けられなかった。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "創立時の理想は、絵画や彫刻を建築や生活用品の設計から明確に切り離すことだった。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 8,
+      "major_category_code": "museum",
+      "category_code": "institutions",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "美術館を調べて、次の施設ノートを作成した。このノートに該当する美術館を一つ選びなさい。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "項目",
+            "調査した内容"
+          ],
+          "rows": [
+            [
+              "所在地",
+              "フランス・パリ"
+            ],
+            [
+              "建物の前用途",
+              "1900年の万国博覧会に合わせて建設された鉄道駅"
+            ],
+            [
+              "美術館としての開館",
+              "1986年"
+            ]
+          ]
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はウのオルセー美術館です。1900年のパリ万国博覧会に合わせて建てられた駅舎を美術館へ転用し、1986年に開館しました。美術館の性格を考える際は、収蔵品に加え、建物の以前の用途や都市との関係も手がかりになります。"
+        },
+        {
+          "type": "text",
+          "text": "アのルーヴルは旧王宮を利用する美術館です。イのテート・モダンはロンドンの旧バンクサイド発電所を改修し、2000年に開館しました。エのポンピドゥー・センターはピアノとロジャースによる建物で1977年に開館しており、旧鉄道駅・1986年という組合せに当てはまりません。"
+        }
+      ],
+      "source_text": "オルセー美術館「Histoire du musée」 | https://www.musee-orsay.fr/en/node/60\nルーヴル美術館「The palace」 | https://www.louvre.fr/en/explore/the-palace\nTate Archive「Tate Modern Project」 | https://archive.tate.org.uk/Record.aspx?src=CalmView.Catalog&id=TG+12\nポンピドゥー・センター「Une architecture iconique」 | https://www.centrepompidou.fr/fr/le-centre-pompidou-se-metamorphose/une-architecture-iconique",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ルーヴル美術館"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "テート・モダン"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "オルセー美術館"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ポンピドゥー・センター"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 9,
+      "major_category_code": "application",
+      "category_code": "display_data",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "同じ紙作品を展示する三つの計画を比較する。光源の種類は同じで、点灯中の照度は一定、消灯中の光は無視できるものとする。可視光の累積曝露量を「照度（lx）×1日の点灯時間（時間）×展示日数」で計算したとき、正しい比較を一つ選びなさい。なお、数値は比較練習のための仮定であり、作品の安全な展示基準を示すものではない。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "計画",
+            "照度",
+            "1日の点灯時間",
+            "展示日数"
+          ],
+          "rows": [
+            [
+              "A",
+              "50 lx",
+              "8時間",
+              "30日"
+            ],
+            [
+              "B",
+              "100 lx",
+              "6時間",
+              "20日"
+            ],
+            [
+              "C",
+              "75 lx",
+              "4時間",
+              "30日"
+            ]
+          ]
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はアです。Aは50×8×30＝12,000 lx・h、Bは100×6×20＝12,000 lx・h、Cは75×4×30＝9,000 lx・hです。したがってCが最も小さく、AとBは等しくなります。照度・点灯時間・日数を別々に見るのではなく、積で比較します。"
+        },
+        {
+          "type": "text",
+          "text": "イは照度だけ、ウは日数だけを比較しているため誤りです。エもCがほかの二つより小さいため誤りです。光による影響は蓄積するので低照度でも時間の管理が必要です。また、計算値だけで安全性は保証できず、実際の展示では材質・色材の光への敏感さや過去の曝露履歴なども確認します。"
+        }
+      ],
+      "source_text": "カナダ保存研究所「Agent of Deterioration: Light, Ultraviolet and Infrared」 | https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html\nカナダ保存研究所「Caring for paper objects」 | https://www.canada.ca/en/conservation-institute/services/preventive-conservation/guidelines-collections/paper-objects.html",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "Cの累積曝露量が最も小さく、AとBは等しい。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "照度が最も低いAの累積曝露量が、三つの中で最も小さい。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "展示日数が最も短いBの累積曝露量が、三つの中で最も小さい。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "照度・点灯時間・展示日数の違いが相殺され、三つとも等しい。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 10,
+      "major_category_code": "practice",
+      "category_code": "collection_care",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "美術館に届いた額装作品を、収蔵庫へ入れる前に検品している。箱の中で生きた小さな虫と、新しい食害を疑わせる粉状のものが見つかった。予定どおり展示準備に回すよう求められたが、担当者がまず取る対応として最も適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "正答はエです。疑わしい資料は既存のコレクションへ入れる前に隔離し、虫の拡散を防いで調べます。発見した日時や位置、作品・梱包材の状態を記録し、保存担当者と虫の確認や周囲の点検を進めるのが、予防的な害虫管理の考え方です。具体的な処置は資料の材質や状態に応じた判断が必要です。"
+        },
+        {
+          "type": "text",
+          "text": "アは目に見える虫を除くだけで被害や潜伏を否定しています。イは梱包材を介して広げるおそれがあり、梱包材も点検の対象です。ウは種類の確認を待つ間の拡散防止を欠いています。隔離・点検と虫の確認は、どちらか一方だけを行えばよいものではありません。"
+        }
+      ],
+      "source_text": "カナダ保存研究所「Preventing Infestations: Control Strategies and Detection Methods」 | https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/preventing-infestations.html\nカナダ保存研究所「Controlling Insect Pests with Low Temperature」 | https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/controlling-insects-low-temperature.html",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "見つかった虫だけを取り除き、作品の見た目に問題がなければ他の資料と同じ棚に置く。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "作品だけを別室へ移し、外した梱包材は問題がないものとして他作品の搬入に再利用する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "虫の種類が確定するまでは箱を開いたまま通常の搬入口に置き、周囲の点検は行わない。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "虫が逃げない適切な包材などで作品・梱包材を隔離し、保存担当者へ連絡して発見状況の記録と点検を進める。"
+            }
+          ],
+          "is_correct": true,
           "display_order": 4
         }
       ]

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 3,
-  "updated_at": "2026-10-29T14:58:08.014Z",
+  "revision": 7,
+  "updated_at": "2026-10-29T18:46:28.165Z",
   "workspace_relative_to_repo": ".",
-  "active_context": "development",
-  "last_checkpoint": "docs/workflow/handoffs/2026-10-29T14-58-08-014Z-r3.json",
+  "active_context": "operations",
+  "last_checkpoint": "docs/workflow/handoffs/2026-10-29T18-46-28-165Z-r7.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -102,6 +102,105 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "art_questions_10",
+      "context": "product",
+      "title": "提供資料の分野と傾向に基づくオリジナル10問の作成",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー依頼: past-examの過去問・概要・分野を参考に10問作成する",
+      "next_action": "ユーザーの内容確認・追加依頼を待つ。コミット・push・公開は未実施",
+      "evidence": [
+        "docs/verification.md",
+        "content/README.md",
+        "config/exam.json",
+        "content/questions.json"
+      ],
+      "last_verified_at": "2026-10-29T18:44:20Z",
+      "verification_scope": "提供資料をローカルで確認してオリジナル10問を作成。共有スキーマと設定・件数検査、単体114件、資料保護121件、独立した空DBへ10問・40選択肢の取込、本番用ビルド、PC/スマートフォン各10問の表示・正答非公開・採点・解説・幅の確認が成功。別担当が出典・一意性・差分と記録を確認。既存DB変更、コミット・push・公開は未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "10問の本文・4択・単一正答・全選択肢の解説と出典、分類・件数の設定が整合し、演習で表示できる",
+          "verification": "共有スキーマ・問題検査と関連テスト、独立したテストDBでの取込・演習表示を確認する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/README.md"
+          ],
+          "checked_at": "2026-10-29T18:44:20Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が出題範囲・事実関係・正答一意性・解説・原資料保護を確認し、指摘が解消されている",
+          "verification": "別担当の内容レビューと最終差分・検証記録の確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/README.md"
+          ],
+          "checked_at": "2026-10-29T18:44:20Z",
+          "reviewer": "template_local_check"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "オリジナル10問の内容・出典を独立レビューし、設定・資料保護・PCとスマートフォンの全問演習が成功",
+            "at": "2026-10-29T18:44:20.782Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_questions_10_push",
+      "context": "operations",
+      "title": "10問の作成結果をコミット・pushする",
+      "status": "doing",
+      "depends_on": [
+        "art_questions_10"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー明示依頼: コミット・pushしてください",
+      "next_action": "原資料を除外した送信対象を確定し、作成結果をコミットする",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "未実施。既存の問題検証結果と今回の送信検査を分けて記録する。公開と本番DB変更は依頼範囲外。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "作成済み10問と関連設定だけをコミットし、保護資料を含めずorigin/mainへpushしてコミット一致を確認する",
+          "verification": "差分・共有設定検査・check-private-sources・コミット対象一覧・push結果・リモートHEAD一致を確認する",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が送信差分と原資料除外を確認し、未解決の指摘がない",
+          "verification": "既存の内容レビューを前提に、送信対象と保護設定を別担当が確認する",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]

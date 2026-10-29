@@ -2,15 +2,17 @@
 
 美術検定2級の学習に向けた、非公式の問題演習サイトです。[exam-practice-template](https://github.com/misato729/exam-practice-template)から作成し、Nuxt 4・Nitro（TypeScript API）・PostgreSQL 16、Better Auth、Prismaを使用します。
 
-現在は西洋美術・日本美術の自作サンプル6問（2セット×3問、4択）を掲載しています。公式過去問や実際の試験形式・難易度を再現した模試ではありません。問題の拡充前に、演習・解説・履歴などの動作を確認するための初期版です。課金は無効です。
+提供された参考資料の分野・出題傾向を参考にした、オリジナル問題10問（1セット×10問、4択）を掲載しています。美術史・技法・デザイン・美術館の知識に加え、表の読み取りと保存対応の判断を扱い、全問に正答・誤答の解説と公開された一次資料の出典を付けています。公式過去問や図版は転載せず、本試験全体の形式・配点・難易度を再現した模試ではありません。課金は無効です。
 
 ## このリポジトリの初期設定
 
 - サービス名・配色・分類：[`config/exam.json`](config/exam.json)
-- 仮問題・解説・出典：[`content/questions.json`](content/questions.json)、[問題一覧](content/README.md)
+- 問題・解説・出典：[`content/questions.json`](content/questions.json)、[問題一覧](content/README.md)
 - サービス識別子：`art-certification-2`（他サービスのログインCookieと分離）
 - Composeプロジェクト：`art-certification-test-practice`、開発DB：`art_practice_development`
 - ローカル画面：http://localhost:3400、DBポート：`55435`
+
+提供された参考資料と、その抽出物・作業画像はローカル専用として`past-exam/`に保存し、Git・Dockerの対象から除外しています。
 
 このリポジトリの作成・GitHubへの保存と、サイトの一般公開は別操作です。問い合わせ先・規約・問題内容は一般公開に向けて整備してください。
 

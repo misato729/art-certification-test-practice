@@ -29,3 +29,7 @@
 **/[lL][oO][cC][aA][lL]-[oO][nN][lL][yY]/**
 /docs/workflow/.context.lock
 /docs/workflow/state.json.*.tmp
+
+# User-supplied exam references remain local.
+**/[pP][aA][sS][tT]-[eE][xX][aA][mM]
+**/[pP][aA][sS][tT]-[eE][xX][aA][mM]/**
