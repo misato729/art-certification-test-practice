@@ -4,32 +4,32 @@
     {
       "exam_number": 1,
       "question_number": 1,
-      "major_category_code": "fundamentals",
-      "category_code": "numbers",
+      "major_category_code": "western",
+      "category_code": "renaissance",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "12個の品物を3人で同じ数ずつ分ける。一人分の個数として正しいものを一つ選びなさい。"
+          "text": "レオナルド・ダ・ヴィンチの《モナ・リザ》に見られる、輪郭を煙のようにぼかして柔らかな明暗を表す技法を一つ選びなさい。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "12 ÷ 3 = 4なので、正答はイです。アの3個ずつでは合計9個となります。ウの6個ずつでは18個、エの9個ずつでは27個となり、いずれも12個を等しく分けた結果ではありません。"
+          "text": "正答はアのスフマートです。《モナ・リザ》では輪郭や明暗の境目を柔らかくつなぐ表現が用いられています。ルーヴル美術館の作品解説でも、この技法が紹介されています。"
         }
       ],
-      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "source_text": "ルーヴル美術館「From the Mona Lisa to The Wedding Feast at Cana」 | https://www.louvre.fr/en/explore/the-palace/from-the-mona-lisa-to-the-wedding-feast-at-cana",
       "choices": [
         {
           "choice_label": "ア",
           "content_blocks": [
             {
               "type": "text",
-              "text": "3個"
+              "text": "スフマート"
             }
           ],
-          "is_correct": false,
+          "is_correct": true,
           "display_order": 1
         },
         {
@@ -37,10 +37,10 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "4個"
+              "text": "点描"
             }
           ],
-          "is_correct": true,
+          "is_correct": false,
           "display_order": 2
         },
         {
@@ -48,7 +48,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "6個"
+              "text": "コラージュ"
             }
           ],
           "is_correct": false,
@@ -59,7 +59,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "9個"
+              "text": "フロッタージュ"
             }
           ],
           "is_correct": false,
@@ -70,29 +70,29 @@
     {
       "exam_number": 1,
       "question_number": 2,
-      "major_category_code": "application",
-      "category_code": "logic",
+      "major_category_code": "western",
+      "category_code": "renaissance",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "「箱に入っているカードは全て青い」と分かっている。ここから確実にいえることを一つ選びなさい。"
+          "text": "ウフィツィ美術館が所蔵する《ヴィーナスの誕生》を描いた画家を一つ選びなさい。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "正答はウです。「箱に入っている」ならば「青い」という条件を、そのまま一枚のカードに適用しています。アは条件と結論を逆にしています。イは箱の外にあるカードについて条件にない結論を出しています。エは青くないカードを加えるため、「全て青い」という条件が成り立たなくなります。"
+          "text": "正答はウのサンドロ・ボッティチェリです。《ヴィーナスの誕生》は15世紀のイタリアで制作された作品で、ウフィツィ美術館の作品情報に作者と技法が掲載されています。"
         }
       ],
-      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "source_text": "ウフィツィ美術館「The birth of Venus」 | https://www.uffizi.it/en/artworks/birth-of-venus",
       "choices": [
         {
           "choice_label": "ア",
           "content_blocks": [
             {
               "type": "text",
-              "text": "青いカードは全て箱に入っている。"
+              "text": "ラファエロ"
             }
           ],
           "is_correct": false,
@@ -103,7 +103,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "箱の外に青いカードはない。"
+              "text": "ミケランジェロ"
             }
           ],
           "is_correct": false,
@@ -114,7 +114,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "箱に入っているカードを1枚取り出せば、そのカードは青い。"
+              "text": "サンドロ・ボッティチェリ"
             }
           ],
           "is_correct": true,
@@ -125,7 +125,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "青くないカードを箱に追加しても、最初の条件は変わらない。"
+              "text": "カラヴァッジョ"
             }
           ],
           "is_correct": false,
@@ -136,29 +136,29 @@
     {
       "exam_number": 1,
       "question_number": 3,
-      "major_category_code": "fundamentals",
-      "category_code": "numbers",
+      "major_category_code": "western",
+      "category_code": "modern",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "ある品物の価格は200円である。この価格から25％引きした金額として正しいものを一つ選びなさい。"
+          "text": "ニューヨーク近代美術館（MoMA）が所蔵する《星月夜》の作者を一つ選びなさい。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "正答はエです。値引き額は200 × 0.25 = 50円なので、支払額は200 − 50 = 150円です。アは値引き額そのもの、イは50％引きの場合の金額です。ウは割合の25％を金額の25円として引いています。"
+          "text": "正答はイのフィンセント・ファン・ゴッホです。《星月夜》は渦巻くような夜空が描かれた油彩画で、MoMAのコレクションに含まれます。"
         }
       ],
-      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "source_text": "MoMA「Vincent van Gogh. The Starry Night」 | https://www.moma.org/collection/works/79802",
       "choices": [
         {
           "choice_label": "ア",
           "content_blocks": [
             {
               "type": "text",
-              "text": "50円"
+              "text": "クロード・モネ"
             }
           ],
           "is_correct": false,
@@ -169,10 +169,10 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "100円"
+              "text": "フィンセント・ファン・ゴッホ"
             }
           ],
-          "is_correct": false,
+          "is_correct": true,
           "display_order": 2
         },
         {
@@ -180,7 +180,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "175円"
+              "text": "ポール・セザンヌ"
             }
           ],
           "is_correct": false,
@@ -191,10 +191,10 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "150円"
+              "text": "エドガー・ドガ"
             }
           ],
-          "is_correct": true,
+          "is_correct": false,
           "display_order": 4
         }
       ]
@@ -202,32 +202,32 @@
     {
       "exam_number": 2,
       "question_number": 1,
-      "major_category_code": "application",
-      "category_code": "logic",
+      "major_category_code": "japanese",
+      "category_code": "edo",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "数列 2，5，8，11，… は、同じ数を順に足して作られている。次の数として正しいものを一つ選びなさい。"
+          "text": "葛飾北斎の《神奈川沖浪裏》が含まれる連作を一つ選びなさい。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "正答はアです。隣り合う数の差はいずれも3なので、11 + 3 = 14となります。イの13は2を足した値、ウの15は4を足した値、エの22は11を2倍した値であり、示された規則と一致しません。"
+          "text": "正答はエの《冨嶽三十六景》です。《神奈川沖浪裏》では大きな波と舟、その奥に小さく見える富士山が組み合わされています。メトロポリタン美術館の作品情報にも連作名が示されています。"
         }
       ],
-      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "source_text": "メトロポリタン美術館「Under the Wave off Kanagawa」 | https://www.metmuseum.org/art/collection/search/45434",
       "choices": [
         {
           "choice_label": "ア",
           "content_blocks": [
             {
               "type": "text",
-              "text": "14"
+              "text": "東海道五拾三次"
             }
           ],
-          "is_correct": true,
+          "is_correct": false,
           "display_order": 1
         },
         {
@@ -235,7 +235,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "13"
+              "text": "名所江戸百景"
             }
           ],
           "is_correct": false,
@@ -246,7 +246,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "15"
+              "text": "木曾海道六拾九次"
             }
           ],
           "is_correct": false,
@@ -257,10 +257,10 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "22"
+              "text": "冨嶽三十六景"
             }
           ],
-          "is_correct": false,
+          "is_correct": true,
           "display_order": 4
         }
       ]
@@ -268,32 +268,32 @@
     {
       "exam_number": 2,
       "question_number": 2,
-      "major_category_code": "fundamentals",
-      "category_code": "numbers",
+      "major_category_code": "japanese",
+      "category_code": "edo",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "4，6，8の三つの数の算術平均として正しいものを一つ選びなさい。"
+          "text": "《名所江戸百景》の一図《大はしあたけの夕立》を手がけた浮世絵師を一つ選びなさい。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "正答はイです。算術平均は合計を個数で割って求めるので、(4 + 6 + 8) ÷ 3 = 6です。アの5とウの7は三つ全ての数の平均ではありません。エの18は合計であり、個数で割っていません。"
+          "text": "正答はアの歌川広重です。《大はしあたけの夕立》は1857年の木版画で、橋を渡る人々と雨を描いた《名所江戸百景》の一図です。"
         }
       ],
-      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "source_text": "メトロポリタン美術館「Sudden Shower over Shin-Ōhashi Bridge and Atake」 | https://www.metmuseum.org/art/collection/search/55433",
       "choices": [
         {
           "choice_label": "ア",
           "content_blocks": [
             {
               "type": "text",
-              "text": "5"
+              "text": "歌川広重"
             }
           ],
-          "is_correct": false,
+          "is_correct": true,
           "display_order": 1
         },
         {
@@ -301,10 +301,10 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "6"
+              "text": "喜多川歌麿"
             }
           ],
-          "is_correct": true,
+          "is_correct": false,
           "display_order": 2
         },
         {
@@ -312,7 +312,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "7"
+              "text": "東洲斎写楽"
             }
           ],
           "is_correct": false,
@@ -323,7 +323,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "18"
+              "text": "菱川師宣"
             }
           ],
           "is_correct": false,
@@ -334,29 +334,29 @@
     {
       "exam_number": 2,
       "question_number": 3,
-      "major_category_code": "application",
-      "category_code": "logic",
+      "major_category_code": "japanese",
+      "category_code": "edo",
       "publication_status": "published",
       "content_blocks": [
         {
           "type": "text",
-          "text": "P、Q、Rの3人が並ぶ。PはQより前、QはRより前にいる。この条件を満たす並びを一つ選びなさい。"
+          "text": "根津美術館が所蔵する国宝《燕子花図屏風》の作者を一つ選びなさい。"
         }
       ],
       "explanation_blocks": [
         {
           "type": "text",
-          "text": "正答はウです。PがQより前で、さらにQがRより前なので、P → Q → Rとなります。アはPとQの前後が逆です。イはQとRの前後が逆です。エは両方の条件と逆の順序です。"
+          "text": "正答はウの尾形光琳です。《燕子花図屏風》は江戸時代の作品で、金地に燕子花を描いた六曲一双の屏風です。根津美術館のコレクション情報で作者と形式を確認できます。"
         }
       ],
-      "source_text": "動作確認用の架空出典（実資料ではありません） | https://example.com/sample-content",
+      "source_text": "根津美術館「燕子花図」 | https://www.nezu-muse.or.jp/jp/collection/detail.php?id=10301",
       "choices": [
         {
           "choice_label": "ア",
           "content_blocks": [
             {
               "type": "text",
-              "text": "Q → P → R"
+              "text": "雪舟等楊"
             }
           ],
           "is_correct": false,
@@ -367,7 +367,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "P → R → Q"
+              "text": "狩野永徳"
             }
           ],
           "is_correct": false,
@@ -378,7 +378,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "P → Q → R"
+              "text": "尾形光琳"
             }
           ],
           "is_correct": true,
@@ -389,7 +389,7 @@
           "content_blocks": [
             {
               "type": "text",
-              "text": "R → Q → P"
+              "text": "円山応挙"
             }
           ],
           "is_correct": false,

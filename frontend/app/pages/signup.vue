@@ -38,7 +38,7 @@ const submit = async (event: { data: typeof state }) => {
 
 <template>
   <div class="page-wrap auth-page">
-    <header class="page-intro"><h1>会員登録</h1><p>登録後は、解答履歴を保存できます。お気に入りはプレミアム会員向けです。</p></header>
+    <header class="page-intro"><h1>会員登録</h1><p>登録後は、解答履歴を保存できます。</p></header>
     <UForm ref="authForm" :schema="signupFormSchema" :state="state" class="content-panel auth-form" novalidate @error="focusFormError" @submit="submit">
       <FormTextField id="name" v-model="state.name" name="name" label="ユーザー名" autocomplete="name" />
       <FormTextField id="email" v-model="state.email" name="email" label="メールアドレス" autocomplete="email" type="email" />

@@ -1,4 +1,4 @@
-name: ${COMPOSE_PROJECT_NAME:-exam-practice-template}
+name: ${COMPOSE_PROJECT_NAME:-art-certification-test-practice}
 
 services:
   frontend:
@@ -10,11 +10,11 @@ services:
     environment:
       DB_HOST: db
       PGPORT: 5432
-      DB_NAME: ${DB_NAME:-exam_practice_development}
+      DB_NAME: ${DB_NAME:-art_practice_development}
     ports:
-      - "127.0.0.1:${FRONTEND_PORT:-3100}:3000"
+      - "127.0.0.1:${FRONTEND_PORT:-3400}:3000"
       # Compatibility alias for callers using the previous Rails API port.
-      - "127.0.0.1:${API_PORT:-3101}:3000"
+      - "127.0.0.1:${API_PORT:-3401}:3000"
     volumes:
       - ./frontend:/workspace/frontend
       - ./config:/workspace/config:ro
@@ -34,11 +34,11 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: ${DB_NAME:-exam_practice_development}
-      POSTGRES_USER: ${POSTGRES_USER:-exam_practice}
+      POSTGRES_DB: ${DB_NAME:-art_practice_development}
+      POSTGRES_USER: ${POSTGRES_USER:-art_practice}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a development database password in .env}
     ports:
-      - "127.0.0.1:${DB_PORT:-55432}:5432"
+      - "127.0.0.1:${DB_PORT:-55435}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

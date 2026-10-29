@@ -1,8 +1,18 @@
-# 資格試験の演習サービス・テンプレート
+# 美術検定ラボ — 美術検定2級 問題演習
 
-試験別の設定と問題データを差し替えて、新しい資格試験の学習サービスを作るためのテンプレートです。Nuxt 4・Nitro（TypeScript API）・PostgreSQL 16で構成し、認証にBetter Auth、DB操作にPrisma、マイグレーションにPrisma Migrateを使用します。単一選択・正答1件の問題を1問ずつ演習できます。
+美術検定2級の学習に向けた、非公式の問題演習サイトです。[exam-practice-template](https://github.com/misato729/exam-practice-template)から作成し、Nuxt 4・Nitro（TypeScript API）・PostgreSQL 16、Better Auth、Prismaを使用します。
 
-初期状態は架空の「サンプル資格試験」です。2セット×3問の自作サンプルを収録し、課金機能は無効です。実在する試験の問題・利用者・決済情報・認証情報は含みません。
+現在は西洋美術・日本美術の自作サンプル6問（2セット×3問、4択）を掲載しています。公式過去問や実際の試験形式・難易度を再現した模試ではありません。問題の拡充前に、演習・解説・履歴などの動作を確認するための初期版です。課金は無効です。
+
+## このリポジトリの初期設定
+
+- サービス名・配色・分類：[`config/exam.json`](config/exam.json)
+- 仮問題・解説・出典：[`content/questions.json`](content/questions.json)、[問題一覧](content/README.md)
+- サービス識別子：`art-certification-2`（他サービスのログインCookieと分離）
+- Composeプロジェクト：`art-certification-test-practice`、開発DB：`art_practice_development`
+- ローカル画面：http://localhost:3400、DBポート：`55435`
+
+このリポジトリの作成・GitHubへの保存と、サイトの一般公開は別操作です。問い合わせ先・規約・問題内容は一般公開に向けて整備してください。
 
 ## できること
 
@@ -80,14 +90,14 @@ docker compose up -d --build
 
 | 画面・接続先 | 初期値 |
 | --- | --- |
-| 学習画面 | http://localhost:3100 |
-| 管理ログイン | http://localhost:3100/admin/login |
-| APIの稼働確認 | http://localhost:3100/api/v1/health |
-| 開発用PostgreSQL | localhost:55432 |
+| 学習画面 | http://localhost:3400 |
+| 管理ログイン | http://localhost:3400/admin/login |
+| APIの稼働確認 | http://localhost:3400/api/v1/health |
+| 開発用PostgreSQL | localhost:55435 |
 
 既存の開発環境と分離するため、Composeプロジェクト名・DB・ボリューム・ポートを独立させています。複数の派生サービスを同時に動かす場合は、各サービスの`.env`で`COMPOSE_PROJECT_NAME`を固有の値にし、公開ポート・接続URLを変更し、`config/exam.json`の`site.id`も異なる値にしてください。ログインCookieはこの識別子で分離します。
 
-画面とAPIは同じNuxtプロセスから配信します。`3101`は以前のAPI接続用に同じプロセスへ接続する互換ポートです。Composeのサービス名は`frontend`と`db`です。
+画面とAPIは同じNuxtプロセスから配信します。`3401`は以前のAPI接続用に同じプロセスへ接続する互換ポートです。Composeのサービス名は`frontend`と`db`です。
 
 停止には次のコマンドを使います。DBを残したまま停止します。
 
@@ -115,7 +125,7 @@ unset ADMIN_PASSWORD
 
 同じメールアドレスが登録済みの場合は作成を拒否します。既存の一般ユーザーを自動で管理者へ変更しません。
 
-## 別の資格試験へ変更する
+## 設定と問題を更新する
 
 1. [`config/exam.json`](config/exam.json)で、サービスごとに一意な`site.id`と、試験名・ロゴ・配色・分類・セット数・問題数・選択肢ラベルを設定する。
 2. [`content/questions.json`](content/questions.json)を、対象資格向けに確認した問題・解説・出典に差し替える。

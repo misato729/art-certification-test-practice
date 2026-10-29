@@ -1,4 +1,4 @@
-name: Template checks
+name: Art practice checks
 on:
   push:
   pull_request:

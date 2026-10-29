@@ -1,23 +1,27 @@
 {
   "schema_version": 1,
   "site": {
-    "id": "sample-exam",
-    "name": "資格試験ラボ",
-    "short_name": "資格ラボ",
-    "exam_name": "サンプル資格試験",
-    "description": "資格試験の知識を、1問ずつ確認できる学習サービスです。",
-    "tagline": "毎日の演習で、理解を積み重ねる。",
+    "id": "art-certification-2",
+    "name": "美術検定ラボ",
+    "short_name": "美術ラボ",
+    "exam_name": "美術検定2級",
+    "description": "美術検定2級に向けて、西洋美術と日本美術の知識を1問ずつ確認。現在は動作確認用の自作サンプル6問を掲載しています。",
+    "tagline": "一問から広がる、美術の世界。",
     "logo_path": "/images/logo.svg",
-    "primary_color": "#2563eb",
+    "primary_color": "#7c3f63",
     "contact_email": "",
     "overview": [
       {
-        "title": "このサンプルについて",
-        "body": "動作確認用の架空の試験です。試験名・分類・問題データを差し替えて利用してください。"
+        "title": "このサイトについて",
+        "body": "美術検定2級の学習に向けて準備中の、非公式の問題演習サイトです。主催団体が運営・監修するサービスではありません。"
+      },
+      {
+        "title": "現在の仮問題",
+        "body": "西洋美術と日本美術を題材とする自作サンプルを2セット、各3問掲載しています。公式の過去問ではなく、実際の出題範囲・難易度・出題形式を再現したものではありません。"
       },
       {
         "title": "学習方法",
-        "body": "問題を1問ずつ解き、回答後に正答・解説・出典を確認できます。ログインすると回答履歴を保存できます。"
+        "body": "4つの選択肢から答えを選ぶと、正誤・正答・解説・出典を確認できます。ログインすると解答履歴とお気に入りを利用できます。"
       }
     ]
   },
@@ -34,24 +38,29 @@
   "categories": {
     "major": [
       {
-        "value": "fundamentals",
-        "label": "基礎知識"
+        "value": "western",
+        "label": "西洋美術"
       },
       {
-        "value": "application",
-        "label": "応用知識"
+        "value": "japanese",
+        "label": "日本美術"
       }
     ],
     "minor": [
       {
-        "value": "numbers",
-        "label": "数と計算",
-        "major_category_value": "fundamentals"
+        "value": "renaissance",
+        "label": "ルネサンス",
+        "major_category_value": "western"
       },
       {
-        "value": "logic",
-        "label": "論理と思考",
-        "major_category_value": "application"
+        "value": "modern",
+        "label": "近代美術",
+        "major_category_value": "western"
+      },
+      {
+        "value": "edo",
+        "label": "江戸時代の美術",
+        "major_category_value": "japanese"
       }
     ]
   },

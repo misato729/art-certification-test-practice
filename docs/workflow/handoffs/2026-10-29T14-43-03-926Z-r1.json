@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "revision": 1,
+  "state_hash": "7277c40b3593809e0f3c1130b7c56aaa7ff7ca13cdbb33729c36c3ec7cda72ba",
+  "recorded_at": "2026-10-29T14:43:03.926Z",
+  "timezone": "UTC",
+  "context": "development",
+  "task": "art_service_setup",
+  "summary": "ユーザー依頼に基づきテンプレートから非公開リポジトリを作成。初期設定の受入条件と検証担当を登録した",
+  "next_action": "設定と自作の仮問題を用意し、既存の自動検査と別担当レビューを行う",
+  "missing_local_files": [],
+  "git": {
+    "available": true,
+    "head": "e006f2d4f1bcb09986e975329ca1e007be048cd5",
+    "changes": []
+  },
+  "file_hashes": {
+    "AGENTS.md": "4824b8c34a5ce59d3076123deb93f2343040d81ad34238759505160ff6ec66f9",
+    "README.md": "66f36d9711eb0f4ff5a17961e5b175d796c5fc641191f795c3f614dcf476b312",
+    "docs/testing.md": "0a8d7b07f7beda12d4b67b00c32630a28c63eacd6cbd58a4ffc1e14cd580e2e9",
+    "docs/workflow/README.md": "ce35c134e34be8261e2478091460df30cd2a2546fba658ba38f25e8411a9f8f8",
+    "docs/workflow/policy.json": "a8c85f6593e4be0bc610b161764d7037a2499c0ff4529bde49f1942f23f24240",
+    "docs/workflow/task.example.json": "4bf161efce99b7d0a26798e3445d1f142505e512eedd591ea11cfb194d67da9f",
+    "docs/workflow/contexts/product.md": "91643328e14bbad5bac8e149e98741df7747a65f9df69b070ae254f60c8e54aa",
+    "docs/workflow/contexts/development.md": "377ca7a8bd03a0bf19db5d00c92eef33f094fb306aafe97297f55e0a3674d13d",
+    "docs/workflow/contexts/operations.md": "d02de6eb127496e226953dc031aad39fb129c2a09e64bc3dcb4b91b0ab9c1efb",
+    "scripts/context.mjs": "3828c41d1cc5a6977b8444035e094e61e1c9895fcaa9451ecb1919e799ecaffc",
+    "scripts/context.test.mjs": "125f184ecd2d34b8a4dc93a8d1edd2b6c527c0de8a46f39c8c92de265ebccc66",
+    "scripts/workflow-policy.mjs": "60535f2c9bf42203c059ca39a0b254c168b7cfb2468904a3842725fe3797141e",
+    "scripts/workflow-policy.test.mjs": "394287e7d1e84756a3ac8833918f964ee66f0ef2c34934d121d055fb37af4782",
+    "scripts/workspace-policy.mjs": "cd575bdc0a83e37ed28f4004c311c2415d895ce9d63b8fe8552ad674269cd219",
+    "scripts/workspace-policy.test.mjs": "22c2dce0ba9006d3266c2628a61e19acae48eb851c34f5a2fdd1d600cfb7944f",
+    "scripts/check-private-sources.mjs": "1d28447b51b39591d42151f236b837b33d695662168ee5c71500205aa0de96af",
+    "scripts/check-private-sources.test.mjs": "db6afd47e6f6e6de3405437960721f037068da4181eb7a81d7ba11477c7d69fb",
+    ".gitignore": "6d25c1f021b2197079eadc2f1549c26b95f9ab91fcebc02f14734fefe12f1178",
+    ".dockerignore": "6ef41aebd0f9ca4d3483f4196ab98ceaba2675050a67d4a8d42a9faaa8f3e108",
+    ".githooks/pre-push": "3529b300f7a655102ad899ab31fa8b2c404ec37479d1195aa9bcd3efa97bf90c"
+  },
+  "verification_note": "ハッシュ・Git・記録済み完了条件の確認であり、テストや出典照合の自動再実行ではない。依頼・権限は最新のユーザー指示とAGENTS.mdに従う。"
+}

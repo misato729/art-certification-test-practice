@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 0,
-  "updated_at": null,
+  "revision": 3,
+  "updated_at": "2026-10-29T14:58:08.014Z",
   "workspace_relative_to_repo": ".",
   "active_context": "development",
-  "last_checkpoint": null,
+  "last_checkpoint": "docs/workflow/handoffs/2026-10-29T14-58-08-014Z-r3.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -48,5 +48,61 @@
     ".dockerignore",
     ".githooks/pre-push"
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "id": "art_service_setup",
+      "context": "development",
+      "title": "美術検定2級のリポジトリと仮問題の初期設定",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-10-29 ユーザー依頼: misato729/exam-practice-templateから美術検定2級の演習リポジトリを作成。問題は仮データでよい。",
+      "next_action": "作成済みの非公開GitHubリポジトリに初期設定を保存して反映を確認する",
+      "evidence": [
+        "docs/verification.md",
+        "config/exam.json",
+        "content/README.md"
+      ],
+      "last_verified_at": "2026-10-29T14:57:51Z",
+      "verification_scope": "設定・6問の初期データ、単体114件、ハーネス162件、型検査、本番ビルド、独立DBのPC/スマートフォン10件が成功。検査後の静的文言削除2件を別担当が確認。非公開リポジトリ作成済み。公開・販売は未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "設定・全6問の整合、既存の単体検査・型検査・ビルド、PC/スマートフォンの演習を確認する",
+          "verification": "schema:check / check-template / npm test / typecheck / buildと独立DBのPlaywright E2Eを順次実行する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-29T14:57:51Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が設定・問題・開発環境の分離・検証根拠を確認し、未解決の指摘がない",
+          "verification": "実装担当と異なるレビュアーが差分と検証結果を確認する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-29T14:57:51Z",
+          "reviewer": "template_local_check"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "設定と仮問題、ローカルの自動検査と独立レビューが成功。検証時点と文言のみの最終修正も記録済み",
+            "at": "2026-10-29T14:58:06.770Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    }
+  ]
 }
