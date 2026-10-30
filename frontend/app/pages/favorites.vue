@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { examTitle } from '~/utils/examCatalog'
+import { examTitle, catalogQuestionLabel } from '~/utils/examCatalog'
 definePageMeta({ middleware: 'auth' })
+const { data: publicCatalog } = await usePublicExamCatalog()
+const positionLabel = (examNumber: number, questionNumber: number) => {
+  const exam = publicCatalog.value?.data.find(item => item.exam_number === examNumber)
+  return exam ? catalogQuestionLabel(exam, questionNumber) : `問${questionNumber}`
+}
 
 type FavoriteItem = {
   id: number
@@ -171,15 +176,15 @@ watch([() => user.value?.id, canUseFavorites, page], loadFavorites, { immediate:
           :class="{ locked: item.locked, 'pending-removal': !isFavorite(item.question.id) }"
         >
           <div class="favorite-card-head">
-            <span>{{ examTitle(item.question.exam_number) }}・問{{ item.question.question_number }}</span>
+            <span>{{ examTitle(item.question.exam_number) }}・{{ positionLabel(item.question.exam_number, item.question.question_number) }}</span>
             <button
               class="favorite-toggle"
               :class="{ active: isFavorite(item.question.id) }"
               type="button"
               :disabled="removingId === item.id"
               :aria-label="isFavorite(item.question.id)
-                ? `問${item.question.question_number}をお気に入りから解除`
-                : `問${item.question.question_number}をお気に入りに戻す`"
+                ? `${positionLabel(item.question.exam_number, item.question.question_number)}をお気に入りから解除`
+                : `${positionLabel(item.question.exam_number, item.question.question_number)}をお気に入りに戻す`"
               :title="isFavorite(item.question.id) ? 'お気に入りから解除' : 'お気に入りに戻す'"
               @click="toggleFromList(item)"
             >

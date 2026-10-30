@@ -12,10 +12,19 @@ async function assertFitsViewport(page: Page) {
 }
 
 async function showQuestion(page: Page) {
-  const response = page.waitForResponse(response => new URL(response.url()).pathname === '/api/v1/questions/next' && response.ok())
+  const response = page.waitForResponse(response => {
+    const url = new URL(response.url())
+    return url.pathname === '/api/v1/questions/next' && response.ok()
+      && url.searchParams.get('exam_number') === String(question.exam_number)
+      && url.searchParams.get('question_number') === String(question.question_number)
+  })
   await page.goto(practicePath)
-  await expect(page.getByRole('heading', { name: `問${question.question_number}`, exact: true })).toBeVisible()
-  return (await (await response).json()).data
+  const payload = (await (await response).json()).data
+  expect(payload.exam_number).toBe(question.exam_number)
+  expect(payload.question_number).toBe(question.question_number)
+  await expect(page.getByRole('heading', { name: `問${payload.group_question_number ?? question.question_number}`, exact: true, level: 2 })).toBeVisible()
+  if (payload.group) await expect(page.locator('.practice-head h1')).toContainText(`大問${payload.group.group_number}`)
+  return payload
 }
 
 async function answerCorrectly(page: Page) {
@@ -36,7 +45,7 @@ async function logout(page: Page) {
   await expect(page.locator('.site-header .login-link')).toHaveAttribute('href', '/login')
 }
 
-test('anonymous practice hides answers until submitting and fits the screen', async ({ page }) => {
+test('anonymous practice hides answers until submitting and fits the screen', async ({ page }, testInfo) => {
   const publicQuestion = await showQuestion(page)
   for (const key of ['explanation_blocks', 'source_text', 'correct_choice']) expect(Object.hasOwn(publicQuestion, key)).toBe(false)
   for (const choice of publicQuestion.choices) expect(Object.hasOwn(choice, 'is_correct')).toBe(false)
@@ -44,6 +53,7 @@ test('anonymous practice hides answers until submitting and fits the screen', as
   await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toHaveCount(0)
   await expect(page.getByRole('button', { name: '回答する', exact: true })).toBeDisabled()
   await assertFitsViewport(page)
+  await page.screenshot({ path: testInfo.outputPath('grouped-practice.png'), fullPage: true })
   await answerCorrectly(page)
   await assertFitsViewport(page)
   const historyResponse = await page.request.get('/api/v1/answer_histories')

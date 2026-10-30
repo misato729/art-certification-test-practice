@@ -34,7 +34,11 @@ before(async () => {
   await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve))
   base = `http://127.0.0.1:${(server.address() as { port: number }).port}`
   const content = JSON.parse(await readFile(new URL('../../content/questions.json', import.meta.url), 'utf8'))
-  for (const input of content.questions) questionIds.push((await saveQuestion(input)).id)
+  for (const input of content.questions) {
+    // This suite exercises authentication/transport using independent standalone fixtures.
+    const { group_id: _group, group_question_number: _number, passage_references: _refs, ...standalone } = input
+    questionIds.push((await saveQuestion(standalone)).id)
+  }
 })
 beforeEach(async () => {
   if (databaseAvailable) await query('DELETE FROM rate_limiter_flexible')
@@ -185,13 +189,14 @@ test('HTTP administrator checks read current roles while preserving the library 
   setConfigurationForTesting(expanded)
   try {
   const content = JSON.parse(await readFile(new URL('../../content/questions.json', import.meta.url), 'utf8'))
-  const created = await request('/admin/questions', { method: 'POST', cookie: session.cookie, body: { question: { ...content.questions[0], exam_number: 3, publication_status: 'draft' } } })
+  const { group_id: _group, group_question_number: _number, passage_references: _references, ...standalone } = content.questions[0]
+  const created = await request('/admin/questions', { method: 'POST', cookie: session.cookie, body: { question: { ...standalone, exam_number: 3, publication_status: 'draft' } } })
   assert.equal(created.status, 201)
   const id = created.body.data.id
   questionIds.push(id)
-  const updated = await request(`/admin/questions/${id}`, { method: 'PATCH', cookie: session.cookie, body: { question: { ...content.questions[0], exam_number: 3, publication_status: 'draft' } } })
+  const updated = await request(`/admin/questions/${id}`, { method: 'PATCH', cookie: session.cookie, body: { question: { ...standalone, exam_number: 3, publication_status: 'draft' } } })
   assert.equal(updated.body.data.id, id)
-  const replaced = await request(`/admin/questions/${id}`, { method: 'PUT', cookie: session.cookie, body: { question: { ...content.questions[0], exam_number: 3, publication_status: 'draft' } } })
+  const replaced = await request(`/admin/questions/${id}`, { method: 'PUT', cookie: session.cookie, body: { question: { ...standalone, exam_number: 3, publication_status: 'draft' } } })
   assert.equal(replaced.status, 200)
   assert.equal(replaced.body.data.id, id)
   assert.equal((await request(`/admin/questions/${id}`, { method: 'DELETE', cookie: session.cookie })).status, 204)

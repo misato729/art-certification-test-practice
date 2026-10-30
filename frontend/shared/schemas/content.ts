@@ -19,6 +19,14 @@ const tableMessage = '表の列数を確認してください'
 const text = (message = blockMessage) => z.string({ error: message })
 const optionalText = text().nullable().optional()
 const strings = z.array(text(), { error: blockMessage })
+export const passageAnchorIdSchema = z.string().regex(/^[A-Za-z][A-Za-z0-9_-]{0,63}$/, '参照IDの形式を確認してください')
+export const passageInlineSchema = z.discriminatedUnion('type', [
+  z.strictObject({ type: z.literal('text'), text: text() }),
+  z.strictObject({ type: z.literal('anchor'), id: passageAnchorIdSchema, label: z.string().min(1).max(40), text: text(), underline: z.literal(true).optional() }),
+  z.strictObject({ type: z.literal('blank'), id: passageAnchorIdSchema, label: z.string().min(1).max(40) }),
+])
+export type PassageInline = z.output<typeof passageInlineSchema>
+export const passageReferenceSchema = z.strictObject({ passage_id: z.number().int().positive(), anchor_id: passageAnchorIdSchema.nullable() })
 
 /** Explicit conversion keeps the API's integer-string support without accepting booleans/floats. */
 export function integer(value: unknown): number | undefined {
@@ -33,13 +41,13 @@ function integerSchema(message: string, strict: boolean) {
 }
 
 function createRawBlockSchema(context: BlockContext, strict: boolean) {
-  const object = <S extends z.ZodRawShape>(shape: S) => strict ? z.strictObject(shape, { error: blockMessage }) : z.object(shape, { error: blockMessage })
+  const object = <S extends z.ZodRawShape>(shape: S) => strict ? z.strictObject({ ...shape, id: passageAnchorIdSchema.optional() }, { error: blockMessage }) : z.object({ ...shape, id: passageAnchorIdSchema.optional() }, { error: blockMessage })
   // Legacy API text inputs check optional source but discard it; archives forbid it.
   const plainText = <T extends 'text' | 'fill_in_text' | 'fill_in_quote'>(type: T) => strict
     ? object({ type: z.literal(type), text: text() })
     : object({ type: z.literal(type), text: text(), source: optionalText })
-  const plain = plainText('text')
-  const quote = object({ type: z.literal('quote'), text: text(), source: optionalText })
+  const plain = object({ type: z.literal('text'), text: text().optional(), inlines: z.array(passageInlineSchema).min(1).optional(), ...(strict ? {} : { source: optionalText }) }).superRefine((block, ctx) => { if ((block.text === undefined && !block.inlines) || (block.inlines && nonblank(block.text))) ctx.addIssue({ code: 'custom', message: blockMessage }) })
+  const quote = object({ type: z.literal('quote'), text: text().optional(), source: optionalText, inlines: z.array(passageInlineSchema).min(1).optional() }).superRefine((block, ctx) => { if ((block.text === undefined && !block.inlines) || (block.inlines && nonblank(block.text))) ctx.addIssue({ code: 'custom', message: blockMessage }) })
   const fillText = plainText('fill_in_text')
   const fillQuote = plainText('fill_in_quote')
   const code = object({ type: z.literal('code'), code: text(), title: optionalText })
@@ -87,7 +95,7 @@ function blockSchema(context: BlockContext, preserveOptionalAttributes: boolean,
 
 function completeBlock(block: Block): boolean {
   switch (block.type) {
-    case 'text': case 'quote': case 'fill_in_text': case 'fill_in_quote': return nonblank(block.text)
+    case 'text': case 'quote': case 'fill_in_text': case 'fill_in_quote': return block.inlines ? block.inlines.length > 0 && block.inlines.every(item => item.type === 'blank' ? nonblank(item.label) : nonblank(item.text)) : nonblank(block.text)
     case 'code': return nonblank(block.code)
     case 'fill_in_choice': return Boolean(block.cells?.length && block.cells.every(nonblank))
     case 'code_group': return Boolean(block.items && block.items.length >= 2 && block.items.every(item => nonblank(item.code)))
@@ -128,6 +136,10 @@ export function questionInputSchema(config: ExamConfiguration, options: Question
   const shape = {
     exam_number: integerSchema(inputMessage, strict).refine(value => value >= 1 && value <= config.exam.set_count, inputMessage),
     question_number: integerSchema(inputMessage, strict).refine(value => value >= 1, inputMessage),
+    group_id: z.preprocess(value => !strict && (value === '' || value === undefined) ? undefined : value, integerSchema(inputMessage, strict).refine(value => value >= 1, inputMessage).nullable().optional()),
+    group_question_number: z.preprocess(value => !strict && (value === '' || value === undefined) ? undefined : value, integerSchema(inputMessage, strict).refine(value => value >= 1, inputMessage).nullable().optional()),
+    passage_references: z.array(passageReferenceSchema).optional(),
+    lock_version: integerSchema(inputMessage, strict).refine(value => value >= 0, inputMessage).optional(),
     major_category_code: text(inputMessage),
     category_code: text(inputMessage),
     publication_status: z.enum(['draft', 'published', 'private'], { error: inputMessage }),
@@ -139,6 +151,10 @@ export function questionInputSchema(config: ExamConfiguration, options: Question
   const schema = strict ? z.strictObject(shape, { error: '問題データの属性が不足しているか未対応の属性があります' }) : z.object(shape, { error: '問題の入力内容を確認してください' })
   return schema.superRefine((question, ctx) => {
     const add = (message: string, path: (string | number)[] = [], details: ValidationDetails = {}) => ctx.addIssue({ code: 'custom', path, message, params: { details } })
+    if (Boolean(question.group_id) !== Boolean(question.group_question_number)) add('大問と大問内の小問番号を両方指定してください', ['group_id'], { group_id: ['大問と小問番号を両方指定してください'] })
+    if (!question.group_id && question.passage_references?.length) add('共通本文を参照する小問には大問が必要です', ['passage_references'])
+    const references = question.passage_references ?? []
+    if (new Set(references.map(reference => `${reference.passage_id}/${reference.anchor_id ?? ''}`)).size !== references.length) add('共通本文の参照が重複しています', ['passage_references'])
     const count = questionCountForExam(config, question.exam_number)
     if (question.question_number > count) add(inputMessage, ['question_number'], { question_number: [`はこの試験の1〜${count}の整数で指定してください`] })
     const labels = choiceLabelsForQuestion(config, question.exam_number, question.question_number)
@@ -245,4 +261,7 @@ export function normalizeQuestionForm(value: Record<string, unknown>, config: Ex
   return result.success ? result.data : throwValidation(result.error, config)
 }
 
-export const contentDocumentSchema = z.strictObject({ schema_version: z.literal(1), questions: z.array(z.unknown()).min(1) })
+export const contentDocumentSchema = z.discriminatedUnion('schema_version', [
+  z.strictObject({ schema_version: z.literal(1), questions: z.array(z.unknown()).min(1) }),
+  z.strictObject({ schema_version: z.literal(2), exam_sets: z.array(z.unknown()).optional(), groups: z.array(z.unknown()), questions: z.array(z.unknown()) }),
+])

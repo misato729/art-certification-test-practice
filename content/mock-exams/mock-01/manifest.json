@@ -82,6 +82,39 @@
         "イ",
         "ウ",
         "エ"
+      ],
+      "sets": [
+        {
+          "exam_number": 1,
+          "title": "模擬試験1",
+          "question_count": 85,
+          "sections": [
+            {
+              "title": "美術史問題",
+              "first": 1,
+              "last": 80,
+              "choice_labels": [
+                "ア",
+                "イ",
+                "ウ",
+                "エ"
+              ]
+            },
+            {
+              "title": "知識・情報の活用問題",
+              "first": 81,
+              "last": 85,
+              "choice_labels": [
+                "ア",
+                "イ",
+                "ウ",
+                "エ",
+                "オ",
+                "カ"
+              ]
+            }
+          ]
+        }
       ]
     },
     "categories": {
@@ -167,5 +200,11 @@
     "活用問題は美術史上の知識と資料の対応を問います。別枠の実践問題は含めていません。",
     "学習用に各問1点とします。正答率約60％は提供資料に記載された目安であり、公式の固定合格点・公式配点や合格保証ではありません。",
     "活用の6択は先に参照した問題集抜粋を参考にした独自の構成です。公式Webサンプルには活用の4択例もあり、公式試験が6択固定であることを意味しません。主催団体の制作・監修による模試ではありません。"
-  ]
+  ],
+  "hierarchy": {
+    "group_count": 23,
+    "shared_passage_count": 12,
+    "questions_with_shared_passage": 43,
+    "numbering": "question_numberは通し番号、group_numberとgroup_question_numberは大問・小問の表示番号"
+  }
 }

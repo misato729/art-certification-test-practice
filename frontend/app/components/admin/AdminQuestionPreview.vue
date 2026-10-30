@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { AdminQuestionInput } from '~/types/adminQuestion'
+import type { GroupPassage } from '../../../shared/types/learning'
 
-const props = defineProps<{ question: AdminQuestionInput }>()
+const props = defineProps<{ question: AdminQuestionInput; passages?: GroupPassage[] }>()
 
 const majorCategoryLabel = computed(() => getMasterDataLabel(
   MAJOR_CATEGORIES,
@@ -12,11 +13,12 @@ const majorCategoryLabel = computed(() => getMasterDataLabel(
 <template>
   <section class="question-preview" aria-label="問題のプレビュー">
     <header class="preview-head">
-      <div><span>試験 {{ question.exam_number }}</span><h2>問{{ question.question_number }}</h2></div>
+      <div><span>模擬試験 {{ question.exam_number }}<template v-if="question.group_id">・通し問{{ question.question_number }}</template></span><h2>問{{ question.group_question_number ?? question.question_number }}</h2></div>
       <p>{{ majorCategoryLabel }} / {{ getCategoryLabel(question.category_code) }}</p>
     </header>
 
     <div class="preview-paper">
+      <section v-if="passages?.length" class="preview-passages"><article v-for="passage in passages" :key="passage.id"><h3>【{{ passage.label }}】</h3><QuestionContentBlocks :blocks="passage.content_blocks" /></article></section>
       <div class="preview-question"><QuestionContentBlocks :blocks="question.content_blocks" /></div>
       <div class="preview-choices">
         <div v-for="choice in question.choices" :key="choice.choice_label" :class="{ correct: choice.is_correct }">
@@ -54,6 +56,8 @@ const majorCategoryLabel = computed(() => getMasterDataLabel(
 .preview-head h2 { margin: 3px 0 0; font-size: 28px; }
 .preview-head p { margin: 0; color: var(--muted); font-size: 13px; }
 .preview-paper { margin: 20px; padding: 25px; border: 1px solid var(--line); border-radius: 7px; background: #fff; }
+.preview-passages { display: grid; gap: 20px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.preview-passages h3 { margin: 0 0 12px; font-size: 15px; }
 .preview-question { font-size: 18px; font-weight: 700; line-height: 1.8; }
 .preview-choices { display: grid; gap: 9px; margin-top: 24px; }
 .preview-choices > div { position: relative; min-width: 0; display: grid; grid-template-columns: 18px 28px minmax(0, 1fr) auto; align-items: start; gap: 9px; padding: 13px; border: 1px solid #c8d4d7; border-radius: 5px; }

@@ -4,6 +4,7 @@ const navigationOpen = ref(false)
 const { user, logout } = useAuth()
 
 const navigationItems = [
+  { label: '模擬試験・大問', to: '/admin/exams', icon: 'i-lucide-notebook-tabs' },
   { label: '問題一覧', to: '/admin/questions', icon: 'i-lucide-list-checks' },
   { label: '問題を作成', to: '/admin/questions/new', icon: 'i-lucide-square-plus' },
 ]
@@ -47,7 +48,7 @@ const signOut = async () => {
             v-for="item in navigationItems"
             :key="item.to"
             :to="item.to"
-            :class="{ active: route.path === item.to || (item.to === '/admin/questions' && /^\/admin\/questions\/\d+\/edit$/.test(route.path)) }"
+            :class="{ active: route.path === item.to || (item.to === '/admin/questions' && /^\/admin\/questions\/\d+\/edit$/.test(route.path)) || (item.to === '/admin/exams' && route.path.startsWith('/admin/exams/')) }"
           >
             <UIcon :name="item.icon" />
             <span>{{ item.label }}</span>

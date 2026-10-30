@@ -6,5 +6,5 @@ import { throttle } from '../../../../core/rate-limit.ts'
 export default defineApiHandler(async (event, user) => {
   await throttle(event, 'answer')
   const body = await readBody<Record<string, unknown>>(event)
-  return answerQuestion(routeId(event), body?.selected_choice_id, user)
+  return answerQuestion(routeId(event), body?.selected_choice_id, user, undefined, body?.question_version)
 })

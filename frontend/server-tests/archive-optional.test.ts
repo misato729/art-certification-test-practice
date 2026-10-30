@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import { after, test } from 'node:test'
 import { configuration, setConfigurationForTesting } from '../server/core/config.ts'
 import { closeDatabase, isolatedTransaction, query } from '../server/core/db.ts'
-import { createArchive, exportArchive, importArchive, IMPORT_CONFIRMATION } from '../server/operations/content.ts'
+import { createArchive, validateArchive, exportArchive, importArchive, IMPORT_CONFIRMATION } from '../server/operations/content.ts'
 import { sanitizeQuestionInput, validateQuestionInput, type QuestionInput } from '../server/services/learning-validation.ts'
 
 process.env.APP_ENV = 'test'
@@ -47,7 +47,7 @@ test('canonical validation retains empty/null optional metadata while admin form
   assert.equal('title' in normalized[2]!.explanation_blocks[0]!, false)
 })
 
-test('PostgreSQL archive import/export keeps legacy optional metadata and its canonical checksum', integration, async () => {
+test('PostgreSQL archive import/export keeps legacy optional metadata while version two retains parent metadata', integration, async () => {
   const directory = await mkdtemp(join(tmpdir(), 'exam-archive-optional-'))
   const path = join(directory, 'export.json')
   try {
@@ -59,14 +59,21 @@ test('PostgreSQL archive import/export keeps legacy optional metadata and its ca
       await db.favorite.deleteMany()
       await db.questionChoice.deleteMany()
       await db.question.deleteMany()
+      await db.groupPassage.deleteMany()
+      await db.questionGroup.deleteMany()
+      await db.examSet.deleteMany()
       const archive = createArchive(questions())
       const imported = await importArchive(archive, IMPORT_CONFIRMATION, db)
       const exported = await exportArchive(path, db)
       const recovered = JSON.parse(await readFile(path, 'utf8'))
-      assert.deepEqual(recovered.questions, archive.questions)
-      assert.equal(imported.sha256, archive.sha256)
-      assert.equal(exported.sha256, archive.sha256)
-      assert.equal(recovered.sha256, archive.sha256)
+      assert.deepEqual(recovered.questions.map(({ group_id, group_question_number, passage_references, ...legacy }: any) => legacy), archive.questions)
+      assert.equal(imported.sha256, archive.sha256, 'legacy input checksums remain valid on import')
+      assert.equal(validateArchive(archive).sha256, archive.sha256)
+      assert.equal(recovered.version, 2, 'parent title and publication status require the expanded export format')
+      assert.equal(recovered.exam_sets.length, 1)
+      assert.deepEqual(recovered.groups, [])
+      assert.equal(exported.sha256, recovered.sha256)
+      assert.equal(validateArchive(recovered).sha256, recovered.sha256)
     })
   } finally {
     await rm(directory, { recursive: true, force: true })

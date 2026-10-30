@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { isDeepStrictEqual } from 'node:util'
 import { readFileSync } from 'node:fs'
 import { EXAM_CONFIG } from '../shared/examConfig.ts'
 import { parseExamConfig, questionCountForExam, choiceLabelsForQuestion } from '../shared/schemas/exam.ts'
@@ -15,7 +16,7 @@ test('the only catalog set contains exactly the 85 authored mock questions', () 
   for (const q of mock.questions) {
     const integrated=parsed.find(p=>p.exam_number===1 && p.question_number===q.question_number)
     assert.ok(integrated)
-    assert.equal(JSON.stringify(integrated),JSON.stringify(q))
+    assert.equal(isDeepStrictEqual(integrated,q), true)
   }
   assert.equal(questionCountForExam(EXAM_CONFIG,1),85)
   assert.equal(questionCountForExam(EXAM_CONFIG,2),0)

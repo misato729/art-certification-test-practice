@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { examTitle } from '~/utils/examCatalog'
+import { examTitle, catalogQuestionLabel } from '~/utils/examCatalog'
 definePageMeta({ middleware: 'auth' })
+const { data: publicCatalog } = await usePublicExamCatalog()
+const positionLabel = (examNumber: number, questionNumber: number) => {
+  const exam = publicCatalog.value?.data.find(item => item.exam_number === examNumber)
+  return exam ? catalogQuestionLabel(exam, questionNumber) : `問${questionNumber}`
+}
 
 type HistoryItem = {
   id: number
@@ -18,6 +23,8 @@ type HistoryItem = {
     choice_label: string
     body_excerpt: string
   }
+  question_version?: number
+  is_outdated?: boolean
   is_correct?: boolean
   answered_at: string
 }
@@ -84,7 +91,7 @@ const majorCategoryLabel = (code?: string) => (
 
 const historyLink = (history: HistoryItem) => ({
   path: `/practice/${history.question.exam_number}/${history.question.question_number}`,
-  query: { answer_history_id: history.id },
+  query: history.is_outdated ? {} : { answer_history_id: history.id },
 })
 </script>
 
@@ -130,28 +137,29 @@ const historyLink = (history: HistoryItem) => ({
         <article v-for="history in histories" :key="history.id" class="history-card">
           <NuxtLink v-if="!history.locked" :to="historyLink(history)">
             <div class="history-card-head">
-              <span class="result-badge" :class="{ correct: history.is_correct }">
-                <UIcon :name="history.is_correct ? 'i-lucide-circle-check' : 'i-lucide-circle-x'" />
-                {{ history.is_correct ? '正解' : '不正解' }}
+              <span class="result-badge" :class="{ correct: !history.is_outdated && history.is_correct, outdated: history.is_outdated }">
+                <UIcon :name="history.is_outdated ? 'i-lucide-history' : history.is_correct ? 'i-lucide-circle-check' : 'i-lucide-circle-x'" />
+                {{ history.is_outdated ? '更新前の回答' : history.is_correct ? '正解' : '不正解' }}
               </span>
               <time :datetime="history.answered_at">{{ formatAnsweredAt(history.answered_at) }}</time>
             </div>
 
             <div class="history-question">
-              <span>{{ examTitle(history.question.exam_number) }}・問{{ history.question.question_number }}</span>
-              <strong>{{ history.question.body_excerpt }}</strong>
-              <small>
+              <span>{{ examTitle(history.question.exam_number) }}・{{ positionLabel(history.question.exam_number, history.question.question_number) }}</span>
+              <strong v-if="history.question.body_excerpt">{{ history.question.body_excerpt }}</strong>
+              <small v-if="history.question.major_category_code || history.question.category_code">
                 {{ majorCategoryLabel(history.question.major_category_code) }} /
                 {{ getCategoryLabel(history.question.category_code ?? '') }}
               </small>
             </div>
 
-            <div class="selected-answer">
+            <div v-if="!history.is_outdated && history.selected_choice" class="selected-answer">
               <span>選択した解答</span>
               <p><b>{{ history.selected_choice?.choice_label }}</b>{{ history.selected_choice?.body_excerpt }}</p>
             </div>
 
-            <span class="review-link">問題と解説を確認する <UIcon name="i-lucide-arrow-right" /></span>
+            <p v-if="history.is_outdated" class="history-outdated">回答後に問題が更新されています。現在の問題を解き直せます。</p>
+            <span class="review-link">{{ history.is_outdated ? '現在の問題を解く' : '問題と解説を確認する' }} <UIcon name="i-lucide-arrow-right" /></span>
           </NuxtLink>
           <div v-else class="locked-history">
             <div class="history-card-head">
@@ -159,7 +167,7 @@ const historyLink = (history: HistoryItem) => ({
               <time :datetime="history.answered_at">{{ formatAnsweredAt(history.answered_at) }}</time>
             </div>
             <div class="history-question">
-              <span>{{ examTitle(history.question.exam_number) }}・問{{ history.question.question_number }}</span>
+              <span>{{ examTitle(history.question.exam_number) }}・{{ positionLabel(history.question.exam_number, history.question.question_number) }}</span>
               <strong>この履歴の本文・正誤・解説はプレミアム会員向けです。</strong>
             </div>
             <NuxtLink v-if="PAYMENTS_ENABLED" class="primary-link" to="/premium">プレミアム会員について確認する</NuxtLink>
@@ -177,6 +185,8 @@ const historyLink = (history: HistoryItem) => ({
 </template>
 
 <style scoped>
+.result-badge.outdated { color: var(--muted); background: var(--surface-soft); }
+.history-outdated { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
 .empty-icon { width: 34px; height: 34px; color: var(--teal); }
 .error-icon { color: var(--coral); }
 .history-summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; color: var(--muted); }

@@ -1,68 +1,28 @@
 <script setup lang="ts">
-type CodeItem = {
-  title: string
-  code: string
-}
+import type { LearningBlock } from '../../shared/types/learning'
 
-type ContentBlock = {
-  type: 'text' | 'quote' | 'fill_in_text' | 'fill_in_quote' | 'fill_in_choice' | 'table' | 'code' | 'code_group'
-  text?: string
-  source?: string
-  title?: string
-  code?: string
-  headers?: string[]
-  rows?: string[][]
-  items?: CodeItem[]
-  cells?: string[]
-}
-
-defineProps<{
-  blocks: ContentBlock[]
-}>()
-
-type FillInPart = {
-  type: 'text' | 'blank'
-  text: string
-}
-
-const fillInParts = (text = ''): FillInPart[] => (
-  text
-    .split(/(\{\{[^{}]+\}\})/g)
-    .filter(Boolean)
-    .map((part) => {
-      const match = part.match(/^\{\{(.+)\}\}$/)
-      return match
-        ? { type: 'blank', text: match[1] ?? '' }
-        : { type: 'text', text: part }
-    })
-)
+withDefaults(defineProps<{ blocks: LearningBlock[]; anchorPrefix?: string }>(), { anchorPrefix: '' })
 
 const blankLabels = ['①', '②', '③', '④', '⑤', '⑥']
 </script>
 
 <template>
   <div class="content-blocks">
-    <template v-for="(block, index) in blocks" :key="`${block.type}-${index}`">
-      <p v-if="block.type === 'text'" class="content-text">{{ block.text }}</p>
+    <div v-for="(block, index) in blocks" :id="anchorPrefix && block.id ? `${anchorPrefix}-${block.id}` : undefined" :key="`${block.type}-${index}`" class="content-block" :tabindex="anchorPrefix && block.id ? -1 : undefined">
+      <p v-if="block.type === 'text'" class="content-text"><QuestionInlineText :text="block.text" :inlines="block.inlines" :anchor-prefix="anchorPrefix" /></p>
 
       <blockquote v-else-if="block.type === 'quote'" class="content-quote">
-        <p>{{ block.text }}</p>
+        <p><QuestionInlineText :text="block.text" :inlines="block.inlines" :anchor-prefix="anchorPrefix" /></p>
         <cite v-if="block.source">{{ block.source }}</cite>
       </blockquote>
 
       <p v-else-if="block.type === 'fill_in_text'" class="content-text fill-in-text">
-        <template v-for="(part, partIndex) in fillInParts(block.text)" :key="partIndex">
-          <span v-if="part.type === 'blank'" class="fill-in-blank">{{ part.text }}</span>
-          <template v-else>{{ part.text }}</template>
-        </template>
+        <QuestionInlineText :text="block.text" :inlines="block.inlines" :anchor-prefix="anchorPrefix" fill />
       </p>
 
       <blockquote v-else-if="block.type === 'fill_in_quote'" class="exam-fill-in-quote">
         <p>
-          <template v-for="(part, partIndex) in fillInParts(block.text)" :key="partIndex">
-            <span v-if="part.type === 'blank'" class="fill-in-blank">{{ part.text }}</span>
-            <template v-else>{{ part.text }}</template>
-          </template>
+          <QuestionInlineText :text="block.text" :inlines="block.inlines" :anchor-prefix="anchorPrefix" fill />
         </p>
       </blockquote>
 
@@ -94,17 +54,19 @@ const blankLabels = ['①', '②', '③', '④', '⑤', '⑥']
       </figure>
 
       <div v-else-if="block.type === 'code_group'" class="code-group">
-        <figure v-for="item in block.items" :key="item.title" class="code-panel">
+        <figure v-for="(item, itemIndex) in block.items" :key="item.title ?? itemIndex" class="code-panel">
           <figcaption>{{ item.title }}</figcaption>
           <pre><code>{{ item.code }}</code></pre>
         </figure>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .content-blocks { display: grid; gap: 20px; min-width: 0; }
+.content-block { min-width: 0; scroll-margin-top: calc(var(--site-navigation-height, var(--header-height)) + 28px); outline-offset: 5px; }
+.content-block:focus { outline: 2px solid var(--teal); }
 .content-text { margin: 0; white-space: pre-wrap; }
 .content-quote { margin: 0; padding: 18px 20px; border: 1px solid var(--line); border-left: 4px solid var(--teal); background: #f7faf9; }
 .content-quote p { margin: 0; font-size: 18px; font-weight: 500; white-space: pre-wrap; }

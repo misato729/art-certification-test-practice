@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import type { PassageInline } from '../../../shared/types/learning'
 import { useFormField } from '@nuxt/ui/composables'
 import type { ContentBlock, ContentBlockType } from '~/types/adminQuestion'
 import { createAdminContentBlock, FILL_IN_CHOICE_COLUMN_COUNTS, FILL_IN_CHOICE_LABELS, getAdminContentBlockOptions, resizeFillInChoiceCells } from '~/utils/adminContentBlocks'
 
 const props = defineProps<{
   context: 'question' | 'explanation' | 'choice'
+  allowReferences?: boolean
 }>()
 
 const blocks = defineModel<ContentBlock[]>({ required: true })
@@ -86,6 +88,33 @@ const removeCodeItem = (block: ContentBlock, index: number) => {
   if ((block.items?.length ?? 0) <= 2) return
   block.items = block.items?.filter((_, itemIndex) => itemIndex !== index)
 }
+const enableInlines = (block: ContentBlock) => {
+  block.inlines = [{ type: 'text', text: block.text ?? '' }]
+  delete block.text
+}
+const flattenInlines = (block: ContentBlock) => {
+  block.text = (block.inlines ?? []).map(part => part.type === 'blank' ? `【${part.label}】` : part.text).join('')
+  delete block.inlines
+}
+const addInline = (block: ContentBlock, type: PassageInline['type']) => {
+  const id = `ref-${globalThis.crypto.randomUUID()}`
+  const part: PassageInline = type === 'text' ? { type, text: '' }
+    : type === 'anchor' ? { type, id, label: '', text: '', underline: true }
+      : { type, id, label: '' }
+  block.inlines = [...(block.inlines ?? []), part]
+}
+const moveInline = (block: ContentBlock, index: number, direction: -1 | 1) => {
+  const parts = [...(block.inlines ?? [])]
+  const target = index + direction
+  if (target < 0 || target >= parts.length) return
+  const [part] = parts.splice(index, 1)
+  if (!part) return
+  parts.splice(target, 0, part)
+  block.inlines = parts
+}
+const removeInline = (block: ContentBlock, index: number) => {
+  block.inlines = (block.inlines ?? []).filter((_, partIndex) => partIndex !== index)
+}
 </script>
 
 <template>
@@ -101,10 +130,19 @@ const removeCodeItem = (block: ContentBlock, index: number) => {
       </header>
       <div class="block-card-body">
         <template v-if="['text', 'fill_in_text', 'fill_in_quote'].includes(block.type)">
-          <div class="admin-field">
+          <div v-if="!block.inlines" class="admin-field">
             <label :for="fieldId('block-text', index)">文章</label>
             <textarea :id="fieldId('block-text', index)" v-model="block.text" required :placeholder="block.type.startsWith('fill_in_') ? '空欄は {{①}} の形式で入力します' : '表示する文章を入力します'" />
           </div>
+          <div v-else class="inline-parts">
+            <article v-for="(part, partIndex) in block.inlines" :key="partIndex" class="inline-part">
+              <header><strong>{{ part.type === 'text' ? '文章' : part.type === 'anchor' ? '参照箇所・下線' : '空欄' }}</strong><div class="block-actions"><button type="button" title="上へ移動" :disabled="partIndex === 0" @click="moveInline(block, partIndex, -1)"><UIcon name="i-lucide-arrow-up" /></button><button type="button" title="下へ移動" :disabled="partIndex === block.inlines.length - 1" @click="moveInline(block, partIndex, 1)"><UIcon name="i-lucide-arrow-down" /></button><button type="button" title="文章の部分を削除" @click="removeInline(block, partIndex)"><UIcon name="i-lucide-trash-2" /></button></div></header>
+              <div v-if="part.type !== 'text'" class="admin-field"><label :for="fieldId('inline-label', index, partIndex)">表示ラベル</label><input :id="fieldId('inline-label', index, partIndex)" v-model="part.label" type="text" :placeholder="part.type === 'anchor' ? 'a' : 'ア'"></div>
+              <div v-if="part.type !== 'blank'" class="admin-field"><label :for="fieldId('inline-text', index, partIndex)">文章</label><textarea :id="fieldId('inline-text', index, partIndex)" v-model="part.text" /></div>
+            </article>
+            <div class="inline-actions"><button type="button" @click="addInline(block, 'text')">文章を追加</button><button type="button" @click="addInline(block, 'anchor')">参照箇所を追加</button><button type="button" @click="addInline(block, 'blank')">空欄を追加</button></div>
+          </div>
+          <div v-if="allowReferences && block.type === 'text'" class="inline-actions"><button v-if="!block.inlines" type="button" @click="enableInlines(block)">文章を分けて参照箇所・空欄を設定</button><button v-else type="button" @click="flattenInlines(block)">通常の文章に戻す</button><small>参照箇所は、小問の本文参照から選べます。</small></div>
         </template>
 
         <template v-else-if="block.type === 'quote'">
@@ -161,6 +199,12 @@ const removeCodeItem = (block: ContentBlock, index: number) => {
 </template>
 
 <style scoped>
+.inline-editor { display: grid; gap: 12px; }
+.inline-part { padding: 12px; border: 1px solid var(--admin-line); border-radius: 5px; }
+.inline-part > header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.inline-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.inline-actions button { padding: 8px 10px; border: 1px solid var(--admin-line); border-radius: 5px; background: var(--admin-surface); color: var(--admin-text); cursor: pointer; }
+.inline-actions small { color: var(--admin-muted); }
 .block-editor { display: grid; gap: 12px; }
 .block-card { overflow: hidden; border: 1px solid var(--admin-line); border-radius: 6px; background: #111a1f; }
 .block-card-head { min-height: 46px; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 7px 10px 7px 13px; border-bottom: 1px solid var(--admin-line); background: #172127; }

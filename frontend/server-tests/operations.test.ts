@@ -21,7 +21,7 @@ process.env.BETTER_AUTH_URL ||= 'http://127.0.0.1:3310'
 if (process.env.TEST_DATABASE_URL) process.env.DATABASE_URL = process.env.TEST_DATABASE_URL
 const integration = { skip: !Boolean(process.env.DATABASE_URL || process.env.PGHOST) }
 const content = JSON.parse(await readFile(defaultContentPath, 'utf8'))
-const archive = () => createArchive(structuredClone(content.questions))
+const archive = () => createArchive(structuredClone(content.questions), content.schema_version === 2 ? { groups: structuredClone(content.groups), exam_sets: structuredClone(content.exam_sets ?? []) } : undefined)
 after(async () => closeDatabase())
 
 async function isolated(action: (db: Database) => Promise<void>) {
@@ -30,6 +30,9 @@ async function isolated(action: (db: Database) => Promise<void>) {
     // must already have been migrated by the test command/CI.
     await db.user.deleteMany()
     await db.question.deleteMany()
+    await db.groupPassage.deleteMany()
+    await db.questionGroup.deleteMany()
+    await db.examSet.deleteMany()
     await db.payment.deleteMany()
     await db.stripeWebhookEvent.deleteMany()
     await db.authVerification.deleteMany()
@@ -112,7 +115,7 @@ test('JSON import and development seed never overwrite existing questions', inte
 
 test('an incomplete public set fails as one transaction and persists no imported rows', integration, async () => isolated(async db => {
   await query('SAVEPOINT partial_import', [], db)
-  await assert.rejects(importArchive(createArchive(content.questions.slice(0, 1)), IMPORT_CONFIRMATION, db), error => error instanceof ApiError && error.status === 422)
+  await assert.rejects(importArchive(createArchive(content.questions.slice(0, 1).map(({ group_id, group_question_number, passage_references, ...question }: any) => question)), IMPORT_CONFIRMATION, db), error => error instanceof ApiError && error.status === 422)
   // A caller-owned transaction is responsible for rollback; the CLI owns its transaction.
   await query('ROLLBACK TO SAVEPOINT partial_import', [], db)
   assert.equal(await countQuestions(db), 0)
@@ -182,4 +185,56 @@ test('audit reports aggregate anomalies and pending checkout expiration uses the
   assert.deepEqual(calls, ['cs_test_operations'])
   assert.equal((await query("SELECT status FROM payments WHERE user_id=$1", [owner.id], db))[0]!.status, 'expired')
   assert.deepEqual(await expirePendingForUser(owner.email, { db, client }), { status: 'ok', expired_count: 0 })
+}))
+
+test('grouped archive round-trip preserves every child, lead and relation in a fresh question domain', integration, () => isolated(async db => {
+  const initial = archive()
+  assert.equal(initial.version, 2)
+  assert.equal(initial.question_count, 85)
+  assert.equal(initial.groups!.length, 23)
+  assert.equal(initial.groups!.reduce((sum, group) => sum + group.passages.length, 0), 12)
+  await importArchive(initial, IMPORT_CONFIRMATION, db)
+  assert.equal(await db.question.count(), 85)
+  assert.equal(await db.questionChoice.count(), 350)
+  assert.equal(await db.questionGroup.count(), 23)
+  assert.equal(await db.groupPassage.count(), 12)
+  const directory = await mkdtemp(join(tmpdir(), 'exam-group-export-'))
+  try {
+    const file = join(directory, 'groups.json')
+    await exportArchive(file, db)
+    const exported = validateArchive(JSON.parse(await readFile(file, 'utf8')))
+    assert.equal(exported.version, 2)
+    assert.equal(exported.groups!.length, initial.groups!.length)
+    assert.deepEqual(exported.questions, initial.questions)
+    assert.deepEqual(exported.groups, initial.groups)
+    assert.deepEqual(exported.exam_sets, initial.exam_sets)
+  } finally { await rm(directory, { recursive: true, force: true }) }
+}))
+
+test('empty-question import cannot overwrite an existing private group or its lead', integration, () => isolated(async db => {
+  await db.examSet.create({ data: { exam_number: 1, title: 'Preserved private parent', publication_status: 'private' } })
+  const group = await db.questionGroup.create({ data: { exam_number: 1, group_number: 1, title: 'Preserved private group', planned_question_count: 1, publication_status: 'private' } })
+  const lead = await db.groupPassage.create({ data: { group_id: group.id, label: 'A', display_order: 1, content_blocks: [{ type: 'text', text: 'Preserved private context' }] } })
+  await assert.rejects(importArchive(archive(), IMPORT_CONFIRMATION, db), OperationError)
+  assert.deepEqual(await db.groupPassage.findUnique({ where: { id: lead.id } }), lead)
+  assert.equal(await db.question.count(), 0)
+}))
+
+test('an empty private parent roundtrips without fabricating questions or losing publication metadata', integration, async () => isolated(async db => {
+  await db.examSet.create({ data: { exam_number: 1, title: 'Synthetic private parent', publication_status: 'private' } })
+  const directory = await mkdtemp(join(tmpdir(), 'exam-parent-export-'))
+  try {
+    const file = join(directory, 'archive.json')
+    await exportArchive(file, db)
+    const exported = validateArchive(JSON.parse(await readFile(file, 'utf8')))
+    assert.equal(exported.version, 2)
+    assert.equal(exported.question_count, 0)
+    assert.equal(exported.exam_sets?.[0]?.publication_status, 'private')
+    assert.equal(exported.exam_sets?.[0]?.title, 'Synthetic private parent')
+    await db.examSet.deleteMany()
+    await importArchive(exported, IMPORT_CONFIRMATION, db)
+    assert.equal(await db.question.count(), 0)
+    assert.equal((await db.examSet.findUniqueOrThrow({ where: { exam_number: 1 } })).publication_status, 'private')
+    assert.equal((await db.examSet.findUniqueOrThrow({ where: { exam_number: 1 } })).title, 'Synthetic private parent')
+  } finally { await rm(directory, { recursive: true, force: true }) }
 }))

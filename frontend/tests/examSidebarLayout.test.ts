@@ -14,7 +14,7 @@ test('one shared exam sidebar is rendered inside the sticky site header', () => 
   assert.match(header, /\.site-header\s*\{[^}]*position:\s*sticky;[^}]*top:\s*0;/)
 })
 
-test('mobile accordion starts closed and keeps a separate question accordion', () => {
+test('mobile accordion starts closed and keeps a separate group accordion', () => {
   assert.match(sidebar, /const mobileOpen = ref\(false\)/)
   assert.match(sidebar, /:aria-expanded="mobileOpen"/)
   assert.match(sidebar, /aria-controls="exam-sidebar-content"/)
@@ -24,12 +24,13 @@ test('mobile accordion starts closed and keeps a separate question accordion', (
   assert.match(sidebar, /\.mobile-open \.sidebar-content\s*\{ display: block; \}/)
 })
 
-test('navigation closes the mobile list without adding API calls', () => {
+test('navigation closes the mobile list without issuing per-click API calls', () => {
   assert.match(sidebar, /watch\(\(\) => route.fullPath, closeMobileList\)/)
   assert.equal(sidebar.match(/@click="closeMobileList"/g)?.length, 2)
   assert.match(sidebar, /@keydown.esc="closeMobileOnEscape"/)
   assert.match(sidebar, /mobileToggle.value\?\.focus\(\)/)
-  assert.doesNotMatch(sidebar, /\b(?:useFetch|useApi|\$fetch)\s*\(/)
+  assert.match(sidebar, /usePublicExamCatalog\(\)/)
+  assert.doesNotMatch(sidebar, /v-for="question in exam.question_numbers"/)
 })
 
 test('home anchor leaves room for both mobile header rows', () => {
@@ -46,6 +47,6 @@ test('mobile exam grid shows two columns and reserves three compact rows', () =>
   assert.match(mobileStyles, /var\(--exam-row-height\) \* 3 \+ var\(--exam-grid-gap\) \* 2 \+ 25px/)
   assert.doesNotMatch(mobileStyles, /\.exam-group.expanded\s*\{[^}]*grid-column/)
   assert.match(mobileStyles, /width: calc\(200% \+ var\(--exam-grid-gap\)\)/)
-  assert.match(mobileStyles, /\.exam-group:nth-child\(even\) \.question-list\s*\{\s*margin-left: calc\(-100% - var\(--exam-grid-gap\)\)/)
+  assert.match(mobileStyles, /\.exam-group:nth-child\(even\) \.group-list\s*\{\s*margin-left: calc\(-100% - var\(--exam-grid-gap\)\)/)
   assert.match(mobileStyles, /overflow-y: auto/)
 })

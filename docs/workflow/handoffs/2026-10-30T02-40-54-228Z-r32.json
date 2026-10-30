@@ -1,0 +1,365 @@
+{
+  "schema_version": 1,
+  "revision": 32,
+  "state_hash": "846d36748e36a2d3680f9321657a0e1bbde09fbc04292474682daefa99721d86",
+  "recorded_at": "2026-10-30T02:40:54.228Z",
+  "timezone": "UTC",
+  "context": "operations",
+  "task": "art_grouped_push",
+  "summary": "DB反映とGit送信の依頼を別タスクに登録。接続設定・対象コンテナ・対象データ領域がなくDBの指定を確認中。Git送信候補と資料除外を独立レビューした。",
+  "next_action": "DBの情報待ちと並行し、承認された実装のコミット・pushを進める",
+  "missing_local_files": [],
+  "git": {
+    "available": true,
+    "head": "31f21dddd99f62207c828d339753ceb28107a2ae",
+    "changes": [
+      {
+        "status": " M",
+        "path": "README.md"
+      },
+      {
+        "status": " M",
+        "path": "config/exam.json"
+      },
+      {
+        "status": " M",
+        "path": "content/mock-exams/mock-01/README.md"
+      },
+      {
+        "status": " M",
+        "path": "content/mock-exams/mock-01/editorial.json"
+      },
+      {
+        "status": " M",
+        "path": "content/mock-exams/mock-01/manifest.json"
+      },
+      {
+        "status": " M",
+        "path": "content/mock-exams/mock-01/questions.json"
+      },
+      {
+        "status": " M",
+        "path": "content/questions.json"
+      },
+      {
+        "status": " M",
+        "path": "docs/architecture.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/customization.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/testing.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/verification.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/workflow/contexts/development.md"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/ExamSidebar.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/QuestionContentBlocks.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/admin/AdminContentBlockEditor.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/admin/AdminQuestionForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/admin/AdminQuestionPreview.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/layouts/admin.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/admin/questions/[questionId]/edit.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/admin/questions/new.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/favorites.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/history.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/index.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/practice/[examNumber]/[questionNumber].vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/types/adminQuestion.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/utils/apiFormErrors.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/utils/examCatalog.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/utils/practiceSequence.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/e2e/core-journeys.spec.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/e2e/mock-exam.spec.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/prisma/schema.prisma"
+      },
+      {
+        "status": " M",
+        "path": "frontend/scripts/e2e-fixture.mjs"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/api.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/archive-optional.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/migrations.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/operations.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/routing.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/api/v1/questions/[id]/answer.post.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/operations/cli.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/operations/content.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/learning-validation.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/learning-writer.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/learning.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/shared/schemas/content.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/tests/examSidebarLayout.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/tests/mixedExamValidation.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "scripts/check-mock-exam.mjs"
+      },
+      {
+        "status": " M",
+        "path": "scripts/check-template.mjs"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/components/QuestionInlineText.vue"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/components/SharedPassagePanel.vue"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/composables/usePublicExamCatalog.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/pages/admin/exams/[examNumber].vue"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/pages/admin/exams/index.vue"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/utils/adminQuestionForm.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/utils/learningPresentation.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/utils/practicePassageState.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/e2e/grouped-admin.spec.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/e2e/grouped-practice.spec.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/prisma/migrations/20261030020000_grouped_questions/migration.sql"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server-tests/grouped-learning.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server-tests/structure-operation.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/exams/[examNumber].get.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/exams/[examNumber].patch.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/exams/[examNumber].put.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/exams/[examNumber]/groups.post.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/exams/[examNumber]/publish.post.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/exams/[examNumber]/validate.post.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/exams/index.get.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/question_groups/[id].delete.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/question_groups/[id].get.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/question_groups/[id].patch.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/admin/question_groups/[id].put.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/exams/[examNumber]/groups.get.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/operations/structure.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/services/learning-structure.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/shared/schemas/structure.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/shared/types/learning.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/tests/adminGroupedQuestion.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/tests/catalogExamNavigation.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/tests/groupedContentSchema.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/tests/practicePassageState.test.ts"
+      }
+    ]
+  },
+  "file_hashes": {
+    "AGENTS.md": "4824b8c34a5ce59d3076123deb93f2343040d81ad34238759505160ff6ec66f9",
+    "README.md": "02da6a648cdcf2233be39bc9f19f508df95bb36875e52911f6fc53bf0b02160a",
+    "docs/testing.md": "042f52acbf7f7b09dcbcc4eb5a20dc59592144bf69e7373655c6fbab3db59a58",
+    "docs/workflow/README.md": "ce35c134e34be8261e2478091460df30cd2a2546fba658ba38f25e8411a9f8f8",
+    "docs/workflow/policy.json": "0cda4e27fe6f57e169cc366fe72041a5276557e53ed8286fc82a6adcd3d524f1",
+    "docs/workflow/task.example.json": "4bf161efce99b7d0a26798e3445d1f142505e512eedd591ea11cfb194d67da9f",
+    "docs/workflow/contexts/product.md": "7f77eaf17a9b985a31b40e3ec00c6dc77ca4ae05e8e83084b4af47721b1dc892",
+    "docs/workflow/contexts/development.md": "6236fb55933849a9c2e091fc4b199cbbc44b710502c6613346f1783703a6b25a",
+    "docs/workflow/contexts/operations.md": "d02de6eb127496e226953dc031aad39fb129c2a09e64bc3dcb4b91b0ab9c1efb",
+    "scripts/context.mjs": "3828c41d1cc5a6977b8444035e094e61e1c9895fcaa9451ecb1919e799ecaffc",
+    "scripts/context.test.mjs": "125f184ecd2d34b8a4dc93a8d1edd2b6c527c0de8a46f39c8c92de265ebccc66",
+    "scripts/workflow-policy.mjs": "60535f2c9bf42203c059ca39a0b254c168b7cfb2468904a3842725fe3797141e",
+    "scripts/workflow-policy.test.mjs": "394287e7d1e84756a3ac8833918f964ee66f0ef2c34934d121d055fb37af4782",
+    "scripts/workspace-policy.mjs": "cd575bdc0a83e37ed28f4004c311c2415d895ce9d63b8fe8552ad674269cd219",
+    "scripts/workspace-policy.test.mjs": "22c2dce0ba9006d3266c2628a61e19acae48eb851c34f5a2fdd1d600cfb7944f",
+    "scripts/check-private-sources.mjs": "1d28447b51b39591d42151f236b837b33d695662168ee5c71500205aa0de96af",
+    "scripts/check-private-sources.test.mjs": "db6afd47e6f6e6de3405437960721f037068da4181eb7a81d7ba11477c7d69fb",
+    ".gitignore": "4db83ed8ce0099a6421c6377340e3e69b7c074ddabf543d0bf7c8f0c806ed83a",
+    ".dockerignore": "dda1228d0ba86e337d9c99648c4010e6b7e3dd87e60a6c04418b77786df959b0",
+    ".githooks/pre-push": "3529b300f7a655102ad899ab31fa8b2c404ec37479d1195aa9bcd3efa97bf90c"
+  },
+  "verification_note": "ハッシュ・Git・記録済み完了条件の確認であり、テストや出典照合の自動再実行ではない。依頼・権限は最新のユーザー指示とAGENTS.mdに従う。"
+}

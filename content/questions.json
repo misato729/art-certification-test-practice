@@ -1,5 +1,365 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "exam_sets": [
+    {
+      "exam_number": 1,
+      "title": "模擬試験1",
+      "publication_status": "published"
+    }
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "exam_number": 1,
+      "group_number": 1,
+      "title": "古代の人物表現",
+      "planned_question_count": 4,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 1,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "exam_number": 1,
+      "group_number": 2,
+      "title": "中世の信仰と美術",
+      "planned_question_count": 3,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 2,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "exam_number": 1,
+      "group_number": 3,
+      "title": "ルネサンスの画家たち",
+      "planned_question_count": 4,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 3,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "exam_number": 1,
+      "group_number": 4,
+      "title": "北方ルネサンスとマニエリスム",
+      "planned_question_count": 3,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 5,
+      "exam_number": 1,
+      "group_number": 5,
+      "title": "17世紀の美術と鑑賞者",
+      "planned_question_count": 3,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 4,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "exam_number": 1,
+      "group_number": 6,
+      "title": "ロココと近代絵画の展開",
+      "planned_question_count": 4,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 7,
+      "exam_number": 1,
+      "group_number": 7,
+      "title": "19世紀の絵画を比べる",
+      "planned_question_count": 4,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 5,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "exam_number": 1,
+      "group_number": 8,
+      "title": "近代の表現と抽象への展開",
+      "planned_question_count": 4,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 9,
+      "exam_number": 1,
+      "group_number": 9,
+      "title": "20世紀の美術と表現手法",
+      "planned_question_count": 5,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 10,
+      "exam_number": 1,
+      "group_number": 10,
+      "title": "先史・古墳時代の美術",
+      "planned_question_count": 2,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 11,
+      "exam_number": 1,
+      "group_number": 11,
+      "title": "仏教美術の受容と展開",
+      "planned_question_count": 4,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 6,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "exam_number": 1,
+      "group_number": 12,
+      "title": "平安時代の信仰と宮廷文化",
+      "planned_question_count": 3,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 7,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "exam_number": 1,
+      "group_number": 13,
+      "title": "鎌倉時代の絵画と彫刻",
+      "planned_question_count": 3,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 8,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "exam_number": 1,
+      "group_number": 14,
+      "title": "室町時代の絵画と文化交流",
+      "planned_question_count": 3,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 9,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "exam_number": 1,
+      "group_number": 15,
+      "title": "桃山から江戸初期の画家たち",
+      "planned_question_count": 4,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 10,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "exam_number": 1,
+      "group_number": 16,
+      "title": "江戸絵画の多様性",
+      "planned_question_count": 4,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 11,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "exam_number": 1,
+      "group_number": 17,
+      "title": "近代日本美術と西洋",
+      "planned_question_count": 4,
+      "publication_status": "published",
+      "passages": [
+        {
+          "id": 12,
+          "label": "A",
+          "display_order": 1,
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "exam_number": 1,
+      "group_number": 18,
+      "title": "戦後日本の美術",
+      "planned_question_count": 1,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 19,
+      "exam_number": 1,
+      "group_number": 19,
+      "title": "現代美術の表現と社会",
+      "planned_question_count": 5,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 20,
+      "exam_number": 1,
+      "group_number": 20,
+      "title": "東洋美術の交流と造形",
+      "planned_question_count": 5,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 21,
+      "exam_number": 1,
+      "group_number": 21,
+      "title": "工芸・デザインと生活",
+      "planned_question_count": 5,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 22,
+      "exam_number": 1,
+      "group_number": 22,
+      "title": "美術館と国際展",
+      "planned_question_count": 3,
+      "publication_status": "published",
+      "passages": []
+    },
+    {
+      "id": 23,
+      "exam_number": 1,
+      "group_number": 23,
+      "title": "知識・情報の活用",
+      "planned_question_count": 5,
+      "publication_status": "published",
+      "passages": []
+    }
+  ],
   "questions": [
     {
       "exam_number": 1,
@@ -8,10 +368,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
-        },
         {
           "type": "text",
           "text": "古代エジプトの壁画や浮彫に見られる、人物の身体の見せ方について、一般的な傾向を適切に説明したものを選びなさい。"
@@ -69,6 +425,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 1,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 1,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -78,10 +442,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
-        },
         {
           "type": "text",
           "text": "ギリシア美術の時代区分を、一般的な順序に従って古いものから並べたものを選びなさい。"
@@ -139,6 +499,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 1,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 1,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -148,10 +516,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
-        },
         {
           "type": "text",
           "text": "アテネの赤像式陶器について、人物の色と細部の表し方の組合せとして適切なものを選びなさい。"
@@ -209,6 +573,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 1,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 1,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -218,10 +590,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
-        },
         {
           "type": "text",
           "text": "共和政末期のローマの男性肖像には、皺や加齢を強調した作例がある。この表現の社会的な意味として、最も適切なものを選びなさい。"
@@ -279,6 +647,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 1,
+      "group_question_number": 4,
+      "passage_references": [
+        {
+          "passage_id": 1,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -288,10 +664,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
-        },
         {
           "type": "text",
           "text": "ビザンティン美術の「イコン」を説明したものとして、最も適切なものを選びなさい。"
@@ -349,6 +721,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 2,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 2,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -358,10 +738,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
-        },
         {
           "type": "text",
           "text": "次の建築的特徴を、ロマネスクとゴシックの一般的な傾向に対応させた組合せを選びなさい。"
@@ -419,6 +795,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 2,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 2,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -428,10 +812,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
-        },
         {
           "type": "text",
           "text": "ゴシック大聖堂で高い身廊や大きな窓を実現するうえで、飛梁（フライング・バットレス）が果たした役割として適切なものを選びなさい。"
@@ -489,6 +869,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 2,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 2,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -498,10 +886,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
-        },
         {
           "type": "text",
           "text": "ブオン・フレスコの基本的な制作工程として、最も適切なものを選びなさい。"
@@ -559,6 +943,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 3,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 3,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -568,10 +960,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
-        },
         {
           "type": "text",
           "text": "15世紀フィレンツェで体系化された線遠近法で、画面に奥行きを構成する基本原理として適切なものを選びなさい。"
@@ -629,6 +1017,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 3,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 3,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -638,10 +1034,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
-        },
         {
           "type": "text",
           "text": "レオナルド・ダ・ヴィンチのスフマートを説明したものとして、最も適切なものを選びなさい。"
@@ -699,6 +1091,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 3,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 3,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -708,10 +1108,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
-        },
         {
           "type": "text",
           "text": "ローマ教皇の注文による作品と作者の組合せとして、両方とも正しいものを選びなさい。"
@@ -768,6 +1164,14 @@
           ],
           "is_correct": true,
           "display_order": 4
+        }
+      ],
+      "group_id": 3,
+      "group_question_number": 4,
+      "passage_references": [
+        {
+          "passage_id": 3,
+          "anchor_id": null
         }
       ]
     },
@@ -835,7 +1239,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 4,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -901,7 +1308,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 4,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -967,7 +1377,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 4,
+      "group_question_number": 3,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -976,10 +1389,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
-        },
         {
           "type": "text",
           "text": "カラヴァッジョが場面を劇的にするために用いた、光と影の強い対比による表現を表す言葉を選びなさい。"
@@ -1037,6 +1446,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 5,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 4,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -1046,10 +1463,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
-        },
         {
           "type": "text",
           "text": "コルナーロ礼拝堂で彫刻・建築・隠された光源を統合し、《聖テレジアの法悦》の空間を構成した美術家を選びなさい。"
@@ -1107,6 +1520,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 5,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 4,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -1116,10 +1537,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
-        },
         {
           "type": "text",
           "text": "フェルメールの《真珠の耳飾りの少女》は「トローニー」の例として説明される。この種の絵画の性格として最も適切なものを選びなさい。"
@@ -1176,6 +1593,14 @@
           ],
           "is_correct": false,
           "display_order": 4
+        }
+      ],
+      "group_id": 5,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 4,
+          "anchor_id": null
         }
       ]
     },
@@ -1243,7 +1668,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 6,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -1309,7 +1737,10 @@
           "is_correct": true,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 6,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -1375,7 +1806,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 6,
+      "group_question_number": 3,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -1441,7 +1875,10 @@
           "is_correct": true,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 6,
+      "group_question_number": 4,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -1450,10 +1887,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
-        },
         {
           "type": "text",
           "text": "クールベの《オルナンの埋葬》が、当時の絵画の主題の序列に対して示した変化を説明するものを選びなさい。"
@@ -1511,6 +1944,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 7,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 5,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -1520,10 +1961,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
-        },
         {
           "type": "text",
           "text": "モネの積みわらやルーアン大聖堂の連作に共通する関心として、最も適切なものを選びなさい。"
@@ -1581,6 +2018,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 7,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 5,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -1590,10 +2035,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
-        },
         {
           "type": "text",
           "text": "スーラらの新印象主義における「視覚的混合」を説明したものとして、適切なものを選びなさい。"
@@ -1651,6 +2092,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 7,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 5,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -1660,10 +2109,6 @@
       "category_code": "western_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
-        },
         {
           "type": "text",
           "text": "セザンヌの静物画に見られる、単一の視点では説明しにくい卓面や器の形を理解する説明を選びなさい。"
@@ -1720,6 +2165,14 @@
           ],
           "is_correct": false,
           "display_order": 4
+        }
+      ],
+      "group_id": 7,
+      "group_question_number": 4,
+      "passage_references": [
+        {
+          "passage_id": 5,
+          "anchor_id": null
         }
       ]
     },
@@ -1787,7 +2240,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 8,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -1853,7 +2309,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 8,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -1919,7 +2378,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 8,
+      "group_question_number": 3,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -1985,7 +2447,10 @@
           "is_correct": true,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 8,
+      "group_question_number": 4,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -2051,7 +2516,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 9,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -2117,7 +2585,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 9,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -2183,7 +2654,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 9,
+      "group_question_number": 3,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -2249,7 +2723,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 9,
+      "group_question_number": 4,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -2315,7 +2792,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 9,
+      "group_question_number": 5,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -2381,7 +2861,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 10,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -2447,7 +2930,10 @@
           "is_correct": true,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 10,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -2456,10 +2942,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
-        },
         {
           "type": "text",
           "text": "法隆寺金堂の釈迦三尊像は、光背銘から聖徳太子に関わる造像の事情が知られる。この像の制作者として銘に記される仏師を一人選びなさい。"
@@ -2517,6 +2999,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 11,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 6,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -2526,10 +3016,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
-        },
         {
           "type": "text",
           "text": "近世には虚空蔵菩薩とされ、明治に化仏のある宝冠が見つかったことで観音として呼ばれるようになった、法隆寺の長身の像はどれか。一つ選びなさい。"
@@ -2587,6 +3073,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 11,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 6,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -2596,10 +3090,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
-        },
         {
           "type": "text",
           "text": "法隆寺の玉虫厨子について、名称の由来と形状の組合せが適切なものを一つ選びなさい。"
@@ -2657,6 +3147,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 11,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 6,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -2666,10 +3164,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
-        },
         {
           "type": "text",
           "text": "唐招提寺の鑑真和上坐像について、表された人物の性格と制作技法の組合せが適切なものを一つ選びなさい。"
@@ -2727,6 +3221,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 11,
+      "group_question_number": 4,
+      "passage_references": [
+        {
+          "passage_id": 6,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -2736,10 +3238,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
-        },
         {
           "type": "text",
           "text": "密教の両界曼荼羅を構成する二つの世界の組合せとして、適切なものを一つ選びなさい。"
@@ -2797,6 +3295,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 12,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 7,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -2806,10 +3312,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
-        },
         {
           "type": "text",
           "text": "平等院鳳凰堂に1053年に納められ、現存する確実な作例としてその仏師の様式を考える基準となる阿弥陀如来坐像の作者を一人選びなさい。"
@@ -2867,6 +3369,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 12,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 7,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -2876,10 +3386,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
-        },
         {
           "type": "text",
           "text": "『源氏物語絵巻』などで、屋根や天井を省き、室内の人物や調度を斜め上から見渡すように描く方法を何というか。一つ選びなさい。"
@@ -2937,6 +3443,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 12,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 7,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -2946,10 +3460,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
-        },
         {
           "type": "text",
           "text": "『平治物語絵巻』について、描かれた事件の時代と、現存する原本の制作時代の組合せが適切なものを一つ選びなさい。"
@@ -3007,6 +3517,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 13,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 8,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3016,10 +3534,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
-        },
         {
           "type": "text",
           "text": "鎌倉時代に盛行し、俗人などの外見的な特徴を細線で描き分ける肖像表現で、『公家列影図』が代表的な遺例とされるものを一つ選びなさい。"
@@ -3077,6 +3591,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 13,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 8,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3086,10 +3608,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
-        },
         {
           "type": "text",
           "text": "格調の高さと実在感を備える来迎形の阿弥陀如来立像を追求し、後世「安阿弥様」と呼ばれる姿の典型を生み出した仏師を一人選びなさい。"
@@ -3147,6 +3665,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 13,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 8,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3156,10 +3682,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
-        },
         {
           "type": "text",
           "text": "如拙の『瓢鮎図』では、瓢箪で鯰を捕らえるという問いをめぐり、絵と詩が組み合わされている。この作品の成立に関わる人物の組合せとして適切なものを一つ選びなさい。"
@@ -3217,6 +3739,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 14,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 9,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3226,10 +3756,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
-        },
         {
           "type": "text",
           "text": "雪舟の『秋冬山水図』では、中国画に学んだ構築的な山水表現が見られる。その様式の源泉として特に関わる、南宋の宮廷画家を一人選びなさい。"
@@ -3287,6 +3813,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 14,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 9,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3296,10 +3830,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
-        },
         {
           "type": "text",
           "text": "狩野元信の大仙院『四季花鳥図』について、参照した中国画と画面構成の関係を説明する文として、最も適切なものを一つ選びなさい。"
@@ -3357,6 +3887,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 14,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 9,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3366,10 +3904,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
-        },
         {
           "type": "text",
           "text": "狩野永徳の『檜図屏風』の表現を捉える説明として、適切なものを一つ選びなさい。"
@@ -3427,6 +3961,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 15,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 10,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3436,10 +3978,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
-        },
         {
           "type": "text",
           "text": "墨の濃淡と余白によって、霧の中の松林を六曲一双の屏風に表した『松林図屏風』の作者を一人選びなさい。"
@@ -3497,6 +4035,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 15,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 10,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3506,10 +4052,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
-        },
         {
           "type": "text",
           "text": "俵屋宗達、尾形光琳、酒井抱一による『風神雷神図屏風』をたどる際、琳派の継承を捉える説明として適切なものを一つ選びなさい。"
@@ -3567,6 +4109,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 15,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 10,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3576,10 +4126,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
-        },
         {
           "type": "text",
           "text": "江戸幕府の御用絵師となり、江戸城・二条城・名古屋城などの障壁画制作に携わって、江戸狩野派の基礎を築いた人物を一人選びなさい。"
@@ -3637,6 +4183,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 15,
+      "group_question_number": 4,
+      "passage_references": [
+        {
+          "passage_id": 10,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3646,10 +4200,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
-        },
         {
           "type": "text",
           "text": "尾形光琳の『燕子花図屏風』は、花の配置によって古典文学の場面を想起させる。発想の源と考えられる文学作品を一つ選びなさい。"
@@ -3707,6 +4257,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 16,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 11,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3716,10 +4274,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
-        },
         {
           "type": "text",
           "text": "円山応挙の『雪松図屏風』の特徴を説明する文として、最も適切なものを一つ選びなさい。"
@@ -3777,6 +4331,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 16,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 11,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3786,10 +4348,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
-        },
         {
           "type": "text",
           "text": "鶏、魚、草花など多彩な生き物を鮮やかに描いた、絹本着色の三十幅からなる『動植綵絵』の作者を一人選びなさい。"
@@ -3847,6 +4405,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 16,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 11,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3856,10 +4422,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
-        },
         {
           "type": "text",
           "text": "寛政期の大首絵について、一般に代表的とされる画家と主題の組合せを一つ選びなさい。"
@@ -3917,6 +4479,14 @@
           "is_correct": false,
           "display_order": 4
         }
+      ],
+      "group_id": 16,
+      "group_question_number": 4,
+      "passage_references": [
+        {
+          "passage_id": 11,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3926,10 +4496,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
-        },
         {
           "type": "text",
           "text": "高村光雲の『老猿』（1893年）は、伝統的な木彫の技術と近代の写生への関心が結び付く作品である。この作品が出品され、優等賞を受けた万国博覧会の開催都市を一つ選びなさい。"
@@ -3987,6 +4553,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 17,
+      "group_question_number": 1,
+      "passage_references": [
+        {
+          "passage_id": 12,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -3996,10 +4570,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
-        },
         {
           "type": "text",
           "text": "浴衣姿の女性が団扇を手に湖畔に座る『湖畔』（1897年）を描き、フランス留学後の日本洋画に大きな影響を与えた画家を一人選びなさい。"
@@ -4057,6 +4627,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 17,
+      "group_question_number": 2,
+      "passage_references": [
+        {
+          "passage_id": 12,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -4066,10 +4644,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
-        },
         {
           "type": "text",
           "text": "愛娘の麗子を繰り返し描き、精密な写実を通して、単なる外見の再現を超える「内なる美」を探究した画家を一人選びなさい。"
@@ -4127,6 +4701,14 @@
           "is_correct": true,
           "display_order": 4
         }
+      ],
+      "group_id": 17,
+      "group_question_number": 3,
+      "passage_references": [
+        {
+          "passage_id": 12,
+          "anchor_id": null
+        }
       ]
     },
     {
@@ -4136,10 +4718,6 @@
       "category_code": "japanese_study",
       "publication_status": "published",
       "content_blocks": [
-        {
-          "type": "text",
-          "text": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
-        },
         {
           "type": "text",
           "text": "1920年代のパリで活躍した藤田嗣治の女性像などを特徴付ける、材料・描写の組合せとして適切なものを一つ選びなさい。"
@@ -4196,6 +4774,14 @@
           ],
           "is_correct": false,
           "display_order": 4
+        }
+      ],
+      "group_id": 17,
+      "group_question_number": 4,
+      "passage_references": [
+        {
+          "passage_id": 12,
+          "anchor_id": null
         }
       ]
     },
@@ -4263,7 +4849,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 18,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4329,7 +4918,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 19,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4395,7 +4987,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 19,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4461,7 +5056,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 19,
+      "group_question_number": 3,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4527,7 +5125,10 @@
           "is_correct": true,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 19,
+      "group_question_number": 4,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4593,7 +5194,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 19,
+      "group_question_number": 5,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4659,7 +5263,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 20,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4725,7 +5332,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 20,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4791,7 +5401,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 20,
+      "group_question_number": 3,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4857,7 +5470,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 20,
+      "group_question_number": 4,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4923,7 +5539,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 20,
+      "group_question_number": 5,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -4989,7 +5608,10 @@
           "is_correct": true,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 21,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5055,7 +5677,10 @@
           "is_correct": true,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 21,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5121,7 +5746,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 21,
+      "group_question_number": 3,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5187,7 +5815,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 21,
+      "group_question_number": 4,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5253,7 +5884,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 21,
+      "group_question_number": 5,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5319,7 +5953,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 22,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5385,7 +6022,10 @@
           "is_correct": false,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 22,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5451,7 +6091,10 @@
           "is_correct": true,
           "display_order": 4
         }
-      ]
+      ],
+      "group_id": 22,
+      "group_question_number": 3,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5564,7 +6207,10 @@
           "is_correct": false,
           "display_order": 6
         }
-      ]
+      ],
+      "group_id": 23,
+      "group_question_number": 1,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5673,7 +6319,10 @@
           "is_correct": false,
           "display_order": 6
         }
-      ]
+      ],
+      "group_id": 23,
+      "group_question_number": 2,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5778,7 +6427,10 @@
           "is_correct": true,
           "display_order": 6
         }
-      ]
+      ],
+      "group_id": 23,
+      "group_question_number": 3,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5866,7 +6518,10 @@
           "is_correct": false,
           "display_order": 6
         }
-      ]
+      ],
+      "group_id": 23,
+      "group_question_number": 4,
+      "passage_references": []
     },
     {
       "exam_number": 1,
@@ -5979,7 +6634,10 @@
           "is_correct": false,
           "display_order": 6
         }
-      ]
+      ],
+      "group_id": 23,
+      "group_question_number": 5,
+      "passage_references": []
     }
   ]
 }

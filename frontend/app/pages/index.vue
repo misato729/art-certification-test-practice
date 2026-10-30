@@ -1,118 +1,55 @@
 <script setup lang="ts">
-import { EXAM_CATALOG, FREE_EXAM_MAX, questionNumbersForExams } from '~/utils/examCatalog'
-import {
-  createPracticeSeed,
-  createPracticeSequence,
-  shufflePracticeSequence,
-  type PracticeOrder,
-} from '~/utils/practiceSequence'
+import { FREE_EXAM_MAX, catalogExamStartNumber, type ExamCatalogEntry } from '~/utils/examCatalog'
+import { createPracticeSeed, selectPracticePositions, shufflePracticeSequence, type PracticeOrder } from '~/utils/practiceSequence'
 
 type LauncherMode = 'exam' | 'conditions'
-
-const title = SITE.name
-const description = SITE.description
-
-useSeoMeta({
-  title,
-  description,
-  ogTitle: title,
-  ogDescription: description,
-})
-
+useSeoMeta({ title: SITE.name, description: SITE.description, ogTitle: SITE.name, ogDescription: SITE.description })
 const { user } = useAuth()
+const { data: publicCatalog, status: catalogStatus, error: catalogError, refresh: refreshCatalog } = await usePublicExamCatalog()
 const launcherMode = ref<LauncherMode>('exam')
-
-const hasFullAccess = computed(() => (
-  hasFullExamAccess(user.value)
-))
-const freeExams = computed(() => EXAM_CATALOG.filter(exam => exam.exam_number <= FREE_EXAM_MAX))
-const availableExams = computed(() => (
-  hasFullAccess.value ? EXAM_CATALOG : freeExams.value
-))
+const hasFullAccess = computed(() => hasFullExamAccess(user.value))
+const catalogExams = computed(() => publicCatalog.value?.data ?? [])
+const availableExams = computed(() => catalogExams.value.filter(exam => exam.access !== 'paid_membership_required' && (hasFullAccess.value || exam.exam_number <= FREE_EXAM_MAX) && catalogExamStartNumber(exam) !== undefined))
 const availableExamNumbers = computed(() => availableExams.value.map(exam => exam.exam_number))
-const selectedExamNumbers = ref<number[]>([...availableExamNumbers.value])
-const questionNumbers = computed(() => questionNumbersForExams(selectedExamNumbers.value, availableExams.value))
-const selectedQuestionNumbers = ref<number[]>([...questionNumbers.value])
-const totalQuestionCount = EXAM_CATALOG.reduce((total, exam) => total + exam.question_numbers.length, 0)
-
+const selectedExamNumbers = ref<number[]>([])
+let initializedSelection = false
+watch(availableExamNumbers, (numbers, previous = []) => {
+  const selectedAll = !initializedSelection || (previous.length > 0 && previous.every(number => selectedExamNumbers.value.includes(number)))
+  selectedExamNumbers.value = selectedAll ? [...numbers] : selectedExamNumbers.value.filter(number => numbers.includes(number))
+  if (numbers.length) initializedSelection = true
+}, { immediate: true })
+const totalQuestionCount = computed(() => catalogExams.value.reduce((total, exam) => total + (exam.published_question_count ?? exam.question_numbers.length), 0))
+const catalogLoading = computed(() => catalogStatus.value === 'idle' || catalogStatus.value === 'pending')
 const allExamsSelected = computed({
-  get: () => (
-    availableExamNumbers.value.length > 0
-    && selectedExamNumbers.value.length === availableExamNumbers.value.length
-    && availableExamNumbers.value.every(examNumber => selectedExamNumbers.value.includes(examNumber))
-  ),
-  set: (selected: boolean) => {
-    selectedExamNumbers.value = selected ? [...availableExamNumbers.value] : []
-  },
+  get: () => availableExamNumbers.value.length > 0 && availableExamNumbers.value.every(number => selectedExamNumbers.value.includes(number)),
+  set: (selected: boolean) => { selectedExamNumbers.value = selected ? [...availableExamNumbers.value] : [] },
 })
-const someExamsSelected = computed(() => (
-  selectedExamNumbers.value.length > 0 && !allExamsSelected.value
-))
-const allQuestionsSelected = computed({
-  get: () => (
-    questionNumbers.value.length > 0
-    && questionNumbers.value.every(questionNumber => selectedQuestionNumbers.value.includes(questionNumber))
-  ),
-  set: (selected: boolean) => {
-    selectedQuestionNumbers.value = selected ? [...questionNumbers.value] : []
-  },
-})
-const someQuestionsSelected = computed(() => (
-  questionNumbers.value.some(questionNumber => selectedQuestionNumbers.value.includes(questionNumber)) && !allQuestionsSelected.value
-))
-const sortedSelectedExamNumbers = computed(() => (
-  [...selectedExamNumbers.value].sort((left, right) => left - right)
-))
-const sortedSelectedQuestionNumbers = computed(() => (
-  selectedQuestionNumbers.value.filter(questionNumber => questionNumbers.value.includes(questionNumber)).sort((left, right) => left - right)
-))
-const conditionSequence = computed(() => createPracticeSequence(
-  sortedSelectedExamNumbers.value,
-  sortedSelectedQuestionNumbers.value,
-  EXAM_CATALOG,
-))
+const someExamsSelected = computed(() => selectedExamNumbers.value.length > 0 && !allExamsSelected.value)
+const sortedSelectedExamNumbers = computed(() => [...selectedExamNumbers.value].sort((a, b) => a - b))
+const conditionSequence = computed(() => selectPracticePositions(availableExams.value, sortedSelectedExamNumbers.value))
 const selectedQuestionCount = computed(() => conditionSequence.value.length)
-const hasConditionSelection = computed(() => conditionSequence.value.length > 0)
-
-const examIsLocked = (examNumber: number) => examNumber > FREE_EXAM_MAX && !hasFullAccess.value
-const examTarget = (examNumber: number) => (
-  examIsLocked(examNumber) ? '/premium' : `/practice/${examNumber}/1`
-)
-const startConditionalPractice = (order: PracticeOrder) => {
-  if (!hasConditionSelection.value) return
-
-  const query: Record<string, string> = {
-    exams: sortedSelectedExamNumbers.value.join(','),
-    questions: sortedSelectedQuestionNumbers.value.join(','),
-  }
-  let sequence = conditionSequence.value
-
-  if (order === 'random') {
-    const seed = createPracticeSeed()
-    sequence = shufflePracticeSequence(sequence, seed)
-    query.order = order
-    query.seed = String(seed)
-  }
-
-  const firstPosition = sequence[0]
-  if (!firstPosition) return
-
-  navigateTo({
-    path: `/practice/${firstPosition.examNumber}/${firstPosition.questionNumber}`,
-    query,
-  })
+const hasConditionSelection = computed(() => !catalogLoading.value && !catalogError.value && selectedQuestionCount.value > 0)
+const examIsLocked = (number: number) => catalogExams.value.find(exam => exam.exam_number === number)?.access === 'paid_membership_required' || (number > FREE_EXAM_MAX && !hasFullAccess.value)
+const examTarget = (exam: ExamCatalogEntry) => examIsLocked(exam.exam_number) ? '/premium' : `/practice/${exam.exam_number}/${catalogExamStartNumber(exam)}`
+const starting = ref(false)
+const startConditionalPractice = async (order: PracticeOrder) => {
+  if (!hasConditionSelection.value || starting.value) return
+  starting.value = true
+  try {
+    await refreshCatalog()
+    await nextTick()
+    if (catalogError.value || !conditionSequence.value.length) return
+    const query: Record<string, string> = { exams: sortedSelectedExamNumbers.value.join(',') }
+    let sequence = conditionSequence.value
+    if (order === 'random') {
+      const seed = createPracticeSeed()
+      sequence = shufflePracticeSequence(sequence, seed)
+      query.order = 'random'; query.seed = String(seed)
+    }
+    const first = sequence[0]
+    if (first) await navigateTo({ path: `/practice/${first.examNumber}/${first.questionNumber}`, query })
+  } finally { starting.value = false }
 }
-
-watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
-  const previouslySelectedAll = (
-    previousExamNumbers.length > 0
-    && previousExamNumbers.every(examNumber => selectedExamNumbers.value.includes(examNumber))
-  )
-  selectedExamNumbers.value = previouslySelectedAll
-    ? [...examNumbers]
-    : selectedExamNumbers.value.filter(examNumber => examNumbers.includes(examNumber))
-})
-
 </script>
 
 <template>
@@ -176,22 +113,25 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         aria-labelledby="exam-mode-tab"
       >
         <div class="exam-grid-heading">
-          <p><strong>全{{ EXAM_CATALOG.length }}セット</strong><span>合計{{ totalQuestionCount }}問</span></p>
+          <p v-if="!catalogLoading && !catalogError"><strong>全{{ catalogExams.length }}セット</strong><span>合計{{ totalQuestionCount }}問</span></p>
           <NuxtLink v-if="!hasFullAccess" class="premium-info-link" to="/premium">
             <UIcon name="i-lucide-lock-keyhole" />
             模擬試験{{ FREE_EXAM_MAX + 1 }}以降はプレミアム会員向けです
           </NuxtLink>
         </div>
-        <div class="exam-grid">
+        <p v-if="catalogLoading" role="status">公開中の模擬試験を読み込んでいます。</p>
+        <p v-else-if="catalogError" role="alert">模擬試験を読み込めませんでした。<button class="secondary-link" type="button" @click="() => refreshCatalog()">再読み込み</button></p>
+        <p v-else-if="!catalogExams.length">公開中の模擬試験はありません。</p>
+        <div v-else class="exam-grid">
           <NuxtLink
-            v-for="exam in EXAM_CATALOG"
+            v-for="exam in catalogExams"
             :key="exam.exam_number"
             class="exam-card"
-            :to="examTarget(exam.exam_number)"
+            :to="examTarget(exam)"
             :aria-label="examIsLocked(exam.exam_number) ? `${exam.title}はプレミアム会員向けです` : `${exam.title}・${exam.question_numbers.length}問を始める`"
           >
             <strong>{{ exam.title }}</strong>
-            <span>{{ exam.question_numbers.length }}問</span>
+            <span>{{ exam.groups?.length ? `${exam.groups.length}大問・` : '' }}{{ exam.published_question_count ?? exam.question_numbers.length }}問</span>
             <UIcon v-if="examIsLocked(exam.exam_number)" name="i-lucide-lock-keyhole" aria-hidden="true" />
           </NuxtLink>
         </div>
@@ -236,56 +176,30 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
               </div>
             </fieldset>
 
-            <fieldset class="condition-fieldset">
-              <legend>出題範囲</legend>
-              <div class="condition-field-heading">
-                <p>問題番号を選択してください</p>
-                <label class="all-selector">
-                  <input
-                    v-model="allQuestionsSelected"
-                    type="checkbox"
-                    :indeterminate="someQuestionsSelected"
-                  >
-                  <span>全選択</span>
-                </label>
-              </div>
-              <div class="number-checkbox-grid question-number-grid">
-                <label
-                  v-for="questionNumber in questionNumbers"
-                  :key="questionNumber"
-                  :class="{ selected: selectedQuestionNumbers.includes(questionNumber) }"
-                >
-                  <input
-                    v-model="selectedQuestionNumbers"
-                    type="checkbox"
-                    name="question-numbers"
-                    :value="questionNumber"
-                  >
-                  <span>問{{ questionNumber }}</span>
-                </label>
-              </div>
-            </fieldset>
+            <div class="condition-fieldset condition-scope-note"><h3>出題範囲</h3><p>選んだ模擬試験の公開小問を、大問の順に演習できます。ランダム出題も選べます。</p></div>
           </div>
 
           <div class="condition-submit">
-            <p v-if="hasConditionSelection">
+            <p v-if="catalogLoading" role="status">出題範囲を確認しています。</p>
+            <p v-else-if="catalogError" role="alert">出題範囲を確認できませんでした。</p>
+            <p v-else-if="hasConditionSelection">
               <span>選択中</span>
               {{ sortedSelectedExamNumbers.length }}セットから
               <strong>全{{ selectedQuestionCount }}問</strong>
             </p>
             <p v-else class="selection-required">
               <span>選択内容を確認してください</span>
-              対象セットと問題番号を1つ以上選択してください
+              対象の模擬試験を1つ以上選択してください
             </p>
             <div class="condition-actions">
-              <button class="primary-link" type="submit" :disabled="!hasConditionSelection">
+              <button class="primary-link" type="submit" :disabled="!hasConditionSelection || starting">
                 <UIcon name="i-lucide-list-ordered" />
-                問題番号順に始める
+                大問の順に始める
               </button>
               <button
                 class="secondary-link"
                 type="button"
-                :disabled="!hasConditionSelection"
+                :disabled="!hasConditionSelection || starting"
                 @click="startConditionalPractice('random')"
               >
                 <UIcon name="i-lucide-shuffle" />

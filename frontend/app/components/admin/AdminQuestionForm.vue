@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import type { AdminQuestionInput, AdminChoice } from '~/types/adminQuestion'
+import type { AdminQuestionInput, AdminChoice, ApiResponse } from '~/types/adminQuestion'
+import type { input as SchemaInput } from 'zod'
 import type { Form, FormError, FormErrorWithId } from '@nuxt/ui'
 import { questionFormSchema } from '../../../shared/schemas/content.ts'
 import { questionFormFields, focusFormError } from '~/utils/apiFormErrors'
 import { choiceLabelsForQuestion, questionCountForExam } from '../../../shared/schemas/exam.ts'
 import { reconcileQuestionChoices } from '~/utils/adminQuestionChoices'
+import type { ExamSet, QuestionGroup, PassageReference } from '../../../shared/types/learning'
+import { normalizeAdminQuestion, prepareAdminQuestion, referenceKey, setPassageReference } from '~/utils/adminQuestionForm'
 
 const props = defineProps<{
   initialValue: AdminQuestionInput
@@ -19,10 +22,13 @@ const emit = defineEmits<{
 }>()
 
 const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value))
-const form = reactive<AdminQuestionInput>(clone(props.initialValue))
+const form = reactive<AdminQuestionInput>(normalizeAdminQuestion(props.initialValue))
 const choiceCache = new Map<string, AdminChoice>()
 const previewOpen = ref(false)
 const schema = questionFormSchema(EXAM_CONFIG)
+// Renderers/editors use the shared broad Block type; UForm validates this same
+// live draft with the canonical discriminated input schema on every submission.
+const formState = computed(() => form as unknown as SchemaInput<typeof schema>)
 const questionForm = useTemplateRef<Form<typeof schema>>('questionForm')
 const validationErrors = computed<FormErrorWithId[]>(() => questionForm.value?.getErrors() ?? [])
 watch(() => props.fieldErrors, errors => questionForm.value?.setErrors(errors ?? []))
@@ -30,8 +36,52 @@ const errorLabel = (name?: string) => questionFormFields[name?.split('.')[0] as 
 
 watch(() => props.initialValue, (value) => {
   choiceCache.clear()
-  Object.assign(form, clone(value))
+  Object.assign(form, normalizeAdminQuestion(value))
 }, { deep: true })
+
+const { $api: api } = useNuxtApp()
+const { authHeaders } = useAuth()
+const exam = ref<ExamSet | null>(null)
+const group = ref<QuestionGroup | null>(null)
+const contextError = ref('')
+let examRequest = 0
+let groupRequest = 0
+const loadExam = async () => {
+  const request = ++examRequest
+  if (import.meta.server) return
+  exam.value = null
+  try {
+    const response = await api<ApiResponse<ExamSet>>(`/api/v1/admin/exams/${form.exam_number}`, { headers: authHeaders.value })
+    if (request === examRequest) { exam.value = response.data; contextError.value = '' }
+  } catch { if (request === examRequest) contextError.value = '模擬試験の構成を読み込めませんでした。' }
+}
+const loadGroup = async () => {
+  const request = ++groupRequest
+  group.value = null
+  if (import.meta.server || !form.group_id) return
+  try {
+    const response = await api<ApiResponse<QuestionGroup>>(`/api/v1/admin/question_groups/${form.group_id}`, { headers: authHeaders.value })
+    if (request === groupRequest) { group.value = response.data; contextError.value = '' }
+  } catch { if (request === groupRequest) contextError.value = '共通本文を読み込めませんでした。' }
+}
+watch(() => form.exam_number, loadExam, { immediate: true })
+watch(() => form.group_id, loadGroup, { immediate: true })
+const selectedGroup = computed({
+  get: () => form.group_id ?? 0,
+  set: (value: number) => {
+    form.group_id = value || null
+    form.group_question_number = value ? 1 : null
+    form.passage_references = []
+  },
+})
+const groupOptions = computed(() => [{ value: 0, label: '所属なし' }, ...(exam.value?.groups ?? []).map(item => ({ value: item.id, label: `大問${item.group_number} ${item.title}` }))])
+const groupQuestionNumber = computed({ get: () => form.group_question_number ?? 1, set: (value: string | number) => { form.group_question_number = Number(value) } })
+const referenceOptions = computed(() => (group.value?.passages ?? []).flatMap(passage => [
+  { passage_id: passage.id, anchor_id: null, label: `【${passage.label}】 全体` },
+  ...passage.content_blocks.flatMap(block => (block.inlines ?? []).filter(part => part.type !== 'text').map(part => ({ passage_id: passage.id, anchor_id: part.id, label: `【${passage.label}】 ${part.type === 'blank' ? '空欄' : '参照箇所'}（${part.label}）` }))),
+]))
+const hasReference = (reference: PassageReference) => (form.passage_references ?? []).some(item => referenceKey(item) === referenceKey(reference))
+const toggleReference = (reference: PassageReference, event: Event) => { form.passage_references = setPassageReference(form.passage_references ?? [], reference, (event.target as HTMLInputElement).checked) }
 
 const categories = computed(() => getCategoriesByMajorCategory(form.major_category_code))
 const questionLimit = computed(() => questionCountForExam(EXAM_CONFIG, Number(form.exam_number)) || EXAM_CONFIG.exam.questions_per_exam)
@@ -44,6 +94,11 @@ const choiceLabels = computed(() => {
 const isExistingQuestion = computed(() => props.initialValue.choices.some(choice => choice.id !== undefined))
 const incompatiblePosition = computed(() => isExistingQuestion.value && choiceLabels.value.length > 0
   && JSON.stringify(choiceLabels.value) !== JSON.stringify(props.initialValue.choices.map(choice => choice.choice_label)))
+
+watch(() => form.exam_number, (current, previous) => {
+  if (Number(current) === Number(previous) || (Number(current) === Number(props.initialValue.exam_number) && form.group_id === props.initialValue.group_id)) return
+  form.group_id = null; form.group_question_number = null; form.passage_references = []
+})
 
 watch([() => form.exam_number, () => form.question_number], () => {
   // Temporarily invalid coordinates must not erase an editor's choices.
@@ -66,19 +121,19 @@ const setCorrectChoice = (index: number) => {
 }
 
 const submit = () => {
-  const value = clone(form)
-  value.choices.forEach((choice, index) => { choice.display_order = index + 1 })
-  emit('submit', value)
+  emit('submit', prepareAdminQuestion(form))
 }
 </script>
 
 <template>
-  <UForm ref="questionForm" :schema="schema" :state="form" :transform="false" class="admin-question-form" novalidate @error="focusFormError" @submit="submit">
+  <UForm ref="questionForm" :schema="schema" :state="formState" :transform="false" class="admin-question-form" novalidate @error="focusFormError" @submit="submit">
     <section class="admin-panel">
       <div class="admin-panel-head"><div><h2>基本情報</h2><p>問題の配置、分類、公開状態を設定します。</p></div></div>
       <div class="admin-panel-body admin-form-grid">
         <FormTextField id="question-exam-number" v-model="form.exam_number" admin name="exam_number" label="試験ナンバー" type="number" min="1" :max="EXAM_CONFIG.exam.set_count" />
-        <FormTextField id="question-number" v-model="form.question_number" admin name="question_number" label="問番号" type="number" min="1" :max="questionLimit" />
+        <FormTextField id="question-number" v-model="form.question_number" admin name="question_number" label="問番号" title="模擬試験内の通し番号。URLと選択肢数の設定に使用します。" type="number" min="1" :max="questionLimit" />
+        <UFormField name="group_id" label="所属する大問" class="admin-field" :ui="{ error: 'form-field-error' }"><USelect id="question-group" v-model="selectedGroup" :items="groupOptions" value-key="value" label-key="label" class="w-full" /><small><NuxtLink :to="`/admin/exams/${form.exam_number}`">模擬試験・共通本文を管理</NuxtLink></small></UFormField>
+        <FormTextField v-if="form.group_id" id="group-question-number" v-model="groupQuestionNumber" admin name="group_question_number" label="大問内の小問番号" type="number" min="1" :max="group?.planned_question_count ?? questionLimit" />
         <UFormField name="major_category_code" label="大分類" class="admin-field" :ui="{ error: 'form-field-error' }"><USelect id="question-major-category" v-model="form.major_category_code" :items="MAJOR_CATEGORIES" value-key="value" label-key="label" class="w-full" /></UFormField>
         <UFormField name="category_code" label="小分類" class="admin-field" :ui="{ error: 'form-field-error' }"><USelect id="question-category" v-model="form.category_code" :items="categories" value-key="value" label-key="label" class="w-full" /></UFormField>
         <UFormField name="publication_status" class="publication-form-field" :ui="{ error: 'form-field-error' }">
@@ -91,7 +146,13 @@ const submit = () => {
           </label>
         </fieldset>
         </UFormField>
+        <p v-if="contextError" class="context-error" role="alert">{{ contextError }}</p>
       </div>
+    </section>
+
+    <section v-if="form.group_id" class="admin-panel">
+      <div class="admin-panel-head"><div><h2>共通本文の参照</h2><p>設問で使う本文全体、又は下線・空欄の箇所を指定します。</p></div></div>
+      <div class="admin-panel-body"><UFormField name="passage_references" :error-pattern="/^passage_references(?:\.|$)/" :ui="{ error: 'form-field-error' }"><div class="reference-list"><p v-if="!referenceOptions.length">共通本文を大問の画面で保存すると、ここで選べるようになります。</p><label v-for="reference in referenceOptions" :key="referenceKey(reference)"><input type="checkbox" :checked="hasReference(reference)" @change="toggleReference(reference, $event)"><span>{{ reference.label }}</span></label></div></UFormField></div>
     </section>
 
     <section class="admin-panel">
@@ -131,7 +192,7 @@ const submit = () => {
 
     <section v-if="previewOpen" class="admin-panel preview-panel">
       <div class="admin-panel-head"><div><h2>プレビュー</h2><p>一般の問題演習画面に近い表示で確認できます。</p></div><button class="admin-icon-button" type="button" aria-label="プレビューを閉じる" @click="previewOpen = false"><UIcon name="i-lucide-x" /></button></div>
-      <div class="admin-panel-body"><AdminQuestionPreview :question="form" /></div>
+      <div class="admin-panel-body"><AdminQuestionPreview :question="form" :passages="group?.passages" /></div>
     </section>
 
     <div class="form-action-bar">
@@ -146,6 +207,10 @@ const submit = () => {
 </template>
 
 <style scoped>
+.context-error { grid-column: 1 / -1; color: #f1b0a3; }
+.reference-list { display: grid; gap: 12px; }
+.reference-list label { display: flex; gap: 10px; align-items: baseline; color: var(--admin-text); font-size: 13px; }
+.reference-list p { color: var(--admin-muted); font-size: 13px; }
 .admin-question-form { display: grid; gap: 18px; padding-bottom: 86px; }
 .publication-form-field { grid-column: 1 / -1; }
 .publication-field { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 2px 0 0; padding: 0; border: 0; }

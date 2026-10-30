@@ -28,7 +28,7 @@ const {
 const question = computed(() => response.value?.data)
 const questionInput = computed<AdminQuestionInput | null>(() => {
   if (!question.value) return null
-  const { id: _id, created_at: _createdAt, updated_at: _updatedAt, ...input } = question.value
+  const { id: _id, created_at: _createdAt, updated_at: _updatedAt, shared_passages: _passages, question_version: _questionVersion, ...input } = question.value
   return input
 })
 
@@ -69,7 +69,8 @@ const submit = async (input: AdminQuestionInput) => {
   <div class="admin-page">
     <header class="admin-page-head">
       <div><p class="admin-page-eyebrow">SC-103</p><h1>問題を編集</h1><p v-if="question">試験 {{ question.exam_number }} の問{{ question.question_number }}を編集しています。</p><p v-else>登録済みの問題を読み込んでいます。</p></div>
-      <NuxtLink class="admin-secondary-button" to="/admin/questions"><UIcon name="i-lucide-arrow-left" />一覧に戻る</NuxtLink>
+      <NuxtLink v-if="question?.group_id" class="admin-secondary-button" :to="{ path: `/admin/exams/${question.exam_number}`, query: { group_id: question.group_id } }"><UIcon name="i-lucide-arrow-left" />大問に戻る</NuxtLink>
+      <NuxtLink v-else class="admin-secondary-button" to="/admin/questions"><UIcon name="i-lucide-arrow-left" />一覧に戻る</NuxtLink>
     </header>
 
     <p v-if="successMessage" class="success-message" role="status"><UIcon name="i-lucide-circle-check" />{{ successMessage }}</p>

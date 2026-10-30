@@ -7,7 +7,9 @@
       "group": {
         "title": "共通資料A　古代の人物表現",
         "passage": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
-      }
+      },
+      "group_number": 1,
+      "group_question_number": 1
     },
     "2": {
       "topic": "ギリシア美術の時代区分",
@@ -15,7 +17,9 @@
       "group": {
         "title": "共通資料A　古代の人物表現",
         "passage": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
-      }
+      },
+      "group_number": 1,
+      "group_question_number": 2
     },
     "3": {
       "topic": "赤像式陶器の技法",
@@ -23,7 +27,9 @@
       "group": {
         "title": "共通資料A　古代の人物表現",
         "passage": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
-      }
+      },
+      "group_number": 1,
+      "group_question_number": 3
     },
     "4": {
       "topic": "ローマ共和政期の肖像",
@@ -31,7 +37,9 @@
       "group": {
         "title": "共通資料A　古代の人物表現",
         "passage": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
-      }
+      },
+      "group_number": 1,
+      "group_question_number": 4
     },
     "5": {
       "topic": "ビザンティンのイコン",
@@ -39,7 +47,9 @@
       "group": {
         "title": "共通資料B　信仰と美術",
         "passage": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
-      }
+      },
+      "group_number": 2,
+      "group_question_number": 1
     },
     "6": {
       "topic": "中世建築の様式比較",
@@ -47,7 +57,9 @@
       "group": {
         "title": "共通資料B　信仰と美術",
         "passage": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
-      }
+      },
+      "group_number": 2,
+      "group_question_number": 2
     },
     "7": {
       "topic": "ゴシック大聖堂の構造",
@@ -55,7 +67,9 @@
       "group": {
         "title": "共通資料B　信仰と美術",
         "passage": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
-      }
+      },
+      "group_number": 2,
+      "group_question_number": 3
     },
     "8": {
       "topic": "フレスコの制作工程",
@@ -63,7 +77,9 @@
       "group": {
         "title": "共通資料C　ルネサンスの画家たち",
         "passage": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
-      }
+      },
+      "group_number": 3,
+      "group_question_number": 1
     },
     "9": {
       "topic": "線遠近法と空間表現",
@@ -71,7 +87,9 @@
       "group": {
         "title": "共通資料C　ルネサンスの画家たち",
         "passage": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
-      }
+      },
+      "group_number": 3,
+      "group_question_number": 2
     },
     "10": {
       "topic": "レオナルドのスフマート",
@@ -79,7 +97,9 @@
       "group": {
         "title": "共通資料C　ルネサンスの画家たち",
         "passage": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
-      }
+      },
+      "group_number": 3,
+      "group_question_number": 3
     },
     "11": {
       "topic": "盛期ルネサンスの作者と作品",
@@ -87,22 +107,30 @@
       "group": {
         "title": "共通資料C　ルネサンスの画家たち",
         "passage": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
-      }
+      },
+      "group_number": 3,
+      "group_question_number": 4
     },
     "12": {
       "topic": "初期ネーデルラント絵画",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 4,
+      "group_question_number": 1
     },
     "13": {
       "topic": "デューラーと版画",
       "difficulty": "advanced",
-      "group": null
+      "group": null,
+      "group_number": 4,
+      "group_question_number": 2
     },
     "14": {
       "topic": "マニエリスムの表現",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 4,
+      "group_question_number": 3
     },
     "15": {
       "topic": "カラヴァッジョの明暗",
@@ -110,7 +138,9 @@
       "group": {
         "title": "共通資料D　17世紀の美術と鑑賞者",
         "passage": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
-      }
+      },
+      "group_number": 5,
+      "group_question_number": 1
     },
     "16": {
       "topic": "ベルニーニと総合的な空間",
@@ -118,7 +148,9 @@
       "group": {
         "title": "共通資料D　17世紀の美術と鑑賞者",
         "passage": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
-      }
+      },
+      "group_number": 5,
+      "group_question_number": 2
     },
     "17": {
       "topic": "フェルメールの室内画",
@@ -126,27 +158,37 @@
       "group": {
         "title": "共通資料D　17世紀の美術と鑑賞者",
         "passage": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
-      }
+      },
+      "group_number": 5,
+      "group_question_number": 3
     },
     "18": {
       "topic": "ロココと雅宴画",
       "difficulty": "basic",
-      "group": null
+      "group": null,
+      "group_number": 6,
+      "group_question_number": 1
     },
     "19": {
       "topic": "ダヴィッドと新古典主義",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 6,
+      "group_question_number": 2
     },
     "20": {
       "topic": "ロマン主義と歴史的事件",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 6,
+      "group_question_number": 3
     },
     "21": {
       "topic": "ロマン主義の風景",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 6,
+      "group_question_number": 4
     },
     "22": {
       "topic": "クールベと主題の序列",
@@ -154,7 +196,9 @@
       "group": {
         "title": "共通資料E　19世紀の絵画を比べる",
         "passage": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
-      }
+      },
+      "group_number": 7,
+      "group_question_number": 1
     },
     "23": {
       "topic": "モネの連作",
@@ -162,7 +206,9 @@
       "group": {
         "title": "共通資料E　19世紀の絵画を比べる",
         "passage": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
-      }
+      },
+      "group_number": 7,
+      "group_question_number": 2
     },
     "24": {
       "topic": "スーラと色彩分割",
@@ -170,7 +216,9 @@
       "group": {
         "title": "共通資料E　19世紀の絵画を比べる",
         "passage": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
-      }
+      },
+      "group_number": 7,
+      "group_question_number": 3
     },
     "25": {
       "topic": "セザンヌの画面構成",
@@ -178,62 +226,86 @@
       "group": {
         "title": "共通資料E　19世紀の絵画を比べる",
         "passage": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
-      }
+      },
+      "group_number": 7,
+      "group_question_number": 4
     },
     "26": {
       "topic": "象徴主義の志向",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 8,
+      "group_question_number": 1
     },
     "27": {
       "topic": "フォーヴィスムとドイツ表現主義",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 8,
+      "group_question_number": 2
     },
     "28": {
       "topic": "未来派の彫刻",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 8,
+      "group_question_number": 3
     },
     "29": {
       "topic": "抽象絵画の複数の方向",
       "difficulty": "advanced",
-      "group": null
+      "group": null,
+      "group_number": 8,
+      "group_question_number": 4
     },
     "30": {
       "topic": "デュシャンのレディメイド",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 9,
+      "group_question_number": 1
     },
     "31": {
       "topic": "シュルレアリスムと無意識",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 9,
+      "group_question_number": 2
     },
     "32": {
       "topic": "ポロックの制作行為",
       "difficulty": "basic",
-      "group": null
+      "group": null,
+      "group_number": 9,
+      "group_question_number": 3
     },
     "33": {
       "topic": "ポップ・アートと複製文化",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 9,
+      "group_question_number": 4
     },
     "34": {
       "topic": "ミニマリズムの材料と反復",
       "difficulty": "advanced",
-      "group": null
+      "group": null,
+      "group_number": 9,
+      "group_question_number": 5
     },
     "35": {
       "topic": "先史・古墳／時代の順序",
       "difficulty": "basic",
-      "group": null
+      "group": null,
+      "group_number": 10,
+      "group_question_number": 1
     },
     "36": {
       "topic": "先史・古墳／埴輪の設置",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 10,
+      "group_question_number": 2
     },
     "37": {
       "topic": "飛鳥／釈迦三尊と造像銘",
@@ -241,7 +313,9 @@
       "group": {
         "title": "仏教美術の受容と展開（問37～40）",
         "passage": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
-      }
+      },
+      "group_number": 11,
+      "group_question_number": 1
     },
     "38": {
       "topic": "飛鳥／百済観音と名称",
@@ -249,7 +323,9 @@
       "group": {
         "title": "仏教美術の受容と展開（問37～40）",
         "passage": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
-      }
+      },
+      "group_number": 11,
+      "group_question_number": 2
     },
     "39": {
       "topic": "飛鳥／玉虫厨子",
@@ -257,7 +333,9 @@
       "group": {
         "title": "仏教美術の受容と展開（問37～40）",
         "passage": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
-      }
+      },
+      "group_number": 11,
+      "group_question_number": 3
     },
     "40": {
       "topic": "奈良／鑑真和上の肖像",
@@ -265,7 +343,9 @@
       "group": {
         "title": "仏教美術の受容と展開（問37～40）",
         "passage": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
-      }
+      },
+      "group_number": 11,
+      "group_question_number": 4
     },
     "41": {
       "topic": "平安／両界曼荼羅",
@@ -273,7 +353,9 @@
       "group": {
         "title": "平安時代の信仰と宮廷文化（問41～43）",
         "passage": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
-      }
+      },
+      "group_number": 12,
+      "group_question_number": 1
     },
     "42": {
       "topic": "平安／鳳凰堂の本尊",
@@ -281,7 +363,9 @@
       "group": {
         "title": "平安時代の信仰と宮廷文化（問41～43）",
         "passage": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
-      }
+      },
+      "group_number": 12,
+      "group_question_number": 2
     },
     "43": {
       "topic": "平安／絵巻の空間表現",
@@ -289,7 +373,9 @@
       "group": {
         "title": "平安時代の信仰と宮廷文化（問41～43）",
         "passage": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
-      }
+      },
+      "group_number": 12,
+      "group_question_number": 3
     },
     "44": {
       "topic": "鎌倉／絵巻の主題と制作時代",
@@ -297,7 +383,9 @@
       "group": {
         "title": "鎌倉時代の絵画と彫刻（問44～46）",
         "passage": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
-      }
+      },
+      "group_number": 13,
+      "group_question_number": 1
     },
     "45": {
       "topic": "鎌倉／似絵と肖像",
@@ -305,7 +393,9 @@
       "group": {
         "title": "鎌倉時代の絵画と彫刻（問44～46）",
         "passage": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
-      }
+      },
+      "group_number": 13,
+      "group_question_number": 2
     },
     "46": {
       "topic": "鎌倉／快慶と安阿弥様",
@@ -313,7 +403,9 @@
       "group": {
         "title": "鎌倉時代の絵画と彫刻（問44～46）",
         "passage": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
-      }
+      },
+      "group_number": 13,
+      "group_question_number": 3
     },
     "47": {
       "topic": "室町／詩画軸と瓢鮎図",
@@ -321,7 +413,9 @@
       "group": {
         "title": "室町時代の絵画と文化交流（問47～49）",
         "passage": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
-      }
+      },
+      "group_number": 14,
+      "group_question_number": 1
     },
     "48": {
       "topic": "室町／雪舟と南宋画",
@@ -329,7 +423,9 @@
       "group": {
         "title": "室町時代の絵画と文化交流（問47～49）",
         "passage": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
-      }
+      },
+      "group_number": 14,
+      "group_question_number": 2
     },
     "49": {
       "topic": "室町／狩野元信と障壁画",
@@ -337,7 +433,9 @@
       "group": {
         "title": "室町時代の絵画と文化交流（問47～49）",
         "passage": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
-      }
+      },
+      "group_number": 14,
+      "group_question_number": 3
     },
     "50": {
       "topic": "桃山／金碧障壁画",
@@ -345,7 +443,9 @@
       "group": {
         "title": "桃山から江戸初期の画家たち（問50～53）",
         "passage": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
-      }
+      },
+      "group_number": 15,
+      "group_question_number": 1
     },
     "51": {
       "topic": "桃山／水墨と余白",
@@ -353,7 +453,9 @@
       "group": {
         "title": "桃山から江戸初期の画家たち（問50～53）",
         "passage": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
-      }
+      },
+      "group_number": 15,
+      "group_question_number": 2
     },
     "52": {
       "topic": "江戸初期／琳派の継承",
@@ -361,7 +463,9 @@
       "group": {
         "title": "桃山から江戸初期の画家たち（問50～53）",
         "passage": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
-      }
+      },
+      "group_number": 15,
+      "group_question_number": 3
     },
     "53": {
       "topic": "江戸初期／御用絵師",
@@ -369,7 +473,9 @@
       "group": {
         "title": "桃山から江戸初期の画家たち（問50～53）",
         "passage": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
-      }
+      },
+      "group_number": 15,
+      "group_question_number": 4
     },
     "54": {
       "topic": "江戸／古典文学と光琳",
@@ -377,7 +483,9 @@
       "group": {
         "title": "江戸絵画の多様性（問54～57）",
         "passage": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
-      }
+      },
+      "group_number": 16,
+      "group_question_number": 1
     },
     "55": {
       "topic": "江戸／応挙と写生",
@@ -385,7 +493,9 @@
       "group": {
         "title": "江戸絵画の多様性（問54～57）",
         "passage": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
-      }
+      },
+      "group_number": 16,
+      "group_question_number": 2
     },
     "56": {
       "topic": "江戸／若冲の花鳥画",
@@ -393,7 +503,9 @@
       "group": {
         "title": "江戸絵画の多様性（問54～57）",
         "passage": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
-      }
+      },
+      "group_number": 16,
+      "group_question_number": 3
     },
     "57": {
       "topic": "江戸／大首絵と主題",
@@ -401,7 +513,9 @@
       "group": {
         "title": "江戸絵画の多様性（問54～57）",
         "passage": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
-      }
+      },
+      "group_number": 16,
+      "group_question_number": 4
     },
     "58": {
       "topic": "明治／万国博覧会と木彫",
@@ -409,7 +523,9 @@
       "group": {
         "title": "近代日本美術と西洋（問58～61）",
         "passage": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
-      }
+      },
+      "group_number": 17,
+      "group_question_number": 1
     },
     "59": {
       "topic": "明治／黒田清輝",
@@ -417,7 +533,9 @@
       "group": {
         "title": "近代日本美術と西洋（問58～61）",
         "passage": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
-      }
+      },
+      "group_number": 17,
+      "group_question_number": 2
     },
     "60": {
       "topic": "大正／岸田劉生の肖像",
@@ -425,7 +543,9 @@
       "group": {
         "title": "近代日本美術と西洋（問58～61）",
         "passage": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
-      }
+      },
+      "group_number": 17,
+      "group_question_number": 3
     },
     "61": {
       "topic": "大正・昭和前期／藤田の表現",
@@ -433,127 +553,367 @@
       "group": {
         "title": "近代日本美術と西洋（問58～61）",
         "passage": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
-      }
+      },
+      "group_number": 17,
+      "group_question_number": 4
     },
     "62": {
       "topic": "戦後／具体と身体",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 18,
+      "group_question_number": 1
     },
     "63": {
       "topic": "写真と演出された自己像",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 19,
+      "group_question_number": 1
     },
     "64": {
       "topic": "写真と言葉によるメディア批評",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 19,
+      "group_question_number": 2
     },
     "65": {
       "topic": "非具象的な肖像と素材",
       "difficulty": "advanced",
-      "group": null
+      "group": null,
+      "group_number": 19,
+      "group_question_number": 3
     },
     "66": {
       "topic": "知覚を組み立てるインスタレーション",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 19,
+      "group_question_number": 4
     },
     "67": {
       "topic": "アフリカの現代美術と再利用素材",
       "difficulty": "basic",
-      "group": null
+      "group": null,
+      "group_number": 19,
+      "group_question_number": 5
     },
     "68": {
       "topic": "中国石窟と唐の彫刻",
       "difficulty": "basic",
-      "group": null
+      "group": null,
+      "group_number": 20,
+      "group_question_number": 1
     },
     "69": {
       "topic": "元代の文人画",
       "difficulty": "advanced",
-      "group": null
+      "group": null,
+      "group_number": 20,
+      "group_question_number": 2
     },
     "70": {
       "topic": "元代の青花磁器",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 20,
+      "group_question_number": 3
     },
     "71": {
       "topic": "ペルシアの叙事詩と写本絵画",
       "difficulty": "basic",
-      "group": null
+      "group": null,
+      "group_number": 20,
+      "group_question_number": 4
     },
     "72": {
       "topic": "朝鮮王朝の白磁",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 20,
+      "group_question_number": 5
     },
     "73": {
       "topic": "アーツ・アンド・クラフツ",
       "difficulty": "basic",
-      "group": null
+      "group": null,
+      "group_number": 21,
+      "group_question_number": 1
     },
     "74": {
       "topic": "アール・ヌーヴォーのガラス",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 21,
+      "group_question_number": 2
     },
     "75": {
       "topic": "デ・ステイルと家具",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 21,
+      "group_question_number": 3
     },
     "76": {
       "topic": "民藝運動の視点",
       "difficulty": "basic",
-      "group": null
+      "group": null,
+      "group_number": 21,
+      "group_question_number": 4
     },
     "77": {
       "topic": "漆芸の装飾技法",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 21,
+      "group_question_number": 5
     },
     "78": {
       "topic": "近代美術館の成立",
       "difficulty": "basic",
-      "group": null
+      "group": null,
+      "group_number": 22,
+      "group_question_number": 1
     },
     "79": {
       "topic": "戦後の国際美術展",
       "difficulty": "advanced",
-      "group": null
+      "group": null,
+      "group_number": 22,
+      "group_question_number": 2
     },
     "80": {
       "topic": "近代美術館と初回展覧会",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 22,
+      "group_question_number": 3
     },
     "81": {
       "topic": "二つの年表から制度の変化を読む",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 23,
+      "group_question_number": 1
     },
     "82": {
       "topic": "制作記録から版種と図録記載を照合する",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 23,
+      "group_question_number": 2
     },
     "83": {
       "topic": "日本趣味と構図上の受容を区別する",
       "difficulty": "advanced",
-      "group": null
+      "group": null,
+      "group_number": 23,
+      "group_question_number": 3
     },
     "84": {
       "topic": "着想年と制作年を作品ラベルから読み分ける",
       "difficulty": "advanced",
-      "group": null
+      "group": null,
+      "group_number": 23,
+      "group_question_number": 4
     },
     "85": {
       "topic": "風景の連作と表現の変化を比較する",
       "difficulty": "standard",
-      "group": null
+      "group": null,
+      "group_number": 23,
+      "group_question_number": 5
     }
+  },
+  "hierarchy": {
+    "group_count": 23,
+    "shared_passage_count": 12,
+    "groups": [
+      {
+        "group_number": 1,
+        "first_question_number": 1,
+        "last_question_number": 4,
+        "title": "古代の人物表現",
+        "question_count": 4,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 2,
+        "first_question_number": 5,
+        "last_question_number": 7,
+        "title": "中世の信仰と美術",
+        "question_count": 3,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 3,
+        "first_question_number": 8,
+        "last_question_number": 11,
+        "title": "ルネサンスの画家たち",
+        "question_count": 4,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 4,
+        "first_question_number": 12,
+        "last_question_number": 14,
+        "title": "北方ルネサンスとマニエリスム",
+        "question_count": 3,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 5,
+        "first_question_number": 15,
+        "last_question_number": 17,
+        "title": "17世紀の美術と鑑賞者",
+        "question_count": 3,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 6,
+        "first_question_number": 18,
+        "last_question_number": 21,
+        "title": "ロココと近代絵画の展開",
+        "question_count": 4,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 7,
+        "first_question_number": 22,
+        "last_question_number": 25,
+        "title": "19世紀の絵画を比べる",
+        "question_count": 4,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 8,
+        "first_question_number": 26,
+        "last_question_number": 29,
+        "title": "近代の表現と抽象への展開",
+        "question_count": 4,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 9,
+        "first_question_number": 30,
+        "last_question_number": 34,
+        "title": "20世紀の美術と表現手法",
+        "question_count": 5,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 10,
+        "first_question_number": 35,
+        "last_question_number": 36,
+        "title": "先史・古墳時代の美術",
+        "question_count": 2,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 11,
+        "first_question_number": 37,
+        "last_question_number": 40,
+        "title": "仏教美術の受容と展開",
+        "question_count": 4,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 12,
+        "first_question_number": 41,
+        "last_question_number": 43,
+        "title": "平安時代の信仰と宮廷文化",
+        "question_count": 3,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 13,
+        "first_question_number": 44,
+        "last_question_number": 46,
+        "title": "鎌倉時代の絵画と彫刻",
+        "question_count": 3,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 14,
+        "first_question_number": 47,
+        "last_question_number": 49,
+        "title": "室町時代の絵画と文化交流",
+        "question_count": 3,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 15,
+        "first_question_number": 50,
+        "last_question_number": 53,
+        "title": "桃山から江戸初期の画家たち",
+        "question_count": 4,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 16,
+        "first_question_number": 54,
+        "last_question_number": 57,
+        "title": "江戸絵画の多様性",
+        "question_count": 4,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 17,
+        "first_question_number": 58,
+        "last_question_number": 61,
+        "title": "近代日本美術と西洋",
+        "question_count": 4,
+        "shared_passage_count": 1
+      },
+      {
+        "group_number": 18,
+        "first_question_number": 62,
+        "last_question_number": 62,
+        "title": "戦後日本の美術",
+        "question_count": 1,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 19,
+        "first_question_number": 63,
+        "last_question_number": 67,
+        "title": "現代美術の表現と社会",
+        "question_count": 5,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 20,
+        "first_question_number": 68,
+        "last_question_number": 72,
+        "title": "東洋美術の交流と造形",
+        "question_count": 5,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 21,
+        "first_question_number": 73,
+        "last_question_number": 77,
+        "title": "工芸・デザインと生活",
+        "question_count": 5,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 22,
+        "first_question_number": 78,
+        "last_question_number": 80,
+        "title": "美術館と国際展",
+        "question_count": 3,
+        "shared_passage_count": 0
+      },
+      {
+        "group_number": 23,
+        "first_question_number": 81,
+        "last_question_number": 85,
+        "title": "知識・情報の活用",
+        "question_count": 5,
+        "shared_passage_count": 0
+      }
+    ]
   }
 }

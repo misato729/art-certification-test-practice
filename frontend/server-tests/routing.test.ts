@@ -73,3 +73,15 @@ test('dynamic parameters are validated by the target operation and admin fallbac
   assert.equal(admin.status, 401)
   assert.equal((await admin.json()).error.code, 'unauthorized')
 })
+
+test('hierarchy endpoints retain administrator authentication and mutation origin boundaries', async () => {
+  for (const [path, method] of [['/admin/exams', 'GET'], ['/admin/exams/1', 'PATCH'], ['/admin/exams/1/groups', 'POST'],
+    ['/admin/exams/1/validate', 'POST'], ['/admin/exams/1/publish', 'POST'], ['/admin/question_groups/1', 'GET'],
+    ['/admin/question_groups/1', 'PUT'], ['/admin/question_groups/1', 'DELETE']]) {
+    const response = await request(path!, { method, headers: { Origin: process.env.BETTER_AUTH_URL!, 'Content-Type': 'application/json' }, ...(method !== 'GET' ? { body: '{}' } : {}) })
+    assert.equal(response.status, 401, `${method} ${path}`)
+    assert.equal((await response.json()).error.code, 'unauthorized')
+  }
+  const foreign = await request('/admin/question_groups/1', { method: 'PUT', headers: { Origin: 'https://foreign.invalid', 'Content-Type': 'application/json' }, body: '{}' })
+  assert.equal(foreign.status, 403)
+})

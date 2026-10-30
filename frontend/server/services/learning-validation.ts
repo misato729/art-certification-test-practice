@@ -32,7 +32,8 @@ export function sanitizeQuestionInput(value: unknown, config: ExamConfiguration 
 }
 
 export function excerptFrom(blocks: Block[]): string {
-  const text = blocks.find(block => ['text', 'quote', 'fill_in_text', 'fill_in_quote'].includes(block.type))?.text
+  const block = blocks.find(block => ['text', 'quote', 'fill_in_text', 'fill_in_quote'].includes(block.type))
+  const text = block?.inlines?.map(item => item.type === 'blank' ? item.label : item.text).join('') ?? block?.text
   const value = nonblank(text)
     ? text.replace(/\{\{([^{}]+)\}\}/g, '$1').replace(/\s+/g, ' ').trim()
     : (blocks.find(block => block.type === 'fill_in_choice')?.cells ?? []).join(' / ')

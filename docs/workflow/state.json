@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 26,
-  "updated_at": "2026-10-30T01:34:01.140Z",
+  "revision": 33,
+  "updated_at": "2026-10-30T02:44:23.855Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-10-30T01-34-01-140Z-r26.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-10-30T02-44-23-855Z-r33.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -522,6 +522,155 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "art_grouped_questions",
+      "context": "development",
+      "title": "世界史サイトの大問・小問・共通リード文構造を美術検定へ適用",
+      "status": "done",
+      "depends_on": [
+        "art_mock_only_85"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー依頼: /world-history-practiceから模擬試験-大問-小問、リード文に対する設問のシステム構成を取り込み適用する",
+      "next_action": "追加依頼を待つ。既存DBの更新、コミット・push・公開は未実施。",
+      "evidence": [
+        "docs/verification.md",
+        "docs/architecture.md",
+        "docs/customization.md"
+      ],
+      "last_verified_at": "2026-10-30T02:37:00Z",
+      "verification_scope": "23大問85小問・12共通本文の内容保全、共有形式・単体145件、型検査、新規/既存移行、API/DB121件中119成功と修正後関連14件成功・空の親1件成功、PC/SP全問を含む初回24件中22成功と修正後関連10件成功、独立レビュー、資料保護を確認。既存アプリDB・本番への反映、コミット・pushは未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "模試→大問→小問の表示・管理と共通リード文の作成/参照/出題がDB・共有規則・API・取込で整合し、既存85問と採点・履歴・お気に入りを維持する",
+          "verification": "共有スキーマ/設定・単体・Prisma新規移行と既存データ保持・関連API/DB検査・型検査・本番ビルド・PC/スマートフォンの操作を順次確認する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T02:37:00Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が参照元との機能対応・移行非破壊性・公開/権限/正答非公開・実際の検証とUIを確認し未解決の指摘がない",
+          "verification": "実装担当と異なる担当者が差分と検証根拠をレビューする",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T02:37:00Z",
+          "reviewer": "art_group_mapping / template_local_check"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "全問・共通本文・一般演習は成功。管理画面2件で表示用labelが参照保存に混ざり拒否されたため不合格。修正と回帰検査を追加した。",
+            "at": "2026-10-30T02:30:02.263Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "修正後の単体145件・型検査・PC/SP関連10件が成功。既存全85問の採点とDB保全、取込往復、独立レビュー、資料保護、専用検証環境の削除を確認した。",
+            "at": "2026-10-30T02:37:01.774Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "context": "operations",
+      "depends_on": [
+        "art_grouped_questions"
+      ],
+      "authorization": "not_requested",
+      "request_ref": "2026-10-30 ユーザー依頼: 既存DBへの反映、コミット・pushしてください。同日補足: 本番DBはないのでローカルのままでOK。今回の本番DB反映は対象外。",
+      "evidence": [],
+      "last_verified_at": null,
+      "id": "art_grouped_db",
+      "title": "既存DBへ大問・共通本文の構成を反映",
+      "status": "waiting_for_request",
+      "next_action": "ローカル検証済み構成を維持する。将来のDB反映は、対象と接続設定を伴う追加依頼を受けてから実施する。",
+      "verification_scope": "設定・環境変数・このサービスのコンテナ/永続領域がなく反映対象未作成と確認。ユーザー補足により本番DB反映は今回対象外。実DBへのバックアップ・反映は未実施。使い捨てローカルDBの検証はart_grouped_questions参照。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "反映先を特定しバックアップ後にPrisma Migrateと一致する問題への階層付与を行い、既存ID・履歴と件数を確認する",
+          "verification": "接続先の所属・バックアップと復元確認・適用前後の集計と照合・反復時の無変更を確認する",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が対象の範囲と確認根拠を照合し未解決の指摘がない",
+          "verification": "実施担当と異なる担当者が差分と実行記録を読取レビューする",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
+      }
+    },
+    {
+      "context": "operations",
+      "depends_on": [
+        "art_grouped_questions"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー依頼: 既存DBへの反映、コミット・pushしてください",
+      "evidence": [],
+      "last_verified_at": null,
+      "id": "art_grouped_push",
+      "title": "大問・共通本文の実装をコミット・push",
+      "status": "doing",
+      "next_action": "mainへコミット・pushし、リモート一致とCIの完了を確認する",
+      "verification_scope": "未実施。既存の完成実装の検証はart_grouped_questionsを参照し、今回のDB反映とGit送信は別に確認する。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "原資料・秘密値を除外した今回の変更をコミット・pushし、リモート一致とCIの最終状態を確認する",
+          "verification": "共有形式・資料保護・差分検査・Git差分とステージ・送信先の公開設定・リモートOID・CIを確認する",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が対象の範囲と確認根拠を照合し未解決の指摘がない",
+          "verification": "実施担当と異なる担当者が差分と実行記録を読取レビューする",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]

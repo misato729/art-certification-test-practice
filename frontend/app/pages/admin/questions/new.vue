@@ -9,6 +9,11 @@ definePageMeta({ layout: 'admin', middleware: 'admin' })
 const { $api: api } = useNuxtApp()
 const { authHeaders, clearCurrentUser } = useAuth()
 const initialValue = createEmptyQuestion()
+const route = useRoute()
+for (const key of ['exam_number', 'question_number', 'group_id', 'group_question_number'] as const) {
+  const value = Number(route.query[key])
+  if (Number.isSafeInteger(value) && value > 0) initialValue[key] = value
+}
 const submitting = ref(false)
 const errorMessage = ref('')
 const fieldErrors = ref<FormError[]>([])
@@ -47,7 +52,8 @@ const submit = async (question: AdminQuestionInput) => {
   <div class="admin-page">
     <header class="admin-page-head">
       <div><p class="admin-page-eyebrow">SC-102</p><h1>問題を作成</h1><p>問題文、選択肢、解答解説を入力し、新しい問題を登録します。</p></div>
-      <NuxtLink class="admin-secondary-button" to="/admin/questions"><UIcon name="i-lucide-arrow-left" />一覧に戻る</NuxtLink>
+      <NuxtLink v-if="initialValue.group_id" class="admin-secondary-button" :to="{ path: `/admin/exams/${initialValue.exam_number}`, query: { group_id: initialValue.group_id } }"><UIcon name="i-lucide-arrow-left" />大問に戻る</NuxtLink>
+      <NuxtLink v-else class="admin-secondary-button" to="/admin/questions"><UIcon name="i-lucide-arrow-left" />一覧に戻る</NuxtLink>
     </header>
     <AdminQuestionForm :initial-value="initialValue" submit-label="問題を保存" :submitting="submitting" :error-message="errorMessage" :field-errors="fieldErrors" @submit="submit" />
   </div>
