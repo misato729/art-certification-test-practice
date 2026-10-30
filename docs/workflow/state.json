@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 33,
-  "updated_at": "2026-10-30T02:44:23.855Z",
+  "revision": 35,
+  "updated_at": "2026-10-30T02:50:42.034Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-10-30T02-44-23-855Z-r33.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-10-30T02-50-42-034Z-r35.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -639,38 +639,52 @@
       ],
       "authorization": "requested",
       "request_ref": "2026-10-30 ユーザー依頼: 既存DBへの反映、コミット・pushしてください",
-      "evidence": [],
-      "last_verified_at": null,
+      "evidence": [
+        "docs/verification.md"
+      ],
+      "last_verified_at": "2026-10-30T02:50:40Z",
       "id": "art_grouped_push",
       "title": "大問・共通本文の実装をコミット・push",
-      "status": "doing",
-      "next_action": "mainへコミット・pushし、リモート一致とCIの完了を確認する",
-      "verification_scope": "未実施。既存の完成実装の検証はart_grouped_questionsを参照し、今回のDB反映とGit送信は別に確認する。",
+      "status": "done",
+      "next_action": "追加依頼を待つ。",
+      "verification_scope": "確認済み89ファイルをb23f5e8189522a498021f25afc6f6188b90db756でorigin/mainへpush。独立レビュー、資料保護、差分形式、進捗/ポリシー162件、リモート一致に成功。CI run40993547680のharness/verify/browserすべて成功を確認。本番DBはないというユーザー補足によりDB反映は対象外。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "原資料・秘密値を除外した今回の変更をコミット・pushし、リモート一致とCIの最終状態を確認する",
           "verification": "共有形式・資料保護・差分検査・Git差分とステージ・送信先の公開設定・リモートOID・CIを確認する",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T02:50:40Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "別担当が対象の範囲と確認根拠を照合し未解決の指摘がない",
           "verification": "実施担当と異なる担当者が差分と実行記録を読取レビューする",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T02:50:40Z",
+          "reviewer": "art_group_mapping"
         }
       ],
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "実装コミットをmainへpushしてリモート一致を独立確認。CIの3ジョブ、資料保護、差分形式、ポリシー162件がすべて成功した。",
+            "at": "2026-10-30T02:50:41.080Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]
