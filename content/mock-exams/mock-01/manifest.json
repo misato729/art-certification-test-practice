@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "id": "art-grade2-mock-01",
+  "title": "美術検定2級 模擬試験1（非公式）",
+  "created_on": "2026-10-30",
+  "duration_minutes": 60,
+  "question_count": 85,
+  "sections": [
+    {
+      "id": "history",
+      "first": 1,
+      "last": 80,
+      "choice_labels": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ]
+    },
+    {
+      "id": "application",
+      "first": 81,
+      "last": 85,
+      "choice_labels": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ",
+        "オ",
+        "カ"
+      ]
+    }
+  ],
+  "area_names": {
+    "western": "西洋美術史",
+    "japanese": "日本美術史",
+    "contemporary": "現代美術",
+    "asian": "東洋美術",
+    "design": "工芸・デザイン",
+    "museum": "美術館・展覧会",
+    "application": "知識・情報の活用"
+  },
+  "allocation": {
+    "western": 34,
+    "japanese": 28,
+    "contemporary": 5,
+    "asian": 5,
+    "design": 5,
+    "museum": 3,
+    "application": 5
+  },
+  "scoring": {
+    "points_per_question": 1,
+    "maximum": 85,
+    "study_target_correct": 51,
+    "official_pass_mark": false
+  },
+  "validation_config": {
+    "schema_version": 1,
+    "site": {
+      "id": "art-certification-2",
+      "name": "美術検定ラボ",
+      "short_name": "美術ラボ",
+      "exam_name": "美術検定2級",
+      "description": "美術検定2級の模擬試験1。美術史80問と知識・情報の活用5問、全85問の非公式模試。",
+      "tagline": "一問から広がる、美術の世界。",
+      "logo_path": "/images/logo.svg",
+      "primary_color": "#7c3f63",
+      "contact_email": "",
+      "overview": [
+        {
+          "title": "模擬試験1",
+          "body": "文章・表で解く独立した学習用模試です。美術史80問は4択、活用5問は6択です。"
+        }
+      ]
+    },
+    "exam": {
+      "set_count": 1,
+      "questions_per_exam": 85,
+      "choice_labels": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ]
+    },
+    "categories": {
+      "major": [
+        {
+          "value": "western",
+          "label": "西洋美術史"
+        },
+        {
+          "value": "japanese",
+          "label": "日本美術史"
+        },
+        {
+          "value": "contemporary",
+          "label": "現代美術"
+        },
+        {
+          "value": "asian",
+          "label": "東洋美術"
+        },
+        {
+          "value": "design",
+          "label": "工芸・デザイン"
+        },
+        {
+          "value": "museum",
+          "label": "美術館・展覧会"
+        },
+        {
+          "value": "application",
+          "label": "知識・情報の活用"
+        }
+      ],
+      "minor": [
+        {
+          "value": "western_study",
+          "label": "西洋美術史",
+          "major_category_value": "western"
+        },
+        {
+          "value": "japanese_study",
+          "label": "日本美術史",
+          "major_category_value": "japanese"
+        },
+        {
+          "value": "contemporary_study",
+          "label": "現代美術",
+          "major_category_value": "contemporary"
+        },
+        {
+          "value": "asian_study",
+          "label": "東洋美術",
+          "major_category_value": "asian"
+        },
+        {
+          "value": "design_study",
+          "label": "工芸・デザイン",
+          "major_category_value": "design"
+        },
+        {
+          "value": "museum_study",
+          "label": "美術館・展覧会",
+          "major_category_value": "museum"
+        },
+        {
+          "value": "application_study",
+          "label": "知識・情報の活用",
+          "major_category_value": "application"
+        }
+      ]
+    },
+    "payments": {
+      "enabled": false,
+      "free_exam_count": 1,
+      "amount": 500,
+      "currency": "jpy"
+    }
+  },
+  "limitations": [
+    "概要と問題集抜粋の美術史37問・活用2問から形式を分析し、後から提供された公式Webサンプル・正答・2025年実践問題も参照しました。分野配分は出題範囲を広く含める編集上の設計で、本試験の年度別配分の統計ではありません。",
+    "西洋34問、日本28問、現代5問、東洋5問、工芸・デザイン5問、美術館・展覧会3問、活用5問の全85問です。",
+    "図版を使わず、独自の文章と表で構成しています。作品画像の識別力、本試験と同等の実測難度、60分での解答可能性は受験者テストで検証していません。",
+    "活用問題は美術史上の知識と資料の対応を問います。別枠の実践問題は含めていません。",
+    "学習用に各問1点とします。正答率約60％は提供資料に記載された目安であり、公式の固定合格点・公式配点や合格保証ではありません。",
+    "活用の6択は先に参照した問題集抜粋を参考にした独自の構成です。公式Webサンプルには活用の4択例もあり、公式試験が6択固定であることを意味しません。主催団体の制作・監修による模試ではありません。"
+  ]
+}

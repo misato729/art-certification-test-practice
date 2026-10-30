@@ -127,20 +127,20 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
             :class="{ current: route.path.startsWith(`/practice/${exam.exam_number}/`) }"
           >
             <NuxtLink class="exam-link" :to="examTarget(exam)" @click="closeMobileList">
-              模擬試験 {{ exam.exam_number }}
+              {{ exam.title }}
             </NuxtLink>
             <button
               type="button"
               :aria-expanded="openExam === exam.exam_number"
               :aria-controls="`exam-${exam.exam_number}-questions`"
-              :title="openExam === exam.exam_number ? `模擬試験${exam.exam_number}を閉じる` : `模擬試験${exam.exam_number}を開く`"
+              :title="openExam === exam.exam_number ? `${exam.title}を閉じる` : `${exam.title}を開く`"
               @click="toggleExam(exam.exam_number)"
             >
               <UIcon
                 :name="openExam === exam.exam_number ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
               />
               <span class="sr-only">
-                {{ openExam === exam.exam_number ? `模擬試験${exam.exam_number}を閉じる` : `模擬試験${exam.exam_number}を開く` }}
+                {{ openExam === exam.exam_number ? `${exam.title}を閉じる` : `${exam.title}を開く` }}
               </span>
             </button>
           </div>
@@ -150,7 +150,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
               v-if="openExam === exam.exam_number"
               :id="`exam-${exam.exam_number}-questions`"
               class="question-list"
-              :aria-label="`模擬試験${exam.exam_number}の問題一覧`"
+              :aria-label="`${exam.title}の問題一覧`"
             >
               <NuxtLink
                 v-for="question in exam.question_numbers"
@@ -246,6 +246,7 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
 }
 
 .exam-link {
+  min-width: 0;
   align-self: stretch;
   flex: 1;
   display: flex;
@@ -254,6 +255,8 @@ const examTarget = (exam: ExamCatalogEntry, question?: number) => (
   font-size: 15px;
   font-weight: 800;
   text-decoration: none;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
 }
 
 .exam-link:hover {

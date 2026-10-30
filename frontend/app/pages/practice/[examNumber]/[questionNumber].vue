@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EXAM_CATALOG, QUESTIONS_PER_EXAM, FREE_EXAM_MAX } from '~/utils/examCatalog'
+import { EXAM_CATALOG, FREE_EXAM_MAX, questionNumbersForExams } from '~/utils/examCatalog'
 import {
   createPracticeSequence,
   shufflePracticeSequence,
@@ -71,7 +71,7 @@ const { canUseFavorites, isFavorite, setFavorite, toggleFavorite } = useFavorite
 const updatingFavorite = ref(false)
 
 const allExamNumbers = EXAM_CATALOG.map(exam => exam.exam_number)
-const allQuestionNumbers = Object.freeze(Array.from({ length: QUESTIONS_PER_EXAM }, (_, index) => index + 1))
+const allQuestionNumbers = Object.freeze(questionNumbersForExams(allExamNumbers))
 
 const parseNumberSelection = (value: unknown, allowedNumbers: readonly number[]) => {
   const serialized = Array.isArray(value) ? value.join(',') : typeof value === 'string' ? value : ''
@@ -85,6 +85,7 @@ const parseNumberSelection = (value: unknown, allowedNumbers: readonly number[])
 
 const examNumber = computed(() => Number(route.params.examNumber))
 const questionNumber = computed(() => Number(route.params.questionNumber))
+const currentExam = computed(() => EXAM_CATALOG.find(exam => exam.exam_number === examNumber.value))
 const hasConditionSelection = computed(() => (
   route.query.exams !== undefined || route.query.questions !== undefined
 ))
@@ -110,6 +111,7 @@ const selectedPracticeQuestionNumbers = computed(() => {
 const basePracticeSequence = computed<PracticePosition[]>(() => createPracticeSequence(
   selectedPracticeExamNumbers.value,
   selectedPracticeQuestionNumbers.value,
+  EXAM_CATALOG,
 ))
 const isRandomPractice = computed(() => (
   hasConditionSelection.value
@@ -147,7 +149,7 @@ const validPosition = computed(() => (
   Number.isInteger(examNumber.value)
   && allExamNumbers.includes(examNumber.value)
   && Number.isInteger(questionNumber.value)
-  && allQuestionNumbers.includes(questionNumber.value)
+  && Boolean(currentExam.value?.question_numbers.includes(questionNumber.value))
   && currentPracticeIndex.value >= 0
 ))
 
@@ -241,9 +243,9 @@ const completionHeading = computed(() => (
 ))
 const completionMessage = computed(() => {
   if (hasConditionSelection.value) {
-    return `${selectedPracticeExamNumbers.value.length}模試、全${practiceSequence.value.length}問の演習が完了しました。`
+    return `${selectedPracticeExamNumbers.value.length}セット、全${practiceSequence.value.length}問の演習が完了しました。`
   }
-  return `模擬試験 ${examNumber.value} の公開問題をすべて解き終えました。`
+  return `${currentExam.value?.title ?? '選択したセット'}の公開問題をすべて解き終えました。`
 })
 
 watch(
@@ -447,7 +449,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
       <header class="practice-head">
         <div>
           <div class="practice-context">
-            <span class="exam-label">模擬試験 {{ question.exam_number }}</span>
+            <span class="exam-label">{{ currentExam?.title }}</span>
             <span v-if="practiceProgress" class="practice-progress">{{ practiceProgress }}</span>
           </div>
           <h1>問{{ question.question_number }}</h1>

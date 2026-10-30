@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM } from '~/utils/examCatalog'
+import { EXAM_CATALOG, FREE_EXAM_MAX, questionNumbersForExams } from '~/utils/examCatalog'
 import {
   createPracticeSeed,
   createPracticeSequence,
@@ -19,8 +19,6 @@ useSeoMeta({
   ogDescription: description,
 })
 
-const questionNumbers = Object.freeze(Array.from({ length: QUESTIONS_PER_EXAM }, (_, index) => index + 1))
-
 const { user } = useAuth()
 const launcherMode = ref<LauncherMode>('exam')
 
@@ -33,7 +31,9 @@ const availableExams = computed(() => (
 ))
 const availableExamNumbers = computed(() => availableExams.value.map(exam => exam.exam_number))
 const selectedExamNumbers = ref<number[]>([...availableExamNumbers.value])
-const selectedQuestionNumbers = ref<number[]>([...questionNumbers])
+const questionNumbers = computed(() => questionNumbersForExams(selectedExamNumbers.value, availableExams.value))
+const selectedQuestionNumbers = ref<number[]>([...questionNumbers.value])
+const totalQuestionCount = EXAM_CATALOG.reduce((total, exam) => total + exam.question_numbers.length, 0)
 
 const allExamsSelected = computed({
   get: () => (
@@ -50,29 +50,28 @@ const someExamsSelected = computed(() => (
 ))
 const allQuestionsSelected = computed({
   get: () => (
-    selectedQuestionNumbers.value.length === questionNumbers.length
-    && questionNumbers.every(questionNumber => selectedQuestionNumbers.value.includes(questionNumber))
+    questionNumbers.value.length > 0
+    && questionNumbers.value.every(questionNumber => selectedQuestionNumbers.value.includes(questionNumber))
   ),
   set: (selected: boolean) => {
-    selectedQuestionNumbers.value = selected ? [...questionNumbers] : []
+    selectedQuestionNumbers.value = selected ? [...questionNumbers.value] : []
   },
 })
 const someQuestionsSelected = computed(() => (
-  selectedQuestionNumbers.value.length > 0 && !allQuestionsSelected.value
+  questionNumbers.value.some(questionNumber => selectedQuestionNumbers.value.includes(questionNumber)) && !allQuestionsSelected.value
 ))
 const sortedSelectedExamNumbers = computed(() => (
   [...selectedExamNumbers.value].sort((left, right) => left - right)
 ))
 const sortedSelectedQuestionNumbers = computed(() => (
-  [...selectedQuestionNumbers.value].sort((left, right) => left - right)
-))
-const selectedQuestionCount = computed(() => (
-  sortedSelectedExamNumbers.value.length * sortedSelectedQuestionNumbers.value.length
+  selectedQuestionNumbers.value.filter(questionNumber => questionNumbers.value.includes(questionNumber)).sort((left, right) => left - right)
 ))
 const conditionSequence = computed(() => createPracticeSequence(
   sortedSelectedExamNumbers.value,
   sortedSelectedQuestionNumbers.value,
+  EXAM_CATALOG,
 ))
+const selectedQuestionCount = computed(() => conditionSequence.value.length)
 const hasConditionSelection = computed(() => conditionSequence.value.length > 0)
 
 const examIsLocked = (examNumber: number) => examNumber > FREE_EXAM_MAX && !hasFullAccess.value
@@ -139,7 +138,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
             <span>問題演習を始める</span>
           </h2>
         </div>
-        <p>模試を1回分解くか、取り組みたい模試と問題番号を自由に組み合わせて始められます。</p>
+        <p>セットを選ぶか、取り組みたい問題番号を指定して始められます。回答するたびに採点と解説を確認できます。</p>
       </div>
 
       <div class="launcher-tabs" role="tablist" aria-label="問題演習の開始方法">
@@ -153,7 +152,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
           @click="launcherMode = 'exam'"
         >
           <UIcon name="i-lucide-files" />
-          模試を選ぶ
+          セットを選ぶ
         </button>
         <button
           id="conditions-mode-tab"
@@ -177,7 +176,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         aria-labelledby="exam-mode-tab"
       >
         <div class="exam-grid-heading">
-          <p><strong>全{{ EXAM_CATALOG.length }}回</strong><span>各{{ QUESTIONS_PER_EXAM }}問</span></p>
+          <p><strong>全{{ EXAM_CATALOG.length }}セット</strong><span>合計{{ totalQuestionCount }}問</span></p>
           <NuxtLink v-if="!hasFullAccess" class="premium-info-link" to="/premium">
             <UIcon name="i-lucide-lock-keyhole" />
             模擬試験{{ FREE_EXAM_MAX + 1 }}以降はプレミアム会員向けです
@@ -189,9 +188,10 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
             :key="exam.exam_number"
             class="exam-card"
             :to="examTarget(exam.exam_number)"
-            :aria-label="examIsLocked(exam.exam_number) ? `模擬試験${exam.exam_number}はプレミアム会員向けです` : `模擬試験${exam.exam_number}を始める`"
+            :aria-label="examIsLocked(exam.exam_number) ? `${exam.title}はプレミアム会員向けです` : `${exam.title}・${exam.question_numbers.length}問を始める`"
           >
-            <strong>{{ exam.exam_number }}</strong>
+            <strong>{{ exam.title }}</strong>
+            <span>{{ exam.question_numbers.length }}問</span>
             <UIcon v-if="examIsLocked(exam.exam_number)" name="i-lucide-lock-keyhole" aria-hidden="true" />
           </NuxtLink>
         </div>
@@ -207,7 +207,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         <form class="condition-form" @submit.prevent="startConditionalPractice('sequential')">
           <div class="condition-fields">
             <fieldset class="condition-fieldset">
-              <legend>対象模試</legend>
+              <legend>対象セット</legend>
               <div class="condition-field-heading">
                 <p>複数選択できます</p>
                 <label class="all-selector">
@@ -231,7 +231,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
                     name="exam-numbers"
                     :value="exam.exam_number"
                   >
-                  <span>{{ exam.exam_number }}</span>
+                  <span>{{ exam.title }}<small>{{ exam.question_numbers.length }}問</small></span>
                 </label>
               </div>
             </fieldset>
@@ -270,12 +270,12 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
           <div class="condition-submit">
             <p v-if="hasConditionSelection">
               <span>選択中</span>
-              {{ sortedSelectedExamNumbers.length }}模試・各{{ sortedSelectedQuestionNumbers.length }}問
+              {{ sortedSelectedExamNumbers.length }}セットから
               <strong>全{{ selectedQuestionCount }}問</strong>
             </p>
             <p v-else class="selection-required">
               <span>選択内容を確認してください</span>
-              対象模試と問題番号を1つ以上選択してください
+              対象セットと問題番号を1つ以上選択してください
             </p>
             <div class="condition-actions">
               <button class="primary-link" type="submit" :disabled="!hasConditionSelection">
@@ -379,10 +379,10 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 .exam-grid-heading p { display: flex; align-items: baseline; gap: 10px; margin: 0; }
 .exam-grid-heading strong { font-size: 16px; }
 .exam-grid-heading span { color: var(--muted); font-size: 13px; font-weight: 700; }
-.exam-grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 8px; }
+.exam-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .exam-card {
   position: relative;
-  height: 68px;
+  min-height: 96px;
   display: grid;
   place-items: center;
   padding: 8px;
@@ -394,7 +394,8 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   transition: border-color .15s, background .15s, transform .15s;
 }
 .exam-card:hover { border-color: var(--teal); background: #f9ffff; transform: translateY(-1px); }
-.exam-card strong { color: var(--teal-dark); font-size: 20px; line-height: 1; transform: translateY(-1px); }
+.exam-card strong { min-width: 0; color: var(--teal-dark); font-size: 17px; line-height: 1.5; text-align: center; overflow-wrap: anywhere; }
+.exam-card > span { color: var(--muted); font-size: 13px; font-weight: 700; }
 .exam-card :deep(.iconify) { position: absolute; top: 7px; right: 7px; width: 13px; height: 13px; color: #677b81; }
 .premium-info-link { display: inline-flex; align-items: center; gap: 5px; color: var(--teal-dark); font-size: 13px; font-weight: 800; }
 .condition-form { border: 1px solid #c7d4d5; border-radius: 8px; background: #fff; }
@@ -445,6 +446,9 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 .number-checkbox-grid label:hover { border-color: var(--teal); }
 .number-checkbox-grid label.selected { border-color: var(--teal); background: #eaf6f5; color: var(--teal-dark); }
 .number-checkbox-grid input { width: 16px; height: 16px; flex: 0 0 16px; margin: 0; accent-color: var(--teal); }
+.number-checkbox-grid.exam-number-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.exam-number-grid label span { min-width: 0; overflow-wrap: anywhere; text-align: center; }
+.exam-number-grid small { display: block; margin-top: 3px; font-size: 12px; font-weight: 500; }
 .question-number-grid label { gap: 4px; padding-inline: 4px; }
 .question-number-grid label span { white-space: nowrap; }
 .condition-submit {
@@ -517,7 +521,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 .usage-premium-link :deep(.iconify) { flex: 0 0 16px; width: 16px; height: 16px; }
 
 @media (max-width: 1100px) {
-  .exam-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .exam-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 1200px) {
@@ -536,8 +540,9 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   .launcher-heading > p { font-size: 14px; }
   .launcher-tabs { width: 100%; margin-top: 24px; }
   .exam-grid-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
-  .exam-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }
-  .exam-card { height: 68px; }
+  .exam-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+  .exam-card { min-height: 92px; }
+  .exam-card strong { font-size: 15px; }
   .condition-fields { padding: 20px; }
   .condition-field-heading { align-items: flex-end; }
   .number-checkbox-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }

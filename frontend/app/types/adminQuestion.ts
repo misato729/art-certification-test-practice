@@ -1,5 +1,6 @@
 import { EXAM_CONFIG, type ExamConfiguration } from '../utils/examConfig.ts'
 import type { QuestionInput } from '../../shared/schemas/content.ts'
+import { choiceLabelsForQuestion } from '../../shared/schemas/exam.ts'
 
 export type ContentBlockType =
   | 'text'
@@ -81,7 +82,7 @@ export const createEmptyQuestion = (config: ExamConfiguration = EXAM_CONFIG): Ad
   explanation_blocks: [{ type: 'text', text: '' }],
   source_text: '',
   publication_status: 'draft',
-  choices: config.exam.choice_labels.map((label, index) => ({
+  choices: choiceLabelsForQuestion(config, 1, 1).map((label, index) => ({
     choice_label: label,
     content_blocks: [{ type: 'text', text: '' }],
     is_correct: index === 0,

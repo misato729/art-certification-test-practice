@@ -1,0 +1,5985 @@
+{
+  "schema_version": 1,
+  "questions": [
+    {
+      "exam_number": 1,
+      "question_number": 1,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
+        },
+        {
+          "type": "text",
+          "text": "古代エジプトの壁画や浮彫に見られる、人物の身体の見せ方について、一般的な傾向を適切に説明したものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "古代エジプトでは、身体の各部分の特徴をよく示す方向を組み合わせました。頭部や脚の側面と、眼や肩の正面が一人の姿に共存します。一つの斜めの視点に統一する表現ではありません。すべての部位を正面にそろえる方法とも、真上から身体全体を見下ろす方法とも異なります。この約束は墓の美術の宗教的な働きとも関係しています。"
+        }
+      ],
+      "source_text": "Australian Museum: The Painter in ancient Egypt | https://australian.museum/learn/cultures/international-collection/ancient-egyptian/the-painter-in-ancient-egypt/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "頭・肩・脚をすべて正面から見せ、左右対称の姿だけで表す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "頭・肩・脚を一つの斜めの視点に統一し、眼前の見え方を再現する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "頭と脚は側面、肩は正面など、各部分が分かりやすい向きを組み合わせる。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "頭・肩・脚をすべて真上から見せ、地面の区画と同じ平面に置く。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 2,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
+        },
+        {
+          "type": "text",
+          "text": "ギリシア美術の時代区分を、一般的な順序に従って古いものから並べたものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "一般的な流れはアルカイック期、クラシック期、ヘレニズム期です。アルカイック期のクーロスなどを経て、クラシック期に人体表現が発展し、前323年のアレクサンドロス大王の死以後をヘレニズム期と区分します。他の順序はいずれも、クラシック期とアルカイック期、またはヘレニズム期の前後関係を逆転させています。"
+        }
+      ],
+      "source_text": "The Met: Greek Art in the Archaic Period | https://www.metmuseum.org/de/essays/greek-art-in-the-archaic-period\nThe Met: Art of the Hellenistic Age and the Hellenistic Tradition | https://www.metmuseum.org/de/essays/art-of-the-hellenistic-age-and-the-hellenistic-tradition",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "アルカイック期 → クラシック期 → ヘレニズム期"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "アルカイック期 → ヘレニズム期 → クラシック期"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "クラシック期 → アルカイック期 → ヘレニズム期"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヘレニズム期 → クラシック期 → アルカイック期"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 3,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
+        },
+        {
+          "type": "text",
+          "text": "アテネの赤像式陶器について、人物の色と細部の表し方の組合せとして適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "赤像式では人物部分に土の赤橙色を残し、背景を黒くして、人物の内部を筆の線などで表します。人物を黒いシルエットとし細部を刻む方法は黒像式の特徴です。赤い人物は原則として赤い絵具の厚塗りで作るのではなく、金箔で細部を示す技法でもありません。白地や流れる釉薬を前提とする説明も赤像式の定義に合いません。"
+        }
+      ],
+      "source_text": "The Met: Athenian Vase Painting: Black- and Red-Figure Techniques | https://www.metmuseum.org/fr/essays/athenian-vase-painting-black-and-red-figure-techniques",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "人物は白い化粧土で覆う／細部は彩釉の流れで示す"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "人物は赤い顔料を厚塗りする／細部は金箔で示す"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "人物は黒く塗る／細部は主に線を刻んで示す"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "人物は素地の赤色を残す／細部は主に筆で描く"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 4,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "人物像には、見たままの姿だけでなく、死後の生への願いや市民・支配者の理想も表れる。以下では、身体の見せ方、時代区分、制作技法、肖像の役割を、それぞれの社会と結び付けて考える。"
+        },
+        {
+          "type": "text",
+          "text": "共和政末期のローマの男性肖像には、皺や加齢を強調した作例がある。この表現の社会的な意味として、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "共和政末期のウェリズムは、皺などで成熟、経験、責任感を示し、公への奉仕という価値を可視化する方法でした。若い美しさの強調はヘレニズム的理想化などとの混同です。王朝内の顔の類似を用いる手法は帝政の肖像で展開し、共同統治者を類型化する方法は後の四帝分治制に関わります。いずれも像と政治の関係を示しますが、時代が違います。"
+        }
+      ],
+      "source_text": "The Met: Roman Portrait Sculpture: The Stylistic Cycle | https://www.metmuseum.org/de/essays/roman-portrait-sculpture-the-stylistic-cycle",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "複数の統治者の顔を同じ形にし、共同支配の統一を示す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "王朝内部の顔の類似を示し、皇帝の世襲を正当化する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "経験と厳格さを示し、国家への奉仕という共和政の価値を表す。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "永遠の若さを示し、王の神に近い美しさを強調する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 5,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
+        },
+        {
+          "type": "text",
+          "text": "ビザンティン美術の「イコン」を説明したものとして、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "イコンはキリストや聖母、聖人、聖なる出来事を表す像です。板絵がよく知られますが、モザイク、金属、象牙などにも作られ、礼拝と関わりました。巡礼の地図、聖人の伝記、寄進の名簿も中世の信仰生活を考える資料ですが、聖なる像を意味するイコンの定義ではありません。絵画という素材だけでなく、表す対象と使われ方を確認しましょう。"
+        }
+      ],
+      "source_text": "The Met: Icons and Iconoclasm in Byzantium | https://www.metmuseum.org/essays/icons-and-iconoclasm-in-byzantium",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "キリストや聖母、聖人などを表し、礼拝に関わる聖なる像。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "聖堂への寄進を、金額と寄進者名だけで記録する名簿。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "聖人の生涯を文章だけで記録し、典礼で朗読する伝記。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "聖地への旅の経路を、距離と地名によって示した地図。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 6,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
+        },
+        {
+          "type": "text",
+          "text": "次の建築的特徴を、ロマネスクとゴシックの一般的な傾向に対応させた組合せを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ロマネスクの一般的な特徴は半円アーチや石の筒形ヴォールト、ゴシックの特徴は尖頭アーチなどです。地域差や移行期の併存はありますが、本問では両者の代表的な傾向を対応させます。ロマネスクを尖頭アーチ、ゴシックを半円アーチとする組合せは逆です。どちらも半円アーチとする組合せ、どちらも尖頭アーチとする組合せも、両様式の基本的な違いを捉えていません。"
+        }
+      ],
+      "source_text": "The Met: Gothic Art | https://www.metmuseum.org/fr/essays/gothic-art",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ロマネスク：尖頭アーチ／ゴシック：半円アーチ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ロマネスク：尖頭アーチ／ゴシック：尖頭アーチ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ロマネスク：半円アーチ／ゴシック：尖頭アーチ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ロマネスク：半円アーチ／ゴシック：半円アーチ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 7,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "中世の美術は、礼拝の対象や教えを伝える像から、共同体の大きな教会堂まで、多様な形で信仰生活に関わった。ここでは東西の宗教像と、西ヨーロッパの建築様式を比較する。"
+        },
+        {
+          "type": "text",
+          "text": "ゴシック大聖堂で高い身廊や大きな窓を実現するうえで、飛梁（フライング・バットレス）が果たした役割として適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "飛梁は、ヴォールトが生む外向きの力を外部の控壁へ伝えます。リブ・ヴォールトや尖頭アーチと組み合わせ、壁への構造上の依存を減らすことで大きな窓を可能にしました。力を控壁から窓へ戻す方向ではありません。屋根上部に重みを集めて相殺する仕組みでも、ガラスの枠だけに屋根を支えさせる仕組みでもありません。"
+        }
+      ],
+      "source_text": "The Met: Gothic Art | https://www.metmuseum.org/fr/essays/gothic-art",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヴォールトの外向きの力を、外部の控壁から身廊の窓へ戻す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヴォールトの外向きの力を、壁の外に立つ控壁へ伝える。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヴォールトの重みを、ステンドグラスの枠組だけで支える。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヴォールトの重みを、屋根の最上部に集めて相殺する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 8,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "ブオン・フレスコの基本的な制作工程として、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ブオン・フレスコは湿った仕上げ漆喰に描き、壁と絵具層を結び付ける技法です。一日分の作業範囲はジョルナータと呼ばれます。乾いた面に描くセッコとは区別します。乾性油を用いて乾いた面へ重ねる工程はこの技法ではありません。蝋と熱を使う説明はエンカウスティーク、卵黄と木板を使う説明は主に卵テンペラを指します。"
+        }
+      ],
+      "source_text": "National Gallery: Fresco | https://www.nationalgallery.org.uk/paintings/glossary/fresco",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "一日に描ける範囲の漆喰を塗り、まだ湿っているうちに描く。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "完全に乾いた漆喰を油で覆い、乾性油絵具を何層も重ねる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "顔料を卵黄で練り、乾いた木板の上に細線を重ねる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "顔料を蝋に練り込み、加熱した金属板に焼き付ける。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 9,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "15世紀フィレンツェで体系化された線遠近法で、画面に奥行きを構成する基本原理として適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "線遠近法では、奥へ向かう同方向の平行線を消失点へ収束させます。ブルネレスキの実験とアルベルティによる理論化が重要です。遠景の色や輪郭の変化による空間表現は空気遠近法です。人物の重要性を大きさで示す方法は階層的な寸法の使い方で、複数の視点の形を重ねる説明はキュビスムなどの空間への問いに近く、本問の作図原理ではありません。"
+        }
+      ],
+      "source_text": "National Gallery: Perspective | https://www.nationalgallery.org.uk/paintings/glossary/perspective",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "一つの物を異なる方向から見た形を組み合わせ、画面を構成する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "遠景の輪郭を弱め、色や明暗の差を減らして奥行きを示す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "身分の高い人物を大きくし、重要性を人物の寸法で示す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "奥へ向かう同じ方向の平行線を、画面上の消失点へ集める。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 10,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "レオナルド・ダ・ヴィンチのスフマートを説明したものとして、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "スフマートは煙のように柔らかく明暗を移し、明確な境界線を感じさせない表現です。《モナ・リザ》などの形の移り変わりと関係します。小さな色点の視覚的な混合は新印象主義の色彩理論に対応します。紙片を貼る方法はコラージュなどの説明であり、湿った漆喰に描く工程はフレスコの制作技法です。"
+        }
+      ],
+      "source_text": "The Met: Leonardo da Vinci (1452–1519) | https://www.metmuseum.org/fr/essays/leonardo-da-vinci-1452-1519",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "物の輪郭を切り抜き、新聞紙などの断片を画面に貼り付ける。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "輪郭を硬い線で区切らず、明暗を滑らかに移行させる。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "色を小さな点に分け、隣り合う色の視覚的な混合を試みる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "湿った漆喰を一日分ずつ塗り、顔料を定着させる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 11,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ルネサンスの画家たちは、古代の作品や人文主義から刺激を受ける一方、礼拝堂・宮殿・邸宅など、異なる場所と注文主に応じて制作した。技法、空間表現、主題、作者を関連付けて答えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "ローマ教皇の注文による作品と作者の組合せとして、両方とも正しいものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "システィーナ礼拝堂天井画はミケランジェロ、《アテネの学堂》はラファエロの作品です。前者は《創世記》の場面など、後者は古代の哲学者たちを描きます。作者を入れ替えた組合せは誤りです。レオナルドはこの天井画の作者ではありません。ボッティチェリは礼拝堂壁面の15世紀の装飾に参加しましたが、《アテネの学堂》の作者ではありません。"
+        }
+      ],
+      "source_text": "Vatican Museums: Ceiling | https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/cappella-sistina/volta.html\nVatican Museums: School of Athens | https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/stanze-di-raffaello/stanza-della-segnatura/scuola-di-atene.html",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "システィーナ礼拝堂天井画：ミケランジェロ／《アテネの学堂》：ボッティチェリ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "システィーナ礼拝堂天井画：ラファエロ／《アテネの学堂》：ミケランジェロ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "システィーナ礼拝堂天井画：レオナルド／《アテネの学堂》：ラファエロ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "システィーナ礼拝堂天井画：ミケランジェロ／《アテネの学堂》：ラファエロ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 12,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ヤン・ファン・エイクの絵画について、油彩の特性と表現の関係を説明したものとして適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ファン・エイクは油彩を巧みに扱い、金属の反射や宝石の輝き、布の質感を精密に表しました。油彩を単独で発明した人物とするのでなく、技法の高度な発展への貢献を押さえましょう。卵黄で顔料を定着させる説明は卵テンペラ、湿った漆喰の硬化を利用するのはフレスコです。木版の凸部から紙へ転写する凸版印刷も、ここでいう油彩の制作方法とは異なります。"
+        }
+      ],
+      "source_text": "The Met: Jan van Eyck (ca. 1390–1441) | https://www.metmuseum.org/essays/jan-van-eyck-ca-1390-1441",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "光の反射を観察し、金属・宝石・布などの表面を精密に描き分けた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "木版の凸部に油絵具を付けて刷る方法で、すべての細部を描いた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "漆喰の硬化と顔料の定着を利用して、油彩画の表面を作った。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "卵黄で顔料を定着させる性質を、油彩独自の長所として用いた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 13,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "デューラーの版画と技法の対応として、正しいものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "デューラーの《黙示録》の連作は木版、《メレンコリアI》はエングレーヴィングです。木版は凸部にインクを付ける凸版、エングレーヴィングは金属板へ直接線を刻む凹版です。エッチングも凹版ですが、酸による腐食を用いる点が異なります。《メレンコリアI》をエッチングとする組合せ、二作品の木版と銅版を入れ替える組合せ、《黙示録》をエッチングとする組合せはいずれも誤りです。"
+        }
+      ],
+      "source_text": "The Met: Albrecht Dürer (1471–1528) | https://www.metmuseum.org/essays/albrecht-durer-1471-1528",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "《黙示録》の連作：エッチング／《メレンコリアI》：エングレーヴィング"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "《黙示録》の連作：エングレーヴィング／《メレンコリアI》：木版"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "《黙示録》の連作：木版／《メレンコリアI》：エングレーヴィング"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "《黙示録》の連作：木版／《メレンコリアI》：エッチング"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 14,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "16世紀イタリアのマニエリスムを特徴付ける傾向として、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "マニエリスムでは、盛期ルネサンスの表現を踏まえながら、伸長した人体、複雑な姿勢、不安定な構図などが好まれました。安定した均衡と自然な比率は、むしろ盛期ルネサンスの理想の説明に近くなります。暗い場から強い光で人物を浮かび上がらせる説明はカラヴァッジョなどの劇的明暗、色点の視覚的混合は新印象主義と関連します。"
+        }
+      ],
+      "source_text": "The Met: Mannerism: Bronzino and his Contemporaries | https://www.metmuseum.org/essays/mannerism-bronzino-1503-1572-and-his-contemporaries",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "安定した幾何学的構図と、均衡を保つ自然な人体比率。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "引き伸ばされた人体や複雑な姿勢、緊張をはらむ構図。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "細かな色点を並べ、鑑賞者の眼で色の混合を促す方法。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "暗い場から強い光で人物を選び出す、劇的な明暗。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 15,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "カラヴァッジョが場面を劇的にするために用いた、光と影の強い対比による表現を表す言葉を選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "キアロスクーロは明暗を意味し、カラヴァッジョはその対比によって劇的な効果を生みました。レオナルドなどの立体表現にも関わる用語です。スフマートは輪郭や明暗を煙のように滑らかに移す方法、グリザイユは灰色などの単色による絵画表現です。線遠近法は消失点などを用いて空間を構成する原理で、明暗の対比そのものの名称ではありません。"
+        }
+      ],
+      "source_text": "National Gallery: Chiaroscuro | https://www.nationalgallery.org.uk/paintings/glossary/chiaroscuro",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "キアロスクーロ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "グリザイユ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "線遠近法"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "スフマート"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 16,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "コルナーロ礼拝堂で彫刻・建築・隠された光源を統合し、《聖テレジアの法悦》の空間を構成した美術家を選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ベルニーニは、聖テレジアの彫刻を建築や隠された光源と一体化し、宗教的な体験を劇的に示す礼拝堂を構成しました。ボッロミーニはサン・カルロ・アッレ・クワトロ・フォンターネなどの建築、コルトーナはサンタ・マリア・イン・ヴァッリチェッラなどの天井画、ガウッリはイル・ジェズ聖堂の天井画で知られ、本問の礼拝堂の作者ではありません。"
+        }
+      ],
+      "source_text": "The Met: Baroque Rome | https://www.metmuseum.org/essays/baroque-rome",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ジャン・ロレンツォ・ベルニーニ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ジョヴァンニ・バッティスタ・ガウッリ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ピエトロ・ダ・コルトーナ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "フランチェスコ・ボッロミーニ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 17,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "17世紀の美術では、宗教的な感情を高める空間、王宮での肖像、市民の室内生活などが題材となった。作品に向き合う人をどのように引き込むかという観点から、次の問いに答えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "フェルメールの《真珠の耳飾りの少女》は「トローニー」の例として説明される。この種の絵画の性格として最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "トローニーは、興味深い顔立ちや衣装、人物の型を描く絵画で、特定の人の注文肖像とは区別されます。《真珠の耳飾りの少女》は実際のモデルに基づくとしても、その人物の注文肖像と同一視できません。団体の集団肖像、寄進者像を伴う祭壇画、夫婦の二人肖像はいずれもネーデルラント絵画を考える別の種類で、トローニーの性格を説明しません。"
+        }
+      ],
+      "source_text": "The Met: Johannes Vermeer (1632–1675) | https://www.metmuseum.org/essays/johannes-vermeer-1632-1675",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "市民の組合や団体から注文され、構成員の身分と序列を記録する集団肖像。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "礼拝堂の祭壇に置くことを目的とし、寄進者の顔を描き込んだ宗教画。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "特定人物の注文肖像とは異なり、顔や衣装、人物の型を探る習作的な人物画。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "結婚契約の成立を記録し、夫婦を同じ室内に対等に配置した二人肖像。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 18,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ワトーが描いた、洗練された衣装の男女が庭園や風景の中で集う場面を表す言葉を選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ワトーの恋人たちや音楽・演劇を思わせる人物が集う絵画は、フェート・ギャラントと呼ばれます。彼の新しい主題に対応する分類がアカデミーでも用いられました。ヴァニタスは死や時間などを象徴する静物の主題、トロンプ・ルイユは本物と見まがわせる描写、カプリッチョは空想的な景観などを指し、本問の人物主題の名称ではありません。"
+        }
+      ],
+      "source_text": "The Met: Antoine Watteau (1684–1721) | https://www.metmuseum.org/essays/antoine-watteau-1684-1721",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "トロンプ・ルイユ（だまし絵）"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヴァニタス（人生のはかなさを示す静物）"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "フェート・ギャラント（雅宴画）"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "カプリッチョ（空想的な景観画）"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 19,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ダヴィッドが代表する新古典主義絵画の特徴として、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ダヴィッドの新古典主義は、明確な輪郭、彫塑的な形、滑らかな画面を用い、歴史画を道徳的な範例と結び付けました。激しい感情や異国への憧れを強い色彩で表す説明はロマン主義の傾向、庭園の恋愛的な集いは雅宴画を伴うロココに近くなります。分割した筆触による戸外の光や近代の余暇は、印象主義の関心として整理できます。"
+        }
+      ],
+      "source_text": "The Met: The Legacy of Jacques Louis David (1748–1825) | https://www.metmuseum.org/pt/essays/the-legacy-of-jacques-louis-david-1748-1825",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "細かく分けた色の筆触で、同時代の戸外の光や余暇の一瞬を捉える。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "柔らかな色と軽やかな筆触で、庭園に集う男女の恋愛的な気分を示す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "揺れ動く斜線と強い色彩対比で、激しい感情と異国への憧れを示す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "明確な輪郭と彫塑的な形態を重視し、歴史主題を道徳的な範例として示す。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 20,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ドラクロワの《民衆を導く自由の女神》が直接の契機とした事件を選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "本作は1830年の七月革命を扱い、自由を擬人化した女性と同時代の民衆を組み合わせています。フランス革命全体の象徴として広く用いられるため、1789年の出来事と混同しやすい作品です。1848年の二月革命、1871年のパリ・コミューンはいずれも本作の制作後の事件であり、直接の契機ではありません。事件と制作時期の対応を確認しましょう。"
+        }
+      ],
+      "source_text": "Musée du Louvre: Romantisme, actualité et sensualité | https://www.louvre.fr/decouvrir/les-parcours-de-visite/chefs-d-oeuvre-du-louvre/romantisme-actualite-et-sensualite",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1871年のパリ・コミューン"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1789年のバスティーユ襲撃"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1830年の七月革命"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1848年の二月革命"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 21,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "後ろ姿の人物が岩の上から霧の広がる風景を望む《雲海の上の旅人》を描き、自然と人間の精神的な関係を探った画家を選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "《雲海の上の旅人》はドイツのロマン主義の画家フリードリヒの代表作です。後ろ姿の人物を介して、鑑賞者と広大な自然の関係を考えさせます。コンスタブルとターナーはともにイギリスの風景画を発展させた重要な画家ですが、この作品の作者ではありません。コローもフランスの風景画の展開に重要な役割を果たしましたが、本作とは一致しません。"
+        }
+      ],
+      "source_text": "Hamburger Kunsthalle: Audiotour Caspar David Friedrich | https://www.hamburger-kunsthalle.org/de/audiotour-caspar-david-friedrich",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ジョン・コンスタブル"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "カミーユ・コロー"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "J・M・W・ターナー"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "カスパー・ダーヴィト・フリードリヒ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 22,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "クールベの《オルナンの埋葬》が、当時の絵画の主題の序列に対して示した変化を説明するものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "クールベは、地方の人々の葬儀を歴史画のような大画面へ、等身大で理想化せず描きました。同時代の普通の人々を重く扱う点に、伝統的な主題の序列への挑戦があります。古代英雄への見立てや道徳的な模範の演技ではありません。人物を小さな添景として理想風景を描いたのでもなく、市民の主題を小型に限るとする説明は、本作の大きさと矛盾します。"
+        }
+      ],
+      "source_text": "Musée d’Orsay: Un enterrement à Ornans | https://www.musee-orsay.fr/en/artworks/un-enterrement-ornans-924",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "聖書や神話にふさわしいとされた大画面に、地方の人々を理想化せず描いた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "地方の人々を古代の英雄に見立て、道徳の模範となる行為を演じさせた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "大画面を王侯の肖像に限り、市民の主題には小型の作品だけを制作した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "地方の葬儀を遠景の小さな添景とし、理想的な自然の景観を主題にした。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 23,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "モネの積みわらやルーアン大聖堂の連作に共通する関心として、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "モネの連作は同じ対象を何度も描き、時刻や光の条件によって変わる見え方を追究します。対象が同じでも、観察の条件によって異なる絵画になる点が重要です。異なる視点の形を一画面に組み合わせる説明はキュビスム、水平・垂直の関係に還元する説明は幾何学的な抽象の一方向に近くなります。機械的なイメージの反復はポップ・アートなどと区別します。"
+        }
+      ],
+      "source_text": "The Met: Claude Monet (1840–1926) | https://www.metmuseum.org/ja/essays/claude-monet-1840-1926",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "同じ図像を機械的に刷って反復し、大衆的イメージの流通を扱う。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "物の輪郭を幾何学的に単純化し、水平線と垂直線の関係に還元する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "同じ対象を繰り返し、時刻などの光の条件による見え方の変化を探る。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "同じ物の複数の方向からの形を、一枚の画面内へ同時に組み合わせる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 24,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "スーラらの新印象主義における「視覚的混合」を説明したものとして、適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "新印象主義は色を別々の小さな筆触として置き、眼で混ざって見える効果を探りました。スーラやシニャックは当時の色彩・光学の理論を参照しています。パレット上で混ぜてから置く方法とは区別します。透明な層を重ねるグレーズや、湿った絵具を画面上でなじませる方法も色を変化させますが、本問でいう分割された色の視覚的混合ではありません。"
+        }
+      ],
+      "source_text": "The Met: Georges Seurat (1859–1891) and Neo-Impressionism | https://www.metmuseum.org/essays/georges-seurat-1859-1891-and-neo-impressionism",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "色を分けて隣接させ、鑑賞者の眼で混ざって見える効果を探る。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "乾いた色の上に透明な絵具を重ね、層を透かして色調を変える。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "色をパレットで十分に混ぜ、目標とする色を一色の絵具として置く。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "湿った絵具どうしを筆でなじませ、隣接する色の境目を消す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 25,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "19世紀の画家たちは、何を描くかだけでなく、どのように色を置き、画面を組み立てるかを問い直した。社会生活をめぐる主題の変化と、光・色・形の探究を区別しながら考えなさい。"
+        },
+        {
+          "type": "text",
+          "text": "セザンヌの静物画に見られる、単一の視点では説明しにくい卓面や器の形を理解する説明を選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "セザンヌは、画面内での個々の物や色の関係を重視し、伝統的な一点透視の規則だけに従いませんでした。卓面や器のずれを単純な描写力不足とみなさないことが要点です。作図上の単一の消失点を第一にする説明とは異なります。光の一瞬へ形を解消する説明は印象主義の一側面、小色点の光学的混合を第一にする説明は新印象主義に近いものです。"
+        }
+      ],
+      "source_text": "The Met: Paul Cézanne (1839–1906) | https://www.metmuseum.org/essays/paul-cezanne-1839-1906",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "その場の光の一瞬を優先し、物の量感や構造を弱めて描く。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "物どうしや色面の関係を重視し、一点透視の整合だけには従わない。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "すべての物を同じ消失点に合わせ、作図上の整合を第一にする。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "輪郭の形より小色点の配列を優先し、光学的な色の混合を目指す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 26,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "モローやルドンらに関連する象徴主義の考え方として、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "象徴主義は、想像、感情、観念の世界を重視し、神話や夢などを題材にしました。モローやルドンはその多様な展開に関わります。同時代の社会を理想化せず描く説明は写実主義、戸外の光や空気の変化を捉える説明は印象主義に近いものです。古代の歴史主題と明確な輪郭・均衡を重視する説明は、ダヴィッドなどの新古典主義と対応します。"
+        }
+      ],
+      "source_text": "The Met: Symbolism | https://www.metmuseum.org/essays/symbolism",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "神話や夢を手がかりに、観念や感情に形を与えようとする。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "古代の歴史主題を、明確な輪郭と均衡ある構図で示す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "同時代の社会生活を、理想化を避けて描くことを重視する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "戸外の光と空気の変化を、分割した筆触で捉えようとする。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 27,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "20世紀初頭の色彩表現をめぐる画家と運動の組合せとして、両方とも適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "マティスはドランらとフォーヴィスムを展開し、キルヒナーはドイツ表現主義のグループ、ブリュッケの中心人物でした。強い色彩という共通点があっても、所属や活動の場は区別します。二人の所属を入れ替えた組合せは誤りです。ボッチョーニは未来派に関わり、ドランはフォーヴィスムの画家です。マティスの初期に新印象主義の影響があっても、ここでの代表的対応にはなりません。"
+        }
+      ],
+      "source_text": "The Met: Fauvism | https://www.metmuseum.org/ja/essays/fauvism\nMoMA: German Expressionism Styles: Brücke | https://www.moma.org/s/ge/curated_ge/styles/brucke.html",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "マティス―ブリュッケ／キルヒナー―フォーヴィスム"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "マティス―フォーヴィスム／キルヒナー―ブリュッケ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "キルヒナー―未来派／マティス―新印象主義"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ドラン―未来派／ボッチョーニ―フォーヴィスム"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 28,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "《空間における連続性の唯一の形態》などで、歩く身体を周囲の空間や速度と結び付けた、イタリア未来派の彫刻家を選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "本作はボッチョーニが1913年に制作した未来派の彫刻です。身体を孤立した静止物としてだけでなく、運動や周囲の空間と関わる形として捉えました。ブランクーシは形態の純化、ジャコメッティは細長い人物像、アルプは有機的な抽象彫刻で知られますが、本作の作者ではありません。同時代の彫刻の変化を、作者・作品・運動の対応から整理しましょう。"
+        }
+      ],
+      "source_text": "MoMA: Futurism | https://www.moma.org/collection/terms/futurism",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "アルベルト・ジャコメッティ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ジャン・アルプ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ウンベルト・ボッチョーニ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "コンスタンティン・ブランクーシ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 29,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "抽象絵画の展開について、画家と表現の関心の組合せが両方とも適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "カンディンスキーは音楽を重要な手がかりに、色と形そのものの感情や精神への働きを考えました。モンドリアンは水平・垂直線と三原色、白や黒などによる構成を探究します。両者の代表的な関心を入れ替える組合せは不適切です。商品画像の機械的反復はウォーホルなどのポップ・アート、滴下による身振りの記録はポロックなどの方法に対応します。"
+        }
+      ],
+      "source_text": "MoMA: Vasily Kandinsky | https://www.moma.org/artists/2981-vasily-kandinsky\nSFMOMA: Piet Mondrian | https://www.sfmoma.org/artist/Piet_Mondrian/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "カンディンスキー―水平・垂直と三原色の関係／モンドリアン―色と形の精神的な響き"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "カンディンスキー―色と形の精神的な響き／モンドリアン―絵具の滴下による身振りの記録"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "カンディンスキー―商品画像のシルクスクリーン／モンドリアン―水平・垂直と三原色の関係"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "カンディンスキー―色と形の精神的な響き／モンドリアン―水平・垂直と三原色の関係"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 30,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "デュシャンのレディメイドが美術の考え方に投げ掛けた問いとして、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "レディメイドは、既製の日用品を選び、通常の用途から切り離して美術として提示する方法です。作品と制作、作者の役割が問い直されます。紙片を貼る方法はコラージュ、日用品を油彩で精密に描く説明は静物などの再現、写真の断片を接合する方法はフォトモンタージュに対応します。日用品や既存の素材を扱う方法にも、異なる仕組みがあります。"
+        }
+      ],
+      "source_text": "MoMA: Marcel Duchamp, Bicycle Wheel | https://www.moma.org/collection/works/81631",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "写真の断片を接合し、新しい複合イメージを印画紙へ焼き付ける。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "新聞や色紙の断片を貼り、絵画の空間と実物の素材を組み合わせる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "既製品を選び、日常の用途から切り離して美術として提示する。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "日用品を油彩で精密に描き、その表面の光や質感を再現する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 31,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "シュルレアリスムで「自動記述」とも訳され、意識的な統制を緩めて無意識の働きを表そうとする方法の総称を選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "オートマティスム（自動記述）は、意識の統制を緩めて無意識の働きを表そうとする方法の総称です。自動的な筆記や描画のほか、偶然を利用する技法とも関わります。ディヴィジョニスムは色を分割して置く方法、キアロスクーロは明暗の対比による表現、グリザイユは灰色などの単色による絵画表現であり、自動記述を指す名称ではありません。"
+        }
+      ],
+      "source_text": "National Galleries of Scotland: Automatism | https://www.nationalgalleries.org/art-and-artists/glossary-terms/automatism\nThe Met: Georges Seurat (1859–1891) and Neo-Impressionism | https://www.metmuseum.org/essays/georges-seurat-1859-1891-and-neo-impressionism\nNational Gallery: Chiaroscuro | https://www.nationalgallery.org.uk/paintings/glossary/chiaroscuro\nNational Gallery: Grisaille | https://www.nationalgallery.org.uk/paintings/glossary/grisaille",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "グリザイユ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "オートマティスム"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ディヴィジョニスム"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "キアロスクーロ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 32,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ポロックが1940年代後半に発展させた、床に置いたカンヴァスへ絵具を滴らせたり流したりする方法を選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "絵具を滴らせるドリッピングや、流しかけるポーリングは、ポロックの制作を特徴付けます。画家の身体の動きと絵具の軌跡が画面に関わる点が重要です。フロッタージュはこすり出し、グラッタージュは絵具層の削りなどを用いる方法です。パピエ・コレとフォトモンタージュは紙片や写真の接合、エングレーヴィングとエッチングは凹版版画の技法であり、滴下の名称ではありません。"
+        }
+      ],
+      "source_text": "The Met: Abstract Expressionism | https://www.metmuseum.org/essays/abstract-expressionism\nMoMA: Frottage | https://www.moma.org/collection/terms/frottage\nNational Galleries of Scotland: Grattage | https://www.nationalgalleries.org/art-and-artists/glossary-terms/grattage",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "フロッタージュ／グラッタージュ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ドリッピング／ポーリング"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "エングレーヴィング／エッチング"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "パピエ・コレ／フォトモンタージュ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 33,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ウォーホルやリキテンスタインに関連するポップ・アートの特徴として、最も適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ポップ・アートは商品、広告、漫画、著名人など、大衆文化に流通するイメージを取り込み、商業的な印刷方法や反復も使いました。身近な画像を美術に持ち込むことで、独創性や価値も問い直します。規格的な物の反復と空間はミニマリズム、瞑想的な大色面はロスコなど、滴下による身振りはポロックなどの抽象表現主義の説明に近くなります。"
+        }
+      ],
+      "source_text": "MoMA: Pop Art | https://www.moma.org/momaorg/shared/flattened_pages/moma_learning/themes/pop-art/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "商品や漫画などの大衆的イメージを、美術の素材や制作方法に取り込む。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "規格的な箱や蛍光灯を反復し、幾何学的な形と展示空間の関係を探る。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "大きな色面の微妙な境界により、鑑賞者に瞑想的な経験を促す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "絵具を滴らせた身振りを重視し、制作行為の軌跡を画面に残す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 34,
+      "major_category_code": "western",
+      "category_code": "western_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "1960年代のミニマリズムに関連する作家と代表的な素材の組合せとして、適切なものを選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ダン・フレイヴィンは市販の蛍光灯を用い、光と展示空間の関係を作品にしました。ミニマリズムでは工業材料や製造方法が重要になります。ジャッドは金属などの幾何学的な立体で知られ、絵具の滴下はポロックの代表的な方法です。金属の箱の反復をポロックに対応させるのも逆で、ロスコは主に大きな色面の絵画を展開した画家です。"
+        }
+      ],
+      "source_text": "MoMA: The Materials of Minimalism | https://www.moma.org/collection/terms/minimalism/the-materials-of-minimalism\nMoMA: Dan Flavin, untitled (to the innovator of Wheeling Peachblow) | https://www.moma.org/collection/works/80758",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ジャクソン・ポロック―反復配置する金属の箱"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ドナルド・ジャッド―絵具を滴下したカンヴァス"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ダン・フレイヴィン―市販の蛍光灯"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "マーク・ロスコ―市販の蛍光灯"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 35,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "日本の造形の展開を確認するため、次の代表的な遺物を、一般的な時代区分に従って古い順に並べた。適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "土偶は縄文時代、銅鐸は弥生時代、人物埴輪は古墳時代を代表する造形です。したがって、この時代区分に沿う順序になります。銅鐸を土偶より先に置く順序は縄文と弥生を逆転させ、人物埴輪を先頭に置く順序は古墳時代を最古としています。人物埴輪を銅鐸より先に置く順序も、弥生と古墳の前後関係が逆です。個々の出土品の年代を問う問題ではありません。"
+        }
+      ],
+      "source_text": "東京国立博物館「日本美術のあけぼの―縄文・弥生・古墳」 | https://www.tnm.jp/modules/r_exhibition/index.php?controller=item&id=1122&lang=ja",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "土偶 → 人物埴輪 → 銅鐸"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "土偶 → 銅鐸 → 人物埴輪"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "人物埴輪 → 土偶 → 銅鐸"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "銅鐸 → 土偶 → 人物埴輪"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 36,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "人物や動物を表した埴輪を理解する際には、像の形だけでなく設置された場所も重要である。埴輪と古墳との関係について、適切な説明を一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "埴輪は古墳の頂部や斜面、周縁などに配置された土製品で、葬送空間との関係で理解する必要があります。棺内だけに置かれた副葬品と同一視する説明は、墳丘での配置を捉えていません。また、仏教寺院の本尊は仏像の役割で、埴輪とは用途が異なります。土製であることだけを理由に煮炊き用の器とみなすこともできません。造形と出土状況を結び付けることが大切です。"
+        }
+      ],
+      "source_text": "Princeton University Art Museum「Haniwa tomb figure」 | https://artmuseum.princeton.edu/art/collections/objects/33721",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "居館の日常食器として、液体の煮炊きに使われた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "寺院の本尊として、金堂の須弥壇に安置された。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "棺の内部だけに納められ、墳丘の外には置かれなかった。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "墳丘上やその周囲などに置かれ、葬送の空間を構成した。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 37,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
+        },
+        {
+          "type": "text",
+          "text": "法隆寺金堂の釈迦三尊像は、光背銘から聖徳太子に関わる造像の事情が知られる。この像の制作者として銘に記される仏師を一人選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "法隆寺金堂の釈迦三尊像は、光背銘によって止利仏師の制作と伝えられます。銘文は、単なる作者名の記録にとどまらず、太子の病気平癒や死後の願いと像との結び付きも伝える重要な資料です。定朝は平安時代後期、運慶と快慶は鎌倉時代の彫刻を代表する仏師であり、この飛鳥時代の造像の制作者には当たりません。作者と時代を対応させて覚えましょう。"
+        }
+      ],
+      "source_text": "法隆寺「仏像―金堂」 | https://www.horyuji.or.jp/garan/kondo/detail/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "鞍作止利"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "定朝"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "運慶"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "快慶"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 38,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
+        },
+        {
+          "type": "text",
+          "text": "近世には虚空蔵菩薩とされ、明治に化仏のある宝冠が見つかったことで観音として呼ばれるようになった、法隆寺の長身の像はどれか。一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "法隆寺の百済観音像は、すらりと長く伸びた体躯で知られ、寺の解説は、近世の呼称から宝冠の発見を経た名称の変化を伝えています。夢違観音、白壇で造られた九面観音、厨子に納められた伝橘夫人念持仏の阿弥陀三尊は、同寺に伝わる別の像です。作品名を不変の呼び名と考えず、尊名の理解も図像や伝来の調査によって変わりうることに注意しましょう。"
+        }
+      ],
+      "source_text": "法隆寺「大宝蔵院（百済観音堂）」 | https://www.horyuji.or.jp/garan/daihozoin/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "百済観音像"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "夢違観音像"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "九面観音像"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "伝橘夫人念持仏の阿弥陀如来像"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 39,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
+        },
+        {
+          "type": "text",
+          "text": "法隆寺の玉虫厨子について、名称の由来と形状の組合せが適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "玉虫厨子は、宮殿のような建築形をした厨子で、金具の下に玉虫の翅を用いたことが名の由来です。玉虫の姿を透彫りした文様が名称の理由なのではなく、実際の翅の光沢を装飾に生かしています。また、塔の形式をとる厨子と混同しないよう注意が必要です。各選択肢の前半と後半をそれぞれ確かめ、建築的な形状と素材の扱い方との両方が一致する組合せを選びます。"
+        }
+      ],
+      "source_text": "法隆寺「大宝蔵院（百済観音堂）」 | https://www.horyuji.or.jp/garan/daihozoin/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "宮殿形の厨子／玉虫の形を金具に透彫りする"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "宮殿形の厨子／金具の下に玉虫の翅を用いる"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "宝塔形の厨子／金具の下に玉虫の翅を用いる"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "宝塔形の厨子／玉虫の形を金具に透彫りする"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 40,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "仏教の伝来後、列島では寺院の造営とともに多様な尊像や荘厳具が制作された。大陸との交流を背景としながら、像の礼拝、人物の追慕、経典の物語など、作品ごとに異なる目的や主題が認められる。名称だけでなく、銘文や形状、伝来も美術史を考える手がかりとなる。"
+        },
+        {
+          "type": "text",
+          "text": "唐招提寺の鑑真和上坐像について、表された人物の性格と制作技法の組合せが適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "鑑真和上坐像は、日本に戒律を伝えた実在の僧、鑑真の姿を表す肖像彫刻で、奈良時代の脱活乾漆造の名作です。したがって、実在の僧の肖像という主題と、脱活乾漆造という技法の両方を満たす組合せが正答です。塑造も奈良時代の重要な彫刻技法ですが、本像の技法ではありません。また、鑑真を観音菩薩とする説明は、表された人物の性格を取り違えています。"
+        }
+      ],
+      "source_text": "奈良国立博物館「国宝 鑑真和上展」 | https://www.narahaku.go.jp/exhibition/special/200904_ganjin/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "実在の僧の肖像／塑造"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "実在の僧の肖像／脱活乾漆造"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "観音菩薩の尊像／塑造"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "観音菩薩の尊像／脱活乾漆造"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 41,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
+        },
+        {
+          "type": "text",
+          "text": "密教の両界曼荼羅を構成する二つの世界の組合せとして、適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "両界曼荼羅は、胎蔵界と金剛界を対にして密教の世界を図示するものです。多数の尊格の配置は、単なる集合肖像ではなく、教えや修法と結び付いています。西方極楽浄土は阿弥陀如来の浄土、兜率天は弥勒信仰などに関わる世界で、いずれも仏教美術の主題ですが、この二界の名称ではありません。似た宗教用語を、図像体系の中で区別する必要があります。"
+        }
+      ],
+      "source_text": "MIHO MUSEUM「両界曼荼羅図」 | https://www.miho.jp/booth/html/artcon/00001100.htm",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "西方極楽浄土と兜率天"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "金剛界と兜率天"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "胎蔵界と西方極楽浄土"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "胎蔵界と金剛界"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 42,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
+        },
+        {
+          "type": "text",
+          "text": "平等院鳳凰堂に1053年に納められ、現存する確実な作例としてその仏師の様式を考える基準となる阿弥陀如来坐像の作者を一人選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "平等院鳳凰堂の本尊阿弥陀如来坐像は定朝の作で、天喜元年（1053）に納められました。平等院は、現存する唯一確実な定朝作の像と説明しています。鞍作止利は飛鳥時代の造像に関わり、快慶と康慶は鎌倉彫刻につながる仏師です。本問では木材の組み方を識別するのではなく、寺院・年紀・作者を結び付け、様式の基準となる作品を確かめています。"
+        }
+      ],
+      "source_text": "平等院「彫刻・工芸」 | https://www.byodoin.or.jp/learn/sculpture/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "鞍作止利"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "康慶"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "定朝"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "快慶"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 43,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "平安時代には、密教の図像、極楽往生を願う造形、宮廷の物語を描く絵巻などが展開した。同じ時代の作品であっても、鑑賞者、使われる場所、表現すべき内容は異なる。各作品の機能と、それに適した表現の関係に注目したい。"
+        },
+        {
+          "type": "text",
+          "text": "『源氏物語絵巻』などで、屋根や天井を省き、室内の人物や調度を斜め上から見渡すように描く方法を何というか。一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "吹抜屋台は、建物の屋根や天井などを取り去ったように表し、室内を俯瞰できる描法です。宮廷の室内生活を示す絵巻でよく知られています。引目鉤鼻は人物の顔の描き方、異時同図は異なる時点の出来事や人物を同じ画面に示す方法です。たらし込みは、乾かないうちに別の墨や絵具を加える技法で、空間の見せ方そのものを指す名称ではありません。"
+        }
+      ],
+      "source_text": "国立国会図書館「王朝を舞台とした絵巻」 | https://www.ndl.go.jp/en/d_exhibitions/emaki/11",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "たらし込み"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "引目鉤鼻"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "吹抜屋台"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "異時同図"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 44,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
+        },
+        {
+          "type": "text",
+          "text": "『平治物語絵巻』について、描かれた事件の時代と、現存する原本の制作時代の組合せが適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "『平治物語絵巻』は、平安時代末期の平治の乱（1159年）を題材とする、鎌倉時代の合戦絵巻です。主題の年代と制作年代を分けて読む必要があります。事件を鎌倉時代や室町時代とする説明は年代が合わず、絵巻の原本を平安時代や江戸時代の制作とする説明も適切ではありません。後世の模本は原本の制作年代とは区別します。制作時代は、後の人々が過去の事件をどう表現したかを考える重要な情報です。"
+        }
+      ],
+      "source_text": "MIHO MUSEUM「平治物語絵巻断簡（六波羅合戦巻）」 | https://www.miho.jp/booth/html/artcon/00001959.htm",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "事件は平安時代／絵巻は江戸時代"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "事件は鎌倉時代／絵巻は平安時代"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "事件は室町時代／絵巻は鎌倉時代"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "事件は平安時代／絵巻は鎌倉時代"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 45,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
+        },
+        {
+          "type": "text",
+          "text": "鎌倉時代に盛行し、俗人などの外見的な特徴を細線で描き分ける肖像表現で、『公家列影図』が代表的な遺例とされるものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "似絵は、人物などの外見の特徴を個別に描き分ける肖像表現として鎌倉時代に盛行しました。『公家列影図』はその代表的な遺例です。頂相も肖像画ですが、禅僧の肖像として、師弟間の印可などと関わるものです。垂迹画は神仏習合の信仰を背景とする主題、六道絵は衆生が輪廻する世界を表す主題であり、本問が示す俗人の面貌を描き分ける似絵とは区別されます。"
+        }
+      ],
+      "source_text": "e国宝「公家列影図」 | https://emuseum.nich.go.jp/detail?content_base_id=100955&content_part_id=0&content_pict_id=0&langId=ja&webView=\nジャパンサーチ（国立国会図書館）「肖像画」 | https://jpsearch.go.jp/gallery/ndl-mnNxmGDnOQd",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "垂迹画"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "六道絵"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "似絵"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "頂相"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 46,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "中世の絵巻や彫刻には、出来事を生々しく伝える群像、個別の人物像、信仰の対象となる端正な尊像など、多様な表現がある。「写実」という一語でまとめるだけでなく、何を、誰に、どのように伝えるための表現かを区別する必要がある。"
+        },
+        {
+          "type": "text",
+          "text": "格調の高さと実在感を備える来迎形の阿弥陀如来立像を追求し、後世「安阿弥様」と呼ばれる姿の典型を生み出した仏師を一人選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "快慶が追求した来迎形の阿弥陀如来立像は、後世に安阿弥様と呼ばれる典型となりました。奈良国立博物館は、その実在感と格調の高さを特徴として説明しています。定朝は平安時代の理想的な仏の姿を確立した仏師ですが、安阿弥様の名と結び付く人物ではありません。円空と木喰は江戸時代の仏像制作で知られ、時代と作風が異なります。"
+        }
+      ],
+      "source_text": "奈良国立博物館「快慶」 | https://www.narahaku.go.jp/exhibition/special/201704_kaikei/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "木喰"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "定朝"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "円空"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "快慶"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 47,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
+        },
+        {
+          "type": "text",
+          "text": "如拙の『瓢鮎図』では、瓢箪で鯰を捕らえるという問いをめぐり、絵と詩が組み合わされている。この作品の成立に関わる人物の組合せとして適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "『瓢鮎図』は足利義持の発案した問いを如拙が絵にし、禅僧たちが詩で応じた作品です。将軍を義満に置き換えた組合せ、画家を周文に置き換えた組合せ、両方を置き換えた組合せはいずれも誤りです。絵と賛、禅宗の知的交流、将軍家の文化が結び付いていることが重要です。滑りやすい瓢箪で鯰を捕らえる問いは、実用的な漁法の図解として示されたものではありません。"
+        }
+      ],
+      "source_text": "京都国立博物館「不思議な絵―如拙筆『瓢鮎図』―」 | https://www.kyohaku.go.jp/jp/learn/home/dictio/kaiga/fushigi/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "足利義持が発案／周文が描画／禅僧たちが賛を記す"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "足利義持が発案／如拙が描画／禅僧たちが賛を記す"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "足利義満が発案／如拙が描画／禅僧たちが賛を記す"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "足利義満が発案／周文が描画／禅僧たちが賛を記す"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 48,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
+        },
+        {
+          "type": "text",
+          "text": "雪舟の『秋冬山水図』では、中国画に学んだ構築的な山水表現が見られる。その様式の源泉として特に関わる、南宋の宮廷画家を一人選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "『秋冬山水図』は、南宋の宮廷画家・夏珪の様式に準じながら、力強い筆致や堅固な構成に雪舟自身の表現が認められる作品です。倪瓚、黄公望、呉鎮はいずれも元代の山水画で重要な画家ですが、南宋の宮廷画家という条件には当たりません。中国絵画を一様に捉えるのではなく、王朝や画家、学ばれた様式の系統を区別することが、この作品を理解する手がかりになります。"
+        }
+      ],
+      "source_text": "e国宝「秋冬山水図」 | https://emuseum.nich.go.jp/detail?content_base_id=100146&content_part_id=001&content_pict_id=002&langId=ja&webView=null",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "黄公望"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "呉鎮"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "倪瓚"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "夏珪"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 49,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "室町時代の絵画は、禅宗寺院、将軍家の文化、中国絵画の学習などと関わりながら展開した。画面に添えられた文章や、画家の旅、絵が置かれる建築空間にも目を向けると、作品が成立した背景が見えてくる。"
+        },
+        {
+          "type": "text",
+          "text": "狩野元信の大仙院『四季花鳥図』について、参照した中国画と画面構成の関係を説明する文として、最も適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "大仙院の『四季花鳥図』は、明代の山水画や花鳥画を参照しながら、横に連続する襖という画面形式に合わせて構成されています。四季が横へ展開する点も重要です。明の作品を参照したとしても、独立した縦長掛軸を各襖に反復しただけとする説明は適切ではありません。唐の人物画を主な参照先とする組合せも、本作の説明と一致しません。時代・画題と画面形式の両面を確かめましょう。"
+        }
+      ],
+      "source_text": "京都国立博物館「四季花鳥図」 | https://www.kyohaku.go.jp/jp/collection/meihin/suibokuga/item05/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "明の山水・花鳥画を参照し、横に連なる襖へ構図を適応させた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "明の山水・花鳥画を参照し、縦長掛軸の構成を各襖に独立して反復した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "唐の人物画を参照し、縦長掛軸の構成を各襖に独立して反復した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "唐の人物画を参照し、横に連なる襖へ構図を適応させた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 50,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
+        },
+        {
+          "type": "text",
+          "text": "狩野永徳の『檜図屏風』の表現を捉える説明として、適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "永徳の『檜図屏風』は、金地を背景に濃い墨などで描いた巨大な檜によって、画面を越えて迫るような力強さを示します。霧の中の松林を余白と墨で示す説明は長谷川等伯の『松林図屏風』、金地の青い花と緑の葉を文学と結び付ける説明は光琳の『燕子花図屏風』に近いものです。雪と松を写生と装飾で捉える説明も、本問の巨木を強調した表現とは異なります。"
+        }
+      ],
+      "source_text": "東京国立博物館「檜図屏風」 | https://www.tnm.jp/modules/r_collection/index.php?colid=A1069&controller=dtl",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "岩に降り積もる雪を紙の白で表し、松の写生と装飾を調和させる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "金地を背景に巨木を大胆に配し、画面を越えるような存在感を示す。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "紙の余白と淡墨だけで、遠くの松林を霧の中に溶け込ませる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "青と緑の花葉を金地に反復し、文学の場面を暗示する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 51,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
+        },
+        {
+          "type": "text",
+          "text": "墨の濃淡と余白によって、霧の中の松林を六曲一双の屏風に表した『松林図屏風』の作者を一人選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "『松林図屏風』は長谷川等伯の代表作です。墨の濃淡と描かれない部分の働きによって、松林を包む霧や空気、奥行きが感じられる構成になっています。狩野永徳の『檜図屏風』と比較すると、同じ桃山期でも大画面表現が一様ではないことが分かります。尾形光琳の『燕子花図屏風』、円山応挙の『雪松図屏風』は別の作品です。松や屏風という主題・形式だけで作者を混同しないようにしましょう。"
+        }
+      ],
+      "source_text": "東京国立博物館「松林図屏風」 | https://www.tnm.jp/modules/r_exhibition/index.php?controller=item&id=8213&lang=ja",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "長谷川等伯"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "尾形光琳"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "円山応挙"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "狩野永徳"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 52,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
+        },
+        {
+          "type": "text",
+          "text": "俵屋宗達、尾形光琳、酒井抱一による『風神雷神図屏風』をたどる際、琳派の継承を捉える説明として適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "琳派の継承は、同時代の直接的な師弟関係だけでは説明できません。宗達、光琳、抱一の『風神雷神図屏風』は、時代を隔てて先人の作品を学ぶ私淑や模写の関係を考える代表例です。三人が同じ工房で同時に制作したわけではなく、光琳を宗達の先行者とする順序も逆です。同じ主題でも構図や視線などには違いがあり、作品をすべて同一視することはできません。"
+        }
+      ],
+      "source_text": "京都市立芸術大学「俵屋宗達筆と尾形光琳筆『風神雷神図屏風』における光琳の模作の問題点とその考察」 | https://www.kcua.ac.jp/2007ob13/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "三人は同じ工房に同時に住み、すべての作品を共同制作した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "光琳は宗達より早く活動し、その直接の師となった。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "三人の作品は題名が同じなので、構図も筆遣いも完全に同一である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "時代を隔てた作品の学習や模写によっても、表現が受け継がれた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 53,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "城や寺院を飾る大画面絵画が制作される一方、同じ時代にも墨の濃淡や余白を生かす作品が描かれた。絵師の活動は政治権力、工房や流派、先人の作品との関わりによっても支えられていた。"
+        },
+        {
+          "type": "text",
+          "text": "江戸幕府の御用絵師となり、江戸城・二条城・名古屋城などの障壁画制作に携わって、江戸狩野派の基礎を築いた人物を一人選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "狩野探幽は幕府の御用絵師として公儀の絵画制作に携わり、江戸狩野派の規範を形成しました。城の障壁画や古画の研究など、その活動は政治権力や工房の制度と関わります。菱川師宣は浮世絵の展開、池大雅と浦上玉堂は文人画で知られる人物で、本問が示す江戸狩野派の御用絵師ではありません。画風だけでなく、絵師が活動した制度にも注目しましょう。"
+        }
+      ],
+      "source_text": "静岡県立美術館「狩野探幽」 | https://jmapps.ne.jp/spmoa/sakka_det.html?list_count=10&person_id=374",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "浦上玉堂"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "狩野探幽"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "菱川師宣"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "池大雅"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 54,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
+        },
+        {
+          "type": "text",
+          "text": "尾形光琳の『燕子花図屏風』は、花の配置によって古典文学の場面を想起させる。発想の源と考えられる文学作品を一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "『燕子花図屏風』は、『伊勢物語』の東下りにある三河国八橋の場面との関係で理解されます。人物や橋を具体的に描かずとも、燕子花というモチーフが、古典に親しむ鑑賞者の記憶を呼び起こします。『平治物語』は合戦物語で、『おくのほそ道』や『南総里見八犬伝』も、本作に結び付けられる八橋の場面の出典ではありません。植物表現と文学的な教養を関連付ける問題です。"
+        }
+      ],
+      "source_text": "根津美術館「NEZUNET 2024/4/13」 | https://www.nezu-muse.or.jp/jp/nezunet/nezunet_page146.html",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "おくのほそ道"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "平治物語"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "南総里見八犬伝"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "伊勢物語"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 55,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
+        },
+        {
+          "type": "text",
+          "text": "円山応挙の『雪松図屏風』の特徴を説明する文として、最も適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "応挙の『雪松図屏風』は、写生を基礎に伝統的な装飾画風を融合させた代表作と説明されています。対象を観察することと、屏風としての装飾的構成をつくることは両立しています。先例の反復だけを優先したり、肉眼の観察を避けたとしたりする説明は、写生を重んじた制作を捉えていません。西洋の一点透視図法へ統一し装飾性を排除したとする説明も、本作を二者択一で理解しすぎています。"
+        }
+      ],
+      "source_text": "三井記念美術館「雪松図屏風」 | https://jmapps.ne.jp/mitsui_museum/det.html?data_id=1241",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "対象を一定の型に還元し、観察よりも先例の忠実な反復を優先した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "対象の観察を基礎としながら、伝統的な装飾画の構成と結び付けた。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "肉眼での観察を避け、山水画の定型だけで雪中の松を構成した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "観察した形を一点透視図法へ統一し、装飾的な平面構成を排した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 56,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
+        },
+        {
+          "type": "text",
+          "text": "鶏、魚、草花など多彩な生き物を鮮やかに描いた、絹本着色の三十幅からなる『動植綵絵』の作者を一人選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "『動植綵絵』は伊藤若冲が制作した三十幅の絹本着色画です。動植物への関心と多彩な表現が結び付く、江戸時代の花鳥画を代表する連作として知られます。池大雅は文人画、葛飾北斎は浮世絵や絵本など、酒井抱一は江戸琳派で重要ですが、この三十幅の作者ではありません。同じ江戸時代に活動した画家でも、代表作の題名・員数・材料を手がかりに区別できます。"
+        }
+      ],
+      "source_text": "皇居三の丸尚蔵館「動植綵絵」 | https://collection.shozokan.nich.go.jp/object/SZK002949",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "葛飾北斎"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "酒井抱一"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "伊藤若冲"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "池大雅"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 57,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "江戸時代の画家たちは、古典文学、身近な動植物、都市の人物など、さまざまな題材を選んだ。作品の主題や構図には、鑑賞者が共有した教養や、その時代の関心が反映されている。"
+        },
+        {
+          "type": "text",
+          "text": "寛政期の大首絵について、一般に代表的とされる画家と主題の組合せを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "寛政期の大首絵では、喜多川歌麿の美人大首絵と、東洲斎写楽の役者大首絵が代表的です。画面に人物を大きく捉えることで、個性や表情に注意を向けさせます。二人の主題を入れ替えたり、歌麿を名所風景と結び付けたりする組合せは誤りです。北斎や広重にも人物表現はありますが、本問が問う寛政期の二人の代表的な大首絵の対応にはなりません。「その主題を一度も描かなかった」という意味ではありません。"
+        }
+      ],
+      "source_text": "江戸東京博物館「写楽の眼・恋する歌麿―浮世絵ベストコレクション―」 | https://edo-tokyo-museum.or.jp/s-exhibition/sharaku2018/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "東洲斎写楽―美人／喜多川歌麿―名所風景"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "喜多川歌麿―歌舞伎役者／東洲斎写楽―美人"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "喜多川歌麿―美人／東洲斎写楽―歌舞伎役者"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "葛飾北斎―美人／歌川広重―歌舞伎役者"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 58,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
+        },
+        {
+          "type": "text",
+          "text": "高村光雲の『老猿』（1893年）は、伝統的な木彫の技術と近代の写生への関心が結び付く作品である。この作品が出品され、優等賞を受けた万国博覧会の開催都市を一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "『老猿』は1893年に完成し、同年にシカゴで開催された万国博覧会に出品されて優等賞を受けました。海外への出品は、日本の近代美術や工芸と国際的な発表の場との関係を考える手がかりになります。パリ、ウィーン、フィラデルフィアも19世紀の万国博覧会に関わる重要な都市ですが、この作品の1893年の出品先ではありません。作者と作品だけでなく、発表された場所や制度にも注目しましょう。"
+        }
+      ],
+      "source_text": "e国宝「老猿」 | https://emuseum.nich.go.jp/detail?content_base_id=100422&content_part_id=001&content_pict_id=001&langId=",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "フィラデルフィア"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "パリ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ウィーン"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "シカゴ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 59,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
+        },
+        {
+          "type": "text",
+          "text": "浴衣姿の女性が団扇を手に湖畔に座る『湖畔』（1897年）を描き、フランス留学後の日本洋画に大きな影響を与えた画家を一人選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "『湖畔』は黒田清輝の代表作です。フランスから帰国した黒田の明るい光や大気の表現は、新派・紫派とも呼ばれ、日本の洋画界と絵画教育に大きな影響を与えました。岸田劉生、藤田嗣治、佐伯祐三も近代洋画の重要な画家ですが、この1897年の作品の作者ではありません。西洋画を学んだ画家という共通点だけでなく、作品の主題と年代を組み合わせて区別しましょう。"
+        }
+      ],
+      "source_text": "文化庁 文化遺産データベース「湖畔」 | https://online.bunka.go.jp/db/heritages/detail/198786",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "岸田劉生"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "藤田嗣治"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "佐伯祐三"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "黒田清輝"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 60,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
+        },
+        {
+          "type": "text",
+          "text": "愛娘の麗子を繰り返し描き、精密な写実を通して、単なる外見の再現を超える「内なる美」を探究した画家を一人選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "岸田劉生は麗子像を繰り返し制作し、対象の内面に迫るような写実を追求しました。大阪市立美術館も、その探究を「内なる美」と結び付けて説明しています。黒田清輝は明るい外光表現、藤田嗣治は乳白色の下地と繊細な線、梅原龍三郎は豊かな色彩をもつ洋画などで知られます。いずれも近代洋画家ですが、麗子像と結び付くのは岸田です。"
+        }
+      ],
+      "source_text": "大阪市立美術館「生誕120周年記念 岸田劉生展」 | https://www.osaka-art-museum.jp/special_exhibition/8363",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "黒田清輝"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "梅原龍三郎"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "藤田嗣治"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "岸田劉生"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 61,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "近代日本の美術家は、西洋の材料や表現を学びながら、伝統的な技法や自分に身近な主題とも向き合った。木彫の刷新、明るい光の表現、精密な肖像、パリでの活動など、その応答は一様ではなかった。"
+        },
+        {
+          "type": "text",
+          "text": "1920年代のパリで活躍した藤田嗣治の女性像などを特徴付ける、材料・描写の組合せとして適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "藤田嗣治は乳白色の下地と、面相筆による細く鋭い墨線を生かす独自の表現で知られます。日本の線描とも関わる方法を油彩画に結び付け、パリで高い評価を得ました。輪郭を消す厚塗りという説明は、繊細な線が際立つ特徴を取り違えています。濃褐色の下地を中心とする説明も、「乳白色の肌」と呼ばれた画面の特徴に合いません。下地の色と線の性格を併せて確認します。"
+        }
+      ],
+      "source_text": "豊田市美術館「藤田嗣治」 | https://www.museum.toyota.aichi.jp/collection/foujita-tsuguharu",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "濃褐色の下地と、面相筆による細く鋭い線"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "乳白色の下地と、面相筆による細く鋭い線"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "濃褐色の下地と、輪郭を消す厚塗りの色面"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "乳白色の下地と、輪郭を消す厚塗りの色面"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 62,
+      "major_category_code": "japanese",
+      "category_code": "japanese_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "1950年代の具体美術協会に参加した白髪一雄は、足で絵を描く制作や『泥にいどむ』で知られる。これらの試みを捉える説明として最も適切なものを一つ選びなさい。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "白髪一雄の試みでは、身体の運動と絵具や泥などの物質との接触が、表現の成り立ちに深く関わります。身体の痕跡を消して均一な幾何学的色面をつくることを主目的とする説明とは異なります。また、既製品を選ぶだけで成立する制作でもなく、自然を精密に模写して動作の痕跡を隠す方法でもありません。具体の活動を、制作の方法そのものを問い直した例として捉えましょう。"
+        }
+      ],
+      "source_text": "日本美術オーラル・ヒストリー・アーカイヴ「白髪一雄 オーラル・ヒストリー」 | https://oralarthistory.org/archives/interviews/shiraga_kazuo_00/\n兵庫県立美術館研究紀要第8号（白髪一雄《泥にいどむ》の論考） | https://www.artm.pref.hyogo.jp/artcenter/pdf/kiyou08.pdf",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "身体の痕跡を消し、均一な幾何学的色面を追求した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "無加工の既製品の選択だけで、制作行為を成立させた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "身体の動きと物質との接触を、制作の重要な要素とした。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "自然の形を精密に模写し、制作中の動作を画面から隠した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 63,
+      "major_category_code": "contemporary",
+      "category_code": "contemporary_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "シンディ・シャーマンが1981年に制作した《センターフォールド》の説明として、最も適切なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "《センターフォールド》ではシャーマン本人がモデルとなり、雑誌の見開きを思わせる横長の写真を演出した。女性を表す慣習や、それを見る側の期待を考えさせる作品である。したがって偶然の街頭記録、既存の女性画家の写真の複写、映画画面の直接撮影という説明はいずれも合わない。作家が写っているという理由だけで、私生活をそのまま示す自伝的写真と決めつけない点も大切である。"
+        }
+      ],
+      "source_text": "MoMA: Cindy Sherman, The Centerfolds, 1981 | https://www.moma.org/audio/playlist/261/3359",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "作家自身がさまざまな役を演じ、雑誌の女性像を見る視線を問い直した。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "街頭で偶然出会った人を、本人に知らせず連続撮影した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "歴史上の女性画家の現存写真だけを、年代順に複写した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "特定の映画の上映画面を、そのまま接写した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 64,
+      "major_category_code": "contemporary",
+      "category_code": "contemporary_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "既存の写真と断定的な短文を組み合わせ、消費社会や権力、メディアによる主体の形成を問いかけるバーバラ・クルーガーの手法に最も近い説明はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "クルーガーは既存の画像と言葉を組み合わせ、見る人へ直接問いを投げかける。広告に似た明快さが消費や権力を批評する仕組みにもなる。文字は撮影時の情報を記すだけの中立的なキャプションではなく、その意味が作品の働きに関わる。即興的な筆跡や身体運動を中心に読む方法も合わない。また短文を作家の日記と決めつけ、私生活の出来事を復元する根拠もない。画像と文字の相互作用を考えたい。"
+        }
+      ],
+      "source_text": "MoMA: Barbara Kruger | https://www.moma.org/artists/3266",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "短文を画家の日記の抜粋とみなし、私生活上の出来事の順序を復元する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "文字の意味よりも筆跡の即興性を重視し、作者の身体運動を読み取る。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "広告に似た画像と文字の形式を使い、消費や権力が主体に及ぼす作用を問いかける。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "画像に添えた文字を、撮影地や撮影時刻を示す中立的な記録として読む。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 65,
+      "major_category_code": "contemporary",
+      "category_code": "contemporary_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ゴンサレス＝トレスの《無題（ロスの肖像、L.A.）》では、個別包装されたキャンディーが素材に指定されている。この作品の理解として最も適切なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "この作品は個別包装されたキャンディーを用いた非具象的な肖像で、顔貌の再現より広く肖像の成立を考えさせる。キャンディーの量も人物との関係を持ち、補充可能な素材として指定されている。顔の型を取った飴、顔写真を印刷した包装紙、身体の輪郭どおりに固定した配置のいずれも、この作品の仕組みではない。肖像という題名から、顔の形や顔写真が必ず含まれると推測しないようにしたい。"
+        }
+      ],
+      "source_text": "Smithsonian: Untitled (Portrait of Ross in L.A.) | https://www.si.edu/object/untitled-portrait-ross-la%3Anpg_2022.343\nArt Institute of Chicago: American Art, lesson plans | https://www.artic.edu/assets/f85bee6b-d18b-5577-a9e6-f429421b4654",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "キャンディーの包装紙にモデルの写真を印刷し、写真を集積した肖像である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "顔貌を写さず、日常の物とその量によって人物を象徴する肖像である。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "身体の輪郭に沿ってキャンディーを固定し、等身大の影を再現した肖像である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "モデルの顔を型取りした飴を集め、顔貌を反復して表した肖像である。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 66,
+      "major_category_code": "contemporary",
+      "category_code": "contemporary_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "エリアソンの《ウェザー・プロジェクト》（2003年）で、半円形の発光面を巨大な太陽のように見せた仕組みとして適切なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "作品はタービン・ホールに設置され、半円の発光面と天井の鏡の反射によって、円形の太陽のような光を作った。人工の霧も観客の知覚に関わる。円い映像の投影、床下の水面による反射、球体内部の照明という説明は、この仕組みと異なる。鏡は半円を円に見せると同時に、観客の身体とホールの空間も映し込んだ。自然現象のように見える経験を、材料と空間の構成によって生み出す点を押さえたい。"
+        }
+      ],
+      "source_text": "Studio Olafur Eliasson: The weather project, 2003 | https://olafureliasson.net/exhibition/the-weather-project-2003/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "透明な球体の内側に照明を置き、天井の鏡は用いなかった。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "床下の水面が半円を反射し、天井から雨滴が落ちる仕組みだった。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "円形の映像を正面のスクリーンへ投影し、天井は黒く覆われていた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "天井の鏡が半円を反射して円に見せ、人工の霧が空間に広がった。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 67,
+      "major_category_code": "contemporary",
+      "category_code": "contemporary_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "エル・アナツイの《大地と天国の間》（2006年）は、布のようにひだを作る金属の作品である。主な材料と制作方法の組合せとして適切なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "アナツイは再利用した瓶の蓋などの金属片を銅線で連結し、織物を思わせる柔軟な立体作品を作る。折りやひだによって設置の形が変わり、地域の織物文化とも関連付けられる。使用済みCD、新聞紙、ポリ袋は、いずれもこの作品の主な材料ではない。再利用という点が共通しそうな素材でも、作品ごとに実際の材料と接合方法を確認する必要がある。布のように見える外観と、金属製という物質的な性質を区別したい。"
+        }
+      ],
+      "source_text": "Met: El Anatsui, Between Earth and Heaven | https://www.metmuseum.org/art/collection/search/319872",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "瓶の金属製の蓋などを、銅線でつなぐ。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "使用済みのCDを、ナイロン糸でつなぐ。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ポリ袋を切り開き、加熱して布状につなぐ。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "新聞紙の切片を、糊で何層にも貼り重ねる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 68,
+      "major_category_code": "asian",
+      "category_code": "asian_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "中国・洛陽近郊にあり、北魏から唐にかけて仏教石彫が造られ、奉先寺洞の大像群でも知られる石窟はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "龍門石窟は洛陽南方に位置し、北魏後期から唐にかけての仏教石彫を伝える。奉先寺洞の巨大な像群は唐代の代表例である。雲岡石窟は山西省大同、敦煌莫高窟は甘粛省敦煌、麦積山石窟は甘粛省天水にあり、いずれも洛陽という所在地に合わない。中国の石窟という共通点だけで選ばず、所在地と代表的な洞窟名を結び付けたい。仏教美術が広がった経路を地理的に整理する手掛かりにもなる。"
+        }
+      ],
+      "source_text": "UNESCO: Longmen Grottoes | https://whc.unesco.org/en/list/1003\nUNESCO: Yungang Grottoes | https://whc.unesco.org/en/list/1039/\nUNESCO: Mogao Caves | https://whc.unesco.org/en/list/440\nUNESCO: Maijishan Scenic Spots | https://whc.unesco.org/en/tentativelists/1631",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "龍門石窟"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "雲岡石窟"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "麦積山石窟"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "敦煌莫高窟"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 69,
+      "major_category_code": "asian",
+      "category_code": "asian_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "元代の倪瓚（げいさん）の山水画を理解するうえで、文人画の伝統に関わる観点として最も適切なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "倪瓚の山水画には古画を学ぶ態度や書を思わせる筆墨の扱いが見られ、文人の教養と自己表現が重要な手掛かりになる。宮廷の儀礼を記録する官的な仕事として捉えるのは適切でない。墨を中心とする作例を、鮮やかな鉱物顔料の重なりで特徴付けるのも合わない。また清代の宮廷で発展した西洋画法の受容とは時代も背景も異なる。山水という主題が共通しても、画家の立場や表現の目的を区別したい。"
+        }
+      ],
+      "source_text": "Met: Ni Zan, Enjoying the Wilderness in an Autumn Grove | https://www.metmuseum.org/art/collection/search/45635",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "唐代の青緑山水と同じく、鉱物顔料の鮮やかな重なりを表現の中心とする。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "書に通じる筆墨や古画への学習を、作者の教養と表現に結び付ける。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "北宋の宮廷絵画と同じく、皇帝の儀礼を記録する仕事として位置付ける。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "清代の宮廷画と同じく、西洋人画家が伝えた光学的な陰影法の習得を中心とする。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 70,
+      "major_category_code": "asian",
+      "category_code": "asian_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "元代の景徳鎮で発展した青花（染付）磁器の基本的な装飾方法として適切なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "青花は白い磁器の素地へコバルト系顔料で文様を描き、透明釉の下に青い文様を表す技法である。元代の景徳鎮の作例は国際的な交流とも関係する。釉の上へ低温で青を定着させる上絵技法とは、文様がある位置が異なる。銅を含む釉自体の発色という説明も、コバルト顔料による筆描きと合わない。白い化粧土を掻き落として素地を見せる技法も別の工程である。顔料と釉と素地の関係を区別したい。"
+        }
+      ],
+      "source_text": "Met: Plate with fish, Yuan dynasty | https://www.metmuseum.org/art/collection/search/39638",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "コバルトを含む顔料で文様を描き、その上を透明釉で覆って焼く。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "白い化粧土を掛け、その一部を掻き落として黒い素地の文様を表す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "素地へ銅を含む透明釉を掛け、釉全体の青緑色だけで文様を表す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "透明釉を焼いた後に、コバルトの青い上絵を描いて低温で定着させる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 71,
+      "major_category_code": "asian",
+      "category_code": "asian_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "サファヴィー朝の宮廷でも豪華な挿絵写本が作られた『シャーナーメ（王書）』は、主に何を語る文学作品か。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "『シャーナーメ』はフィルダウスィーがまとめたペルシア語の叙事詩で、神話的な起源から古代イランの王や英雄を語る。宮廷で豪華な挿絵写本が作られたが、そのために成立した日々の公的な記録ではない。イスラームの礼拝・戒律の注釈や、スーフィーの師弟の問答を主題とする書物でもない。王朝の支援を受けた写本であっても、内容が宗教書や同時代の行政記録とは限らない点を押さえたい。"
+        }
+      ],
+      "source_text": "Met: The Shahnama of Shah Tahmasp | https://www.metmuseum.org/ja/essays/the-shahnama-of-shah-tahmasp",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "イスラームの礼拝と戒律を解説する注釈書"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "古代イランの王や英雄の物語"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "宮廷の日常生活を、在位年順に記録した公的な年代記"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "スーフィーの修行のための、師弟の問答集"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 72,
+      "major_category_code": "asian",
+      "category_code": "asian_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "17〜18世紀の朝鮮半島で作られた「月壺」を、朝鮮王朝の文化と関連付けた説明として適切なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "月壺は満月を思わせる白い磁器の壺で、朝鮮王朝期の儒教的な質素さや清らかさとも関連付けられる。青磁への象嵌を重視した高麗の器とは材料・装飾・時代が異なる。龍文を青く描く装飾や、仏伝の金彩が月壺の簡潔な外観を特徴付けるわけではない。食物の貯蔵や花を生ける用途も知られる。朝鮮半島の陶磁器を一つの画一的な様式とせず、王朝や思想、器の使われ方と結び付けて理解したい。"
+        }
+      ],
+      "source_text": "British Museum: Moon jar | https://www.britishmuseum.org/collection/object/A_2006-0505-1",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "龍を青く描いた左右対称の形が、王権を表す儀礼用の酒器として重んじられた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "白磁の簡潔な形や色が、儒教的な質素・清らかさの観念とも結び付く。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "仏伝を金彩で描いた表面が、寺院の供養のための器として評価された。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "青磁の釉下へ白土を埋めた文様が、高麗の貴族的文化と結び付く。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 73,
+      "major_category_code": "design",
+      "category_code": "design_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ウィリアム・モリスとアーツ・アンド・クラフツ運動について適切な説明はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "モリスは壁紙や染織、室内装飾などを通じ、暮らしの美と手仕事の質を問い直した。作り手の仕事や制作を理解することが重要であり、分業によって図案から切り離す説明は方向が異なる。歴史的な染織・印刷技法も学んでいるため、その再興に距離を置く説明も合わない。また生活の品を美術から切り離し低く位置付ける立場でもない。完成した形だけでなく、労働や制作工程への関心と併せて捉えたい。"
+        }
+      ],
+      "source_text": "V&A: Introducing William Morris | https://www.vam.ac.uk/articles/introducing-william-morris",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "工場の分業を徹底することで、制作する人から図案の知識を切り離そうとした。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "製品の規格化を第一の課題とし、歴史的な手仕事の技法の再興には距離を置いた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "絵画を応用美術より高いものとし、室内装飾を美術教育の周辺へ置こうとした。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "生活空間の美を重視し、手仕事や制作の質を問い直した。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 74,
+      "major_category_code": "design",
+      "category_code": "design_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "植物の形態や日本の意匠への関心をガラス工芸へ取り入れ、ナンシーを拠点にアール・ヌーヴォーへ貢献した作家はだれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ガレはフランスのナンシーで活動したガラス工芸の重要な作家で、植物学や日本の意匠への関心も作品に関わった。ティファニーはアメリカのガラスや室内装飾、ラリックはフランスの宝飾やガラス、ジェンセンはデンマークの銀器で知られる。近代の工芸家という共通点はあるが、ナンシーを拠点にしたガレという条件に一致しない。材料と作家名だけでなく、制作地や関係した運動を対応させて整理したい。"
+        }
+      ],
+      "source_text": "V&A: Objects of beauty: Art Nouveau glass and jewellery | https://www.vam.ac.uk/articles/objects-of-beauty-art-nouveau-glass-and-jewellery\nMet: Louis Comfort Tiffany | https://www.metmuseum.org/de/essays/louis-comfort-tiffany-1848-1933\nV&A: Art Deco: René Jules Lalique | https://www.vam.ac.uk/articles/art-deco-ren%C3%A9-jules-lalique\nGeorg Jensen: Our Beginnings | https://www.georgjensen.com/en-us/explore/georg-jensen",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ジョージ・ジェンセン"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ルネ・ラリック"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ルイス・カムフォート・ティファニー"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "エミール・ガレ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 75,
+      "major_category_code": "design",
+      "category_code": "design_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "リートフェルトの《赤と青の椅子》について、デ・ステイルの造形との関係を説明したものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "この椅子は木製の直線的な部材や面を組み合わせ、原色などで各部分の関係を明確にする。デ・ステイルの絵画や建築と共通する造形上の関心がある。植物を思わせる曲線の連続や、歴史的な装飾文様の手彫りを中心とする構成ではない。また近代の椅子には鋼管を用いる作例もあるが、本作は塗装された木製で、金属管と布による椅子ではない。同時代の家具の材料や形態を区別して理解したい。"
+        }
+      ],
+      "source_text": "MoMA: Gerrit Rietveld, Red Blue Chair | https://www.moma.org/collection/works/4044?per_page=20&q=de+stijl",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "水平・垂直の部材や面、原色などによって空間的な構成を考える。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "金属管を曲げた連続する骨組みに、布を張って座面と背を作る。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "植物の成長を思わせる曲線で、支持する部材と座面を連続的につなぐ。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "手彫りの植物文様を背板へ置き、歴史的な家具の装飾を再興する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 76,
+      "major_category_code": "design",
+      "category_code": "design_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "柳宗悦らが提唱した「民藝」の美の捉え方として、最も適切なものはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "民藝は民衆の日常に用いられた品へ目を向け、無名の職人の仕事の中に美を捉え直す考え方である。作家個人の独創性を最優先にする説明や、宮廷の特別注文品を中心に据える説明は、その評価の転換を捉えていない。機械生産による均質さだけを手仕事に代わる基準とする立場でもない。柳宗悦は濱田庄司や河井寬次郎らと運動を進めた。実用、反復される仕事、日々の暮らしと美を結び付ける点が重要である。"
+        }
+      ],
+      "source_text": "日本民藝館: 柳宗悦と日本民藝館 | https://mingeikan.or.jp/about/soetsu/",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "機械による均質な製品こそが、手仕事に代わる工芸美の基準になると考える。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "宮廷で珍重された特別注文の器を、民衆の普段使いの器より中心に据える。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "無名の職人が作る日常の道具にも、美を見いだす。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "名を残した作家の独創性を、日常の職人の反復作業より優先して評価する。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 77,
+      "major_category_code": "design",
+      "category_code": "design_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "「漆で文様を描き、その部分が乾かないうちに金・銀などの粉を蒔く」という基本工程に該当する技法はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "蒔絵は漆の粘着性を利用し、金銀などの粉を付着させて文様を表す技法である。螺鈿は真珠層をもつ貝の小片などを用いる装飾で、彫漆は何層も塗り重ねた漆の層を彫る技法である。七宝は金属素地などにガラス質の釉薬を施して焼き付けるもので、設問の金属粉を漆へ蒔く工程とは異なる。同じように光沢のある装飾でも、材料と加工方法の違いを区別する必要がある。"
+        }
+      ],
+      "source_text": "Met: Lacquerware of East Asia | https://www.metmuseum.org/de/essays/lacquerware-of-east-asia\n東京国立博物館: 七宝―金属を飾る彩り | https://www.tnm.jp/modules/r_free_page/index.php?id=1789",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "彫漆"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "蒔絵"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "七宝"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "螺鈿"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 78,
+      "major_category_code": "museum",
+      "category_code": "museum_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "ルーヴルが1793年に公衆へ開かれた美術館となったことを考えるとき、その背景として最も直接関係する出来事はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "ルーヴルはフランス革命期の1793年に美術館として公衆へ開かれた。王室のコレクションを公的な鑑賞の場と関係付けるうえで重要な出来事である。アメリカ独立戦争、イギリスの産業革命、七年戦争の終結はいずれも18世紀を考える重要な出来事だが、フランスの王宮を美術館として公開する直接の政治的背景には当たらない。年代が近い出来事同士でも、開催地や制度の変化との結び付きを区別したい。"
+        }
+      ],
+      "source_text": "Louvre: La peinture italienne en perspective | https://musee.louvre.fr/decouvrir/le-palais/la-peinture-italienne-en-perspective",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "アメリカ独立戦争"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "七年戦争の終結"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "フランス革命"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "イギリスの産業革命"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 79,
+      "major_category_code": "museum",
+      "category_code": "museum_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "1955年、アーノルト・ボーデを中心にカッセルで始まり、ナチ体制下で迫害された前衛美術を戦後の社会へ再び紹介する意味も持った国際展はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "最初のドクメンタは1955年にドイツのカッセルで開催された。国際的な近代美術を広く紹介し、戦後の文化的な再接続を目指す背景がある。サロン・ドートンヌはパリで始まった展覧会、ヴェネツィア・ビエンナーレはイタリアの国際展、アーモリー・ショーは1913年のアメリカにおける展覧会として知られ、開催地と開始年の条件が合わない。展覧会名を戦争や社会状況とも関連付けたい。"
+        }
+      ],
+      "source_text": "documenta: documenta (1955) | https://documenta.de/en/retrospective/documenta",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ドクメンタ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ヴェネツィア・ビエンナーレ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "アーモリー・ショー"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "サロン・ドートンヌ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 80,
+      "major_category_code": "museum",
+      "category_code": "museum_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "1929年に開館したニューヨーク近代美術館（MoMA）の最初の展覧会に出品された画家の組合せはどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "MoMAの開館時の展覧会はセザンヌ、ゴーガン、スーラ、ゴッホを取り上げた。19世紀末の革新を20世紀美術の基盤として紹介する構成だった。モネやルノワールらの印象派の組合せ、キュビスムとフォーヴィスムの作家の組合せ、エコール・ド・パリなどに関連する作家の組合せは、いずれもこの初回展の四人ではない。1929年という年代に存在した作家の中で、どのような近代美術史観を提示した展覧会だったかを確認したい。"
+        }
+      ],
+      "source_text": "MoMA: About our exhibition history | https://www.moma.org/calendar/about/exhibition-history",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ピカソ、ブラック、マティス、ドラン"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "モネ、ルノワール、ドガ、ピサロ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "ルソー、モディリアーニ、シャガール、スーティン"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "セザンヌ、ゴーガン、スーラ、ゴッホ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 81,
+      "major_category_code": "application",
+      "category_code": "application_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "仮想講座「近代の美術教育と発表の場」の準備のため、担当者は表の四つの出来事を年代順に整理した。ここで、官による美術教育の導入・改編と、画家たちが公式展覧会から独立して発表する動きを区別したい。表の内容と美術史上の知識の双方に整合するまとめはどれか。なお、表は四つの出来事を学習用に抜き出したもので、各国の制度の変化すべてを示すものではない。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "年",
+            "出来事"
+          ],
+          "rows": [
+            [
+              "1874",
+              "パリで第1回印象派展"
+            ],
+            [
+              "1876",
+              "工部美術学校の設置"
+            ],
+            [
+              "1889",
+              "東京美術学校の開校"
+            ],
+            [
+              "1896",
+              "東京美術学校に西洋画科を新設"
+            ]
+          ]
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "第1回印象派展は画家たちが公式サロンとは別に企画し、工部美術学校は西洋美術の教育を目的に設置された。東京美術学校は伝統絵画などで開校し、7年後に西洋画科を設けた。独立展を官の事業やサロンの審査に従った展覧会とする説明は誤りである。二つの学校の開校時の方針を同一視する説明も合わない。また1896年の新設を1889年の開校の原因とするのは前後が逆である。制度の年と性格を併せて読む。"
+        }
+      ],
+      "source_text": "東京藝術大学: 歩み | https://gacma.geidai.ac.jp/timeline/\nMusée d’Orsay: Paris 1874, Inventer l’impressionnisme | https://www.musee-orsay.fr/fr/programme/agenda/expositions/paris-1874-inventer-limpressionnisme",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "東京美術学校の西洋画科は1896年に新設され、これを受けて1889年に同校が開校した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "東京美術学校は開校7年後に西洋画科を設けたので、開校時も西洋画教育を中心としていた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "パリの独立展の後、日本では西洋美術を教える官立学校の設置と、別の学校での西洋画科新設があった。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "パリの独立展は公式のサロンの審査に従って開かれ、その2年後に工部美術学校が設置された。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        },
+        {
+          "choice_label": "オ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "工部美術学校と東京美術学校は、ともに開校時から西洋画と日本画を同じ制度で教えた。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 5
+        },
+        {
+          "choice_label": "カ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "第1回印象派展と工部美術学校の設置は1870年代であり、いずれも官が主催して西洋美術を普及した。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 6
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 82,
+      "major_category_code": "application",
+      "category_code": "application_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "架空の版画展で、三作品の制作記録A〜Cと図録の技法名を照合している。担当者は木版、エッチング、リトグラフを一つずつ割り当てたが、記入前に工程との一致を確かめたい。表の作業は各作品の主要な製版・印刷工程を要約したもので、補助的な作業は省略している。A・B・Cに対応する技法名の組合せとして、すべて適切なものはどれか。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "記録",
+            "主要な工程"
+          ],
+          "rows": [
+            [
+              "A",
+              "木の板で不要な部分を彫り、彫り残した面にインクを付けて刷る。"
+            ],
+            [
+              "B",
+              "金属版の防食層に線を引き、露出部を酸で腐食し、できた溝にインクを詰めて刷る。"
+            ],
+            [
+              "C",
+              "平らな石版へ油性の材料で描き、水と油の性質を利用して描画部分にインクを付けて刷る。"
+            ]
+          ]
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "Aは彫り残した凸部から刷る木版、Bは酸で金属版にくぼみを作る凹版のエッチング、Cは平らな版面を用いるリトグラフである。木版の彫る工程とエッチングの腐食、リトグラフの平版という違いを対応させると、一つの組合せに決まる。それ以外の組合せは最低二つの技法を入れ替えており、凸部、凹部、平らな面というインクの位置と合わない。単に版に石や金属を使うかだけで決めず、刷りの仕組みを読む。"
+        }
+      ],
+      "source_text": "Met: Materials and Techniques | https://www.metmuseum.org/perspectives/series/materials-and-techniques",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A＝エッチング、B＝リトグラフ、C＝木版"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A＝エッチング、B＝木版、C＝リトグラフ"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A＝木版、B＝リトグラフ、C＝エッチング"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A＝リトグラフ、B＝エッチング、C＝木版"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        },
+        {
+          "choice_label": "オ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A＝木版、B＝エッチング、C＝リトグラフ"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 5
+        },
+        {
+          "choice_label": "カ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "A＝リトグラフ、B＝木版、C＝エッチング"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 6
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 83,
+      "major_category_code": "application",
+      "category_code": "application_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "仮想研究会で、西洋の二つの作品について表の観察記録が示された。別資料には「ドガは日本風の衣装や小道具を画中に並べるよりも、非対称の構図、縦長の画面、俯瞰的な視点などを吸収した」とある。参加者は、目に見える日本の品物を描くことと、表現の仕組みを取り入れることを分けて考えようとしている。観察記録と別資料から導く解釈として、最も妥当なものはどれか。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "作品",
+            "学習用に作成した観察記録"
+          ],
+          "rows": [
+            [
+              "A",
+              "西洋の室内で、着物を着た人物と日本の扇が大きく描かれる。"
+            ],
+            [
+              "B",
+              "日本の品物は見当たらない。人物を画面の端で切り、斜め上から室内を捉える。"
+            ]
+          ]
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "Aの記録は衣装や小道具という主題上の受容、Bは構図上の受容を考える材料となる。Bにも日本の品物を描いたとする説明は記録と合わず、影響を考えるために着物の追加が必要なわけでもない。一方、二つの記録だけではAからBへの直接継承、受容の前後、輸出時の用途別分類は分からない。類似する形を挙げることと、因果関係や年代を確定することは区別する。観察と解釈の根拠を慎重に対応させたい。"
+        }
+      ],
+      "source_text": "Met: Japonisme | https://www.metmuseum.org/ja/essays/japonisme",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "AとBに異なる受容が見られるのは、日本の作品が衣装用と構図用に分かれて輸出されたためと結論できる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "Bには構図上の関連が考えられるが、日本の品物がないため、影響を論じるには着物の描写を追加する必要がある。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "Aでは日本の扇の描写、Bでは非対称の構図が見られ、どちらも日本の品物を主題に選んだ例といえる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "Aの着物と扇は日本の小道具の受容を示し、それによってBの構図もAから直接継承されたと分かる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        },
+        {
+          "choice_label": "オ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "Bの人物を切る構図は日本美術との関連を示し、Aのような主題上の受容より制作時期が早いといえる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 5
+        },
+        {
+          "choice_label": "カ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "Aには主題・小道具、Bには構図という、異なる受容のあり方を検討できる。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 6
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 84,
+      "major_category_code": "application",
+      "category_code": "application_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "デュシャンの《自転車の車輪》について、学習用の作品カードに「1913年の原作は現存しない」「MoMA所蔵品は1951年に作られた第3版」と記した。別の作品紹介には、同作は椅子と車輪という既製品を組み合わせた表現であり、「レディメイド」という語が用いられるより早く発想されたとある。仮想展示の解説文を校正する際、これらの資料に整合する文はどれか。"
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "最初の制作の年と、目の前の個体が作られた年は区別できる。MoMAの個体は1951年の第3版として記録され、原作は1913年である。1951年を収蔵年や原作の修復年に読み替える根拠はない。同じ構成でも、失われた原作と後の版は同じ個体ではなく、材料を継承したとも分からない。後の版が現存しても最初の着想年は制作史に重要である。形の同一性だけで個体の来歴を一つにしないようにしたい。"
+        }
+      ],
+      "source_text": "MoMA: Marcel Duchamp, Bicycle Wheel | https://www.moma.org/collection/works/81631",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "発想の起点を1913年に置きながら、展示する個体の制作年を1951年と記すことができる。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1951年の第3版が現存するため、1913年という年は制作の経緯から外して記載できる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1951年はMoMAが収蔵した年であり、展示する個体の制作年は1913年と記すのがよい。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "第3版も椅子と車輪を組み合わせるため、その材料は1913年の原作から受け継がれたと分かる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        },
+        {
+          "choice_label": "オ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1913年は発想の年、1951年は原作を修復した年であり、両者は同じ個体の履歴を示す。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 5
+        },
+        {
+          "choice_label": "カ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "1913年の原作と1951年の第3版は構成が同じなので、作品カードは同じ個体を二通りに記録している。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 6
+        }
+      ]
+    },
+    {
+      "exam_number": 1,
+      "question_number": 85,
+      "major_category_code": "application",
+      "category_code": "application_study",
+      "publication_status": "published",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "仮想展示「水辺を繰り返し描く」のため、表の三作品を調べた。担当者は「連作」という共通語だけでまとめず、各作品が属するシリーズの範囲、描かれた場所、画面の構成の変化を分けて考えたい。表に加え、モネはジヴェルニーに作った水庭を後年まで繰り返し描いたという資料がある。これらから導く比較として最も適切なものはどれか。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "作品",
+            "年・技法",
+            "内容を要約した記録"
+          ],
+          "rows": [
+            [
+              "A 広重《大はしあたけの夕立》",
+              "1857年・多色木版",
+              "江戸の各地を扱う《名所江戸百景》の一図。川の橋を渡る人と斜線の雨。"
+            ],
+            [
+              "B モネ《睡蓮の池》",
+              "1899年・油彩",
+              "ジヴェルニーの水庭。画面の上部を日本風の橋が横切る。"
+            ],
+            [
+              "C モネ《睡蓮、夕日》",
+              "1907年頃・油彩",
+              "同じ水庭。橋や地平線を描かず、水面の睡蓮と光の反映を捉える。"
+            ]
+          ]
+        }
+      ],
+      "explanation_blocks": [
+        {
+          "type": "text",
+          "text": "BとCは同じ水庭を繰り返す中で、橋を含む風景から水面と反映へ関心が移る。Aは江戸の各地をまとめるシリーズで、同じ対象の反復とは整理の軸が異なる。Cに橋がないことは撤去の証明にならず、AとBが同じ橋とも読めない。雨と夕日は同一の気象条件ではなく、CをB以前の習作とする説明は年と合わない。また同じ場所を描いても視点や構図は変わる。共通語から個々の制作条件を同一視しないようにしたい。"
+        }
+      ],
+      "source_text": "Met: Hiroshige, Sudden Shower over Shin-Ōhashi Bridge and Atake | https://www.metmuseum.org/art/collection/search/55433\nNational Gallery: Monet, The Water-Lily Pond | https://www.nationalgallery.org.uk/paintings/claude-monet-the-water-lily-pond\nNational Gallery: Monet, Water-Lilies, Setting Sun | https://www.nationalgallery.org.uk/paintings/claude-monet-water-lilies-setting-sun",
+      "choices": [
+        {
+          "choice_label": "ア",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "Cでは橋や地平線が描かれないので、Bより前に描かれた風景の習作として位置付けられる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 1
+        },
+        {
+          "choice_label": "イ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "BとCは同じ水庭を反復する中で構図が変化し、Aのように各地を集めるシリーズとは対象のまとめ方が異なる。"
+            }
+          ],
+          "is_correct": true,
+          "display_order": 2
+        },
+        {
+          "choice_label": "ウ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "AとBはともに橋を主題とするので、モネが広重と同じ江戸の橋を訪れて描いたと判断できる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 3
+        },
+        {
+          "choice_label": "エ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "Aは複数の場所、BとCは同じ場所を描くため、後者では視点や構図が固定されていると判断できる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 4
+        },
+        {
+          "choice_label": "オ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "AとCは雨や夕日を描くため同じ気象条件の連作に属し、Bだけが場所を基準にまとめられる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 5
+        },
+        {
+          "choice_label": "カ",
+          "content_blocks": [
+            {
+              "type": "text",
+              "text": "BとCは同じ水庭を描くので、Cで橋が見えないことは、その橋が当時撤去された証拠になる。"
+            }
+          ],
+          "is_correct": false,
+          "display_order": 6
+        }
+      ]
+    }
+  ]
+}

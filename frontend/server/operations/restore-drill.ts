@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import pg from 'pg'
 import { hashPassword, verifyPassword } from 'better-auth/crypto'
+import { choiceLabelsForQuestion } from '../../shared/schemas/exam.ts'
 import { query, record, createDatabase, type Database, type RawDatabase } from '../core/db.ts'
 import { configuration, environment } from '../core/config.ts'
 import { userPayload, type User } from '../core/auth.ts'
@@ -95,7 +96,7 @@ async function createSyntheticRecords(db: Database, password: string) {
     major_category_code: category.major_category_value, category_code: category.value, publication_status: 'published',
     content_blocks: [{ type: 'text', text: 'Synthetic restore question' }], explanation_blocks: [{ type: 'text', text: 'Synthetic explanation' }],
     source_text: 'Synthetic source | https://example.invalid/source',
-    choices: configuration.exam.choice_labels.map((choice_label, index) => ({ choice_label, display_order: index + 1,
+    choices: choiceLabelsForQuestion(configuration, 1, 1).map((choice_label, index) => ({ choice_label, display_order: index + 1,
       is_correct: index === 0, content_blocks: [{ type: 'text', text: `Synthetic choice ${index + 1}` }] })) }, { db, requireCompleteExam: false })
   const correct = question.choices.find(choice => choice.is_correct)!
   await db.answerHistory.create({ data: { user_id: BigInt(user.id), question_id: BigInt(question.id), selected_choice_id: BigInt(correct.id), is_correct: true, created_at: now, updated_at: now } })
@@ -139,7 +140,7 @@ async function applicationChecks(db: Database, password: string, cookies: string
   const checks = {
     password_authentication: true, session_authentication: true, paid_content_access: me.paid_content_access === true,
     public_answer_secrecy: !('explanation_blocks' in question) && !('source_text' in question) &&
-      Array.isArray(question.choices) && question.choices.length === configuration.exam.choice_labels.length && question.choices.every(choice => !('is_correct' in choice)),
+      Array.isArray(question.choices) && question.choices.length === choiceLabelsForQuestion(configuration, Number(question.exam_number), Number(question.question_number)).length && question.choices.every(choice => !('is_correct' in choice)),
     history_relationship: history.length === 1 && history[0]!.question.id === question.id,
     favorite_relationship: favorites.length === 1 && favorites[0]!.question.id === question.id,
     admin_read: managed.length === 1 && managed[0]!.id === question.id,

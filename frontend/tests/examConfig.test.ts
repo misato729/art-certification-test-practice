@@ -14,7 +14,7 @@ test('a different exam configuration drives catalog dimensions, category default
   const config = parseExamConfig(input)
   const catalog = createExamCatalog(config)
   assert.equal(catalog.length, 3)
-  assert.deepEqual(catalog[2], { exam_number: 3, question_numbers: [1, 2, 3, 4, 5, 6, 7] })
+  assert.deepEqual(catalog[2], { exam_number: 3, title: '模擬試験 3', question_numbers: [1, 2, 3, 4, 5, 6, 7] })
   const question = createEmptyQuestion(config)
   assert.equal(question.major_category_code, 'other')
   assert.equal(question.category_code, 'topic')

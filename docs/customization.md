@@ -38,8 +38,9 @@
 ## 問題数・選択肢・分野を変える
 
 - `exam.set_count`：用意する試験セット数。
-- `exam.questions_per_exam`：各セットの問題数。公開するセットは問1からこの数までをそろえます。
-- `exam.choice_labels`：選択肢の表示順とラベル。例：`["A", "B", "C"]`。各問題の選択肢もこの順序・件数にそろえます。
+- `exam.questions_per_exam`：セット定義を省略する場合の共通問題数。公開するセットは問1からそのセットの問題数までをそろえます。
+- `exam.choice_labels`：標準の選択肢の表示順とラベル。例：`["A", "B", "C"]`。区分で上書きしない問題はこの順序・件数にそろえます。
+- `exam.sets`（任意）：`exam_number`・`title`・`question_count`で全セットを番号順に定義すると、セットごとに問題数を変えられます。さらに`sections`へ`title`・`first`・`last`・`choice_labels`を指定すると問番号区分ごとに選択肢を変えられます。区分は問1から最終問までを重複・欠落なく連続して網羅します。設定を省略する既存形式も使用できます。既存問題はラベル構成の異なる区分へ移動できません。
 - `categories.major`：大分類の`value`と`label`。
 - `categories.minor`：小分類の`value`・`label`・`major_category_value`。最後の値は登録済み大分類の`value`を指します。
 

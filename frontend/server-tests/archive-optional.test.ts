@@ -12,7 +12,7 @@ process.env.APP_ENV = 'test'
 if (process.env.TEST_DATABASE_URL) process.env.DATABASE_URL = process.env.TEST_DATABASE_URL
 const integration = { skip: !Boolean(process.env.DATABASE_URL || process.env.PGHOST) }
 const originalConfiguration = structuredClone(configuration)
-const testConfiguration = { ...originalConfiguration, exam: { ...originalConfiguration.exam, set_count: 1, questions_per_exam: 3 }, payments: { ...originalConfiguration.payments, enabled: false, free_exam_count: 1 } }
+const testConfiguration = { ...originalConfiguration, exam: { set_count: 1, questions_per_exam: 3, choice_labels: [...originalConfiguration.exam.choice_labels] }, payments: { ...originalConfiguration.payments, enabled: false, free_exam_count: 1 } }
 setConfigurationForTesting(testConfiguration)
 after(async () => { setConfigurationForTesting(originalConfiguration); await closeDatabase() })
 

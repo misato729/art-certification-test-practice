@@ -2,7 +2,7 @@ import { randomBytes } from 'node:crypto'
 import { test, expect, type Page } from '@playwright/test'
 import { loadE2EFixture } from '../scripts/e2e-fixture.mjs'
 
-const { config, question } = loadE2EFixture()
+const { question } = loadE2EFixture()
 const practicePath = `/practice/${question.exam_number}/${question.question_number}`
 const correctIndex = question.choices.findIndex((choice: { is_correct: boolean }) => choice.is_correct)
 
@@ -40,7 +40,7 @@ test('anonymous practice hides answers until submitting and fits the screen', as
   const publicQuestion = await showQuestion(page)
   for (const key of ['explanation_blocks', 'source_text', 'correct_choice']) expect(Object.hasOwn(publicQuestion, key)).toBe(false)
   for (const choice of publicQuestion.choices) expect(Object.hasOwn(choice, 'is_correct')).toBe(false)
-  await expect(page.getByRole('radio')).toHaveCount(config.exam.choice_labels.length)
+  await expect(page.getByRole('radio')).toHaveCount(question.choices.length)
   await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toHaveCount(0)
   await expect(page.getByRole('button', { name: '回答する', exact: true })).toBeDisabled()
   await assertFitsViewport(page)

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "revision": 13,
+  "state_hash": "e75f225bf48ee2ffb0c523f6c1976f27b7b08634efba4e3653e2e11da3b24087",
+  "recorded_at": "2026-10-29T19:15:20.825Z",
+  "timezone": "UTC",
+  "context": "product",
+  "task": "art_mock_exam_01",
+  "summary": "美術史80問と活用5問の模試・問題冊子23p・解答解説25pが完成。自動検査と独立レビューを確認して完了",
+  "next_action": "内容確認と追加依頼を待つ。サイト組込・コミット・push・公開は未実施",
+  "missing_local_files": [],
+  "git": {
+    "available": true,
+    "head": "586120cc50a49894d12e62ea8d0eae61e07cc801",
+    "changes": [
+      {
+        "status": " M",
+        "path": "content/README.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/verification.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/workflow/contexts/product.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/README.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/editorial.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/japanese.sources.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/other.sources.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/questions.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/western.sources.md"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-01-answers.pdf"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-01-questions.pdf"
+      },
+      {
+        "status": "??",
+        "path": "scripts/check-mock-exam.mjs"
+      }
+    ]
+  },
+  "file_hashes": {
+    "AGENTS.md": "4824b8c34a5ce59d3076123deb93f2343040d81ad34238759505160ff6ec66f9",
+    "README.md": "82aa44bf1b937b2e9b6639d0f9b04c6c1c5c563eb8185000d95a5b4cb70676bf",
+    "docs/testing.md": "dac1c5275ac26905de06539f753e37066241e3ef9dddb3cf55c2088eeab4c8fc",
+    "docs/workflow/README.md": "ce35c134e34be8261e2478091460df30cd2a2546fba658ba38f25e8411a9f8f8",
+    "docs/workflow/policy.json": "0cda4e27fe6f57e169cc366fe72041a5276557e53ed8286fc82a6adcd3d524f1",
+    "docs/workflow/task.example.json": "4bf161efce99b7d0a26798e3445d1f142505e512eedd591ea11cfb194d67da9f",
+    "docs/workflow/contexts/product.md": "bbc86d0431974933e489300ecf4aa28872a61fb515a08e6e3125a12ac46b346a",
+    "docs/workflow/contexts/development.md": "377ca7a8bd03a0bf19db5d00c92eef33f094fb306aafe97297f55e0a3674d13d",
+    "docs/workflow/contexts/operations.md": "d02de6eb127496e226953dc031aad39fb129c2a09e64bc3dcb4b91b0ab9c1efb",
+    "scripts/context.mjs": "3828c41d1cc5a6977b8444035e094e61e1c9895fcaa9451ecb1919e799ecaffc",
+    "scripts/context.test.mjs": "125f184ecd2d34b8a4dc93a8d1edd2b6c527c0de8a46f39c8c92de265ebccc66",
+    "scripts/workflow-policy.mjs": "60535f2c9bf42203c059ca39a0b254c168b7cfb2468904a3842725fe3797141e",
+    "scripts/workflow-policy.test.mjs": "394287e7d1e84756a3ac8833918f964ee66f0ef2c34934d121d055fb37af4782",
+    "scripts/workspace-policy.mjs": "cd575bdc0a83e37ed28f4004c311c2415d895ce9d63b8fe8552ad674269cd219",
+    "scripts/workspace-policy.test.mjs": "22c2dce0ba9006d3266c2628a61e19acae48eb851c34f5a2fdd1d600cfb7944f",
+    "scripts/check-private-sources.mjs": "1d28447b51b39591d42151f236b837b33d695662168ee5c71500205aa0de96af",
+    "scripts/check-private-sources.test.mjs": "db6afd47e6f6e6de3405437960721f037068da4181eb7a81d7ba11477c7d69fb",
+    ".gitignore": "4db83ed8ce0099a6421c6377340e3e69b7c074ddabf543d0bf7c8f0c806ed83a",
+    ".dockerignore": "dda1228d0ba86e337d9c99648c4010e6b7e3dd87e60a6c04418b77786df959b0",
+    ".githooks/pre-push": "3529b300f7a655102ad899ab31fa8b2c404ec37479d1195aa9bcd3efa97bf90c"
+  },
+  "verification_note": "ハッシュ・Git・記録済み完了条件の確認であり、テストや出典照合の自動再実行ではない。依頼・権限は最新のユーザー指示とAGENTS.mdに従う。"
+}

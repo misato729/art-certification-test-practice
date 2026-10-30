@@ -4,6 +4,10 @@ const nonblank = z.string().regex(/\S/, 'must contain non-whitespace text')
 const categoryCode = z.string().regex(/^[a-z][a-z0-9_]{0,49}$/)
 const category = z.object({ value: categoryCode, label: nonblank }).passthrough()
 const count = z.number().int().min(1).max(10000)
+const choiceLabels = z.array(nonblank.max(10)).min(2).max(10)
+const examSection = z.object({ title: nonblank, first: count, last: count, choice_labels: choiceLabels }).strict()
+const examSet = z.object({ exam_number: count, title: nonblank, question_count: count,
+  sections: z.array(examSection).min(1).optional(), }).strict()
 
 /** The source of truth for runtime, CLI, TypeScript and generated editor hints. */
 export const examConfigurationSchema = z.object({
@@ -23,7 +27,8 @@ export const examConfigurationSchema = z.object({
   exam: z.object({
     set_count: count,
     questions_per_exam: count,
-    choice_labels: z.array(nonblank.max(10)).min(2).max(10),
+    choice_labels: choiceLabels,
+    sets: z.array(examSet).min(1).optional(),
   }).passthrough(),
   categories: z.object({
     major: z.array(category).min(1),
@@ -40,6 +45,26 @@ export const examConfigurationSchema = z.object({
     if (new Set(values).size !== values.length) ctx.addIssue({ code: 'custom', path, message: 'values must be unique' })
   }
   unique(config.exam.choice_labels, ['exam', 'choice_labels'])
+  if (config.exam.sets) {
+    const sets = config.exam.sets
+    unique(sets.map(item => String(item.exam_number)), ['exam', 'sets'])
+    if (sets.length !== config.exam.set_count || sets.some((item, index) => item.exam_number !== index + 1)) {
+      ctx.addIssue({ code: 'custom', path: ['exam', 'sets'], message: 'must define every set in exam_number order' })
+    }
+    for (const [index, set] of sets.entries()) {
+      if (!set.sections) continue
+      let next = 1
+      for (const [sectionIndex, section] of set.sections.entries()) {
+        const path = ['exam', 'sets', index, 'sections', sectionIndex]
+        unique(section.choice_labels, [...path, 'choice_labels'])
+        if (section.first !== next || section.last < section.first || section.last > set.question_count) {
+          ctx.addIssue({ code: 'custom', path, message: 'sections must cover questions consecutively without gaps or overlaps' })
+        }
+        next = section.last + 1
+      }
+      if (next !== set.question_count + 1) ctx.addIssue({ code: 'custom', path: ['exam', 'sets', index, 'sections'], message: 'must cover every question in the set' })
+    }
+  }
   unique(config.categories.major.map(item => item.value), ['categories', 'major'])
   unique(config.categories.minor.map(item => item.value), ['categories', 'minor'])
   for (const [index, item] of config.categories.minor.entries()) {
@@ -53,6 +78,20 @@ export const examConfigurationSchema = z.object({
 })
 
 export type ExamConfiguration = z.infer<typeof examConfigurationSchema>
+export type ExamSetDefinition = z.infer<typeof examSet>
+
+/** All consumers resolve variable set lengths and choices through these helpers. */
+export function getExamSet(config: ExamConfiguration, examNumber: number): ExamSetDefinition | undefined {
+  if (!Number.isInteger(examNumber) || examNumber < 1 || examNumber > config.exam.set_count) return undefined
+  return config.exam.sets?.find(set => set.exam_number === examNumber) ?? {
+    exam_number: examNumber, title: `模擬試験 ${examNumber}`, question_count: config.exam.questions_per_exam,
+  }
+}
+export const questionCountForExam = (config: ExamConfiguration, examNumber: number): number => getExamSet(config, examNumber)?.question_count ?? 0
+export function choiceLabelsForQuestion(config: ExamConfiguration, examNumber: number, questionNumber: number): string[] {
+  const section = getExamSet(config, examNumber)?.sections?.find(section => questionNumber >= section.first && questionNumber <= section.last)
+  return section?.choice_labels ?? config.exam.choice_labels
+}
 
 export function parseExamConfig(input: unknown): ExamConfiguration {
   const result = examConfigurationSchema.safeParse(input)

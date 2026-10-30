@@ -181,6 +181,7 @@ test('HTTP administrator checks read current roles while preserving the library 
   assert.equal((await request('/admin/questions', { cookie: session.cookie })).status, 200)
   const expanded = structuredClone(original)
   expanded.exam.set_count = 3
+  delete expanded.exam.sets
   setConfigurationForTesting(expanded)
   try {
   const content = JSON.parse(await readFile(new URL('../../content/questions.json', import.meta.url), 'utf8'))
@@ -204,11 +205,11 @@ test('paid gates and expired or tampered database sessions preserve API status b
   const session = await account()
   const paid = structuredClone(original)
   paid.payments.enabled = true
-  paid.payments.free_exam_count = 1
+  paid.payments.free_exam_count = 0
   setConfigurationForTesting(paid)
   try {
-    assert.equal((await request('/questions/next?exam_number=2&after_question_number=0')).status, 401)
-    assert.equal((await request('/questions/next?exam_number=2&after_question_number=0', { cookie: session.cookie })).status, 403)
+    assert.equal((await request('/questions/next?exam_number=1&after_question_number=0')).status, 401)
+    assert.equal((await request('/questions/next?exam_number=1&after_question_number=0', { cookie: session.cookie })).status, 403)
     assert.equal((await request('/favorites', { cookie: session.cookie })).status, 403)
     assert.equal((await request('/payments/config')).body.data.enabled, false)
     assert.equal((await request('/payments/checkout_sessions', { method: 'POST', cookie: session.cookie })).body.error.code, 'payment_unavailable')

@@ -16,6 +16,10 @@ node --experimental-strip-types scripts/check-template.mjs
 
 設定値や問題の内容を差し替えるだけならJSON Schemaの再生成は不要です。Zodの検証ルール自体を変更した場合は生成物も更新します。
 
+セットごとに件数が異なる場合は、`config/exam.json`の`exam.sets`で全セットを番号順に定義します。各セットの`question_count`を指定し、選択肢が途中で変わる場合は`sections`に`title`・`first`・`last`・`choice_labels`を指定します。区分は問1から最終問までを連続して網羅する必要があります。`sets`を省略した従来形式は共通の`questions_per_exam`と`choice_labels`を使用します。アプリ・管理フォーム・API・取込・公開セット検査は同じ共有ヘルパーで解決します。
+
+このサービスは試験番号1の「模擬試験1」1セット・全85問です。問1〜80は4択、81〜85は6択です。`frontend/e2e/mock-exam.spec.ts`は全85問の表示・採点、回答前の正答非公開、4択から6択への境界、条件出題、管理フォームをPCとスマートフォンで確認します。サイトは1問ずつ採点する演習形式で、60分の一括受験・一括採点セッションは対象に含みません。
+
 ```bash
 npm --prefix frontend run schema:generate
 npm --prefix frontend run schema:check

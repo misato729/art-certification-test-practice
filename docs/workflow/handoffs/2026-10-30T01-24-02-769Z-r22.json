@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "revision": 22,
+  "state_hash": "79f378c20dfc03da4cc7548a4e1a8dcfbec3f09a6655fae3f73face5a94d34af",
+  "recorded_at": "2026-10-30T01:24:02.769Z",
+  "timezone": "UTC",
+  "context": "development",
+  "task": "art_mock_only_85",
+  "summary": "模擬試験1・1セット85問350選択肢への統一、関連20+26検査・PC/mobile18件・PDF48p確認と独立レビューが合格",
+  "next_action": "gate確認後、コミット・pushの送信検査へ進む",
+  "missing_local_files": [],
+  "git": {
+    "available": true,
+    "head": "586120cc50a49894d12e62ea8d0eae61e07cc801",
+    "changes": [
+      {
+        "status": " M",
+        "path": "README.md"
+      },
+      {
+        "status": " M",
+        "path": "config/exam.json"
+      },
+      {
+        "status": " M",
+        "path": "config/exam.schema.json"
+      },
+      {
+        "status": " M",
+        "path": "content/README.md"
+      },
+      {
+        "status": " M",
+        "path": "content/questions.json"
+      },
+      {
+        "status": " M",
+        "path": "docs/customization.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/testing.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/verification.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/workflow/contexts/development.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/workflow/contexts/product.md"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/ExamSidebar.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/admin/AdminQuestionForm.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/exam-overview.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/favorites.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/history.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/index.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/practice/[examNumber]/[questionNumber].vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/types/adminQuestion.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/utils/examCatalog.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/utils/practiceSequence.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/e2e/core-journeys.spec.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/api.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/archive-optional.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/learning.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/operations.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/timezone.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/operations/restore-drill.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/learning-writer.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/shared/schemas/content.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/shared/schemas/exam.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/tests/examConfig.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "scripts/check-template.mjs"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/README.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/editorial.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/japanese.sources.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/other.sources.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/questions.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-01/western.sources.md"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/utils/adminQuestionChoices.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/e2e/mock-exam.spec.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/tests/mixedExamNavigation.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/tests/mixedExamValidation.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-01-answers.pdf"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-01-questions.pdf"
+      },
+      {
+        "status": "??",
+        "path": "scripts/check-mock-exam.mjs"
+      }
+    ]
+  },
+  "file_hashes": {
+    "AGENTS.md": "4824b8c34a5ce59d3076123deb93f2343040d81ad34238759505160ff6ec66f9",
+    "README.md": "54ac4da0a0bab029b23e07bd1dc6877230f98c665fb8e3135a1e51acde79e8b0",
+    "docs/testing.md": "ea578cf17e0444e1aa02101e54ed6054d06d426bff45e14d7177cc3b3b3b024f",
+    "docs/workflow/README.md": "ce35c134e34be8261e2478091460df30cd2a2546fba658ba38f25e8411a9f8f8",
+    "docs/workflow/policy.json": "0cda4e27fe6f57e169cc366fe72041a5276557e53ed8286fc82a6adcd3d524f1",
+    "docs/workflow/task.example.json": "4bf161efce99b7d0a26798e3445d1f142505e512eedd591ea11cfb194d67da9f",
+    "docs/workflow/contexts/product.md": "7f77eaf17a9b985a31b40e3ec00c6dc77ca4ae05e8e83084b4af47721b1dc892",
+    "docs/workflow/contexts/development.md": "8873b4d81e670a6dcb06513819cd4513c334acc09623b45335c5fdd40f2b0e3f",
+    "docs/workflow/contexts/operations.md": "d02de6eb127496e226953dc031aad39fb129c2a09e64bc3dcb4b91b0ab9c1efb",
+    "scripts/context.mjs": "3828c41d1cc5a6977b8444035e094e61e1c9895fcaa9451ecb1919e799ecaffc",
+    "scripts/context.test.mjs": "125f184ecd2d34b8a4dc93a8d1edd2b6c527c0de8a46f39c8c92de265ebccc66",
+    "scripts/workflow-policy.mjs": "60535f2c9bf42203c059ca39a0b254c168b7cfb2468904a3842725fe3797141e",
+    "scripts/workflow-policy.test.mjs": "394287e7d1e84756a3ac8833918f964ee66f0ef2c34934d121d055fb37af4782",
+    "scripts/workspace-policy.mjs": "cd575bdc0a83e37ed28f4004c311c2415d895ce9d63b8fe8552ad674269cd219",
+    "scripts/workspace-policy.test.mjs": "22c2dce0ba9006d3266c2628a61e19acae48eb851c34f5a2fdd1d600cfb7944f",
+    "scripts/check-private-sources.mjs": "1d28447b51b39591d42151f236b837b33d695662168ee5c71500205aa0de96af",
+    "scripts/check-private-sources.test.mjs": "db6afd47e6f6e6de3405437960721f037068da4181eb7a81d7ba11477c7d69fb",
+    ".gitignore": "4db83ed8ce0099a6421c6377340e3e69b7c074ddabf543d0bf7c8f0c806ed83a",
+    ".dockerignore": "dda1228d0ba86e337d9c99648c4010e6b7e3dd87e60a6c04418b77786df959b0",
+    ".githooks/pre-push": "3529b300f7a655102ad899ab31fa8b2c404ec37479d1195aa9bcd3efa97bf90c"
+  },
+  "attempt": {
+    "outcome": "passed",
+    "number": 1
+  },
+  "verification_note": "ハッシュ・Git・記録済み完了条件の確認であり、テストや出典照合の自動再実行ではない。依頼・権限は最新のユーザー指示とAGENTS.mdに従う。"
+}

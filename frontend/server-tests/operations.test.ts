@@ -49,7 +49,7 @@ test('archives preserve Rails canonical checksums regardless of object attribute
   assert.equal(digest({ b: 2, a: { d: 4, c: 3 } }), digest({ a: { c: 3, d: 4 }, b: 2 }))
   const document = archive()
   assert.equal(document.question_count, content.questions.length)
-  assert.equal(document.choice_count, content.questions.length * configuration.exam.choice_labels.length)
+  assert.equal(document.choice_count, content.questions.reduce((total: number, question: { choices: unknown[] }) => total + question.choices.length, 0))
   assert.deepEqual(validateArchive(document), document)
   const optional = structuredClone(content.questions)
   optional[0].content_blocks = [{ type: 'code', title: '', code: 'value = 1' }]

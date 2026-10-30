@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { examTitle } from '~/utils/examCatalog'
 definePageMeta({ middleware: 'auth' })
 
 type HistoryItem = {
@@ -137,7 +138,7 @@ const historyLink = (history: HistoryItem) => ({
             </div>
 
             <div class="history-question">
-              <span>模擬試験 {{ history.question.exam_number }}・問{{ history.question.question_number }}</span>
+              <span>{{ examTitle(history.question.exam_number) }}・問{{ history.question.question_number }}</span>
               <strong>{{ history.question.body_excerpt }}</strong>
               <small>
                 {{ majorCategoryLabel(history.question.major_category_code) }} /
@@ -158,7 +159,7 @@ const historyLink = (history: HistoryItem) => ({
               <time :datetime="history.answered_at">{{ formatAnsweredAt(history.answered_at) }}</time>
             </div>
             <div class="history-question">
-              <span>模擬試験 {{ history.question.exam_number }}・問{{ history.question.question_number }}</span>
+              <span>{{ examTitle(history.question.exam_number) }}・問{{ history.question.question_number }}</span>
               <strong>この履歴の本文・正誤・解説はプレミアム会員向けです。</strong>
             </div>
             <NuxtLink v-if="PAYMENTS_ENABLED" class="primary-link" to="/premium">プレミアム会員について確認する</NuxtLink>

@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import type { AdminQuestionInput } from '~/types/adminQuestion'
+import type { AdminQuestionInput, AdminChoice } from '~/types/adminQuestion'
 import type { Form, FormError, FormErrorWithId } from '@nuxt/ui'
 import { questionFormSchema } from '../../../shared/schemas/content.ts'
 import { questionFormFields, focusFormError } from '~/utils/apiFormErrors'
+import { choiceLabelsForQuestion, questionCountForExam } from '../../../shared/schemas/exam.ts'
+import { reconcileQuestionChoices } from '~/utils/adminQuestionChoices'
 
 const props = defineProps<{
   initialValue: AdminQuestionInput
@@ -18,6 +20,7 @@ const emit = defineEmits<{
 
 const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value))
 const form = reactive<AdminQuestionInput>(clone(props.initialValue))
+const choiceCache = new Map<string, AdminChoice>()
 const previewOpen = ref(false)
 const schema = questionFormSchema(EXAM_CONFIG)
 const questionForm = useTemplateRef<Form<typeof schema>>('questionForm')
@@ -25,9 +28,32 @@ const validationErrors = computed<FormErrorWithId[]>(() => questionForm.value?.g
 watch(() => props.fieldErrors, errors => questionForm.value?.setErrors(errors ?? []))
 const errorLabel = (name?: string) => questionFormFields[name?.split('.')[0] as keyof typeof questionFormFields] ?? '入力内容'
 
-watch(() => props.initialValue, (value) => Object.assign(form, clone(value)), { deep: true })
+watch(() => props.initialValue, (value) => {
+  choiceCache.clear()
+  Object.assign(form, clone(value))
+}, { deep: true })
 
 const categories = computed(() => getCategoriesByMajorCategory(form.major_category_code))
+const questionLimit = computed(() => questionCountForExam(EXAM_CONFIG, Number(form.exam_number)) || EXAM_CONFIG.exam.questions_per_exam)
+const choiceLabels = computed(() => {
+  const examNumber = Number(form.exam_number)
+  const questionNumber = Number(form.question_number)
+  if (!Number.isInteger(questionNumber) || questionNumber < 1 || questionNumber > questionCountForExam(EXAM_CONFIG, examNumber)) return []
+  return choiceLabelsForQuestion(EXAM_CONFIG, examNumber, questionNumber)
+})
+const isExistingQuestion = computed(() => props.initialValue.choices.some(choice => choice.id !== undefined))
+const incompatiblePosition = computed(() => isExistingQuestion.value && choiceLabels.value.length > 0
+  && JSON.stringify(choiceLabels.value) !== JSON.stringify(props.initialValue.choices.map(choice => choice.choice_label)))
+
+watch([() => form.exam_number, () => form.question_number], () => {
+  // Temporarily invalid coordinates must not erase an editor's choices.
+  if (!choiceLabels.value.length) return
+  for (const choice of form.choices) choiceCache.set(choice.choice_label, clone(choice))
+  form.choices = reconcileQuestionChoices(form.choices, choiceLabels.value, {
+    preserveExisting: isExistingQuestion.value,
+    cachedChoices: [...choiceCache.values()],
+  })
+})
 
 watch(() => form.major_category_code, () => {
   if (!categories.value.some(item => item.value === form.category_code)) {
@@ -52,7 +78,7 @@ const submit = () => {
       <div class="admin-panel-head"><div><h2>基本情報</h2><p>問題の配置、分類、公開状態を設定します。</p></div></div>
       <div class="admin-panel-body admin-form-grid">
         <FormTextField id="question-exam-number" v-model="form.exam_number" admin name="exam_number" label="試験ナンバー" type="number" min="1" :max="EXAM_CONFIG.exam.set_count" />
-        <FormTextField id="question-number" v-model="form.question_number" admin name="question_number" label="問番号" type="number" min="1" :max="EXAM_CONFIG.exam.questions_per_exam" />
+        <FormTextField id="question-number" v-model="form.question_number" admin name="question_number" label="問番号" type="number" min="1" :max="questionLimit" />
         <UFormField name="major_category_code" label="大分類" class="admin-field" :ui="{ error: 'form-field-error' }"><USelect id="question-major-category" v-model="form.major_category_code" :items="MAJOR_CATEGORIES" value-key="value" label-key="label" class="w-full" /></UFormField>
         <UFormField name="category_code" label="小分類" class="admin-field" :ui="{ error: 'form-field-error' }"><USelect id="question-category" v-model="form.category_code" :items="categories" value-key="value" label-key="label" class="w-full" /></UFormField>
         <UFormField name="publication_status" class="publication-form-field" :ui="{ error: 'form-field-error' }">
@@ -74,8 +100,9 @@ const submit = () => {
     </section>
 
     <UFormField name="choices" class="admin-panel" :ui="{ error: 'form-field-error' }">
-      <div class="admin-panel-head"><div><h2>選択肢と正答</h2><p>{{ CHOICE_LABELS.length }}件の選択肢を入力し、正答を1件選びます。</p></div></div>
+      <div class="admin-panel-head"><div><h2>選択肢と正答</h2><p>{{ form.choices.length }}件の選択肢を入力し、正答を1件選びます。</p></div></div>
       <div class="admin-panel-body choice-list">
+        <p v-if="incompatiblePosition" class="choice-position-error" role="alert">選択肢の構成が異なる問題番号へは移動できません。元の番号に戻すか、同じ選択肢の問題番号を指定してください。</p>
         <article v-for="(choice, index) in form.choices" :key="choice.choice_label" class="choice-editor" :class="{ correct: choice.is_correct }">
           <header>
             <span class="choice-label">{{ choice.choice_label }}</span>
@@ -134,6 +161,7 @@ const submit = () => {
 .publication-field strong { color: var(--admin-text); font-size: 12px; }
 .publication-field small { margin-top: 2px; color: var(--admin-muted); font-size: 10px; }
 .choice-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.choice-position-error { grid-column: 1 / -1; margin: 0; color: #f1b0a3; }
 .choice-editor { min-width: 0; padding: 13px; border: 1px solid var(--admin-line); border-radius: 6px; background: #111a1f; }
 .choice-editor.correct { border-color: #287b78; background: #112323; }
 .choice-editor > header { min-height: 40px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 11px; }

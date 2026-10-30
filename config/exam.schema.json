@@ -103,6 +103,75 @@
             "maxLength": 10,
             "pattern": "\\S"
           }
+        },
+        "sets": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "exam_number": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000
+              },
+              "title": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "question_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000
+              },
+              "sections": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "first": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 10000
+                    },
+                    "last": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 10000
+                    },
+                    "choice_labels": {
+                      "minItems": 2,
+                      "maxItems": 10,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 10,
+                        "pattern": "\\S"
+                      }
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "first",
+                    "last",
+                    "choice_labels"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "exam_number",
+              "title",
+              "question_count"
+            ],
+            "additionalProperties": false
+          }
         }
       },
       "required": [

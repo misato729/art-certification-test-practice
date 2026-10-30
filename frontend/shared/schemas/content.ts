@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import type { ExamConfiguration } from './exam.ts'
+import { choiceLabelsForQuestion, questionCountForExam } from './exam.ts'
 
 export type BlockContext = 'question' | 'explanation' | 'choice'
 export type ValidationDetails = Record<string, string[]>
@@ -115,8 +116,7 @@ type QuestionSchemaOptions = { preserveOptionalAttributes?: boolean, strict?: bo
 export function questionInputSchema(config: ExamConfiguration, options: QuestionSchemaOptions = {}) {
   const preserve = options.preserveOptionalAttributes ?? true
   const strict = options.strict ?? false
-  const labels = config.exam.choice_labels
-  const choiceMessage = `選択肢は${labels.join('・')}の順で各1件、正答は1件必要です`
+  const choiceMessage = '選択肢のラベル・順序と正答を確認してください'
   const choice = z.object({
     id: z.preprocess(value => value === null || value === '' ? undefined : value, integerSchema(choiceMessage, strict).refine(value => value >= 1, choiceMessage).optional()),
     choice_label: text(choiceMessage),
@@ -127,22 +127,26 @@ export function questionInputSchema(config: ExamConfiguration, options: Question
   const archiveChoice = choice.omit({ id: true }).strict().transform(value => value as z.output<typeof choice>)
   const shape = {
     exam_number: integerSchema(inputMessage, strict).refine(value => value >= 1 && value <= config.exam.set_count, inputMessage),
-    question_number: integerSchema(inputMessage, strict).refine(value => value >= 1 && value <= config.exam.questions_per_exam, inputMessage),
+    question_number: integerSchema(inputMessage, strict).refine(value => value >= 1, inputMessage),
     major_category_code: text(inputMessage),
     category_code: text(inputMessage),
     publication_status: z.enum(['draft', 'published', 'private'], { error: inputMessage }),
     content_blocks: blocksSchema('question', false, preserve, strict),
     explanation_blocks: blocksSchema('explanation', false, preserve, strict),
     source_text: text('出典の形式を確認してください').nullable(),
-    choices: z.array(strict ? archiveChoice : choice, { error: `選択肢は${labels.length}件入力してください` }).length(labels.length, { error: `選択肢は${labels.length}件入力してください` }),
+    choices: z.array(strict ? archiveChoice : choice, { error: choiceMessage }).min(2, { error: choiceMessage }).max(10, { error: choiceMessage }),
   }
   const schema = strict ? z.strictObject(shape, { error: '問題データの属性が不足しているか未対応の属性があります' }) : z.object(shape, { error: '問題の入力内容を確認してください' })
   return schema.superRefine((question, ctx) => {
     const add = (message: string, path: (string | number)[] = [], details: ValidationDetails = {}) => ctx.addIssue({ code: 'custom', path, message, params: { details } })
+    const count = questionCountForExam(config, question.exam_number)
+    if (question.question_number > count) add(inputMessage, ['question_number'], { question_number: [`はこの試験の1〜${count}の整数で指定してください`] })
+    const labels = choiceLabelsForQuestion(config, question.exam_number, question.question_number)
+    const choiceMessage = `選択肢は${labels.join('・')}の順で各1件、正答は1件必要です`
     const major = config.categories.major.find(item => item.value === question.major_category_code)
     const category = config.categories.minor.find(item => item.value === question.category_code)
     if (!major || !category || category.major_category_value !== major.value) add(inputMessage, ['category_code'], { category_code: ['は有効な大分類・小分類の組合せを指定してください'] })
-    if (question.choices.some((item, index) => item.choice_label !== labels[index] || item.display_order !== index + 1)) add(choiceMessage, ['choices'])
+    if (question.choices.length !== labels.length || question.choices.some((item, index) => item.choice_label !== labels[index] || item.display_order !== index + 1)) add(choiceMessage, ['choices'], { choices: [`はこの問題の${labels.length}件を指定してください`] })
     const ids = question.choices.filter(choice => choice.id !== undefined).map(choice => choice.id)
     if (new Set(ids).size !== ids.length) add('選択肢IDが重複しています', ['choices'])
     if (question.choices.filter(item => item.is_correct).length !== 1) add('正答を1件選択してください', ['choices'], { choices: ['正答は1件必要です'] })
@@ -193,9 +197,9 @@ function throwValidation(error: z.ZodError, config?: ExamConfiguration): never {
   const details: ValidationDetails = issue.code === 'custom' ? (issue.params?.details as ValidationDetails | undefined) ?? {} : {}
   if (config && !Object.keys(details).length) {
     if (issue.path[0] === 'exam_number') details.exam_number = [`は1〜${config.exam.set_count}の整数で指定してください`]
-    if (issue.path[0] === 'question_number') details.question_number = [`は1〜${config.exam.questions_per_exam}の整数で指定してください`]
+    if (issue.path[0] === 'question_number') details.question_number = ['はこの試験の範囲内の整数で指定してください']
     if (issue.path[0] === 'publication_status') details.publication_status = ['は下書き・公開・非公開から指定してください']
-    if (issue.path.length === 1 && issue.path[0] === 'choices' && issue.code !== 'custom') details.choices = [`は${config.exam.choice_labels.length}件必要です`]
+    if (issue.path.length === 1 && issue.path[0] === 'choices' && issue.code !== 'custom') details.choices = ['はこの問題の区分に対応する件数で指定してください']
   }
   if (issue.message === blockKindMessage) details.content_blocks = ['使用できない表示ブロックです']
   if (issue.message === tableMessage) details.content_blocks = ['見出しと各行の列数を揃えてください']

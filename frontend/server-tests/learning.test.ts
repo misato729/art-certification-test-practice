@@ -2,12 +2,13 @@ import assert from 'node:assert/strict'
 import { randomUUID } from 'node:crypto'
 import { after, test } from 'node:test'
 import type { ExamConfiguration } from '../app/utils/examConfig.ts'
+import { choiceLabelsForQuestion } from '../shared/schemas/exam.ts'
 import { configuration, setConfigurationForTesting } from '../server/core/config.ts'
 import { ApiError } from '../server/core/errors.ts'
 import { closeDatabase, isolatedTransaction, query, type Database } from '../server/core/db.ts'
 import type { User } from '../server/core/auth.ts'
 import { excerptFrom, sanitizeQuestionInput, validateQuestionInput, type QuestionInput } from '../server/services/learning-validation.ts'
-import { deleteQuestion, loadQuestion, materialDigest, saveQuestion } from '../server/services/learning-writer.ts'
+import { deleteQuestion, loadQuestion, materialDigest, saveQuestion, validateCompleteExam } from '../server/services/learning-writer.ts'
 import { answerQuestion, getHistory, getQuestion, listAdminQuestions, listExams, listFavorites, listHistory, nextQuestion, putFavorite, removeFavorite } from '../server/services/learning.ts'
 
 process.env.APP_ENV = 'test'
@@ -23,13 +24,13 @@ function input(overrides: Partial<QuestionInput> = {}, config = configuration): 
     exam_number: 1, question_number: 1, major_category_code: category.major_category_value, category_code: category.value,
     publication_status: 'published', content_blocks: [{ type: 'text', text: 'Sample question' }],
     explanation_blocks: [{ type: 'text', text: 'Explanation revealed only after answering' }], source_text: 'Self-authored sample | https://example.com/sample',
-    choices: config.exam.choice_labels.map((label, index) => ({ choice_label: label, content_blocks: [{ type: 'text', text: `Choice ${label}` }], is_correct: index === 1, display_order: index + 1 })),
+    choices: choiceLabelsForQuestion(config, overrides.exam_number ?? 1, overrides.question_number ?? 1).map((label, index) => ({ choice_label: label, content_blocks: [{ type: 'text', text: `Choice ${label}` }], is_correct: index === 1, display_order: index + 1 })),
     ...overrides,
   }
 }
 
 async function isolated(action: (db: Database, exam: number) => Promise<void>) {
-  const testConfiguration = configFor({ exam: { ...configuration.exam, set_count: 10000, questions_per_exam: 3 }, payments: { ...configuration.payments, enabled: false, free_exam_count: 10000 } })
+  const testConfiguration = configFor({ exam: { set_count: 10000, questions_per_exam: 3, choice_labels: [...configuration.exam.choice_labels] }, payments: { ...configuration.payments, enabled: false, free_exam_count: 10000 } })
   setConfigurationForTesting(testConfiguration)
   try {
     await isolatedTransaction(async db => {
@@ -46,6 +47,59 @@ async function user(db: Database, role: 'user' | 'admin' = 'user'): Promise<User
 }
 const integration = { skip: !hasDatabase }
 after(async () => { setConfigurationForTesting(originalConfiguration); await closeDatabase() })
+
+function mixedConfiguration(): ExamConfiguration {
+  const four = ['ア', 'イ', 'ウ', 'エ']
+  return configFor({ exam: { set_count: 2, questions_per_exam: 10, choice_labels: four, sets: [
+    { exam_number: 1, title: 'Synthetic ten-question set', question_count: 10 },
+    { exam_number: 2, title: 'Synthetic mixed-choice set', question_count: 85, sections: [
+      { title: 'History', first: 1, last: 80, choice_labels: four },
+      { title: 'Application', first: 81, last: 85, choice_labels: [...four, 'オ', 'カ'] },
+    ] },
+  ] }, payments: { ...originalConfiguration.payments, enabled: false, free_exam_count: 2 } })
+}
+
+async function isolatedMixed(action: (db: Database) => Promise<void>) {
+  setConfigurationForTesting(mixedConfiguration())
+  try {
+    await isolatedTransaction(async db => {
+      // Only fixtures in the caller-owned rollback transaction use these two slots.
+      await db.answerHistory.deleteMany({ where: { question: { exam_number: { in: [1, 2] } } } })
+      await db.question.deleteMany({ where: { exam_number: { in: [1, 2] } } })
+      await action(db)
+    })
+  } finally { setConfigurationForTesting(originalConfiguration) }
+}
+
+test('mixed set validation enforces each position and its exact choice labels', () => {
+  const config = mixedConfiguration()
+  for (const [exam_number, question_number, count] of [[1, 10, 4], [2, 80, 4], [2, 81, 6], [2, 85, 6]] as const) {
+    assert.equal(validateQuestionInput(input({ exam_number, question_number }, config), config).choices.length, count)
+  }
+  for (const [exam_number, question_number] of [[1, 11], [2, 86]] as const) {
+    assert.throws(() => validateQuestionInput(input({ exam_number, question_number }, config), config), apiError(422))
+  }
+  const six = input({ exam_number: 2, question_number: 81 }, config)
+  assert.throws(() => validateQuestionInput({ ...six, choices: six.choices.slice(0, 4) }, config), apiError(422))
+  const wrongLabels = structuredClone(six)
+  wrongLabels.choices[5]!.choice_label = '別'
+  assert.throws(() => validateQuestionInput(wrongLabels, config), apiError(422))
+  assert.throws(() => validateQuestionInput({ ...six, question_number: 80 }, config), apiError(422))
+})
+
+test('publication completeness resolves ten and eighty-five question sets independently', async () => {
+  const config = mixedConfiguration()
+  for (const [exam, count] of [[1, 10], [2, 85]] as const) {
+    const rows = Array.from({ length: count - 1 }, (_, index) => ({ question_number: index + 1 }))
+    const db = { question: { findMany: async () => rows } } as unknown as Database
+    await assert.rejects(validateCompleteExam(exam, db, config), apiError(422))
+    await validateCompleteExam(exam, db, config, { question_number: count })
+    rows.push({ question_number: count })
+    await validateCompleteExam(exam, db, config)
+  }
+  const unused = { question: { findMany: async () => { throw new Error('Invalid set must not query the DB') } } } as unknown as Database
+  await assert.rejects(validateCompleteExam(3, unused, config), apiError(422))
+})
 
 test('configuration-derived question and choice limits support three/five choices and 25 questions', () => {
   for (const labels of [['A', 'B', 'C'], ['A', 'B', 'C', 'D', 'E']]) {
@@ -240,6 +294,66 @@ test('changing the correct answer preserves choice IDs and enforces choice-ID ow
   changed.choices[0]!.id = other.choices[0]!.id
   await assert.rejects(saveQuestion(changed, { id: question.id, db }), apiError(422))
   assert.deepEqual(await loadQuestion(question.id, db), saved)
+}))
+
+test('six-choice grading and edits preserve identities, no-op histories and visibility-only histories', integration, async () => isolatedMixed(async db => {
+  const owner = await user(db)
+  const initial = input({ exam_number: 2, question_number: 81 })
+  initial.choices.forEach((choice, index) => { choice.is_correct = index === 5 })
+  const question = await saveQuestion(initial, { db })
+  assert.equal(question.choices.length, 6)
+  const ids = question.choices.map(choice => choice.id)
+  const publicQuestion = (await getQuestion(question.id, owner, db)).data
+  const publicChoices = publicQuestion.choices as Record<string, unknown>[]
+  assert.equal(publicChoices.length, 6)
+  assert.equal('explanation_blocks' in publicQuestion, false)
+  assert.equal('source_text' in publicQuestion, false)
+  assert(publicChoices.every(choice => !('is_correct' in choice)))
+  const answer = await answerQuestion(question.id, question.choices[5]!.id, owner, db)
+  assert.equal(answer.data.is_correct, true)
+  assert.equal(answer.data.correct_choice.choice_label, 'カ')
+  await putFavorite(question.id, owner, db)
+  const before = await loadQuestion(question.id, db)
+  await saveQuestion(initial, { id: question.id, db })
+  assert.deepEqual(await loadQuestion(question.id, db), before)
+  await saveQuestion({ ...initial, publication_status: 'private' }, { id: question.id, db })
+  await saveQuestion(initial, { id: question.id, db })
+  assert.equal(await db.answerHistory.count({ where: { id: answer.data.answer_history_id! } }), 1)
+  const changed = structuredClone(initial)
+  changed.choices.forEach((choice, index) => {
+    choice.id = ids[index]
+    choice.is_correct = index === 4
+  })
+  const saved = await saveQuestion(changed, { id: question.id, db })
+  assert.deepEqual(saved.choices.map(choice => choice.id), ids)
+  assert.equal(saved.choices.filter(choice => choice.is_correct).length, 1)
+  assert.equal(await db.answerHistory.count({ where: { question_id: question.id } }), 0)
+  assert.equal(await db.favorite.count({ where: { user_id: owner.id, question_id: question.id } }), 1)
+  assert.equal((await answerQuestion(question.id, saved.choices[4]!.id, owner, db)).data.is_correct, true)
+}))
+
+test('existing questions cannot move across choice-label sections or lose choices and histories', integration, async () => isolatedMixed(async db => {
+  const owner = await user(db)
+  const fourInput = input({ exam_number: 1, question_number: 1 })
+  const sixInput = input({ exam_number: 2, question_number: 81 })
+  const four = await saveQuestion(fourInput, { db })
+  const six = await saveQuestion(sixInput, { db })
+  await answerQuestion(four.id, four.choices[1]!.id, owner, db)
+  await answerQuestion(six.id, six.choices[1]!.id, owner, db)
+  for (const [before, destination] of [
+    [four, input({ exam_number: 2, question_number: 82 })],
+    [six, input({ exam_number: 2, question_number: 80 })],
+  ] as const) {
+    destination.choices.forEach((choice, index) => { choice.id = before.choices[index]?.id })
+    await assert.rejects(saveQuestion(destination, { id: before.id, db }), (error: unknown) => error instanceof ApiError && error.status === 422 &&
+      error.message === '選択肢のラベルが異なる区分へ既存の問題は移動できません')
+    assert.deepEqual(await loadQuestion(before.id, db), before)
+    assert.equal(await db.answerHistory.count({ where: { question_id: before.id } }), 1)
+  }
+  assert.equal(await db.question.count({ where: { exam_number: 2, question_number: { in: [80, 82] } } }), 0)
+  const sameLabels = await saveQuestion({ ...sixInput, question_number: 82 }, { id: six.id, db })
+  assert.deepEqual(sameLabels.choices.map(choice => choice.id), six.choices.map(choice => choice.id))
+  assert.equal(await db.answerHistory.count({ where: { question_id: six.id } }), 0)
 }))
 
 test('question deletion cascades only its own learning records and admin filtering remains scoped', integration, async () => isolated(async (db, exam) => {

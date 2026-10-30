@@ -5,7 +5,7 @@
     "name": "美術検定ラボ",
     "short_name": "美術ラボ",
     "exam_name": "美術検定2級",
-    "description": "美術検定2級に向けて、美術史・技法・デザイン・美術館の知識を1問ずつ確認。解説と出典付きのオリジナル問題10問を掲載しています。",
+    "description": "美術検定2級に向けて、美術史80問・知識と情報の活用5問の模擬試験1を、解説と出典付きで学べます。",
     "tagline": "一問から広がる、美術の世界。",
     "logo_path": "/images/logo.svg",
     "primary_color": "#7c3f63",
@@ -16,23 +16,56 @@
         "body": "美術検定2級の学習に向けて準備中の、非公式の問題演習サイトです。主催団体が運営・監修するサービスではありません。"
       },
       {
-        "title": "今回の演習セット",
-        "body": "西洋・日本・東洋美術、現代美術、工芸・デザイン、美術館に関する10問です。技法や時代背景の理解に加え、展示計画の資料を読み取る問題や、保存対応を判断する問題を含みます。提供資料の分野と傾向を参考に作成した独自問題で、公式過去問の転載ではありません。全問4択で、図版を使う問題や本試験全体を再現するものではありません。"
+        "title": "演習セット",
+        "body": "「模擬試験1」として全85問を掲載しています。美術史80問と知識・情報の活用5問で構成し、60分を学習の目安としています。別枠の実践問題は含みません。"
       },
       {
         "title": "学習方法",
-        "body": "4つの選択肢から答えを選ぶと、正誤・正答・解説・出典を確認できます。ログインすると解答履歴とお気に入りを利用できます。"
+        "body": "各問の選択肢から一つ選ぶと、正誤・正答・解説・出典を確認できます。模試の美術史は4択、活用問題は6択です。文章と表による非公式の独自問題で、図版識別や公式試験の配分・難易度を再現するものではありません。ログインすると解答履歴とお気に入りを利用できます。"
       }
     ]
   },
   "exam": {
     "set_count": 1,
-    "questions_per_exam": 10,
+    "questions_per_exam": 85,
     "choice_labels": [
       "ア",
       "イ",
       "ウ",
       "エ"
+    ],
+    "sets": [
+      {
+        "exam_number": 1,
+        "title": "模擬試験1",
+        "question_count": 85,
+        "sections": [
+          {
+            "title": "美術史問題",
+            "first": 1,
+            "last": 80,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ]
+          },
+          {
+            "title": "知識・情報の活用問題",
+            "first": 81,
+            "last": 85,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ",
+              "オ",
+              "カ"
+            ]
+          }
+        ]
+      }
     ]
   },
   "categories": {
@@ -64,62 +97,43 @@
       {
         "value": "application",
         "label": "知識・情報の活用"
-      },
-      {
-        "value": "practice",
-        "label": "美術館の実践"
       }
     ],
     "minor": [
       {
-        "value": "ancient",
-        "label": "古代の建築",
+        "value": "western_study",
+        "label": "西洋美術史",
         "major_category_value": "western"
       },
       {
-        "value": "modern",
-        "label": "近代の美術運動",
-        "major_category_value": "western"
-      },
-      {
-        "value": "medieval",
-        "label": "中世の仏像彫刻",
+        "value": "japanese_study",
+        "label": "日本美術史",
         "major_category_value": "japanese"
       },
       {
-        "value": "edo",
-        "label": "江戸時代の版画",
-        "major_category_value": "japanese"
-      },
-      {
-        "value": "installation",
-        "label": "空間とインスタレーション",
+        "value": "contemporary_study",
+        "label": "現代美術",
         "major_category_value": "contemporary"
       },
       {
-        "value": "ceramics",
-        "label": "東アジアの陶磁器",
+        "value": "asian_study",
+        "label": "東洋美術",
         "major_category_value": "asian"
       },
       {
-        "value": "modern_design",
-        "label": "近代のデザイン教育",
+        "value": "design_study",
+        "label": "工芸・デザイン",
         "major_category_value": "design"
       },
       {
-        "value": "institutions",
-        "label": "美術館と建物の活用",
+        "value": "museum_study",
+        "label": "美術館・展覧会",
         "major_category_value": "museum"
       },
       {
-        "value": "display_data",
-        "label": "展示計画の資料読解",
+        "value": "application_study",
+        "label": "知識・情報の活用",
         "major_category_value": "application"
-      },
-      {
-        "value": "collection_care",
-        "label": "収蔵品の保存対応",
-        "major_category_value": "practice"
       }
     ]
   },

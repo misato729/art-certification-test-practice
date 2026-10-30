@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { examTitle } from '~/utils/examCatalog'
 definePageMeta({ middleware: 'auth' })
 
 type FavoriteItem = {
@@ -170,7 +171,7 @@ watch([() => user.value?.id, canUseFavorites, page], loadFavorites, { immediate:
           :class="{ locked: item.locked, 'pending-removal': !isFavorite(item.question.id) }"
         >
           <div class="favorite-card-head">
-            <span>模擬試験 {{ item.question.exam_number }}・問{{ item.question.question_number }}</span>
+            <span>{{ examTitle(item.question.exam_number) }}・問{{ item.question.question_number }}</span>
             <button
               class="favorite-toggle"
               :class="{ active: isFavorite(item.question.id) }"

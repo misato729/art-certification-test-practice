@@ -8,9 +8,12 @@ export type PracticePosition = {
 export const createPracticeSequence = (
   examNumbers: readonly number[],
   questionNumbers: readonly number[],
+  catalog?: readonly { exam_number: number, question_numbers: readonly number[] }[],
 ): PracticePosition[] => (
   examNumbers.flatMap(examNumber => (
-    questionNumbers.map(questionNumber => ({ examNumber, questionNumber }))
+    questionNumbers
+      .filter(questionNumber => !catalog || catalog.some(exam => exam.exam_number === examNumber && exam.question_numbers.includes(questionNumber)))
+      .map(questionNumber => ({ examNumber, questionNumber }))
   ))
 )
 

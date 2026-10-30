@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 9,
-  "updated_at": "2026-10-29T18:48:45.365Z",
+  "revision": 24,
+  "updated_at": "2026-10-30T01:24:04.256Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-10-29T18-48-45-365Z-r9.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-10-30T01-24-04-256Z-r24.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -215,6 +215,299 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "art_mock_exam_01",
+      "context": "product",
+      "title": "美術史80問と活用5問の模試第1回を作成",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー依頼: 提供PDFと過去問分析に基づき美術史80問と活用5問・60分の模試1セットを作成",
+      "next_action": "内容確認と追加依頼を待つ。サイト組込・コミット・push・公開は未実施",
+      "evidence": [
+        "docs/verification.md",
+        "content/mock-exams/mock-01/README.md",
+        "content/mock-exams/mock-01/questions.json",
+        "content/mock-exams/mock-01/manifest.json",
+        "scripts/check-mock-exam.mjs"
+      ],
+      "last_verified_at": "2026-10-29T19:14:55.708Z",
+      "verification_scope": "美術史80問・活用5問の独自模試、問題23p・解答解説25p。全85問・350選択肢を共有Zodで検査し、PDF全問収録・字形・用紙内配置・全48pの表示を確認。3担当の全問独立内容レビューと別担当のシャッフル・PDF正答照合が合格。既存10問とアプリ・DBは非変更。図版識別と実受験者による難度・60分校正は未実施。コミット・push・公開は未実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "美術史80問・活用5問の連番・区分別4択／6択・単一正答・解説・出典・分類を検査し、問題冊子と解説PDFの全ページを確認する",
+          "verification": "共有Zodスキーマを使ったデータ検査、件数と採点の検査、PDF抽出・レンダリング確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-29T19:14:55.708Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が過去問分析の限界、出題配分、事実関係、正答一意性、解説と成果物を確認する",
+          "verification": "作成担当と異なる担当者が85問を分担してレビューし未解決事項を修正する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-29T19:14:55.708Z",
+          "reviewer": "exam_analysis / author_western / author_japanese"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初稿85問の内容評価で誤答の識別力不足・西洋近現代の不足・重複を確認したため不合格",
+            "at": "2026-10-29T19:02:13.603Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "改稿85問の共有形式・2冊のPDF全48p・全問独立レビュー・350選択肢の統合照合が合格",
+            "at": "2026-10-29T19:14:56.173Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_mock_exam_site",
+      "context": "development",
+      "title": "既存10問を保持して85問模試をサイトの演習へ組み込む",
+      "status": "done",
+      "depends_on": [
+        "art_mock_exam_01",
+        "art_official_sample_review"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー回答: サイトへの組み込みも希望",
+      "next_action": "内容確認と追加依頼を待つ。既存DBへの反映・コミット・push・公開は未実施",
+      "evidence": [
+        "docs/verification.md",
+        "README.md",
+        "docs/testing.md",
+        "config/exam.json",
+        "content/README.md",
+        "frontend/e2e/mock-exam.spec.ts"
+      ],
+      "last_verified_at": "2026-10-30T00:58:01.075Z",
+      "verification_scope": "既存10問の不変と模試85問を合わせ95問390選択肢、共有設定のセット別件数・4/6択と公開整合を検査。Schema生成/照合、単体121件＋最終関連5件、関連API/DB46件、型・専用本番ビルド成功。PC/スマートフォン全95問計190回答と条件出題等14シナリオ成功、管理spec修正後4件を新規DBで再検査し全成功。追加公式3PDF13pの参照・独立照合済み。既存DB/配信先変更・一括受験・commit/push/公開なし。使い捨てDB/専用ビルド/検証コンテナ/一時認証設定は削除済み。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "10問と85問の別セット、4択/6択、取込・公開セット整合・管理フォーム・APIの正答非公開が一つの共有規則で整合する",
+          "verification": "設定生成/照合・共有/関連単体とAPI/DB検査・型検査・独立testDBのPlaywrightでPC/スマートフォンの全問表示と採点を順次確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T00:56:05.555Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が設定・共有スキーマ・データの非改変・API/管理・PC/スマートフォン表示と検証根拠を確認し未解決の指摘がない",
+          "verification": "実装担当と異なる担当が差分と実際の検証結果をレビューする",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T00:58:01.075Z",
+          "reviewer": "exam_analysis / author_western"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "95問のPC/スマートフォン操作と14シナリオは成功したが、追加管理検証4件が操作対象・合成エラー期待の不整合で失敗",
+            "at": "2026-10-30T00:50:36.950Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "95問・4/6択の実装、単体/API/DB/型検査、PC/mobile全問と管理再検査が成功。追加公式資料と最終独立レビューも合格",
+            "at": "2026-10-30T00:58:01.383Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_official_sample_review",
+      "context": "product",
+      "title": "追加された公式サンプルと正答・実践資料を参照し85問との整合を確認",
+      "status": "done",
+      "depends_on": [
+        "art_mock_exam_01"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー依頼: past-examに格納した公式Webサンプルも参考資料にする",
+      "next_action": "サイト組み込みの管理検証を完了する",
+      "evidence": [
+        "docs/verification.md",
+        "content/mock-exams/mock-01/README.md"
+      ],
+      "last_verified_at": "2026-10-30T00:50:34.775Z",
+      "verification_scope": "追加の公式Webサンプル・正答・2025実践3PDF全13pをPDFium画像で分析し別担当も全頁照合。活用4択例と既存抜粋6択の差、実践10問の別枠、図版/配分/実測難度の未再現範囲を説明へ反映。85問に必須の正答・一意性修正なし。共有形式・同梱95問との一致と資料保護検査成功。原資料・抽出・画像は保護領域内のみ。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "追加PDFの読取・ページ確認、原資料と派生画像/抽出の保護、既存85問と独立データの一致を確認する",
+          "verification": "ローカルPDF読取と保護検査・共有形式検査を行う",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T00:50:34.775Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が公式サンプルとの整合と、実践を85問へ混ぜない判断・画像と難易度の未再現範囲を確認する",
+          "verification": "追加資料と分析所見を別担当が独立照合する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T00:50:34.775Z",
+          "reviewer": "exam_analysis"
+        }
+      ],
+      "execution": {
+        "worker": "author_western",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "追加公式3PDF全13pを全頁分析・独立確認。活用の選択肢数の差と別枠実践・未再現範囲を追記し保護検査成功",
+            "at": "2026-10-30T00:50:35.380Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_mock_only_85",
+      "context": "development",
+      "title": "既存10問を外して85問の「模擬試験1」へ統一",
+      "status": "done",
+      "depends_on": [
+        "art_mock_exam_site"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー依頼: 既存10問は消し85問を模試1回分にする。追加指定: 表示名は「模擬試験1」",
+      "next_action": "明示依頼のコミット・pushを実施する",
+      "evidence": [
+        "docs/verification.md",
+        "config/exam.json",
+        "content/README.md",
+        "frontend/e2e/mock-exam.spec.ts"
+      ],
+      "last_verified_at": "2026-10-30T01:24:02.353Z",
+      "verification_scope": "旧10問と旧分類を同梱から除き、独立模試とバイト同一の85問350選択肢を試験番号1へ統一。名称は模擬試験1。schema照合・関連単体20件・専用DB API運用26件・PC/mobile E2E18件170回答が成功。PDF2冊23/25pを名称更新し全48pの表示と本文正答を確認。別担当レビュー合格。既存DB非接続・マイグレーション差分なし。専用DB/ビルド/コンテナ/一時env削除済み。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "試験番号1の1セット85問350選択肢のみを同梱し、模試原本と本文/正答/解説が一致。PC/mobileの全問表示・採点が成功",
+          "verification": "共有設定/件数/内容一致、関連単体、独立test DBのPlaywright PC/mobileで全85問を検証",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T01:24:02.353Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が既存10問の除去・1セット表示・参照文書・検証結果を確認し未解決なし",
+          "verification": "別担当が差分と実施済み検証の根拠を確認する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T01:24:02.353Z",
+          "reviewer": "exam_analysis"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "模擬試験1・1セット85問350選択肢への統一、関連20+26検査・PC/mobile18件・PDF48p確認と独立レビューが合格",
+            "at": "2026-10-30T01:24:02.769Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_mock_only_85_push",
+      "context": "operations",
+      "title": "85問模試とサイト組込をコミット・push",
+      "status": "doing",
+      "depends_on": [
+        "art_mock_only_85"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー依頼: 終わったらコミット・push",
+      "next_action": "原資料除外とステージ対象を確認してコミット・pushする",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "着手前。先行差分を保護し、明示依頼の範囲だけ行う。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "依頼対象の問題・設定・UI・検証・PDF等だけを保護資料なしでコミットしoriginへpushしてリモート一致を確認",
+          "verification": "資料保護・差分と対象ファイル一覧、コミットとリモートHEAD一致を確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が送信対象と資料除外・配信境界を確認し未解決なし",
+          "verification": "別担当が差分と実施済み検証の根拠を確認する",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]
