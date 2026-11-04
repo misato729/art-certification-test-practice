@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 63,
-  "updated_at": "2026-11-04T01:50:17.397Z",
+  "revision": 65,
+  "updated_at": "2026-11-04T01:56:19.582Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T01-50-17-397Z-r63.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T01-56-19-582Z-r65.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1100,7 +1100,7 @@
       "id": "art_frontend_taxonomy_push",
       "context": "operations",
       "title": "画面再構成・配色・分類と受験科目選択をコミットpush",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "art_frontend_template_reset",
         "art_pale_blue",
@@ -1110,21 +1110,23 @@
       ],
       "authorization": "requested",
       "request_ref": "2026-11-04 ユーザー依頼: ここまでの変更をコミット・pushしてください",
-      "next_action": "追加コミットpush後に新しいCI全ジョブを確認する",
+      "next_action": "完了記録のみ同期してremote一致を確認。追加依頼を待つ",
       "evidence": [
         "docs/verification.md"
       ],
-      "last_verified_at": null,
-      "verification_scope": "58cc270をmainへpush、remote一致。CI41755499070のverify移行期待値2件失敗とbrowser再ログインお気に入り失敗を確認し、明示4移行期待値とsessionVersion watchを修正。独立DB移行11件・PC/SP core6件と再レビューが合格。追加コミット/CI全ジョブ待ち。",
+      "last_verified_at": "2026-11-04T01:56:18Z",
+      "verification_scope": "完了済み81ファイルを58cc270でmainへpush、CIで検出した移行期待値/お気に入り再読込を1fd4b50で追加push。ローカルの移行11・PC/SP core6・ポリシー162と独立レビュー、原資料保護、remote一致を確認。追加CI41756832275のharness/verify/browser全成功。既存DB/配信設定変更なし。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "許可範囲の差分だけをコミットpushし、原資料/秘密値を送らずリモート一致と実行されたCIの最終状態を確認する",
           "verification": "差分/履歴/資料保護/関連する軽量検査、明示ステージ、push後のOID/差分、GitHub Actionsの状態を確認",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T01:56:18Z"
         },
         {
           "id": "review",
@@ -1135,7 +1137,7 @@
           "evidence": [
             "docs/verification.md"
           ],
-          "checked_at": "2026-11-04T01:50:16Z",
+          "checked_at": "2026-11-04T01:56:18Z",
           "reviewer": "art_questions"
         }
       ],
@@ -1161,6 +1163,13 @@
             "failed_criteria": [
               "checks"
             ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "追加修正のローカル移行11件・PC/SP6件と独立レビューが合格。1fd4b50をmainへpushしCI41756832275の全3ジョブ成功とremote一致を確認",
+            "at": "2026-11-04T01:56:18.828Z",
+            "failed_criteria": []
           }
         ]
       }
