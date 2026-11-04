@@ -69,9 +69,20 @@ type SourceReference = {
 
 const route = useRoute()
 const { $api: api } = useNuxtApp()
-const { isLoggedIn, user, authHeaders } = useAuth()
+const { isLoggedIn, user, authHeaders, sessionVersion, ensureCurrentUser } = useAuth()
 const { canUseFavorites, isFavorite, setFavorite, toggleFavorite } = useFavorites()
 const updatingFavorite = ref(false)
+
+const incorrectReview = useIncorrectReview()
+const isIncorrectReview = computed(() => route.query.review === 'incorrect' && route.query.answer_history_id === undefined)
+const reviewReady = ref(false)
+const reviewPositions = ref<PracticePosition[]>([])
+const reviewError = ref('')
+let pageActive = true
+let reviewGeneration = 0
+onScopeDispose(() => { pageActive = false; reviewGeneration++ })
+
+const { data: publicPracticeCatalog, status: practiceCatalogStatus, refresh: refreshPracticeCatalog } = usePracticeCatalog(computed(() => true))
 
 const allExamNumbers = EXAM_CATALOG.map(exam => exam.exam_number)
 const allQuestionNumbers = Object.freeze(Array.from({ length: QUESTIONS_PER_EXAM }, (_, index) => index + 1))
@@ -113,6 +124,7 @@ const selectedPracticeQuestionNumbers = computed(() => {
 const basePracticeSequence = computed<PracticePosition[]>(() => createPracticeSequence(
   selectedPracticeExamNumbers.value,
   selectedPracticeQuestionNumbers.value,
+  publicPracticeCatalog.value ?? [],
 ))
 const isRandomPractice = computed(() => (
   hasConditionSelection.value
@@ -120,7 +132,7 @@ const isRandomPractice = computed(() => (
   && practiceSeed.value !== null
 ))
 const practiceSequence = computed<PracticePosition[]>(() => (
-  isRandomPractice.value
+  isIncorrectReview.value ? (reviewReady.value ? reviewPositions.value : []) : isRandomPractice.value
     ? shufflePracticeSequence(basePracticeSequence.value, practiceSeed.value!)
     : basePracticeSequence.value
 ))
@@ -134,6 +146,7 @@ const nextPracticePosition = computed(() => (
 ))
 const studyRouteQuery = computed(() => Object.fromEntries(['study_category_codes', 'study_part_code', 'study_section_code', 'study_scope_codes'].filter(key => route.query[key] !== undefined).map(key => [key, route.query[key]])))
 const practiceNavigationQuery = computed(() => {
+  if (isIncorrectReview.value) return { review: 'incorrect', seed: String(practiceSeed.value) }
   if (hasConditionSelection.value) {
     const query: LocationQueryRaw = {
       ...studyRouteQuery.value,
@@ -176,9 +189,15 @@ const {
   lazy: true,
 })
 
+const retryQuestion = async () => {
+  if (practiceCatalogStatus.value === 'error') await refreshPracticeCatalog()
+  if (practiceCatalogStatus.value === 'success') await refresh()
+}
+
 const question = computed(() => {
   // Master-only phase: classified questions have not been assigned yet.
   if (Object.keys(studyRouteQuery.value).length) return null
+  if (isIncorrectReview.value && (!reviewReady.value || !isLoggedIn.value)) return null
   const loaded = questionResponse.value?.data
   if (!loaded || loaded.exam_number !== examNumber.value || loaded.question_number !== questionNumber.value) return null
   return loaded
@@ -238,7 +257,7 @@ const loadErrorMessage = computed(() => {
   return ''
 })
 const practiceProgress = computed(() => (
-  hasConditionSelection.value && currentPracticeIndex.value >= 0
+  isIncorrectReview.value && currentPracticeIndex.value >= 0 ? `復習 ${currentPracticeIndex.value + 1} / ${practiceSequence.value.length}` : hasConditionSelection.value && currentPracticeIndex.value >= 0
     ? `${isRandomPractice.value ? 'ランダム ' : ''}${currentPracticeIndex.value + 1} / ${practiceSequence.value.length}`
     : ''
 ))
@@ -262,6 +281,9 @@ watch(
     route.query.questions,
     route.query.order,
     route.query.seed,
+    route.query.review,
+    sessionVersion.value,
+    incorrectReview.sessionKey.value,
   ],
   () => {
     selectedChoiceId.value = null
@@ -289,21 +311,26 @@ const choiceState = (choice: Choice) => {
 const submitAnswer = async () => {
   if (!question.value || selectedChoiceId.value === null || submitting.value) return
 
+  const context = { path: route.fullPath, version: sessionVersion.value, id: question.value.id, owner: incorrectReview.sessionKey.value }
+  const current = () => pageActive && context.path === route.fullPath && context.version === sessionVersion.value && context.id === question.value?.id && context.owner === incorrectReview.sessionKey.value
   submitting.value = true
   answerError.value = ''
 
   try {
     const response = await api<ApiResponse<AnswerResult>>(
-      `/api/v1/questions/${question.value.id}/answer`,
+      isIncorrectReview.value ? `/api/v1/review_questions/${question.value.id}/answer` : `/api/v1/questions/${question.value.id}/answer`,
       {
         method: 'POST',
         headers: authHeaders.value,
         body: { selected_choice_id: selectedChoiceId.value, question_version: question.value?.question_version },
       },
     )
+    if (!current()) return
     answerResult.value = response.data
+    if (context.owner === incorrectReview.sessionKey.value) incorrectReview.invalidate()
   }
   catch (error: any) {
+    if (!current()) return
     if (error?.statusCode === 401 || error?.status === 401) {
       answerError.value = 'ログインの有効期限が切れました。もう一度ログインしてください。'
       return
@@ -325,8 +352,10 @@ const answerHistoryId = computed(() => {
 })
 
 const restoreAnswerHistory = async () => {
-  if (!question.value || !isLoggedIn.value || !answerHistoryId.value) return
+  if (!question.value || !isLoggedIn.value || !answerHistoryId.value || isIncorrectReview.value) return
   if (restoredHistoryId.value === answerHistoryId.value) return
+  const context = { path: route.fullPath, history: answerHistoryId.value, owner: incorrectReview.sessionKey.value, id: question.value.id }
+  const current = () => pageActive && !isIncorrectReview.value && context.path === route.fullPath && context.history === answerHistoryId.value && context.owner === incorrectReview.sessionKey.value && context.id === question.value?.id
 
   try {
     const response = await api<ApiResponse<AnswerHistoryDetail>>(
@@ -335,8 +364,9 @@ const restoreAnswerHistory = async () => {
         headers: authHeaders.value,
       },
     )
+    if (!current()) return
     const history = response.data
-    if (history.question.id !== question.value.id) {
+    if (history.question.id !== question.value!.id) {
       answerError.value = 'この解答履歴は表示中の問題と一致しません。'
       return
     }
@@ -354,7 +384,7 @@ const restoreAnswerHistory = async () => {
     restoredHistoryId.value = history.id
   }
   catch (error: any) {
-    if (error?.statusCode !== 401 && error?.status !== 401) answerError.value = '解答履歴を読み込めませんでした。'
+    if (current() && error?.statusCode !== 401 && error?.status !== 401) answerError.value = '解答履歴を読み込めませんでした。'
   }
 }
 
@@ -363,6 +393,29 @@ watch(
   restoreAnswerHistory,
   { immediate: true },
 )
+
+const prepareReview = async () => {
+  const generation = ++reviewGeneration
+  if (!isIncorrectReview.value) { reviewReady.value = false; reviewError.value = ''; return }
+  reviewReady.value = false
+  reviewPositions.value = []
+  reviewError.value = ''
+  await ensureCurrentUser()
+  if (!pageActive || generation !== reviewGeneration) return
+  if (!isLoggedIn.value) { reviewError.value = 'ログインしてから復習を始めてください。'; return }
+  if (practiceSeed.value === null) { reviewError.value = '復習の指定が正しくありません。新しく復習を始めてください。'; return }
+  const owner = incorrectReview.sessionKey.value
+  const positions = await incorrectReview.prepareRound(practiceSeed.value)
+  if (!pageActive || generation !== reviewGeneration || owner !== incorrectReview.sessionKey.value) return
+  if (!positions?.some(item => item.examNumber === examNumber.value && item.questionNumber === questionNumber.value)) {
+    reviewError.value = 'この問題は現在の復習対象に含まれていません。新しく復習を始めてください。'
+    return
+  }
+  reviewPositions.value = [...positions]
+  reviewReady.value = true
+}
+onMounted(() => { void prepareReview() })
+watch([() => route.query.review, practiceSeed, incorrectReview.sessionKey], () => { void prepareReview() }, { flush: 'sync' })
 
 const goToNextQuestion = async () => {
   if (!question.value || loadingNext.value) return
@@ -425,7 +478,11 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
 
 <template>
   <div class="page-wrap practice-wrap">
-    <div v-if="status === 'idle' || status === 'pending'" class="state-panel" role="status" aria-live="polite" aria-busy="true">
+    <div v-if="isIncorrectReview && (!reviewReady || reviewError)" class="state-panel" aria-live="polite">
+      <p v-if="!reviewError" role="status">復習する問題を確認しています。</p>
+      <template v-else><h1>復習を再開してください</h1><p role="alert">{{ reviewError }}</p><IncorrectReviewPanel /></template>
+    </div>
+    <div v-else-if="status === 'idle' || status === 'pending' || (!isIncorrectReview && (practiceCatalogStatus === 'idle' || practiceCatalogStatus === 'pending'))" class="state-panel" role="status" aria-live="polite" aria-busy="true">
       <UIcon class="spin" name="i-lucide-loader-circle" aria-hidden="true" />
       <p>問題を読み込んでいます</p>
     </div>
@@ -441,12 +498,13 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
       </div>
     </div>
 
+    <div v-else-if="practiceCatalogStatus === 'error'" class="state-panel error-panel" role="alert"><h1>模擬試験を読み込めません</h1><p>通信状況を確認して、もう一度お試しください。</p><button class="secondary-link" type="button" @click="retryQuestion">再読み込み</button></div>
     <div v-else-if="loadErrorMessage || !question" class="state-panel error-panel">
       <UIcon name="i-lucide-circle-alert" />
       <h1>問題を表示できません</h1>
       <p>{{ loadErrorMessage || '指定された公開問題が見つかりませんでした。' }}</p>
       <div class="state-actions">
-        <button class="secondary-link" type="button" @click="() => refresh()">再読み込み</button>
+        <button class="secondary-link" type="button" @click="retryQuestion">再読み込み</button>
         <NuxtLink class="primary-link" to="/practice/1/1">問1から始める</NuxtLink>
       </div>
     </div>
@@ -563,12 +621,13 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
           </div>
 
           <div v-if="completed" class="completed-message">
-            <strong>{{ completionHeading }}</strong>
-            <p>{{ completionMessage }}</p>
+            <IncorrectReviewCompletion v-if="isIncorrectReview" />
+            <template v-else><strong>{{ completionHeading }}</strong>
+            <p>{{ completionMessage }}</p></template>
             <NuxtLink class="secondary-link" to="/">トップへ戻る</NuxtLink>
           </div>
           <button v-else class="primary-link next-button" type="button" :disabled="loadingNext" @click="goToNextQuestion">
-            {{ loadingNext ? '読み込み中です' : '次の問題' }}
+            {{ loadingNext ? '読み込み中です' : isIncorrectReview && !nextPracticePosition ? '復習結果を見る' : '次の問題' }}
             <UIcon name="i-lucide-arrow-right" />
           </button>
         </section>

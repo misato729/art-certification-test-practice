@@ -46,7 +46,7 @@ export async function authorizeExam(examNumber: number, user: User | null, db?: 
 }
 
 /** Parent visibility applies consistently to direct URLs, grading, catalog and saved learning records. */
-async function publicQuestionWhere(db: Database): Promise<Prisma.QuestionWhereInput> {
+export async function publicQuestionWhere(db: Database): Promise<Prisma.QuestionWhereInput> {
   const hidden = await db.examSet.findMany({ where: { publication_status: { not: 'published' } }, select: { exam_number: true } })
   return { publication_status: 'published', exam_number: { notIn: hidden.map(set => set.exam_number) },
     OR: [{ group_id: null }, { group: { is: { publication_status: 'published' } } }] }
@@ -133,7 +133,9 @@ export async function answerQuestion(id: number, selectedChoiceId: unknown, user
   }, db)
 }
 
-export async function listExams(user: User | null, db: Database = getDatabase()) {
+export async function listExams(user: User | null, db: Database = getDatabase(), params: Record<string, unknown> = {}) {
+  // Taxonomy is master-only until questions are explicitly assigned to it.
+  if (await validateStudyFilter(params, db)) return { data: [] }
   const published = record(await db.question.findMany({ where: await publicQuestionWhere(db),
     include: { group: { select: { group_number: true } } } }))
   published.sort((a, b) => a.exam_number - b.exam_number || (a.group?.group_number ?? 0) - (b.group?.group_number ?? 0) ||

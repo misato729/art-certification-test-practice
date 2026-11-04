@@ -8,13 +8,13 @@ const header = source('components/SiteHeader.vue')
 const sidebar = source('components/ExamSidebar.vue')
 
 test('one shared exam sidebar is rendered inside the sticky site header', () => {
-  assert.equal(layout.match(/<ExamSidebar\s*\/>/g)?.length, 1)
-  assert.match(layout, /<SiteHeader>\s*<ExamSidebar\s*\/>\s*<\/SiteHeader>/)
+  assert.equal(layout.match(/<ExamSidebar\b/g)?.length, 1)
+  assert.match(layout, /<SiteHeader>\s*<ExamSidebar\b[^>]*\/>\s*<\/SiteHeader>/)
   assert.match(header, /<slot\s*\/>\s*<\/header>/)
   assert.match(header, /\.site-header\s*\{[^}]*position:\s*sticky;[^}]*top:\s*0;/)
 })
 
-test('mobile accordion starts closed and keeps a separate question accordion', () => {
+test('mobile accordion starts closed and keeps a separate group accordion', () => {
   assert.match(sidebar, /const mobileOpen = ref\(false\)/)
   assert.match(sidebar, /:aria-expanded="mobileOpen"/)
   assert.match(sidebar, /aria-controls="exam-sidebar-content"/)
@@ -24,12 +24,34 @@ test('mobile accordion starts closed and keeps a separate question accordion', (
   assert.match(sidebar, /\.mobile-open \.sidebar-content\s*\{ display: block; \}/)
 })
 
-test('navigation closes the mobile list without adding API calls', () => {
+test('navigation closes the mobile list and shares the published catalog', () => {
   assert.match(sidebar, /watch\(\(\) => route.fullPath, closeMobileList\)/)
-  assert.equal(sidebar.match(/@click="closeMobileList"/g)?.length, 2)
-  assert.match(sidebar, /@keydown.esc="closeMobileOnEscape"/)
+  assert.equal(sidebar.match(/@click="closeMobileList"/g)?.length, 3)
+  assert.match(sidebar, /@keydown.esc="closeSidebarOnEscape"/)
   assert.match(sidebar, /mobileToggle.value\?\.focus\(\)/)
+  assert.match(sidebar, /usePracticeCatalog\(/)
   assert.doesNotMatch(sidebar, /\b(?:useFetch|useApi|\$fetch)\s*\(/)
+})
+
+test('sidebar labels mock exams and links published groups without listing child questions', () => {
+  assert.match(sidebar, /catalogExamLabel\(exam.exam_number\)/)
+  assert.match(sidebar, /catalogGroupLinks\(exam\)/)
+  assert.match(sidebar, /v-for="entry in exam.groupLinks"/)
+  assert.match(sidebar, /catalogGroupLabel\(entry.group\)/)
+  assert.match(sidebar, /isCatalogGroupActive\(exam, group,/)
+  assert.match(sidebar, /:to="entry.to"/)
+  assert.doesNotMatch(sidebar, /v-for="question in exam.question_numbers"/)
+  assert.doesNotMatch(sidebar, /exam.title\s*\|\|/)
+  assert.match(sidebar, /v-else-if="!exams.length"/)
+  assert.match(sidebar, /createSidebarExamCatalog\(/)
+  assert.doesNotMatch(sidebar, /v-if="exam.groupLinks.length"/)
+  assert.match(sidebar, /プレミアム会員で利用/)
+  assert.match(sidebar, /演習を開始/)
+})
+
+test('group titles wrap within the sidebar and keep comfortable link targets', () => {
+  assert.match(sidebar, /\.group-list a\s*\{[^}]*min-width:\s*0;[^}]*min-height:\s*44px;[^}]*overflow-wrap:\s*anywhere;/)
+  assert.match(sidebar, /\.exam-link\s*\{[^}]*min-width:\s*0;[^}]*overflow-wrap:\s*anywhere;/)
 })
 
 test('home anchor leaves room for both mobile header rows', () => {
@@ -46,6 +68,7 @@ test('mobile exam grid shows two columns and reserves three compact rows', () =>
   assert.match(mobileStyles, /var\(--exam-row-height\) \* 3 \+ var\(--exam-grid-gap\) \* 2 \+ 25px/)
   assert.doesNotMatch(mobileStyles, /\.exam-group.expanded\s*\{[^}]*grid-column/)
   assert.match(mobileStyles, /width: calc\(200% \+ var\(--exam-grid-gap\)\)/)
-  assert.match(mobileStyles, /\.exam-group:nth-child\(even\) \.question-list\s*\{\s*margin-left: calc\(-100% - var\(--exam-grid-gap\)\)/)
+  assert.match(mobileStyles, /\.exam-group:nth-child\(even\) \.group-list\s*\{\s*margin-left: calc\(-100% - var\(--exam-grid-gap\)\)/)
+  assert.match(mobileStyles, /\.group-list\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\)/)
   assert.match(mobileStyles, /overflow-y: auto/)
 })

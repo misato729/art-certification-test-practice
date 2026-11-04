@@ -106,3 +106,8 @@ GitHub Actionsの`harness`ジョブで先に資料保護とこの回帰検査を
 共有スキーマでv1互換、v2の所属・参照・インラインID・未知属性・公開整合を検査します。DB/APIでは同一模試・大問の制約、公開親による直接取得・採点の制限、編集競合、本文変更後の古い回答拒否、履歴の保持、取込・書出しの往復、同一問題への階層付与と反復時の無変更を確認します。
 
 Playwrightの`mock-exam.spec.ts`は全85問の表示・採点と80→81問の4/6択境界を維持します。`grouped-practice.spec.ts`は本文の開閉保持、参照先への移動、大問変更時の破棄、更新前履歴を確認し、`grouped-admin.spec.ts`は共有UFormでの所属・本文編集を確認します。いずれも独立したテストDBと合成会員を使用します。条件・利用者の変更による本文状態の破棄と古い非同期応答の拒否は`practicePassageState.test.ts`でも確認します。
+
+
+## 静的トップ・大問サイドバー・誤答復習
+
+関連単体は`examSidebarLayout.test.ts`・`sidebarCatalog.test.ts`・`mixedExamNavigation.test.ts`、API/DBは`incorrect-review.test.ts`・`study-categories.test.ts`と学習/ルート検査を使用します。`world-ui-review.spec.ts`は通常の隔離ハーネスで、静的入口の初回カタログ通信なし、PC折畳み/スマホ展開、静的大問入口の公開位置解決、疎な位置の次問、カタログ再試行、最新誤答・一巡・残数/0件・完了時通信失敗・ログイン期限切れを検証します。通常の`study-categories.spec.ts`も併せてジャンルと受験科目プリセットを確認します。いずれも既存DBや公開サイトを検証用会員・履歴で変更しません。

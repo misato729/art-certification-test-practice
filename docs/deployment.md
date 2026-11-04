@@ -66,3 +66,8 @@ Fly.io公式CLIは一時領域へ導入し、既存のシェル設定/PATHは変
 ## Git連携とビルド停止
 
 Git連携時にはNetlifyがビルドを有効化するため、連携後にUIでStopped buildsを保存し、APIでrepo/mainとstop_builds=trueを再確認しました。連携時に初回デプロイ1件が自動作成されましたがerrorで終了し、公開されていません。公開中のproduction deployは6aeb081120217ca85b03ef73のままです。実装コミットf6afdc5には[skip netlify]も付け、push後もstop_builds=true・デプロイ履歴2件（増分0）・公開版の維持を確認しました。GitHub Actions run41818378785はharness・verify・browserの全3ジョブが成功しました。原資料・接続設定・ローカルNeon関連付けは送信していません。
+
+
+## サイドバー・静的トップ・誤答復習の更新
+
+2026年11月4日の追加依頼で、確認済み変更をmainへ送信してFly APIとNetlify画面を手動再配信します。自動ビルドは停止のまま維持します。DBモデル/マイグレーションの追加はなく、既存の問題・分類・履歴は保持します。GitHub Actionsの確認後、静的ファイルのみをNetlify CLIのno-build/production指定でアップロードし、Flyは既存の地域/容量/環境設定を維持します。最新の配信結果と確認範囲はdocs/verification.mdへ記録します。

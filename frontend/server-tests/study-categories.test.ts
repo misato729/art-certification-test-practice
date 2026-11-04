@@ -6,7 +6,7 @@ import { join } from 'node:path'
 import { closeDatabase, isolatedTransaction } from '../server/core/db.ts'
 import { importStudyCategories, STUDY_CATEGORY_CONFIRMATION } from '../server/operations/study-categories.ts'
 import { listStudyCategories, validateStudyFilter } from '../server/services/study-categories.ts'
-import { nextQuestion } from '../server/services/learning.ts'
+import { nextQuestion, listExams } from '../server/services/learning.ts'
 import { saveQuestion } from '../server/services/learning-writer.ts'
 import { configuration } from '../server/core/config.ts'
 import { choiceLabelsForQuestion } from '../shared/schemas/exam.ts'
@@ -47,6 +47,9 @@ test('master import is atomic, idempotent, conflict-safe and leaves the existing
       assert.equal(catalog.data.study_outline[1]!.children.length, 0)
       assert.equal(await validateStudyFilter({}, db), false)
       assert.equal(await validateStudyFilter({ study_category_codes: 'test_part,test_section' }, db), true)
+      assert.deepEqual((await listExams(null, db, { study_category_codes: 'test_part,test_section' })).data, [])
+      assert.deepEqual((await listExams(null, db, { study_category_codes: ['test_part', 'test_section'] })).data, [])
+      await assert.rejects(listExams(null, db, { study_part_code: ['test_part', 'test_empty'] }), (error: any) => error.status === 400)
       await assert.rejects(validateStudyFilter({ study_category_codes: 'test_scope' }, db), (error: any) => error.status === 400)
       await assert.rejects(nextQuestion({ study_category_codes: 'test_part' }, null, db), (error: any) => error.status === 404)
       assert.equal(await validateStudyFilter({ study_part_code: 'test_part', study_section_code: 'test_section', study_scope_codes: 'test_scope' }, db), true)

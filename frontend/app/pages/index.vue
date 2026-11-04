@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { categoryLeafCodes, categorySelectionState, toggleCategoryCodes, presetCategoryCodes, presetSelectionState, toggleStudyPreset, type StudyPreset } from '~/utils/studyCategorySelection'
 import type { StudyCategoryNode } from '../../shared/schemas/study-categories'
-import { EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM } from '~/utils/examCatalog'
+import { EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM, catalogExamLabel, catalogExamStartNumber, type ExamCatalogEntry } from '~/utils/examCatalog'
 import {
   createPracticeSeed,
   createPracticeSequence,
@@ -9,7 +9,7 @@ import {
   type PracticeOrder,
 } from '~/utils/practiceSequence'
 
-type LauncherMode = 'exam' | 'conditions'
+type LauncherMode = 'exam' | 'conditions' | 'incorrect'
 
 const title = SITE.name
 const description = SITE.description
@@ -23,11 +23,15 @@ useSeoMeta({
 
 const questionNumbers = Object.freeze(Array.from({ length: QUESTIONS_PER_EXAM }, (_, index) => index + 1))
 
-const { user } = useAuth()
+const { user, isLoggedIn } = useAuth()
 const launcherMode = ref<LauncherMode>('exam')
 const { $api: api } = useNuxtApp()
-const { data: studyCatalog, error: studyError, refresh: refreshStudy } = await useAsyncData('study-categories', () => api<{ data: { exam_scope: StudyCategoryNode[], study_outline: StudyCategoryNode[] } }>('/api/v1/study_categories'), { server: false })
-const { data: publishedExams } = await useAsyncData('condition-exams', () => api<{ data: { exam_number: number, title: string, question_numbers: number[] }[] }>('/api/v1/exams'), { server: false })
+const { data: studyCatalog, error: studyError, refresh: refreshStudy } = await useAsyncData('study-categories', () => api<{ data: { exam_scope: StudyCategoryNode[], study_outline: StudyCategoryNode[] } }>('/api/v1/study_categories'), { server: false, immediate: false })
+watch(launcherMode, mode => { if (mode === 'conditions' && !studyCatalog.value) void refreshStudy() })
+const catalogEnabled = computed(() => isLoggedIn.value || launcherMode.value === 'conditions')
+const { data: publicCatalog, status: catalogStatus, error: catalogError, refresh: refreshCatalog } = usePracticeCatalog(catalogEnabled)
+const staticExams: ExamCatalogEntry[] = EXAM_CATALOG.map(exam => ({ exam_number: exam.exam_number, question_numbers: [] }))
+const catalogExams = computed(() => catalogEnabled.value ? publicCatalog.value ?? [] : staticExams)
 const selectedCategories = ref<string[]>([])
 const parts = computed(() => studyCatalog.value?.data.study_outline ?? [])
 const hasStudyFilter = computed(() => selectedCategories.value.length > 0)
@@ -40,7 +44,7 @@ const hasFullAccess = computed(() => (
 ))
 const freeExams = computed(() => EXAM_CATALOG.filter(exam => exam.exam_number <= FREE_EXAM_MAX))
 const availableExams = computed(() => (
-  (hasFullAccess.value ? EXAM_CATALOG : freeExams.value).filter(exam => publishedExams.value?.data.some(item => item.exam_number === exam.exam_number))
+  catalogExams.value.filter(exam => (hasFullAccess.value || exam.exam_number <= FREE_EXAM_MAX) && exam.access !== 'paid_membership_required')
 ))
 const availableExamNumbers = computed(() => availableExams.value.map(exam => exam.exam_number))
 const selectedExamNumbers = ref<number[]>([...availableExamNumbers.value])
@@ -83,13 +87,15 @@ const selectedQuestionCount = computed(() => (
 const conditionSequence = computed(() => createPracticeSequence(
   sortedSelectedExamNumbers.value,
   sortedSelectedQuestionNumbers.value,
-  publishedExams.value?.data ?? [],
+  publicCatalog.value ?? [],
 ))
 const hasConditionSelection = computed(() => Boolean(studyCatalog.value) && !studyError.value && conditionSequence.value.length > 0 && !hasStudyFilter.value)
 
 const examIsLocked = (examNumber: number) => examNumber > FREE_EXAM_MAX && !hasFullAccess.value
-const examTarget = (examNumber: number) => (
-  examIsLocked(examNumber) ? '/premium' : `/practice/${examNumber}/1`
+const examTarget = (exam: ExamCatalogEntry) => (
+  examIsLocked(exam.exam_number) ? '/premium' : catalogEnabled.value && catalogExamStartNumber(exam) !== undefined
+    ? `/practice/${exam.exam_number}/${catalogExamStartNumber(exam)}`
+    : { path: '/practice/start', query: { exams: String(exam.exam_number) } }
 )
 const startConditionalPractice = (order: PracticeOrder) => {
   if (!hasConditionSelection.value) return
@@ -181,6 +187,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
           <UIcon name="i-lucide-list-filter" />
           条件を指定
         </button>
+        <button id="incorrect-mode-tab" type="button" role="tab" :aria-selected="launcherMode === 'incorrect'" aria-controls="incorrect-mode-panel" :class="{ active: launcherMode === 'incorrect' }" @click="launcherMode = 'incorrect'"><UIcon name="i-lucide-list-restart" />間違えた問題</button>
       </div>
 
       <div
@@ -190,8 +197,11 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         role="tabpanel"
         aria-labelledby="exam-mode-tab"
       >
+        <p v-if="catalogEnabled && (catalogStatus === 'pending' || catalogStatus === 'idle')" role="status">模擬試験を読み込んでいます。</p>
+        <p v-else-if="catalogError" role="alert">模擬試験を読み込めませんでした。<button type="button" @click="refreshCatalog()">再読み込み</button></p>
+        <p v-else-if="catalogEnabled && !catalogExams.length" role="status">現在利用できる公開問題はありません。</p>
         <div class="exam-grid-heading">
-          <p><strong>全{{ EXAM_CATALOG.length }}回</strong><span>各{{ QUESTIONS_PER_EXAM }}問</span></p>
+          <p><strong>{{ catalogEnabled ? `公開中 ${catalogExams.length}回` : `模擬試験 全${EXAM_CATALOG.length}回` }}</strong><span>大問の順に演習</span></p>
           <NuxtLink v-if="!hasFullAccess" class="premium-info-link" to="/premium">
             <UIcon name="i-lucide-lock-keyhole" />
             模擬試験{{ FREE_EXAM_MAX + 1 }}以降はプレミアム会員向けです
@@ -199,20 +209,20 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         </div>
         <div class="exam-grid">
           <NuxtLink
-            v-for="exam in EXAM_CATALOG"
+            v-for="exam in catalogExams"
             :key="exam.exam_number"
             class="exam-card"
-            :to="examTarget(exam.exam_number)"
+            :to="examTarget(exam)"
             :aria-label="examIsLocked(exam.exam_number) ? `模擬試験${exam.exam_number}はプレミアム会員向けです` : `模擬試験${exam.exam_number}を始める`"
           >
-            <strong>{{ exam.exam_number }}</strong>
-            <UIcon v-if="examIsLocked(exam.exam_number)" name="i-lucide-lock-keyhole" aria-hidden="true" />
+            <span class="exam-card-copy"><strong>{{ catalogExamLabel(exam.exam_number) }}</strong><span v-if="catalogEnabled">{{ exam.groups?.length ? `${exam.groups.length}大問・` : '' }}{{ exam.question_numbers.length }}問収録</span><span v-else>{{ examIsLocked(exam.exam_number) ? 'プレミアム会員向け' : '無料で演習' }}</span></span>
+            <UIcon :name="examIsLocked(exam.exam_number) ? 'i-lucide-lock-keyhole' : 'i-lucide-arrow-right'" aria-hidden="true" />
           </NuxtLink>
         </div>
       </div>
 
       <div
-        v-else
+        v-else-if="launcherMode === 'conditions'"
         id="conditions-mode-panel"
         class="launcher-panel"
         role="tabpanel"
@@ -305,6 +315,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
           </div>
         </form>
       </div>
+      <div v-if="launcherMode === 'incorrect'" id="incorrect-mode-panel" class="launcher-panel" role="tabpanel" aria-labelledby="incorrect-mode-tab"><IncorrectReviewPanel /></div>
     </section>
 
     <section id="usage-guide" class="home-section policy-section" aria-labelledby="usage-guide-title">
@@ -375,9 +386,9 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
 .section-heading::before { content: ''; flex: 0 0 4px; width: 4px; height: 26px; background: var(--teal-dark); }
 .section-heading > span { min-width: 0; }
 .launcher-tabs {
-  width: min(400px, 100%);
+  width: min(660px, 100%);
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 30px;
   border-bottom: 1px solid #bfcfd0;
 }
@@ -581,4 +592,14 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   .update-list article { grid-template-columns: 1fr; gap: 5px; padding: 15px 0; }
   .usage-row { padding: 22px 0; }
 }
+</style>
+
+<style scoped>
+.exam-grid { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.exam-card { min-height: 82px; height: auto; display: flex; justify-content: space-between; gap: 12px; padding: 18px; }
+.exam-card-copy { min-width: 0; display: grid; gap: 10px; }
+.exam-card-copy strong { font-size: 18px; }
+.exam-card-copy > span { font-size: 13px; color: var(--muted); }
+.exam-card :deep(.iconify) { position: static; width: 18px; height: 18px; flex-shrink: 0; }
+@media (max-width:640px) { .launcher-tabs button { font-size:12px; gap:4px; } .launcher-tabs :deep(svg) { width:16px; } .exam-grid { grid-template-columns:minmax(0,1fr); } }
 </style>

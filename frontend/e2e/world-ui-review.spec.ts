@@ -1,0 +1,165 @@
+import { randomBytes } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { mkdir } from 'node:fs/promises'
+import { test, expect } from '@playwright/test'
+
+const content = JSON.parse(readFileSync(new URL('../../content/questions.json', import.meta.url), 'utf8'))
+const fixture = (number: number) => content.questions.find((q: any) => q.question_number === number)
+const screenshotDir = new URL('../../local-only/art-world-ui/', import.meta.url).pathname
+
+test('practice can retry a failed public catalog without a page reload', async ({ page }) => {
+  await page.route('**/api/v1/exams', route => route.fulfill({ status: 503, json: { error: { code: 'synthetic_failure', message: 'Synthetic unavailable' } } }))
+  await page.goto('/practice/1/2')
+  await expect(page.getByRole('heading', { name: '模擬試験を読み込めません', exact: true })).toBeVisible()
+  await page.unroute('**/api/v1/exams')
+  await page.locator('main').getByRole('button', { name: '再読み込み', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '問2', exact: true })).toBeVisible()
+})
+
+test('static home, desktop collapse, mobile accordion and group navigation match the history lab', async ({ page, isMobile }, info) => {
+  const catalogRequests: string[] = []
+  page.on('request', request => {
+    const path = new URL(request.url()).pathname
+    if (['/api/v1/exams', '/api/v1/study_categories', '/api/v1/review_questions/incorrect'].includes(path)) catalogRequests.push(path)
+  })
+  await page.goto('/')
+  await expect(page.getByRole('heading', { name: '問題演習を始める' })).toBeVisible()
+  await expect(page.locator('.site-header .login-link')).toHaveAttribute('href', '/login')
+  await page.waitForLoadState('networkidle')
+  expect(catalogRequests).toEqual([])
+  await page.getByRole('tab', { name: '間違えた問題', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'ログインして復習する', exact: true })).toBeVisible()
+  await page.getByRole('tab', { name: '模試を選ぶ', exact: true }).click()
+  await expect(page.locator('.exam-card')).toHaveAttribute('href', '/practice/start?exams=1')
+  const sidebar = page.getByRole('complementary', { name: '模擬試験一覧' })
+  if (isMobile) {
+    await page.getByRole('button', { name: '模擬試験を開く', exact: true }).click()
+  } else {
+    await expect(sidebar).toHaveCSS('width', '260px')
+    await page.getByRole('button', { name: 'サイドバーを閉じる', exact: true }).click()
+    await expect(sidebar).toHaveCSS('width', '64px')
+    await page.getByRole('button', { name: 'サイドバーを開く', exact: true }).click()
+    await expect(sidebar).toHaveCSS('width', '260px')
+  }
+  await sidebar.getByRole('button', { name: '模擬試験1の大問を開く', exact: true }).click()
+  const links = sidebar.getByRole('navigation', { name: '模擬試験1の大問一覧' }).getByRole('link')
+  await expect(links).toHaveCount(23)
+  const group = content.groups.at(-1)
+  const first = content.questions.find((q: any) => q.group_id === group.id).question_number
+  await links.last().click()
+  await expect(page).toHaveURL(new RegExp(`/practice/1/${first}$`))
+  await expect(page.getByRole('heading', { name: `問${first}`, exact: true })).toBeVisible()
+  if (isMobile) await expect(page.getByRole('button', { name: '模擬試験を開く', exact: true })).toHaveAttribute('aria-expanded', 'false')
+  else await expect(sidebar.locator('[aria-current="location"]')).toHaveCount(1)
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  await mkdir(screenshotDir, { recursive: true })
+  await page.screenshot({ path: `${screenshotDir}sidebar-${info.project.name}.png` })
+  await page.goto('/')
+  await page.locator('.exam-card').click()
+  await expect(page).toHaveURL(/\/practice\/1\/1\?exams=1$/)
+  await expect(page.getByRole('heading', { name: '問1', exact: true })).toBeVisible()
+})
+
+test('start rejects repeated conditions and follows sparse published positions including static group entries', async ({ page, isMobile }) => {
+  const questions: number[] = []
+  page.on('request', request => {
+    const url = new URL(request.url())
+    if (url.pathname === '/api/v1/questions/next') questions.push(Number(url.searchParams.get('question_number')))
+  })
+  await page.goto('/practice/start?exams=1&study_category_codes=part_01&study_category_codes=part_02')
+  await expect(page.getByRole('alert')).toContainText('演習条件の指定が正しくありません')
+  expect(questions).toEqual([])
+  await page.route('**/api/v1/exams', route => route.fulfill({ json: { data: [{ exam_number: 1, title: 'Synthetic sparse set', access: 'available', question_numbers: [2, 5], groups: [{ id: 1, group_number: 1, title: 'Synthetic sparse group', question_numbers: [2, 5] }] }] } }))
+  await page.goto('/')
+  const sidebar = page.getByRole('complementary', { name: '模擬試験一覧' })
+  if (isMobile) await page.getByRole('button', { name: '模擬試験を開く', exact: true }).click()
+  await sidebar.getByRole('button', { name: '模擬試験1の大問を開く', exact: true }).click()
+  await sidebar.getByRole('navigation').getByRole('link').first().click()
+  await expect(page).toHaveURL(/\/practice\/1\/2$/)
+  await expect(page.getByRole('heading', { name: '問2', exact: true })).toBeVisible()
+  await page.locator('.choices label').nth(fixture(2).choices.findIndex((c: any) => c.is_correct)).click()
+  await page.getByRole('button', { name: '回答する', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toBeVisible()
+  await page.getByRole('button', { name: '次の問題', exact: true }).click()
+  await expect(page).toHaveURL(/\/practice\/1\/5$/)
+  await expect(page.getByRole('heading', { name: '問5', exact: true })).toBeVisible()
+  expect(questions).not.toContain(3)
+})
+
+test('latest mistakes are reviewed once in a stable random round, refreshed at completion, and require a live session', async ({ page, context }, info) => {
+  const suffix = randomBytes(8).toString('hex')
+  const password = `Synthetic-${randomBytes(16).toString('hex')}`
+  await page.goto('/signup')
+  await page.getByLabel('ユーザー名', { exact: true }).fill('復習検証')
+  await page.getByLabel('メールアドレス', { exact: true }).fill(`review-${suffix}@example.test`)
+  await page.getByLabel('パスワード', { exact: true }).fill(password)
+  await page.getByLabel('確認用パスワード', { exact: true }).fill(password)
+  await page.getByRole('button', { name: '登録する', exact: true }).click()
+  await expect(page).toHaveURL('/')
+  await expect(page.locator('.site-header .account-link')).toBeVisible()
+  const origin = new URL(page.url()).origin
+  const publicQuestion = async (number: number) => (await (await page.request.get(`/api/v1/questions/next?exam_number=1&question_number=${number}`)).json()).data
+  const record = async (number: number, correct: boolean) => {
+    const q = await publicQuestion(number)
+    const index = fixture(number).choices.findIndex((c: any) => c.is_correct === correct)
+    const response = await page.request.post(`/api/v1/questions/${q.id}/answer`, { headers: { Origin: origin }, data: { selected_choice_id: q.choices[index].id, question_version: q.question_version } })
+    expect(response.status()).toBe(200)
+  }
+  await record(1, false); await record(1, true); await record(5, false)
+  const one = await (await page.request.get('/api/v1/review_questions/incorrect')).json()
+  expect(one.meta.total_count).toBe(1)
+  expect(Object.keys(one.data[0]).sort()).toEqual(['exam_number', 'question_id', 'question_number'])
+  await record(1, false)
+  await page.getByRole('tab', { name: '間違えた問題', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '復習する問題が2問あります' })).toBeVisible()
+  await page.getByRole('button', { name: 'ランダムに復習を始める' }).click()
+  const visited: number[] = []
+  for (let index = 0; index < 2; index++) {
+    await expect(page).toHaveURL(/review=incorrect/)
+    const number = Number(new URL(page.url()).pathname.split('/').at(-1))
+    visited.push(number)
+    await expect(page.getByRole('heading', { name: `問${number}`, exact: true })).toBeVisible()
+    await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toHaveCount(0)
+    const choice = fixture(number).choices.findIndex((c: any) => c.is_correct === (index !== 0))
+    await page.locator('.choices label').nth(choice).click()
+    await page.getByRole('button', { name: '回答する', exact: true }).click()
+    await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toBeVisible()
+    if (index === 1) await page.route('**/api/v1/review_questions/incorrect', route => route.fulfill({ status: 503, json: { error: { code: 'synthetic_failure', message: 'Synthetic unavailable' } } }))
+    const previousUrl = page.url()
+    await page.getByRole('button', { name: index === 0 ? '次の問題' : '復習結果を見る', exact: true }).click()
+    if (index === 0) await expect(page).not.toHaveURL(previousUrl)
+  }
+  expect(visited.sort((a,b) => a-b)).toEqual([1, 5])
+  await expect(page.locator('.review-completion').getByRole('alert')).toContainText('間違えた問題を読み込めませんでした')
+  await expect(page.getByRole('heading', { name: '間違えた問題をすべて正解しました', exact: true })).toHaveCount(0)
+  await page.unroute('**/api/v1/review_questions/incorrect')
+  await page.locator('.review-completion').getByRole('button', { name: '再読み込み', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'まだ1問あります', exact: true })).toBeVisible()
+  await page.getByRole('button', { name: '残っている問題をもう一度復習' }).click()
+  await expect(page.getByRole('button', { name: '回答する', exact: true })).toBeVisible()
+  const number = Number(new URL(page.url()).pathname.split('/').at(-1))
+  await page.locator('.choices label').nth(fixture(number).choices.findIndex((c: any) => c.is_correct)).click()
+  await page.getByRole('button', { name: '回答する', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toBeVisible()
+  await page.getByRole('button', { name: '復習結果を見る', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '間違えた問題をすべて正解しました', exact: true })).toBeVisible()
+  await page.screenshot({ path: `${screenshotDir}review-complete-${info.project.name}.png` })
+  await record(2, false)
+  await page.goto('/')
+  await page.getByRole('tab', { name: '間違えた問題', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '復習する問題が1問あります' })).toBeVisible()
+  await page.getByRole('button', { name: 'ランダムに復習を始める' }).click()
+  await expect(page.getByRole('heading', { name: '問2', exact: true })).toBeVisible()
+  const q = await publicQuestion(2)
+  await context.clearCookies()
+  await page.locator('.choices label').first().click()
+  await page.getByRole('button', { name: '回答する', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'ログインして復習する', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toHaveCount(0)
+  expect((await page.request.get('/api/v1/review_questions/incorrect')).status()).toBe(401)
+  const data = { selected_choice_id: q.choices[0].id, question_version: q.question_version }
+  expect((await page.request.post(`/api/v1/review_questions/${q.id}/answer`, { headers: { Origin: origin }, data })).status()).toBe(401)
+  const anonymous = await page.request.post(`/api/v1/questions/${q.id}/answer`, { headers: { Origin: origin }, data })
+  expect(anonymous.status()).toBe(200)
+  expect((await anonymous.json()).data.answer_history_id).toBeNull()
+})

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 74,
-  "updated_at": "2026-11-04T11:12:02.856Z",
+  "revision": 82,
+  "updated_at": "2026-11-04T11:49:21.738Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T11-12-02-856Z-r74.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T11-49-21-738Z-r82.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1288,6 +1288,130 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "art_world_ui_review",
+      "context": "development",
+      "title": "世界史ラボ式のサイドバー・静的トップ・誤答復習を適用",
+      "status": "done",
+      "depends_on": [
+        "art_cloud_git_link_push"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 ユーザー追加依頼: 世界史ラボのサイドバー仕様、トップページの静的表示と復習機能を同様に反映する",
+      "next_action": "追加依頼を待つ。今回の追加分は未コミット・未公開。",
+      "evidence": [
+        "docs/verification.md",
+        "docs/architecture.md"
+      ],
+      "last_verified_at": "2026-11-04T11:44:29Z",
+      "verification_scope": "世界史式のPC260/64px/スマホ大問サイドバー、静的匿名トップと開始時公開位置解決、最新誤答のランダム固定周回/残数再取得を適用。単体17/API-DB25/型/PC-SP12成功、接続不可DBで静的27ルート/HTML確認。再周回/503/401/疎な位置/条件脱落/非変更を確認。独立レビュー合格、専用DB/ビルド/接続設定削除。既存DB/公開非変更、追加commitpushなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "PC開閉/スマホ展開/大問リンク、静的トップのAPI抑制と開始時解決、最新誤答のランダム一巡復習と完了/認証境界を確認する",
+          "verification": "関連単体/API/型検査と独立testDB起点PlaywrightのPC/SP、既存DBと非破壊性の差分確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "docs/architecture.md",
+            "docs/testing.md"
+          ],
+          "checked_at": "2026-11-04T11:44:29Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が世界史との対応・認証/履歴/正答非開示と資料保護を確認し未解決指摘なし",
+          "verification": "読取専用の独立実装/検証レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "docs/architecture.md",
+            "docs/testing.md"
+          ],
+          "checked_at": "2026-11-04T11:44:29Z",
+          "reviewer": "art_questions"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回レビューで疎な公開位置/重複条件/認証遅延の境界を指摘。PC-SP E2Eは待機不足と開閉ラベルで3件失敗、修正後の全対象再評価を行う",
+            "at": "2026-11-04T11:32:04.602Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "2回目は単体17/API25/型成功、PC-SPは8/12成功。再周回準備で現在round消失と開始元アンマウントが生じたため画面snapshotへ分離、タブ名の検査も修正",
+            "at": "2026-11-04T11:38:56.567Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "単体17/API-DB25/型/PC-SP12、接続不可DBでの静的生成27ルートとHTML確認、再周回→残数0/503再試行/401停止/疎な公開位置と独立レビューが合格",
+            "at": "2026-11-04T11:44:29.757Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_world_ui_release",
+      "context": "operations",
+      "title": "世界史式UIと復習をcommit pushし自動停止のまま手動配信",
+      "status": "doing",
+      "depends_on": [
+        "art_world_ui_review"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 ユーザー明示依頼: ここまでの変更をコミットpushして手動デプロイ。自動デプロイは停止したまま。",
+      "next_action": "明示した差分をcommit/pushしCIを待って手動配信する",
+      "evidence": [
+        "docs/deployment.md",
+        "docs/verification.md"
+      ],
+      "last_verified_at": null,
+      "verification_scope": "未検証。既存コード差分30パス/実装の前回検証を照合し、秘密値/原本を送信しない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "依頼差分のみcommit/pushしremoteとCI成功を確認、FlyとNetlifyを手動配信し公開HTTP/PC-SPと自動停止維持を確認する",
+          "verification": "明示ステージ/資料保護/remote/CI、Fly設定維持、生成物検査、Netlify stop_buildsと手動deploy/HTTP/ブラウザ",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が送信対象、公開差分と検証範囲、秘密/原資料保護を確認し未解決指摘なし",
+          "verification": "読取専用の独立レビュー",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]

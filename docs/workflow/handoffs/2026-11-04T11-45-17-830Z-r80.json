@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "revision": 80,
+  "state_hash": "b5c1f2078ca8ea8406685d071d08e43118760b1fa5d57b94a73afaed555b1fac",
+  "recorded_at": "2026-11-04T11:45:17.830Z",
+  "timezone": "UTC",
+  "context": "development",
+  "task": "art_world_ui_review",
+  "summary": "最終形式・資料保護成功、今回の検証環境を削除し開始前の既存ビルド1件は保持した",
+  "next_action": "追加依頼を待つ。今回の追加分は未コミット・未公開。",
+  "missing_local_files": [],
+  "git": {
+    "available": true,
+    "head": "476c8d2ebeb0053542289a8083064ce74c0031cb",
+    "changes": [
+      {
+        "status": " M",
+        "path": "docs/architecture.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/testing.md"
+      },
+      {
+        "status": " M",
+        "path": "docs/verification.md"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/components/ExamSidebar.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/layouts/default.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/index.vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/pages/practice/[examNumber]/[questionNumber].vue"
+      },
+      {
+        "status": " M",
+        "path": "frontend/app/utils/examCatalog.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server-tests/study-categories.test.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/api/v1/exams.get.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/server/services/learning.ts"
+      },
+      {
+        "status": " M",
+        "path": "frontend/tests/examSidebarLayout.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/components/IncorrectReviewCompletion.vue"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/components/IncorrectReviewPanel.vue"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/composables/useIncorrectReview.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/composables/usePracticeCatalog.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/pages/practice/start.vue"
+      },
+      {
+        "status": "??",
+        "path": "frontend/app/utils/staticExamGroups.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/e2e/world-ui-review.spec.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server-tests/incorrect-review.test.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/review_questions/[id]/answer.post.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/api/v1/review_questions/incorrect.get.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/server/services/incorrect-review.ts"
+      },
+      {
+        "status": "??",
+        "path": "frontend/tests/sidebarCatalog.test.ts"
+      }
+    ]
+  },
+  "file_hashes": {
+    "AGENTS.md": "4824b8c34a5ce59d3076123deb93f2343040d81ad34238759505160ff6ec66f9",
+    "README.md": "7f3d64684d7a25e61cc6989e04ac8bbe255491100a41336a10eafc88a62e033a",
+    "docs/testing.md": "dfb36b88e670b577bfd4947b71c465b695bfb6f920277642b6461e18a267ace5",
+    "docs/workflow/README.md": "ce35c134e34be8261e2478091460df30cd2a2546fba658ba38f25e8411a9f8f8",
+    "docs/workflow/policy.json": "0cda4e27fe6f57e169cc366fe72041a5276557e53ed8286fc82a6adcd3d524f1",
+    "docs/workflow/task.example.json": "4bf161efce99b7d0a26798e3445d1f142505e512eedd591ea11cfb194d67da9f",
+    "docs/workflow/contexts/product.md": "7f77eaf17a9b985a31b40e3ec00c6dc77ca4ae05e8e83084b4af47721b1dc892",
+    "docs/workflow/contexts/development.md": "6236fb55933849a9c2e091fc4b199cbbc44b710502c6613346f1783703a6b25a",
+    "docs/workflow/contexts/operations.md": "d02de6eb127496e226953dc031aad39fb129c2a09e64bc3dcb4b91b0ab9c1efb",
+    "scripts/context.mjs": "3828c41d1cc5a6977b8444035e094e61e1c9895fcaa9451ecb1919e799ecaffc",
+    "scripts/context.test.mjs": "125f184ecd2d34b8a4dc93a8d1edd2b6c527c0de8a46f39c8c92de265ebccc66",
+    "scripts/workflow-policy.mjs": "60535f2c9bf42203c059ca39a0b254c168b7cfb2468904a3842725fe3797141e",
+    "scripts/workflow-policy.test.mjs": "394287e7d1e84756a3ac8833918f964ee66f0ef2c34934d121d055fb37af4782",
+    "scripts/workspace-policy.mjs": "cd575bdc0a83e37ed28f4004c311c2415d895ce9d63b8fe8552ad674269cd219",
+    "scripts/workspace-policy.test.mjs": "22c2dce0ba9006d3266c2628a61e19acae48eb851c34f5a2fdd1d600cfb7944f",
+    "scripts/check-private-sources.mjs": "1d28447b51b39591d42151f236b837b33d695662168ee5c71500205aa0de96af",
+    "scripts/check-private-sources.test.mjs": "db6afd47e6f6e6de3405437960721f037068da4181eb7a81d7ba11477c7d69fb",
+    ".gitignore": "a94b66612f126c5a1850853664366b9b01c2ed29fa1dbd6724e31668f544497d",
+    ".dockerignore": "f4c3506cdf310bdcc90f69836dae139ebca4f3b9831cfaee9da3edc4378e9922",
+    ".githooks/pre-push": "3529b300f7a655102ad899ab31fa8b2c404ec37479d1195aa9bcd3efa97bf90c"
+  },
+  "verification_note": "ハッシュ・Git・記録済み完了条件の確認であり、テストや出典照合の自動再実行ではない。依頼・権限は最新のユーザー指示とAGENTS.mdに従う。"
+}
