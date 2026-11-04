@@ -1,0 +1,2 @@
+/api/*  https://art-history-practice.fly.dev/api/:splat  200!
+/*  /200.html  200

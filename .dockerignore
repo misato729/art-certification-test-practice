@@ -1,4 +1,6 @@
 .git
+/frontend/dist
+.neon
 **/.git
 .env
 .env.*

@@ -1,0 +1,9 @@
+[build]
+base = "frontend"
+command = "npm run generate"
+publish = ".output/public"
+
+[build.environment]
+NODE_VERSION = "24"
+NITRO_PRESET = "static"
+NUXT_PUBLIC_API_BASE = ""

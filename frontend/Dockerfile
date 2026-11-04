@@ -20,4 +20,4 @@ RUN npm run build
 FROM base AS production
 COPY --from=build /workspace/frontend/.output ./.output
 ENV NODE_ENV=production
-CMD ["sh", "-c", "npm run db:migrate && node .output/server/index.mjs"]
+CMD ["sh", "-c", "DATABASE_URL=\"${DIRECT_DATABASE_URL:-$DATABASE_URL}\" npm run db:migrate && node .output/server/index.mjs"]

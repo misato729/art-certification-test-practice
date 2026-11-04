@@ -27,7 +27,7 @@ const { user } = useAuth()
 const launcherMode = ref<LauncherMode>('exam')
 const { $api: api } = useNuxtApp()
 const { data: studyCatalog, error: studyError, refresh: refreshStudy } = await useAsyncData('study-categories', () => api<{ data: { exam_scope: StudyCategoryNode[], study_outline: StudyCategoryNode[] } }>('/api/v1/study_categories'), { server: false })
-const { data: publishedExams } = await useAsyncData('condition-exams', () => api<{ data: { exam_number: number, title: string, question_numbers: number[] }[] }>('/api/v1/exams'))
+const { data: publishedExams } = await useAsyncData('condition-exams', () => api<{ data: { exam_number: number, title: string, question_numbers: number[] }[] }>('/api/v1/exams'), { server: false })
 const selectedCategories = ref<string[]>([])
 const parts = computed(() => studyCatalog.value?.data.study_outline ?? [])
 const hasStudyFilter = computed(() => selectedCategories.value.length > 0)
@@ -118,8 +118,10 @@ const startConditionalPractice = (order: PracticeOrder) => {
 
 watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
   const previouslySelectedAll = (
+    previousExamNumbers.length === 0 || (
     previousExamNumbers.length > 0
     && previousExamNumbers.every(examNumber => selectedExamNumbers.value.includes(examNumber))
+    )
   )
   selectedExamNumbers.value = previouslySelectedAll
     ? [...examNumbers]

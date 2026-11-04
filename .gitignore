@@ -1,4 +1,5 @@
 .env
+/frontend/dist
 .env.*
 !.env.example
 .DS_Store
@@ -24,3 +25,4 @@
 
 # User-supplied exam references remain local.
 **/[pP][aA][sS][tT]-[eE][xX][aA][mM]/
+.neon

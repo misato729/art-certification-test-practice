@@ -430,3 +430,19 @@ CIのverifyは移行履歴テスト2件で失敗しました。分類追加後�
 追加修正を`1fd4b50c285cebd10b461ec20d422d4dfcd8b3dc`でmainへpushし、直後のリモート一致・分岐0/0・作業ツリーcleanを確認しました。art_questionsもGitHub connectorでmain OIDを独立に照合し、追加commitが確認済み7ファイルのみで検証記録と一致することを確認しました。
 
 追加コミットのGitHub Actions [run 41756832275](https://github.com/misato729/art-certification-test-practice/actions/runs/41756832275)はharness・verify・browserの全3ジョブが成功しました。verifyのDB/APIとフロント単体・型検査・本番ビルド、browserのPC/スマートフォンフローも成功です。先行runの失敗は上記のまま保持しています。完了記録の同期には`[skip ci]`を使い、実装の検証成功と記録のみの追加コミットを区別します。原資料や分類取込JSON・接続設定・バックアップは送信せず、公開環境への手動反映/配信設定変更も行っていません。
+
+# art-history-practiceの新規公開とNeonツール導入（2026年11月4日）
+
+新規のNetlify/Fly.io/Neonへ配信しました。変更一覧、接続方式、公開URL、データ件数、失敗と修正、Neonスキル/OAuth MCPの導入範囲と未確認範囲は[配信手順と全変更](deployment.md)を参照します。
+
+Netlify site edf75882-5328-468f-857f-04d65dfc83b7、production deploy 6aeb081120217ca85b03ef73です。Flyはart-history-practice、machine 82d1315b246478/nrtで初回配信と秘密設定更新が成功。Neonはbillowing-credit-23159408のproject nameをart-history-practiceへ変更しました。当初の旧名で作成したFlyアプリは未配信のまま削除し、新名のアプリだけを使用しています。
+
+公開APIで1模試85問、分類41件、問1の4択と正答非開示、管理API401、auth session200を確認。静的生成・型検査・資料保護/差分形式の検査に成功しました。MCPはproject IDへ限定したOAuth接続としてCodexが認識し、本人の初回OAuth承認は未実施です。配信操作にはCLI認証を使用しました。公開サイトの新規会員・解答送信は行っていません。今回の構成変更・導入設定のコミットpushは未実施です。
+
+art_questionsが最終構成・取込/反復ログ・スキル同一性・OAuth設定・資料除外と検証範囲を独立レビューし、未解決指摘なしでした。公開HTTPの独立取得はレビュー担当のwebツールではできず、rootのOS curlと実ブラウザ結果を根拠として区別しました。今回の軽量ポリシー検査162件も成功しました。
+
+# 配信設定の送信とGit連携・自動ビルド停止（2026年11月4日）
+
+追加依頼により、確認済みの配信設定・ホームの初回読込・Neon2スキルとproject OAuth MCP設定・関連記録をコミットpushします。候補31件の独立レビューは合格し、原資料・production.env・.neon・確認画像・取込スクリプトがGit除外であることを確認しました。軽量ポリシー162件、資料保護・差分形式検査も成功しています。
+
+Netlifyの新規サイトart-history-practiceをGitHub misato729/art-certification-test-practiceのmainへ連携しました。正式な公開手順では連携時にビルドが有効化されるため、UIでStopped buildsへ変更し、APIでstop_builds=trueを確認しました。連携時に作られた初回デプロイ6aeb0ef21607c76e1db04eafはerrorで未公開、元の手動公開版6aeb081120217ca85b03ef73は保持されています。新しいpushでデプロイが増えないことはpush後に確認します。

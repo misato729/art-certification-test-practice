@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 65,
-  "updated_at": "2026-11-04T01:56:19.582Z",
+  "revision": 71,
+  "updated_at": "2026-11-04T11:00:41.294Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T01-56-19-582Z-r65.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T11-00-41-294Z-r71.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1172,6 +1172,108 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "art_cloud_deploy",
+      "context": "operations",
+      "title": "Netlify・Fly.io・Neonを新規作成して美術史ラボを公開",
+      "status": "done",
+      "depends_on": [
+        "art_frontend_taxonomy_push"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 他のラボシリーズと同様にNetlify/Fly.io/Neonへデプロイ。プロジェクトはまだ未作成。追加依頼: プロジェクト名art-history-practice、最新Neonスキル取得と不足するskills/MCP導入、分類41件の公開登録を承認。",
+      "next_action": "追加依頼を待つ。MCP初回本人OAuthは利用時に必要",
+      "evidence": [
+        "docs/deployment.md",
+        "docs/verification.md"
+      ],
+      "last_verified_at": "2026-11-04T10:44:04Z",
+      "verification_scope": "新規art-history-practiceをNetlify/Fly nrt/Neon PG16 Singaporeへ公開。4移行、85問350choices41分類/再取込created0、HTTP200/正答非開示/admin401、PC/SP読取UI・型/静的生成・保護検査を確認。指定Neon skillと同一2skills最新、project OAuth MCP導入/CLI認識、初回OAuth未承認。既存env/他ラボ/原資料保護を維持。Git連携/commitpushなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "新規のNetlify/Fly/Neon構成で公開URL・API・DB移行・既存公開問題と条件UIの動作を確認する",
+          "verification": "関連設定/静的生成/型・本番API/PC-SP確認、データ件数と正答非開示、配信revisionを確認",
+          "status": "passed",
+          "evidence": [
+            "docs/deployment.md",
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T10:44:04Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が分離構成・資料保護・秘密管理と配信根拠を確認する",
+          "verification": "読取専用の独立レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/deployment.md",
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T10:44:04Z",
+          "reviewer": "art_questions"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "新名で新規3サービスを公開。85問/41分類、HTTP/UI/型/静的生成・資料保護・Neon2skills/OAuth MCP設定と独立レビューに合格。MCP初回承認は別途必要と明記",
+            "at": "2026-11-04T10:44:04.627Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_cloud_git_link_push",
+      "context": "operations",
+      "title": "配信・Neon設定を送信しNetlify Git連携をビルド停止で設定",
+      "status": "doing",
+      "depends_on": [
+        "art_cloud_deploy"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 ここまでの変更をコミットpush、NetlifyをGit連携し自動デプロイを切る",
+      "next_action": "明示ステージ・コミットpush後に停止保持/履歴とCIを確認する",
+      "evidence": [
+        "docs/deployment.md",
+        "docs/verification.md"
+      ],
+      "last_verified_at": null,
+      "verification_scope": "送信候補31件の安全性レビュー合格。Netlify repo/main連携後UI StoppedとAPI stop_builds=trueを確認。連携時の初回自動deploy1件はbuild失敗で未公開、既存production版保持。162軽量検査と資料保護/形式検査成功。push後履歴/CI/remoteの確認待ち。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "対象変更だけをコミットpushしremote一致と実行CIを確認、Netlifyのrepo/mainとstop_builds=trueを確認して自動配信を行わない",
+          "verification": "資料保護/差分/明示ステージ/remote/CI、Netlify設定とdeploy履歴・公開URLを確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が送信対象と秘密除外・Git連携/停止の根拠を確認し未解決指摘なし",
+          "verification": "読取専用の独立レビュー",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]
