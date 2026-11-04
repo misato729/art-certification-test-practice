@@ -446,3 +446,9 @@ art_questionsが最終構成・取込/反復ログ・スキル同一性・OAuth�
 追加依頼により、確認済みの配信設定・ホームの初回読込・Neon2スキルとproject OAuth MCP設定・関連記録をコミットpushします。候補31件の独立レビューは合格し、原資料・production.env・.neon・確認画像・取込スクリプトがGit除外であることを確認しました。軽量ポリシー162件、資料保護・差分形式検査も成功しています。
 
 Netlifyの新規サイトart-history-practiceをGitHub misato729/art-certification-test-practiceのmainへ連携しました。正式な公開手順では連携時にビルドが有効化されるため、UIでStopped buildsへ変更し、APIでstop_builds=trueを確認しました。連携時に作られた初回デプロイ6aeb0ef21607c76e1db04eafはerrorで未公開、元の手動公開版6aeb081120217ca85b03ef73は保持されています。新しいpushでデプロイが増えないことはpush後に確認します。
+
+確認済み32ファイルをf6afdc56fac70a80e9831ae12dd68a1c8ae9ecbe（[skip netlify]付き）でコミットしました。初回pushはGitHub側Internal Server Errorで拒否され、remoteが旧OIDのままであることを確認後、通常のpushを再試行して成功しました。強制pushは行っていません。直後の分岐0/0を確認しています。GitHub Actions run41818378785は確認中です。
+
+push成功後のNetlify APIでもrepo/main・stop_builds=true、公開deployのOID維持を確認しました。Git連携直後の履歴2件から増分0で、今回のpushによる自動デプロイは作られていません。完了時にも再確認します。
+
+GitHub Actions [run 41818378785](https://github.com/misato729/art-certification-test-practice/actions/runs/41818378785)はharness・verify・browserの全3ジョブが成功しました。art_questionsもremote mainのOID、32ファイルのmanifest一致、CI全3件の成功と送信後の履歴増分0を独立確認し、未解決指摘なしでした。最終のAPI読取でもrepo/main・stop_builds=true、履歴2件、公開deploy 6aeb081120217ca85b03ef73を再確認しました。完了記録のみの追加コミットには[skip ci]と[skip netlify]を付けます。

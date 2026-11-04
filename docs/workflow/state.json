@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 71,
-  "updated_at": "2026-11-04T11:00:41.294Z",
+  "revision": 74,
+  "updated_at": "2026-11-04T11:12:02.856Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T11-00-41-294Z-r71.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T11-12-02-856Z-r74.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1236,44 +1236,58 @@
       "id": "art_cloud_git_link_push",
       "context": "operations",
       "title": "配信・Neon設定を送信しNetlify Git連携をビルド停止で設定",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "art_cloud_deploy"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-04 ここまでの変更をコミットpush、NetlifyをGit連携し自動デプロイを切る",
-      "next_action": "明示ステージ・コミットpush後に停止保持/履歴とCIを確認する",
+      "next_action": "完了記録だけ同期し、追加依頼を待つ",
       "evidence": [
         "docs/deployment.md",
         "docs/verification.md"
       ],
-      "last_verified_at": null,
-      "verification_scope": "送信候補31件の安全性レビュー合格。Netlify repo/main連携後UI StoppedとAPI stop_builds=trueを確認。連携時の初回自動deploy1件はbuild失敗で未公開、既存production版保持。162軽量検査と資料保護/形式検査成功。push後履歴/CI/remoteの確認待ち。",
+      "last_verified_at": "2026-11-04T11:12:01Z",
+      "verification_scope": "32ファイルをf6afdc5でmainへpushしremote一致/分岐0/0を確認。CI41818378785のharness/verify/browser全成功。Netlify repo/main連携、UI Stopped/API stop_builds=true、push後履歴増分0・既存公開版維持。連携初回1件はerror未公開。ポリシー162・資料保護/差分検査・独立レビュー合格。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "対象変更だけをコミットpushしremote一致と実行CIを確認、Netlifyのrepo/mainとstop_builds=trueを確認して自動配信を行わない",
           "verification": "資料保護/差分/明示ステージ/remote/CI、Netlify設定とdeploy履歴・公開URLを確認",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/deployment.md",
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T11:12:01Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "別担当が送信対象と秘密除外・Git連携/停止の根拠を確認し未解決指摘なし",
           "verification": "読取専用の独立レビュー",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/deployment.md",
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T11:12:01Z",
+          "reviewer": "art_questions"
         }
       ],
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "明示した32ファイルのpush/remote一致、CI全3ジョブ成功、Git連携と停止・履歴増分0、資料保護と独立レビューが合格",
+            "at": "2026-11-04T11:12:01.831Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]
