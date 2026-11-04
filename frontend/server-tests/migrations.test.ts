@@ -11,6 +11,7 @@ import { migrate, migrationRunner, BASELINE_MIGRATION, MIGRATIONS_TABLE, BASELIN
 process.env.APP_ENV = 'test'
 const testUrl = process.env.TEST_DATABASE_URL
 const integration = { skip: !testUrl }
+const expectedMigrations = [BASELINE_MIGRATION, '20261024010000_library_rate_limits', '20261030020000_grouped_questions', '20261104010000_study_categories']
 const baselineSql = await readFile(new URL(`../prisma/migrations/${BASELINE_MIGRATION}/migration.sql`, import.meta.url), 'utf8')
 after(closeDatabase)
 const features = () => ({
@@ -90,10 +91,10 @@ async function isolated(run: (db: Database, databaseUrl: string, raw: pg.Client)
 test('Prisma Migrate deploys an empty schema once and manages its checksum ledger', integration, () => isolated(async (db, databaseUrl) => {
   await migrate({ databaseUrl })
   const ledger = await query<{ migration_name: string, checksum: string }>(`SELECT migration_name,checksum FROM ${MIGRATIONS_TABLE}`, [], db)
-  assert.deepEqual(ledger.map(row => row.migration_name).sort(), [BASELINE_MIGRATION, '20261024010000_library_rate_limits', '20261030020000_grouped_questions'])
+  assert.deepEqual(ledger.map(row => row.migration_name).sort(), expectedMigrations)
   assert.match(ledger[0]!.checksum, /^[a-f0-9]{64}$/)
   await migrate({ databaseUrl })
-  assert.equal((await query(`SELECT 1 FROM ${MIGRATIONS_TABLE}`, [], db)).length, 3)
+  assert.equal((await query(`SELECT 1 FROM ${MIGRATIONS_TABLE}`, [], db)).length, expectedMigrations.length)
   const created = await db.user.create({ data: { name: 'Migration test', email: 'migration@example.invalid', created_at: new Date(), updated_at: new Date() } })
   assert.equal(typeof created.id, 'bigint')
   assert.equal(created.email_verified, false)
@@ -130,7 +131,7 @@ test('explicit baseline retains existing IDs, rows and all historical migration 
   await migrate({ databaseUrl, baseline: true })
   assert.deepEqual(await db.user.findUnique({ where: { id: owner.id } }), owner)
   await migrate({ databaseUrl })
-  assert.equal((await query(`SELECT 1 FROM ${MIGRATIONS_TABLE}`, [], db)).length, 3)
+  assert.equal((await query(`SELECT 1 FROM ${MIGRATIONS_TABLE}`, [], db)).length, expectedMigrations.length)
   assert.deepEqual(await legacyLedgerRows(raw), ledgers, 'baseline and deploy must leave historical ledger rows unchanged')
 }))
 

@@ -111,7 +111,7 @@ const majorCategoryLabel = (code?: string) => (
 
 onMounted(() => { void resolveAccess() })
 watch(isLoggedIn, () => { void resolveAccess() })
-watch([() => user.value?.id, canUseFavorites, page], loadFavorites, { immediate: true })
+watch([sessionVersion, () => user.value?.id, canUseFavorites, page], loadFavorites, { immediate: true })
 </script>
 
 <template>

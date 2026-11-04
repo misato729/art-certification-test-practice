@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 60,
-  "updated_at": "2026-11-04T01:33:25.293Z",
+  "revision": 63,
+  "updated_at": "2026-11-04T01:50:17.397Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T01-33-25-293Z-r60.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T01-50-17-397Z-r63.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1110,10 +1110,12 @@
       ],
       "authorization": "requested",
       "request_ref": "2026-11-04 ユーザー依頼: ここまでの変更をコミット・pushしてください",
-      "next_action": "関連PC/SP E2E、独立再レビュー後に明示リストを更新して送信する",
-      "evidence": [],
+      "next_action": "追加コミットpush後に新しいCI全ジョブを確認する",
+      "evidence": [
+        "docs/verification.md"
+      ],
       "last_verified_at": null,
-      "verification_scope": "完了済みの画面再構成・名称・配色・分類マスター/条件選択・プリセット、対応テスト・手順/検証/進捗記録に限定。原資料/取込JSON/接続設定/DBバックアップは含めない。公開環境や配信設定を変更しない。",
+      "verification_scope": "58cc270をmainへpush、remote一致。CI41755499070のverify移行期待値2件失敗とbrowser再ログインお気に入り失敗を確認し、明示4移行期待値とsessionVersion watchを修正。独立DB移行11件・PC/SP core6件と再レビューが合格。追加コミット/CI全ジョブ待ち。",
       "acceptance": [
         {
           "id": "checks",
@@ -1129,10 +1131,12 @@
           "kind": "review",
           "description": "別担当が対象ファイルと差分、原資料保護、検証記録を照合し未解決の指摘なし",
           "verification": "読取専用でコミット対象の差分と根拠を独立レビュー",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T01:50:16Z",
+          "reviewer": "art_questions"
         }
       ],
       "execution": {
@@ -1147,6 +1151,15 @@
             "failed_criteria": [
               "checks",
               "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "CI verifyで移行履歴テスト2件が旧3件想定のため失敗。分類追加を含む4移行名を明示した期待値へ修正し、独立DBの移行テストと新CIで再評価する",
+            "at": "2026-11-04T01:44:34.584Z",
+            "failed_criteria": [
+              "checks"
             ]
           }
         ]
