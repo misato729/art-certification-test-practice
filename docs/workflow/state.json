@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 82,
-  "updated_at": "2026-11-04T11:49:21.738Z",
+  "revision": 83,
+  "updated_at": "2026-11-04T11:55:25.373Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T11-49-21-738Z-r82.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T11-55-25-373Z-r83.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1380,7 +1380,7 @@
       ],
       "authorization": "requested",
       "request_ref": "2026-11-04 ユーザー明示依頼: ここまでの変更をコミットpushして手動デプロイ。自動デプロイは停止したまま。",
-      "next_action": "明示した差分をcommit/pushしCIを待って手動配信する",
+      "next_action": "期待値修正を追加pushし、全CIの成功後に手動配信する",
       "evidence": [
         "docs/deployment.md",
         "docs/verification.md"
@@ -1393,8 +1393,10 @@
           "kind": "automated",
           "description": "依頼差分のみcommit/pushしremoteとCI成功を確認、FlyとNetlifyを手動配信し公開HTTP/PC-SPと自動停止維持を確認する",
           "verification": "明示ステージ/資料保護/remote/CI、Fly設定維持、生成物検査、Netlify stop_buildsと手動deploy/HTTP/ブラウザ",
-          "status": "pending",
-          "evidence": [],
+          "status": "failed",
+          "evidence": [
+            "docs/verification.md"
+          ],
           "checked_at": null
         },
         {
@@ -1411,7 +1413,18 @@
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "cf4347cのCIはharness/verify成功、browser28/32成功。mock-examの旧トップ/サイドバー期待4件を新表示へ修正し、全85問の検査を保持して再評価",
+            "at": "2026-11-04T11:55:25.373Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          }
+        ]
       }
     }
   ]

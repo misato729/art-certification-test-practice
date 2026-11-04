@@ -124,7 +124,7 @@ async function assertSingleExamName(page: Page) {
   const isMobile = await mobileToggle.isVisible()
   if (isMobile) await mobileToggle.click()
   await expect(page.locator('.exam-sidebar .exam-link')).toHaveCount(1)
-  await expect(page.locator('.exam-sidebar .exam-link')).toHaveText('模擬試験 1')
+  await expect(page.locator('.exam-sidebar .exam-link')).toHaveText('模擬試験1')
   await expect(page.locator('.exam-sidebar .exam-link')).toBeVisible()
   if (isMobile) await mobileToggle.click()
 }
@@ -136,8 +136,8 @@ test('all 85 questions hide answers, render and grade across the four/six-choice
   expect(questions.reduce((total, question) => total + question.choices.length, 0)).toBe(350)
   await page.goto('/')
   await expect(page.locator('.exam-card')).toHaveCount(1)
-  await expect(page.locator('.exam-card strong')).toHaveText('1')
-  await expect(page.locator('.exam-grid-heading')).toContainText('85問')
+  await expect(page.locator('.exam-card strong')).toHaveText('模擬試験1')
+  await expect(page.locator('.exam-grid-heading')).toContainText('大問の順に演習')
   await assertSingleExamName(page)
   await screenshot(page, testInfo, 'mock-home.png')
   for (const [index, question] of questions.entries()) {
@@ -157,8 +157,8 @@ test('all 85 questions hide answers, render and grade across the four/six-choice
 async function chooseAllQuestions(page: Page) {
   await page.goto('/')
   await expect(page.locator('.exam-card')).toHaveCount(1)
-  await expect(page.locator('.exam-card[href="/practice/1/1"]')).toBeVisible()
-  await expect(page.locator('.exam-card strong')).toHaveText('1')
+  await expect(page.locator('.exam-card[href="/practice/start?exams=1"]')).toBeVisible()
+  await expect(page.locator('.exam-card strong')).toHaveText('模擬試験1')
   await page.getByRole('tab', { name: '条件を指定', exact: true }).click()
   await expect(page.locator('.condition-submit strong')).toHaveText('全85問')
   await assertFitsViewport(page)
