@@ -7,14 +7,16 @@ import { OperationError, importContent, importArchiveFile, exportArchive, seedCo
 import { createAdmin, grantVerification, revokeVerification } from './accounts.ts'
 import { auditOperations, expirePendingForUser } from './audit.ts'
 import { restoreDrill } from './restore-drill.ts'
+import { importStudyCategories } from './study-categories.ts'
 import { applyContentStructure } from './structure.ts'
 
-export const commands = ['db:migrate', 'db:baseline', 'db:seed', 'questions:import_content', 'questions:import', 'questions:export', 'questions:apply_structure',
+export const commands = ['categories:import', 'db:migrate', 'db:baseline', 'db:seed', 'questions:import_content', 'questions:import', 'questions:export', 'questions:apply_structure',
   'admin:create', 'verification_access:grant', 'verification_access:revoke', 'payments:expire_pending_checkouts', 'operations:audit', 'operations:restore_drill'] as const
 
 /** Inputs arrive through environment variables so passwords never enter command arguments. */
 export async function runCommand(command: string | undefined, env: NodeJS.ProcessEnv = process.env) {
   switch (command) {
+    case 'categories:import': return importStudyCategories(env.INPUT, env.CONFIRM)
     case 'db:migrate': return { status: 'ok', ...await migrate() }
     case 'db:baseline': return { status: 'ok', ...await migrate({ baseline: true }) }
     case 'db:seed': return seedContent({ path: env.INPUT })

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 35,
-  "updated_at": "2026-10-30T02:50:42.034Z",
+  "revision": 60,
+  "updated_at": "2026-11-04T01:33:25.293Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-10-30T02-50-42-034Z-r35.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T01-33-25-293Z-r60.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -683,6 +683,471 @@
             "summary": "実装コミットをmainへpushしてリモート一致を独立確認。CIの3ジョブ、資料保護、差分形式、ポリシー162件がすべて成功した。",
             "at": "2026-10-30T02:50:41.080Z",
             "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_local_preview",
+      "context": "development",
+      "title": "ローカルサイトを起動してブラウザで確認可能にする",
+      "status": "done",
+      "depends_on": [
+        "art_grouped_questions"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー依頼: ローカルでサイトを起動して、ブラウザで確認できるようにしてください",
+      "next_action": "追加依頼を待つ。ローカルサイトは起動したまま。",
+      "evidence": [
+        "docs/verification.md"
+      ],
+      "last_verified_at": "2026-10-30T03:26:30Z",
+      "verification_scope": "専用Compose DB+ホストNode24のNuxtをlocalhost3400で起動。HTTP200、85問350選択肢23大問12本文、公開状態、正答非開示、ChromeでPC/390px表示と4/6択、5画像を確認。別担当が安全設定・件数・HTTP・他21コンテナ不変を確認。起動を維持。ソース変更・コミットpushなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "専用のローカルDBとサイトが起動し、模擬試験1の23大問85問12本文が使え、PC/スマートフォンのブラウザ表示と接続を確認できる",
+          "verification": "Composeヘルスチェック、HTTP/APIの件数・正答非開示、ブラウザでトップ/大問/4択6択を読取確認し画像をローカル保存する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T03:26:30Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が専用構成・資料保護・起動結果と件数を確認し未解決の指摘がない",
+          "verification": "読取専用で設定・HTTP/DB集計と記録を独立確認する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T03:26:30Z",
+          "reviewer": "template_local_check"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "Composeビルドの公開依存ファイル取得がタイムアウトし起動できなかった。ホストの接続確認もreset。再試行と既存依存関係を利用する方法で復旧を進める。",
+            "at": "2026-10-30T03:11:42.071Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "ネットワーク取得に依存しない既存Node24と専用DBで復旧。HTTP・85問の件数・ChromeのPC/SP表示・正答非開示・別担当レビューに合格した。",
+            "at": "2026-10-30T03:26:31.425Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_passage_single_column",
+      "context": "development",
+      "title": "共通本文と小問を1カラム構成に変更",
+      "status": "done",
+      "depends_on": [
+        "art_local_preview"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-10-30 ユーザー依頼: 共通本文と小問は1カラム構造にしてください",
+      "next_action": "追加依頼を待つ。",
+      "evidence": [
+        "docs/verification.md"
+      ],
+      "last_verified_at": "2026-10-30T05:01:17Z",
+      "verification_scope": "CSSのみで共通本文→小問の1列に変更。Vue/CSS構文・差分検査、ChromeのPlaywright APIで1280px/390pxの同幅・縦並び・横はみ出しなし、開閉と参照の再展開/フォーカス、画像2枚の目視、独立レビューに合格。既存差分保持、DB変更・全件検査・コミットpushなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "PCとスマートフォンの両方で共通本文が小問の上に並び、同じ幅の1列構成で横はみ出しなく表示される",
+          "verification": "変更差分と構文を確認し、起動中サイトのブラウザで本文/小問の位置・幅と開閉・参照を読取確認し画像を保存する",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T05:01:17Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が限定差分と検証根拠を確認し未解決の指摘がない",
+          "verification": "実装担当とは異なる担当者による読取レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-10-30T05:01:17Z",
+          "reviewer": "art_questions"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "本文→小問の1列に限定変更。構文・差分検査、PC/SPの同幅/上下配置/横はみ出しなし、本文開閉/参照、独立レビューに合格した。",
+            "at": "2026-10-30T05:01:18.812Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_frontend_template_reset",
+      "context": "development",
+      "title": "DBを保持しフロントをテンプレートから再構成",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 フロント全廃とテンプレート再構成。サイト名は美術史ラボ、サブタイトルは美術検定2級・早慶歴史対策",
+      "next_action": "追加依頼を待つ。コミットpushは未実施。",
+      "evidence": [
+        "docs/verification.md",
+        "README.md",
+        "docs/customization.md"
+      ],
+      "last_verified_at": "2026-11-04T00:18:33Z",
+      "verification_scope": "当初のテンプレートe006f2dから画面一式を再構成。指定のサイト名/サブタイトル、既存共通本文/4択6択を表示。単体129件・最終型/ビルド・Schema/形式・PC/SP使い捨てDB E2E6件(全85問×2含む)・独立レビューに合格。元DB17業務テーブルの件数/全行hashが検証後も一致。server/shared/prisma/content差分0。ローカル退避とバックアップ保持。コミットpushなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "テンプレート画面と指定名称で既存問題を表示し、業務DBの全行ハッシュが変わらない",
+          "verification": "テンプレート比較・型/ビルド・PC/SP表示・DBハッシュ照合",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T00:18:33Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が画面置換とデータ非変更を確認",
+          "verification": "独立した差分と根拠のレビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T00:18:33Z",
+          "reviewer": "art_questions"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回ビルドのヘルパー名誤りと単体3件の互換/実行環境不整合を修正。129件・最終型/ビルドは成功。PC/SP使い捨てDB検証の終了待ち。",
+            "at": "2026-11-04T00:16:23.759Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "単体129件・最終型/ビルド・PC/SPの全85問を含むE2E6件・独立レビューに合格。元DB17業務テーブル全行hash一致、指定名称とテンプレート画面を確認した。",
+            "at": "2026-11-04T00:18:33.391Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_pale_blue",
+      "context": "development",
+      "title": "世界史と区別できる淡い水色へ配色を調整",
+      "status": "done",
+      "depends_on": [
+        "art_frontend_template_reset"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 水色を美術検定に寄せ、世界史と被らない薄い水色に変更",
+      "next_action": "追加依頼を待つ。",
+      "evidence": [
+        "docs/verification.md"
+      ],
+      "last_verified_at": "2026-11-04T00:33:14Z",
+      "verification_scope": "公開中の世界史サイトをブラウザで直接確認し鮮やかなcyanヘッダーと濃紺文字を確認。美術検定公式の白と青も参照し、淡い青寄りの水色へ調整。CSS/Vue/SVG/Schema/差分検査、PC/SPのホーム/問題/選択状態と390px横はみ出しなし、主要コントラスト5.09〜9.85、独立レビューに合格。DB操作・コミットpushなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "淡い水色でヘッダー・背景・選択状態・ロゴの色が揃い、文字と操作が読みやすい",
+          "verification": "CSS/SVG/設定検査、コントラスト計算、PC/SPのホームと問題表示を確認し画像保存",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T00:33:14Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が配色差分と範囲を確認し未解決指摘なし",
+          "verification": "読取の独立レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T00:33:14Z",
+          "reviewer": "art_questions"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "公開版世界史と美術検定公式を直接確認して淡い水色へ調整。PC/SP表示・構文/設定・コントラスト・独立レビューが合格。",
+            "at": "2026-11-04T00:33:15.162Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_taxonomy_db",
+      "context": "development",
+      "title": "PDFの分野情報を階層マスターとしてDBに取り込む",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 美術検定2級_概要と分野.pdfから分野情報をDBへ。世界史ラボの持ち方と実装を確認する",
+      "next_action": "関連付けは追加依頼を待つ",
+      "evidence": [
+        "docs/verification.md",
+        "docs/customization.md",
+        "docs/architecture.md"
+      ],
+      "last_verified_at": "2026-11-04T01:17:44Z",
+      "verification_scope": "41分類(出題範囲7、学習目次6部28項)をPrisma新規移行/明示CLIで取込。再取込無変更、既存16業務表全行hash一致、85問350選択肢23大問12本文保持、単体/専用DB/実API・独立原本レビューに合格。問題関連付けなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "PDFと一致する分類マスターがDBへ保存され、既存問題等を保持し、再取込でも変化しない",
+          "verification": "共有schema・単体・独立testDBでの移行/取込/反復/不一致拒否/API、バックアップと既存DB前後全行hash、現DB件数を確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T01:17:44Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当がPDF画像の全分類と階層・世界史参照・適用根拠を照合し指摘がない",
+          "verification": "読取専用の独立レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T01:17:44Z",
+          "reviewer": "art_group_mapping"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "分類41件取込と再取込無変更、既存16業務表全行hash一致、原本全件/移行の独立レビューと関連検証合格",
+            "at": "2026-11-04T01:17:45.904Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_taxonomy_conditions",
+      "context": "development",
+      "title": "世界史式の分野条件指定を追加",
+      "status": "done",
+      "depends_on": [
+        "art_taxonomy_db"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 追加指示: 問題への紐付けはまだ不要。条件指定も世界史と合わせる。続く追加指示: 分野selectを除去して出題ジャンルのみへ集約し小分類も選択可能にする",
+      "next_action": "問題への関連付けは追加依頼を待つ",
+      "evidence": [
+        "docs/verification.md",
+        "docs/customization.md",
+        "docs/architecture.md"
+      ],
+      "last_verified_at": "2026-11-04T01:17:44Z",
+      "verification_scope": "分野selectを出題ジャンル階層へ集約し大/小分類を選択可能。選択0問/開始不可、分類付きURL400/404と条件保持、解除後85問、順番/ランダム演習、型/PC-SP E2Eと独立レビューに合格。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "DBの分野候補を表示し親子選択が連動、未紐付け条件は0問・開始不可でURL指定でも他の問題を表示しない",
+          "verification": "共有filter/schema・testDBの無結果/不正条件拒否・型・PC/SPブラウザの選択/解除/0件/深いURLを確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T01:17:44Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が世界史との構造対応と条件脱落防止を確認し指摘なし",
+          "verification": "読取レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T01:17:44Z",
+          "reviewer": "art_questions"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "出題ジャンル階層と小分類・0問/開始不可・分類URL保持を検証。単体/DB/型・最新PC-SP E2E8件と独立レビューが合格",
+            "at": "2026-11-04T01:18:08.275Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_exam_presets",
+      "context": "development",
+      "title": "受験世界史・受験日本史で出題ジャンルを一括選択",
+      "status": "done",
+      "depends_on": [
+        "art_taxonomy_conditions"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 ユーザー依頼: 受験世界史は西洋美術史全件とその他のジャンルの東洋美術のみ、受験日本史は日本美術史全件へチェック",
+      "next_action": "追加依頼を待つ。今回のコミットpush・公開なし",
+      "evidence": [
+        "docs/verification.md",
+        "docs/customization.md",
+        "docs/architecture.md"
+      ],
+      "last_verified_at": "2026-11-04T01:17:44Z",
+      "verification_scope": "受験世界史13(西洋12+東洋1)、受験日本史10、両方23、片方解除/余剰再適用/部分表示を単体6・PC/SP E2E8成功と実画面で確認。独立レビュー合格、既存データ保持、コミットpushなし。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "世界史は西洋全件+東洋のみ、日本史は日本全件、両方は和集合。解除/部分選択/手動余剰からの再適用がPC/SPで一致する",
+          "verification": "選択補助unit・型検査・独立testDB起点のPC/SP E2Eと実際のDB分類のブラウザ確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T01:17:44Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が範囲指定と選択状態の整合、UIと検証根拠を確認し未解決指摘なし",
+          "verification": "実装担当と異なる担当者による読取レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T01:17:44Z",
+          "reviewer": "art_questions"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "世界史13/日本史10/両方23、片方解除と部分選択/余剰からの再適用を確認。単体6・型・PC/SP E2E8件・独立最終レビュー合格",
+            "at": "2026-11-04T01:18:11.164Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_frontend_taxonomy_push",
+      "context": "operations",
+      "title": "画面再構成・配色・分類と受験科目選択をコミットpush",
+      "status": "doing",
+      "depends_on": [
+        "art_frontend_template_reset",
+        "art_pale_blue",
+        "art_taxonomy_db",
+        "art_taxonomy_conditions",
+        "art_exam_presets"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-04 ユーザー依頼: ここまでの変更をコミット・pushしてください",
+      "next_action": "関連PC/SP E2E、独立再レビュー後に明示リストを更新して送信する",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "完了済みの画面再構成・名称・配色・分類マスター/条件選択・プリセット、対応テスト・手順/検証/進捗記録に限定。原資料/取込JSON/接続設定/DBバックアップは含めない。公開環境や配信設定を変更しない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "許可範囲の差分だけをコミットpushし、原資料/秘密値を送らずリモート一致と実行されたCIの最終状態を確認する",
+          "verification": "差分/履歴/資料保護/関連する軽量検査、明示ステージ、push後のOID/差分、GitHub Actionsの状態を確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が対象ファイルと差分、原資料保護、検証記録を照合し未解決の指摘なし",
+          "verification": "読取専用でコミット対象の差分と根拠を独立レビュー",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "送信レビューで更新前履歴E2Eの巻き添え削除を確認。共通journeyへ移設し表示ガードを補う。PC/SPの関連検証後に再評価する",
+            "at": "2026-11-04T01:33:25.293Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
           }
         ]
       }

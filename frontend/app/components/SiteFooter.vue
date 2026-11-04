@@ -31,7 +31,7 @@ const { apiStatus } = useApiStatus()
 </template>
 
 <style scoped>
-.site-footer { margin-top: 72px; border-top: 1px solid #d8e1e4; background: #e8eeee; }
+.site-footer { margin-top: 72px; border-top: 1px solid #d8e1e4; background: var(--surface-tint); }
 .footer-inner {
   width: min(1080px, calc(100% - 40px));
   min-height: 88px;
@@ -60,7 +60,7 @@ const { apiStatus } = useApiStatus()
   padding: 0 11px;
   border: 1px solid #c4d0d2;
   border-radius: 6px;
-  background: #f7fafa;
+  background: var(--surface-soft);
   color: #52636c;
   font-weight: 700;
 }

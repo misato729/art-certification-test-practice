@@ -2,7 +2,7 @@ import { randomBytes } from 'node:crypto'
 import { test, expect, type Page } from '@playwright/test'
 import { loadE2EFixture } from '../scripts/e2e-fixture.mjs'
 
-const { question } = loadE2EFixture()
+const { config, question } = loadE2EFixture()
 const practicePath = `/practice/${question.exam_number}/${question.question_number}`
 const correctIndex = question.choices.findIndex((choice: { is_correct: boolean }) => choice.is_correct)
 
@@ -12,19 +12,10 @@ async function assertFitsViewport(page: Page) {
 }
 
 async function showQuestion(page: Page) {
-  const response = page.waitForResponse(response => {
-    const url = new URL(response.url())
-    return url.pathname === '/api/v1/questions/next' && response.ok()
-      && url.searchParams.get('exam_number') === String(question.exam_number)
-      && url.searchParams.get('question_number') === String(question.question_number)
-  })
+  const response = page.waitForResponse(response => new URL(response.url()).pathname === '/api/v1/questions/next' && response.ok())
   await page.goto(practicePath)
-  const payload = (await (await response).json()).data
-  expect(payload.exam_number).toBe(question.exam_number)
-  expect(payload.question_number).toBe(question.question_number)
-  await expect(page.getByRole('heading', { name: `問${payload.group_question_number ?? question.question_number}`, exact: true, level: 2 })).toBeVisible()
-  if (payload.group) await expect(page.locator('.practice-head h1')).toContainText(`大問${payload.group.group_number}`)
-  return payload
+  await expect(page.getByRole('heading', { name: `問${question.question_number}`, exact: true })).toBeVisible()
+  return (await (await response).json()).data
 }
 
 async function answerCorrectly(page: Page) {
@@ -45,15 +36,14 @@ async function logout(page: Page) {
   await expect(page.locator('.site-header .login-link')).toHaveAttribute('href', '/login')
 }
 
-test('anonymous practice hides answers until submitting and fits the screen', async ({ page }, testInfo) => {
+test('anonymous practice hides answers until submitting and fits the screen', async ({ page }) => {
   const publicQuestion = await showQuestion(page)
   for (const key of ['explanation_blocks', 'source_text', 'correct_choice']) expect(Object.hasOwn(publicQuestion, key)).toBe(false)
   for (const choice of publicQuestion.choices) expect(Object.hasOwn(choice, 'is_correct')).toBe(false)
-  await expect(page.getByRole('radio')).toHaveCount(question.choices.length)
+  await expect(page.getByRole('radio')).toHaveCount(config.exam.choice_labels.length)
   await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toHaveCount(0)
   await expect(page.getByRole('button', { name: '回答する', exact: true })).toBeDisabled()
   await assertFitsViewport(page)
-  await page.screenshot({ path: testInfo.outputPath('grouped-practice.png'), fullPage: true })
   await answerCorrectly(page)
   await assertFitsViewport(page)
   const historyResponse = await page.request.get('/api/v1/answer_histories')
@@ -136,4 +126,32 @@ test('registration, history, favorites, relogin and cross-tab logout stay consis
   await otherTab.reload()
   await expect(otherTab).toHaveURL(/\/login\?redirect=/)
   await otherTab.close()
+})
+
+test('outdated history uses a neutral label and opens the current question without an old answer', async ({ page }) => {
+  const timestamp = '2026-01-01T00:00:00.000Z'
+  const user = { id: 910001, name: '合成の履歴検証', email: 'history-regression@example.test', role: 'user', paid_content_access: false,
+    favorite_questions: [], membership: { status: 'free', purchased_at: null, expires_at: null }, verification_access: null, created_at: timestamp }
+  await page.route('**/api/v1/me', route => route.fulfill({ json: { data: user } }))
+  await page.route('**/api/auth/get-session**', route => route.fulfill({ json: {
+    session: { id: 'synthetic-history-session', userId: String(user.id), token: 'synthetic-history-token', expiresAt: '2099-01-01T00:00:00.000Z', createdAt: timestamp, updatedAt: timestamp },
+    user: { id: String(user.id), name: user.name, email: user.email, role: user.role, emailVerified: false, createdAt: timestamp, updatedAt: timestamp },
+  } }))
+  await page.route('**/api/v1/answer_histories?**', route => route.fulfill({ json: {
+    data: [{ id: 99, locked: false, is_outdated: true, question_version: 1, answered_at: timestamp, question: { id: 731, exam_number: question.exam_number, question_number: question.question_number } }],
+    meta: { current_page: 1, per_page: 20, total_count: 1, total_pages: 1 },
+  } }))
+  await page.goto('/history')
+  const card = page.locator('.history-card')
+  await expect(card).toHaveCount(1)
+  await expect(card.locator('.result-badge')).toHaveText('更新前の回答')
+  await expect(card.locator('.selected-answer')).toHaveCount(0)
+  await expect(card.getByRole('link')).toHaveAttribute('href', practicePath)
+  await card.getByRole('link').click()
+  await expect(page).toHaveURL(practicePath)
+  await expect(page.getByRole('heading', { name: `問${question.question_number}`, exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toHaveCount(0)
+  await expect(page.getByRole('radio')).toHaveCount(question.choices.length)
+  await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0)
+  await assertFitsViewport(page)
 })

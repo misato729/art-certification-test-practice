@@ -3,14 +3,17 @@
 
 :root {
   color-scheme: light;
-  --ink: #16232b;
-  --muted: #60717a;
-  --line: #d8e1e4;
+  --ink: #213b4b;
+  --muted: #546e7c;
+  --line: #d2e7f0;
+  --line-strong: #b6d5e4;
   --surface: #ffffff;
-  --surface-soft: #f2f6f6;
+  --surface-soft: #f4f9fe;
+  --surface-tint: #eaf5fc;
+  --surface-selected: #d6eafa;
   --teal: var(--brand-primary, #2563eb);
   --teal-dark: var(--brand-primary-dark, #1b47a9);
-  --aqua: var(--brand-header, #e7eefc);
+  --aqua: #dceefa;
   --yellow: #f4c95d;
   --coral: #e66b54;
   --header-height: 76px;
@@ -27,7 +30,7 @@ body {
 button, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a:focus-visible, button:focus-visible, input:focus-visible {
-  outline: 3px solid rgba(8, 127, 131, 0.28);
+  outline: 3px solid rgba(53, 111, 145, 0.32);
   outline-offset: 3px;
 }
 
@@ -131,8 +134,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   --admin-line-strong: #41545e;
   --admin-text: #edf3f4;
   --admin-muted: #9eafb6;
-  --admin-accent: #27a8ad;
-  --admin-accent-hover: #32bac0;
+  --admin-accent: #86cbe4;
+  --admin-accent-hover: #a4ddf0;
   --admin-danger: #d86a62;
   min-height: 100vh;
   color: var(--admin-text);
@@ -193,7 +196,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   text-decoration: none;
 }
 .admin-navigation a:hover { color: var(--admin-text); background: var(--admin-surface); }
-.admin-navigation a.active { color: #dff8f8; background: #173439; }
+.admin-navigation a.active { color: #e3f3fc; background: #193549; }
 .admin-navigation a.active svg { color: var(--admin-accent-hover); }
 .admin-sidebar-bottom { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--admin-line); }
 .admin-sidebar-bottom button {

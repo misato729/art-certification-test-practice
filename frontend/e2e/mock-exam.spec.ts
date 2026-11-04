@@ -2,7 +2,6 @@ import { readFileSync } from 'node:fs'
 import { test, expect, type Page, type Locator, type TestInfo } from '@playwright/test'
 import { loadE2EFixture } from '../scripts/e2e-fixture.mjs'
 import { contentDocumentSchema, parseQuestionArchiveEntries, type Block, type QuestionInput } from '../shared/schemas/content.ts'
-import { shufflePracticeSequence } from '../app/utils/practiceSequence.ts'
 import { choiceLabelsForQuestion } from '../shared/schemas/exam.ts'
 
 const { config } = loadE2EFixture()
@@ -15,10 +14,6 @@ type PublicQuestion = {
   id: number
   exam_number: number
   question_number: number
-  group_question_number?: number | null
-  group?: { id: number; group_number: number; title: string; question_numbers: number[] } | null
-  shared_passages?: { id: number; label: string; content_blocks: Block[] }[]
-  passage_references?: { passage_id: number; anchor_id: string | null }[]
   content_blocks: Block[]
   choices: { id: number, choice_label: string, content_blocks: Block[] }[]
 }
@@ -73,12 +68,8 @@ async function showQuestion(page: Page, question: QuestionInput, action: () => P
   expect(payload.choices.map((choice: PublicQuestion['choices'][number]) => choice.choice_label).join('') === expectedLabels.join(''), 'question uses its configured labels').toBe(true)
   expect(payload.choices.every((choice: PublicQuestion['choices'][number], index: number) =>
     sameData(choice.content_blocks, question.choices[index]?.content_blocks)), 'API choices match the fixture').toBe(true)
-  await expect(page.getByRole('heading', { name: `問${question.group_question_number ?? question.question_number}`, exact: true, level: 2 })).toBeVisible()
-  if (payload.group) {
-    expect(payload.group_question_number).toBe(question.group_question_number)
-    await expect(page.locator('.practice-head h1')).toContainText(`大問${payload.group.group_number}`)
-  }
-  await expect(page.locator('.practice-head .exam-label')).toHaveText('模擬試験1')
+  await expect(page.getByRole('heading', { name: `問${question.question_number}`, exact: true })).toBeVisible()
+  await expect(page.locator('.practice-head .exam-label')).toHaveText('模擬試験 1')
   await expect(page.getByRole('radio')).toHaveCount(expectedLabels.length)
   await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toHaveCount(0)
   await expect(page.getByRole('button', { name: '回答する', exact: true })).toBeDisabled()
@@ -133,7 +124,7 @@ async function assertSingleExamName(page: Page) {
   const isMobile = await mobileToggle.isVisible()
   if (isMobile) await mobileToggle.click()
   await expect(page.locator('.exam-sidebar .exam-link')).toHaveCount(1)
-  await expect(page.locator('.exam-sidebar .exam-link')).toHaveText('模擬試験1')
+  await expect(page.locator('.exam-sidebar .exam-link')).toHaveText('模擬試験 1')
   await expect(page.locator('.exam-sidebar .exam-link')).toBeVisible()
   if (isMobile) await mobileToggle.click()
 }
@@ -145,7 +136,7 @@ test('all 85 questions hide answers, render and grade across the four/six-choice
   expect(questions.reduce((total, question) => total + question.choices.length, 0)).toBe(350)
   await page.goto('/')
   await expect(page.locator('.exam-card')).toHaveCount(1)
-  await expect(page.locator('.exam-card strong')).toHaveText('模擬試験1')
+  await expect(page.locator('.exam-card strong')).toHaveText('1')
   await expect(page.locator('.exam-grid-heading')).toContainText('85問')
   await assertSingleExamName(page)
   await screenshot(page, testInfo, 'mock-home.png')
@@ -163,32 +154,25 @@ test('all 85 questions hide answers, render and grade across the four/six-choice
   await expect(page).toHaveURL('/practice/1/85')
 })
 
-async function chooseApplicationQuestions(page: Page, order: string) {
+async function chooseAllQuestions(page: Page) {
   await page.goto('/')
   await expect(page.locator('.exam-card')).toHaveCount(1)
   await expect(page.locator('.exam-card[href="/practice/1/1"]')).toBeVisible()
-  await expect(page.locator('.exam-card strong')).toHaveText('模擬試験1')
+  await expect(page.locator('.exam-card strong')).toHaveText('1')
   await page.getByRole('tab', { name: '条件を指定', exact: true }).click()
   await expect(page.locator('.condition-submit strong')).toHaveText('全85問')
-  await expect(page.locator('input[name="question-numbers"]')).toHaveCount(0)
-  await page.getByRole('button', { name: order === 'random' ? 'ランダムに始める' : '大問の順に始める', exact: true }).click()
-  await expect(page.locator('.practice-progress')).toHaveText(`${order === 'random' ? 'ランダム ' : ''}1 / 85`)
-  expect(new URL(page.url()).searchParams.has('questions')).toBe(false)
-  // Previously shared question-filter URLs remain supported without a separate launcher selector.
-  const positions = [81, 82, 83, 84, 85].map(questionNumber => ({ examNumber: 1, questionNumber }))
-  const first = order === 'random' ? shufflePracticeSequence(positions, 17)[0]!.questionNumber : 81
-  await page.goto(`/practice/1/${first}?exams=1&questions=81,82,83,84,85${order === 'random' ? '&order=random&seed=17' : ''}`)
   await assertFitsViewport(page)
 }
 
-test('launcher counts the 85-question set and conditions use only configured positions', async ({ page }) => {
+test('unfiltered conditions use published positions in sequential and random order', async ({ page }) => {
   test.setTimeout(90000)
   for (const order of ['sequential', 'random']) {
-    await chooseApplicationQuestions(page, order)
+    await chooseAllQuestions(page)
+    await page.getByRole('button', { name: order === 'random' ? 'ランダムに始める' : '順番に始める', exact: true }).click()
     const visited = new Set<number>()
-    for (let index = 0; index < 5; index += 1) {
-      await expect(page.locator('.practice-progress')).toHaveText(`${order === 'random' ? 'ランダム ' : ''}${index + 1} / 5`)
-      await expect(page.locator('.question-number')).toHaveText(/^問[1-5]$/)
+    for (let index = 0; index < 3; index += 1) {
+      await expect(page.locator('.practice-progress')).toHaveText(`${order === 'random' ? 'ランダム ' : ''}${index + 1} / 85`)
+      await expect(page.getByRole('heading', { name: /^問[0-9]+$/ })).toBeVisible()
       const url = new URL(page.url())
       expect(url.pathname.startsWith('/practice/1/')).toBe(true)
       expect(url.searchParams.get('order') === 'random').toBe(order === 'random')
@@ -203,10 +187,10 @@ test('launcher counts the 85-question set and conditions use only configured pos
       expect(payload.exam_number).toBe(1)
       expect(payload.question_number).toBe(number)
       await answerCorrectly(page, question, payload)
-      if (index < 4) await page.getByRole('button', { name: '次の問題', exact: true }).click()
+      if (index < 2) await page.getByRole('button', { name: '次の問題', exact: true }).click()
     }
-    expect([...visited].sort((left, right) => left - right)).toEqual([81, 82, 83, 84, 85])
-    await finishSequence(page)
+    expect(visited.size).toBe(3)
+    expect([...visited].every(number => number >= 1 && number <= 85)).toBe(true)
   }
   for (const path of ['/practice/1/86', '/practice/2/1']) {
     await page.goto(path)

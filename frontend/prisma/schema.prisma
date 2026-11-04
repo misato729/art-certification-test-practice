@@ -283,3 +283,22 @@ model QuestionPassageReference {
   @@index([passage_id], map: "question_passage_references_passage_idx")
   @@map("question_passage_references")
 }
+
+model StudyCategory {
+  code String @id @db.VarChar(100)
+  scheme String @db.VarChar(30)
+  parent_code String? @db.VarChar(100)
+  number Int
+  sort_order Int
+  label String @db.VarChar(200)
+  subtitle String? @db.VarChar(200)
+  source_page Int?
+  reference_page Int?
+  parent StudyCategory? @relation("StudyCategoryTree", fields: [parent_code, scheme], references: [code, scheme], onDelete: Restrict, onUpdate: NoAction)
+  children StudyCategory[] @relation("StudyCategoryTree")
+  @@unique([code, scheme])
+  @@unique([scheme, parent_code, number])
+  @@unique([scheme, parent_code, sort_order])
+  @@index([scheme, parent_code, sort_order])
+  @@map("study_categories")
+}

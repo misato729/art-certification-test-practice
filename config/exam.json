@@ -2,13 +2,13 @@
   "schema_version": 1,
   "site": {
     "id": "art-certification-2",
-    "name": "美術検定ラボ",
-    "short_name": "美術ラボ",
-    "exam_name": "美術検定2級",
+    "name": "美術史ラボ",
+    "short_name": "美術史ラボ",
+    "exam_name": "美術検定2級・早慶歴史対策",
     "description": "美術検定2級に向けて、美術史80問・知識と情報の活用5問の模擬試験1を、解説と出典付きで学べます。",
-    "tagline": "一問から広がる、美術の世界。",
+    "tagline": "美術検定2級・早慶歴史対策",
     "logo_path": "/images/logo.svg",
-    "primary_color": "#7c3f63",
+    "primary_color": "#356f91",
     "contact_email": "",
     "overview": [
       {

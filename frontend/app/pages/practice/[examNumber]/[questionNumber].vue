@@ -1,14 +1,24 @@
 <script setup lang="ts">
-import type { NitroFetchOptions } from 'nitropack/types'
-import type { LearningBlock as ContentBlock, GroupPassage, PassageReference } from '../../../../shared/types/learning'
-import { canRetainPassageContext, isCurrentPracticeRequest, reconcilePassageContext, type PracticePassageContext, type PracticeRequestTag } from '~/utils/practicePassageState'
-import { EXAM_CATALOG, FREE_EXAM_MAX, publishedQuestionNumbers } from '~/utils/examCatalog'
+import type { LocationQueryRaw } from 'vue-router'
+import { EXAM_CATALOG, QUESTIONS_PER_EXAM, FREE_EXAM_MAX } from '~/utils/examCatalog'
 import {
-  selectPracticePositions,
+  createPracticeSequence,
   shufflePracticeSequence,
   type PracticeOrder,
   type PracticePosition,
 } from '~/utils/practiceSequence'
+
+type ContentBlock = {
+  type: 'text' | 'quote' | 'fill_in_text' | 'fill_in_quote' | 'fill_in_choice' | 'table' | 'code' | 'code_group'
+  text?: string
+  source?: string
+  title?: string
+  code?: string
+  headers?: string[]
+  rows?: string[][]
+  items?: { title: string, code: string }[]
+  cells?: string[]
+}
 
 type Choice = {
   id: number
@@ -18,6 +28,8 @@ type Choice = {
 }
 
 type Question = {
+  shared_passages?: { id: number; label: string; content_blocks: ContentBlock[] }[]
+  question_version?: number
   id: number
   exam_number: number
   question_number: number
@@ -26,11 +38,6 @@ type Question = {
   category_code: string
   choices: Choice[]
   is_favorite?: boolean
-  group_question_number?: number | null
-  group?: { id: number; group_number: number; title: string; question_numbers: number[] } | null
-  shared_passages?: GroupPassage[]
-  passage_references?: PassageReference[]
-  question_version: number
 }
 
 type AnswerResult = {
@@ -41,13 +48,10 @@ type AnswerResult = {
   explanation_blocks: ContentBlock[]
   source_text: string | null
   answer_history_id: number | null
-  question_version?: number
 }
 
 type AnswerHistoryDetail = {
   id: number
-  question_version?: number
-  is_outdated?: boolean
   question: { id: number }
   selected_choice: { id: number }
   is_correct: boolean
@@ -63,17 +67,14 @@ type SourceReference = {
   url: string | null
 }
 
-definePageMeta({ key: route => `practice:${String(route.params.examNumber)}` })
-
 const route = useRoute()
 const { $api: api } = useNuxtApp()
-const { isLoggedIn, user, sessionVersion, authHeaders } = useAuth()
+const { isLoggedIn, user, authHeaders } = useAuth()
 const { canUseFavorites, isFavorite, setFavorite, toggleFavorite } = useFavorites()
 const updatingFavorite = ref(false)
 
 const allExamNumbers = EXAM_CATALOG.map(exam => exam.exam_number)
-const { data: matchingCatalog, status: catalogStatus, error: catalogError, refresh: refreshCatalog } = await usePublicExamCatalog()
-const allQuestionNumbers = computed(() => publishedQuestionNumbers(matchingCatalog.value?.data ?? []))
+const allQuestionNumbers = Object.freeze(Array.from({ length: QUESTIONS_PER_EXAM }, (_, index) => index + 1))
 
 const parseNumberSelection = (value: unknown, allowedNumbers: readonly number[]) => {
   const serialized = Array.isArray(value) ? value.join(',') : typeof value === 'string' ? value : ''
@@ -87,7 +88,6 @@ const parseNumberSelection = (value: unknown, allowedNumbers: readonly number[])
 
 const examNumber = computed(() => Number(route.params.examNumber))
 const questionNumber = computed(() => Number(route.params.questionNumber))
-const currentExam = computed(() => (matchingCatalog.value?.data ?? []).find(exam => exam.exam_number === examNumber.value))
 const hasConditionSelection = computed(() => (
   route.query.exams !== undefined || route.query.questions !== undefined
 ))
@@ -106,13 +106,13 @@ const selectedPracticeExamNumbers = computed(() => {
   return selected.length > 0 ? selected : [examNumber.value]
 })
 const selectedPracticeQuestionNumbers = computed(() => {
-  if (route.query.questions === undefined) return undefined
-  const selected = parseNumberSelection(route.query.questions, allQuestionNumbers.value)
+  const selected = parseNumberSelection(route.query.questions, allQuestionNumbers)
   if (selected.length > 0) return selected
-  return [...allQuestionNumbers.value]
+  return [...allQuestionNumbers]
 })
-const basePracticeSequence = computed<PracticePosition[]>(() => selectPracticePositions(
-  matchingCatalog.value?.data ?? [], selectedPracticeExamNumbers.value, selectedPracticeQuestionNumbers.value,
+const basePracticeSequence = computed<PracticePosition[]>(() => createPracticeSequence(
+  selectedPracticeExamNumbers.value,
+  selectedPracticeQuestionNumbers.value,
 ))
 const isRandomPractice = computed(() => (
   hasConditionSelection.value
@@ -132,68 +132,57 @@ const nextPracticePosition = computed(() => (
     ? practiceSequence.value[currentPracticeIndex.value + 1] ?? null
     : null
 ))
+const studyRouteQuery = computed(() => Object.fromEntries(['study_category_codes', 'study_part_code', 'study_section_code', 'study_scope_codes'].filter(key => route.query[key] !== undefined).map(key => [key, route.query[key]])))
 const practiceNavigationQuery = computed(() => {
   if (hasConditionSelection.value) {
-    const query: Record<string, string> = {
+    const query: LocationQueryRaw = {
+      ...studyRouteQuery.value,
       exams: selectedPracticeExamNumbers.value.join(','),
+      questions: selectedPracticeQuestionNumbers.value.join(','),
     }
-    if (selectedPracticeQuestionNumbers.value !== undefined) query.questions = selectedPracticeQuestionNumbers.value.join(',')
     if (isRandomPractice.value) {
       query.order = 'random'
       query.seed = String(practiceSeed.value)
     }
     return query
   }
-  return {}
+  return { ...studyRouteQuery.value }
 })
-const validRoutePosition = computed(() => Number.isInteger(examNumber.value) && allExamNumbers.includes(examNumber.value)
-  && Number.isInteger(questionNumber.value) && questionNumber.value > 0 && questionNumber.value <= 10000)
-const validPosition = computed(() => validRoutePosition.value && currentPracticeIndex.value >= 0)
-const conditionScope = computed(() => JSON.stringify(['exams', 'questions', 'order', 'seed'].map(key => route.query[key] ?? null)))
-const scopeGeneration = ref(0)
-const navigationGeneration = ref(0)
-const requestInstance = useId()
-const latestQuestionRequest = ref(0)
-let pageActive = true
-const passageContext = shallowRef<PracticePassageContext | null>(null)
-const requestFailure = shallowRef<{ context: PracticeRequestTag; error: any } | null>(null)
-const sharedPassagePanel = ref<{ showReference: (reference: PassageReference, isCurrent?: () => boolean) => Promise<void> } | null>(null)
-const currentRequestContext = (): PracticeRequestTag => ({ instance: requestInstance, scope: scopeGeneration.value, navigation: navigationGeneration.value, request: latestQuestionRequest.value, examNumber: examNumber.value, questionNumber: questionNumber.value })
-const requestIsCurrent = (context: PracticeRequestTag | undefined) => pageActive && isCurrentPracticeRequest(context, currentRequestContext())
-type TaggedQuestionResponse = ApiResponse<Question> & { requestContext: PracticeRequestTag }
-type QuestionEndpoint = '/api/v1/questions/next'
-const requestQuery = computed(() => ({ exam_number: validRoutePosition.value ? examNumber.value : 0, question_number: validRoutePosition.value ? questionNumber.value : -1 }))
-const questionFetch = (async (request: QuestionEndpoint, options?: NitroFetchOptions<QuestionEndpoint>): Promise<TaggedQuestionResponse> => {
-  const context = { ...currentRequestContext(), request: ++latestQuestionRequest.value }
-  requestFailure.value = null
-  try { return { ...await api<ApiResponse<Question>, QuestionEndpoint>(request, options), requestContext: context } }
-  catch (error) { if (requestIsCurrent(context)) requestFailure.value = { context, error }; throw error }
-}) as typeof api
-const { data: questionResponse, status, refresh } = await useFetch<TaggedQuestionResponse>('/api/v1/questions/next', {
-  key: `practice-question:${requestInstance}`, $fetch: questionFetch, query: requestQuery, headers: authHeaders,
-  server: false, lazy: true, watch: false, getCachedData: () => undefined,
+const validPosition = computed(() => (
+  Number.isInteger(examNumber.value)
+  && allExamNumbers.includes(examNumber.value)
+  && Number.isInteger(questionNumber.value)
+  && allQuestionNumbers.includes(questionNumber.value)
+  && currentPracticeIndex.value >= 0
+))
+
+const requestQuery = computed(() => ({
+  ...studyRouteQuery.value,
+  exam_number: validPosition.value ? examNumber.value : 0,
+  question_number: validPosition.value ? questionNumber.value : -1,
+}))
+
+const {
+  data: questionResponse,
+  status,
+  error: questionError,
+  refresh,
+} = await useFetch<ApiResponse<Question>>('/api/v1/questions/next', {
+  $fetch: api,
+  query: requestQuery,
+  headers: authHeaders,
+  server: false,
+  // 画面遷移をAPIの応答待ちで止めず、起動待ち中も読み込み表示を出す。
+  lazy: true,
 })
+
 const question = computed(() => {
-  if (status.value !== 'success' || !requestIsCurrent(questionResponse.value?.requestContext)) return null
+  // Master-only phase: classified questions have not been assigned yet.
+  if (Object.keys(studyRouteQuery.value).length) return null
   const loaded = questionResponse.value?.data
-  return loaded?.exam_number === examNumber.value && loaded.question_number === questionNumber.value ? loaded : null
+  if (!loaded || loaded.exam_number !== examNumber.value || loaded.question_number !== questionNumber.value) return null
+  return loaded
 })
-const questionError = computed(() => requestIsCurrent(requestFailure.value?.context) ? requestFailure.value?.error : null)
-const retainedPassageContext = computed(() => canRetainPassageContext(passageContext.value, { examNumber: examNumber.value, questionNumber: questionNumber.value, scope: scopeGeneration.value }) ? passageContext.value : null)
-const displayedGroup = computed(() => question.value?.group ?? retainedPassageContext.value?.group)
-const displayedQuestionNumber = computed(() => question.value?.group_question_number ?? (displayedGroup.value ? displayedGroup.value.question_numbers.indexOf(questionNumber.value) + 1 : questionNumber.value))
-const visibleGroupNumbers = computed(() => (displayedGroup.value?.question_numbers ?? []).filter(number => practiceSequence.value.some(position => position.examNumber === examNumber.value && position.questionNumber === number)))
-const questionLoading = computed(() => status.value === 'idle' || status.value === 'pending' || catalogStatus.value === 'idle' || catalogStatus.value === 'pending' || (!requestIsCurrent(questionResponse.value?.requestContext) && !questionError.value))
-const referenceLabel = (reference: PassageReference) => {
-  const passage = question.value?.shared_passages?.find(item => item.id === reference.passage_id)
-  const anchor = passage?.content_blocks.flatMap(block => block.inlines ?? []).find(part => part.type !== 'text' && part.id === reference.anchor_id)
-  if (anchor?.type === 'blank') return `【${passage?.label ?? ''}】 空欄${anchor.label}`
-  return anchor?.type === 'anchor' ? `【${passage?.label ?? ''}】 (${anchor.label})` : `【${passage?.label ?? ''}】`
-}
-const showReference = async (reference: PassageReference) => {
-  const context = currentRequestContext()
-  await sharedPassagePanel.value?.showReference(reference, () => requestIsCurrent(context))
-}
 
 const selectedChoiceId = ref<number | null>(null)
 const answerResult = ref<AnswerResult | null>(null)
@@ -243,7 +232,6 @@ const paywallRequired = computed(() => (
 const paywallNeedsLogin = computed(() => questionErrorStatus.value === 401)
 
 const loadErrorMessage = computed(() => {
-  if (catalogError.value) return '演習条件を確認できませんでした。もう一度お試しください。'
   if (!validPosition.value) return '試験ナンバーまたは問番号が正しくありません。'
   if (paywallRequired.value) return ''
   if (questionError.value || (questionResponse.value && !question.value)) return '指定された公開問題が見つかりませんでした。'
@@ -261,35 +249,32 @@ const completionHeading = computed(() => (
 ))
 const completionMessage = computed(() => {
   if (hasConditionSelection.value) {
-    return `${selectedPracticeExamNumbers.value.length}セット、全${practiceSequence.value.length}問の演習が完了しました。`
+    return `${selectedPracticeExamNumbers.value.length}模試、全${practiceSequence.value.length}問の演習が完了しました。`
   }
-  return `${currentExam.value?.title ?? '選択したセット'}の公開問題をすべて解き終えました。`
+  return `模擬試験 ${examNumber.value} の公開問題をすべて解き終えました。`
 })
 
-let answerRequestVersion = 0
-const resetAnswer = () => {
-  answerRequestVersion++
-  selectedChoiceId.value = null; answerResult.value = null; answerError.value = ''; completed.value = false
-  restoredHistoryId.value = null; submitting.value = false; favoriteModalOpen.value = false
-}
-watch([sessionVersion, () => user.value?.id, () => user.value?.role, () => user.value?.paid_content_access, conditionScope], () => {
-  scopeGeneration.value++; passageContext.value = null; requestFailure.value = null; resetAnswer()
-}, { flush: 'sync' })
-watch([examNumber, questionNumber], () => {
-  navigationGeneration.value++; requestFailure.value = null
-  if (!canRetainPassageContext(passageContext.value, { examNumber: examNumber.value, questionNumber: questionNumber.value, scope: scopeGeneration.value })) passageContext.value = null
-  resetAnswer()
-}, { flush: 'sync' })
-watch(() => route.query.answer_history_id, resetAnswer, { flush: 'sync' })
-watch([() => question.value?.id, () => question.value?.question_version], resetAnswer, { flush: 'sync' })
-watch([scopeGeneration, navigationGeneration], () => { if (pageActive) void refresh() }, { flush: 'post' })
+watch(
+  () => [
+    examNumber.value,
+    questionNumber.value,
+    route.query.exams,
+    route.query.questions,
+    route.query.order,
+    route.query.seed,
+  ],
+  () => {
+    selectedChoiceId.value = null
+    answerResult.value = null
+    answerError.value = ''
+    completed.value = false
+    restoredHistoryId.value = null
+  },
+)
+
 watch(question, (loaded) => {
-  if (!loaded) return
-  passageContext.value = reconcilePassageContext(passageContext.value, loaded, scopeGeneration.value)
-  if (typeof loaded.is_favorite === 'boolean') setFavorite(loaded, loaded.is_favorite)
+  if (loaded && typeof loaded.is_favorite === 'boolean') setFavorite(loaded, loaded.is_favorite)
 }, { immediate: true })
-watch([questionError, catalogError], ([failure, catalogFailure]) => { if (failure || catalogFailure) passageContext.value = null }, { flush: 'sync' })
-onBeforeUnmount(() => { pageActive = false; answerRequestVersion++; passageContext.value = null })
 
 const choiceState = (choice: Choice) => {
   if (!answerResult.value) return { selected: selectedChoiceId.value === choice.id }
@@ -304,9 +289,6 @@ const choiceState = (choice: Choice) => {
 const submitAnswer = async () => {
   if (!question.value || selectedChoiceId.value === null || submitting.value) return
 
-  const context = currentRequestContext()
-  const request = ++answerRequestVersion
-  const currentQuestion = question.value
   submitting.value = true
   answerError.value = ''
 
@@ -316,15 +298,12 @@ const submitAnswer = async () => {
       {
         method: 'POST',
         headers: authHeaders.value,
-        body: { selected_choice_id: selectedChoiceId.value, question_version: currentQuestion.question_version },
+        body: { selected_choice_id: selectedChoiceId.value, question_version: question.value?.question_version },
       },
     )
-    if (request !== answerRequestVersion || !requestIsCurrent(context)) return
     answerResult.value = response.data
   }
   catch (error: any) {
-    if (request !== answerRequestVersion || !requestIsCurrent(context)) return
-    if ((error?.statusCode ?? error?.status) === 409) { answerError.value = '問題が更新されています。再読み込みしてから回答してください。'; return }
     if (error?.statusCode === 401 || error?.status === 401) {
       answerError.value = 'ログインの有効期限が切れました。もう一度ログインしてください。'
       return
@@ -336,7 +315,7 @@ const submitAnswer = async () => {
     answerError.value = '回答を送信できませんでした。通信状況を確認して、もう一度お試しください。'
   }
   finally {
-    if (request === answerRequestVersion) submitting.value = false
+    submitting.value = false
   }
 }
 
@@ -349,9 +328,6 @@ const restoreAnswerHistory = async () => {
   if (!question.value || !isLoggedIn.value || !answerHistoryId.value) return
   if (restoredHistoryId.value === answerHistoryId.value) return
 
-  const context = currentRequestContext()
-  const historyId = answerHistoryId.value
-  const answerVersion = answerRequestVersion
   try {
     const response = await api<ApiResponse<AnswerHistoryDetail>>(
       `/api/v1/answer_histories/${answerHistoryId.value}`,
@@ -359,9 +335,7 @@ const restoreAnswerHistory = async () => {
         headers: authHeaders.value,
       },
     )
-    if (!requestIsCurrent(context) || answerVersion !== answerRequestVersion || historyId !== answerHistoryId.value || !question.value) return
     const history = response.data
-    if (history.is_outdated || (history.question_version !== undefined && history.question_version !== question.value.question_version)) { answerError.value = 'この回答後に問題が更新されています。現在の問題を解き直してください。'; return }
     if (history.question.id !== question.value.id) {
       answerError.value = 'この解答履歴は表示中の問題と一致しません。'
       return
@@ -380,9 +354,7 @@ const restoreAnswerHistory = async () => {
     restoredHistoryId.value = history.id
   }
   catch (error: any) {
-    if (!requestIsCurrent(context) || answerVersion !== answerRequestVersion || historyId !== answerHistoryId.value) return
-    if ((error?.statusCode ?? error?.status) === 409) answerError.value = 'この回答後に問題が更新されています。現在の問題を解き直してください。'
-    else if (error?.statusCode !== 401 && error?.status !== 401) answerError.value = '解答履歴を読み込めませんでした。'
+    if (error?.statusCode !== 401 && error?.status !== 401) answerError.value = '解答履歴を読み込めませんでした。'
   }
 }
 
@@ -453,7 +425,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
 
 <template>
   <div class="page-wrap practice-wrap">
-    <div v-if="questionLoading && !retainedPassageContext" class="state-panel" role="status" aria-live="polite" aria-busy="true">
+    <div v-if="status === 'idle' || status === 'pending'" class="state-panel" role="status" aria-live="polite" aria-busy="true">
       <UIcon class="spin" name="i-lucide-loader-circle" aria-hidden="true" />
       <p>問題を読み込んでいます</p>
     </div>
@@ -469,7 +441,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
       </div>
     </div>
 
-    <div v-else-if="!questionLoading && (loadErrorMessage || !question)" class="state-panel error-panel">
+    <div v-else-if="loadErrorMessage || !question" class="state-panel error-panel">
       <UIcon name="i-lucide-circle-alert" />
       <h1>問題を表示できません</h1>
       <p>{{ loadErrorMessage || '指定された公開問題が見つかりませんでした。' }}</p>
@@ -483,18 +455,17 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
       <header class="practice-head">
         <div>
           <div class="practice-context">
-            <span class="exam-label">{{ currentExam?.title }}</span>
+            <span class="exam-label">模擬試験 {{ question.exam_number }}</span>
             <span v-if="practiceProgress" class="practice-progress">{{ practiceProgress }}</span>
           </div>
-          <h1 v-if="displayedGroup"><span class="group-number">大問{{ displayedGroup.group_number }}</span> {{ displayedGroup.title }}</h1>
-          <h1 v-else>{{ currentExam?.title }}</h1>
+          <h1>問{{ question.question_number }}</h1>
         </div>
         <div class="practice-meta">
           <button
             class="favorite-button"
             :class="{ active: questionIsFavorite }"
             type="button"
-            :disabled="!question || updatingFavorite || (isLoggedIn && !user)"
+            :disabled="updatingFavorite || (isLoggedIn && !user)"
             :aria-pressed="isLoggedIn ? questionIsFavorite : false"
             :aria-label="questionIsFavorite ? 'お気に入りから解除する' : 'お気に入りに登録する'"
             :title="questionIsFavorite ? 'お気に入りから解除' : 'お気に入りに登録'"
@@ -506,18 +477,15 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
         </div>
       </header>
 
-      <nav v-if="displayedGroup && visibleGroupNumbers.length > 1" class="group-question-nav" aria-label="大問内の小問"><NuxtLink v-for="number in visibleGroupNumbers" :key="number" :to="{ path: `/practice/${examNumber}/${number}`, query: practiceNavigationQuery }" :aria-current="number === questionNumber ? 'page' : undefined">問{{ displayedGroup.question_numbers.indexOf(number) + 1 }}</NuxtLink></nav>
-      <div class="practice-columns" :class="{ 'has-passage': Boolean(retainedPassageContext) }">
-      <SharedPassagePanel v-if="retainedPassageContext" :key="`${retainedPassageContext.scope}:${retainedPassageContext.key}`" ref="sharedPassagePanel" :passages="retainedPassageContext.passages" />
-      <section class="question-panel" :aria-busy="questionLoading">
-        <h2 class="question-number">問{{ displayedQuestionNumber }}</h2>
-        <div v-if="questionLoading" class="question-loading" role="status">問題を読み込んでいます。</div>
-        <template v-else-if="question">
+      <section v-if="question.shared_passages?.length" class="question-panel shared-reading" aria-label="共通本文">
+        <h2>共通本文</h2>
+        <div v-for="passage in question.shared_passages" :key="passage.id"><h3>【{{ passage.label }}】</h3><QuestionContentBlocks :blocks="passage.content_blocks" /></div>
+      </section>
+      <section class="question-panel">
         <div class="question-text">
           <QuestionContentBlocks :blocks="question.content_blocks" />
         </div>
 
-        <div v-if="question.passage_references?.length" class="passage-references" aria-label="参照する本文"><button v-for="reference in question.passage_references" :key="`${reference.passage_id}-${reference.anchor_id ?? 'all'}`" type="button" @click="showReference(reference)">{{ referenceLabel(reference) }}を確認</button></div>
         <div class="choices" role="radiogroup" aria-label="選択肢">
           <label
             v-for="choice in question.choices"
@@ -604,9 +572,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
             <UIcon name="i-lucide-arrow-right" />
           </button>
         </section>
-        </template>
       </section>
-      </div>
     </template>
 
     <Teleport to="body">
@@ -648,18 +614,8 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
 </template>
 
 <style scoped>
-.practice-columns { display: grid; align-items: start; gap: 22px; }
-.practice-columns.has-passage { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
-.practice-head > div:first-child { min-width: 0; flex: 1; }
-.practice-head h1 { overflow-wrap: anywhere; }
-.group-number { white-space: nowrap; }
-.question-number { margin: 0 0 18px; font-size: 20px; }
-.group-question-nav, .passage-references { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-.group-question-nav a, .passage-references button { min-height: 40px; display: inline-flex; align-items: center; padding: 8px 12px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--teal-dark); font-weight: 700; text-decoration: none; cursor: pointer; }
-.group-question-nav a[aria-current="page"] { border-color: var(--teal); background: var(--surface-soft); }
-.question-loading { min-height: 120px; display: grid; place-items: center; color: var(--muted); }
-@media (max-width: 1000px) { .practice-columns.has-passage { grid-template-columns: minmax(0, 1fr); } }
-
+.shared-reading { margin-bottom: 22px; }
+.shared-reading h2 { margin-top: 0; }
 .practice-wrap { max-width: 900px; }
 .practice-head { padding: 46px 0 22px; display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; }
 .practice-context { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; }
@@ -691,8 +647,8 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
 .choices label:hover:not(:has(input:disabled)) { border-color: var(--teal); }
 .choices input,
 .choice-label { margin-top: 3px; }
-.choices label.selected { border-color: var(--teal); background: #eaf6f5; }
-.choices label.correct { border-color: var(--teal); background: #eaf6f5; }
+.choices label.selected { border-color: var(--teal); background: var(--surface-selected); }
+.choices label.correct { border-color: var(--teal); background: var(--surface-selected); }
 .choices label.incorrect { border-color: var(--coral); background: #fff4f1; }
 .choice-label { min-width: 0; overflow-wrap: anywhere; color: var(--teal-dark); font-weight: 900; }
 .choice-content { min-width: 0; line-height: 1.65; }
@@ -704,7 +660,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
 .next-button:disabled { opacity: .45; cursor: not-allowed; }
 .inline-error { margin: 16px 0 0; color: #a23b2a; font-weight: 700; }
 .answer-result { margin-top: 28px; padding: 24px; border-left: 4px solid var(--coral); background: #fff8f6; }
-.answer-result.correct { border-color: var(--teal); background: #f3fbfa; }
+.answer-result.correct { border-color: var(--teal); background: var(--surface-tint); }
 .result-heading { display: flex; align-items: center; gap: 10px; color: var(--coral); }
 .correct .result-heading { color: var(--teal-dark); }
 .result-heading :deep(svg) { width: 26px; height: 26px; }
@@ -755,7 +711,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
   place-items: center;
   border: 0;
   border-radius: 50%;
-  background: #edf2f2;
+  background: var(--surface-tint);
   color: #41555c;
   cursor: pointer;
 }

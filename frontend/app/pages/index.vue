@@ -1,55 +1,131 @@
 <script setup lang="ts">
-import { FREE_EXAM_MAX, catalogExamStartNumber, type ExamCatalogEntry } from '~/utils/examCatalog'
-import { createPracticeSeed, selectPracticePositions, shufflePracticeSequence, type PracticeOrder } from '~/utils/practiceSequence'
+import { categoryLeafCodes, categorySelectionState, toggleCategoryCodes, presetCategoryCodes, presetSelectionState, toggleStudyPreset, type StudyPreset } from '~/utils/studyCategorySelection'
+import type { StudyCategoryNode } from '../../shared/schemas/study-categories'
+import { EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM } from '~/utils/examCatalog'
+import {
+  createPracticeSeed,
+  createPracticeSequence,
+  shufflePracticeSequence,
+  type PracticeOrder,
+} from '~/utils/practiceSequence'
 
 type LauncherMode = 'exam' | 'conditions'
-useSeoMeta({ title: SITE.name, description: SITE.description, ogTitle: SITE.name, ogDescription: SITE.description })
-const { user } = useAuth()
-const { data: publicCatalog, status: catalogStatus, error: catalogError, refresh: refreshCatalog } = await usePublicExamCatalog()
-const launcherMode = ref<LauncherMode>('exam')
-const hasFullAccess = computed(() => hasFullExamAccess(user.value))
-const catalogExams = computed(() => publicCatalog.value?.data ?? [])
-const availableExams = computed(() => catalogExams.value.filter(exam => exam.access !== 'paid_membership_required' && (hasFullAccess.value || exam.exam_number <= FREE_EXAM_MAX) && catalogExamStartNumber(exam) !== undefined))
-const availableExamNumbers = computed(() => availableExams.value.map(exam => exam.exam_number))
-const selectedExamNumbers = ref<number[]>([])
-let initializedSelection = false
-watch(availableExamNumbers, (numbers, previous = []) => {
-  const selectedAll = !initializedSelection || (previous.length > 0 && previous.every(number => selectedExamNumbers.value.includes(number)))
-  selectedExamNumbers.value = selectedAll ? [...numbers] : selectedExamNumbers.value.filter(number => numbers.includes(number))
-  if (numbers.length) initializedSelection = true
-}, { immediate: true })
-const totalQuestionCount = computed(() => catalogExams.value.reduce((total, exam) => total + (exam.published_question_count ?? exam.question_numbers.length), 0))
-const catalogLoading = computed(() => catalogStatus.value === 'idle' || catalogStatus.value === 'pending')
-const allExamsSelected = computed({
-  get: () => availableExamNumbers.value.length > 0 && availableExamNumbers.value.every(number => selectedExamNumbers.value.includes(number)),
-  set: (selected: boolean) => { selectedExamNumbers.value = selected ? [...availableExamNumbers.value] : [] },
+
+const title = SITE.name
+const description = SITE.description
+
+useSeoMeta({
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description,
 })
-const someExamsSelected = computed(() => selectedExamNumbers.value.length > 0 && !allExamsSelected.value)
-const sortedSelectedExamNumbers = computed(() => [...selectedExamNumbers.value].sort((a, b) => a - b))
-const conditionSequence = computed(() => selectPracticePositions(availableExams.value, sortedSelectedExamNumbers.value))
-const selectedQuestionCount = computed(() => conditionSequence.value.length)
-const hasConditionSelection = computed(() => !catalogLoading.value && !catalogError.value && selectedQuestionCount.value > 0)
-const examIsLocked = (number: number) => catalogExams.value.find(exam => exam.exam_number === number)?.access === 'paid_membership_required' || (number > FREE_EXAM_MAX && !hasFullAccess.value)
-const examTarget = (exam: ExamCatalogEntry) => examIsLocked(exam.exam_number) ? '/premium' : `/practice/${exam.exam_number}/${catalogExamStartNumber(exam)}`
-const starting = ref(false)
-const startConditionalPractice = async (order: PracticeOrder) => {
-  if (!hasConditionSelection.value || starting.value) return
-  starting.value = true
-  try {
-    await refreshCatalog()
-    await nextTick()
-    if (catalogError.value || !conditionSequence.value.length) return
-    const query: Record<string, string> = { exams: sortedSelectedExamNumbers.value.join(',') }
-    let sequence = conditionSequence.value
-    if (order === 'random') {
-      const seed = createPracticeSeed()
-      sequence = shufflePracticeSequence(sequence, seed)
-      query.order = 'random'; query.seed = String(seed)
-    }
-    const first = sequence[0]
-    if (first) await navigateTo({ path: `/practice/${first.examNumber}/${first.questionNumber}`, query })
-  } finally { starting.value = false }
+
+const questionNumbers = Object.freeze(Array.from({ length: QUESTIONS_PER_EXAM }, (_, index) => index + 1))
+
+const { user } = useAuth()
+const launcherMode = ref<LauncherMode>('exam')
+const { $api: api } = useNuxtApp()
+const { data: studyCatalog, error: studyError, refresh: refreshStudy } = await useAsyncData('study-categories', () => api<{ data: { exam_scope: StudyCategoryNode[], study_outline: StudyCategoryNode[] } }>('/api/v1/study_categories'), { server: false })
+const { data: publishedExams } = await useAsyncData('condition-exams', () => api<{ data: { exam_number: number, title: string, question_numbers: number[] }[] }>('/api/v1/exams'))
+const selectedCategories = ref<string[]>([])
+const parts = computed(() => studyCatalog.value?.data.study_outline ?? [])
+const hasStudyFilter = computed(() => selectedCategories.value.length > 0)
+const toggleGroup = (node: StudyCategoryNode, checked: boolean) => { selectedCategories.value = toggleCategoryCodes(selectedCategories.value, categoryLeafCodes(node), checked) }
+const togglePreset = (preset: StudyPreset, checked: boolean) => { selectedCategories.value = toggleStudyPreset(parts.value, selectedCategories.value, preset, checked) }
+
+
+const hasFullAccess = computed(() => (
+  hasFullExamAccess(user.value)
+))
+const freeExams = computed(() => EXAM_CATALOG.filter(exam => exam.exam_number <= FREE_EXAM_MAX))
+const availableExams = computed(() => (
+  (hasFullAccess.value ? EXAM_CATALOG : freeExams.value).filter(exam => publishedExams.value?.data.some(item => item.exam_number === exam.exam_number))
+))
+const availableExamNumbers = computed(() => availableExams.value.map(exam => exam.exam_number))
+const selectedExamNumbers = ref<number[]>([...availableExamNumbers.value])
+const selectedQuestionNumbers = ref<number[]>([...questionNumbers])
+
+const allExamsSelected = computed({
+  get: () => (
+    availableExamNumbers.value.length > 0
+    && selectedExamNumbers.value.length === availableExamNumbers.value.length
+    && availableExamNumbers.value.every(examNumber => selectedExamNumbers.value.includes(examNumber))
+  ),
+  set: (selected: boolean) => {
+    selectedExamNumbers.value = selected ? [...availableExamNumbers.value] : []
+  },
+})
+const someExamsSelected = computed(() => (
+  selectedExamNumbers.value.length > 0 && !allExamsSelected.value
+))
+const allQuestionsSelected = computed({
+  get: () => (
+    selectedQuestionNumbers.value.length === questionNumbers.length
+    && questionNumbers.every(questionNumber => selectedQuestionNumbers.value.includes(questionNumber))
+  ),
+  set: (selected: boolean) => {
+    selectedQuestionNumbers.value = selected ? [...questionNumbers] : []
+  },
+})
+const someQuestionsSelected = computed(() => (
+  selectedQuestionNumbers.value.length > 0 && !allQuestionsSelected.value
+))
+const sortedSelectedExamNumbers = computed(() => (
+  [...selectedExamNumbers.value].sort((left, right) => left - right)
+))
+const sortedSelectedQuestionNumbers = computed(() => (
+  [...selectedQuestionNumbers.value].sort((left, right) => left - right)
+))
+const selectedQuestionCount = computed(() => (
+  hasStudyFilter.value ? 0 : conditionSequence.value.length
+))
+const conditionSequence = computed(() => createPracticeSequence(
+  sortedSelectedExamNumbers.value,
+  sortedSelectedQuestionNumbers.value,
+  publishedExams.value?.data ?? [],
+))
+const hasConditionSelection = computed(() => Boolean(studyCatalog.value) && !studyError.value && conditionSequence.value.length > 0 && !hasStudyFilter.value)
+
+const examIsLocked = (examNumber: number) => examNumber > FREE_EXAM_MAX && !hasFullAccess.value
+const examTarget = (examNumber: number) => (
+  examIsLocked(examNumber) ? '/premium' : `/practice/${examNumber}/1`
+)
+const startConditionalPractice = (order: PracticeOrder) => {
+  if (!hasConditionSelection.value) return
+
+  const query: Record<string, string> = {
+    exams: sortedSelectedExamNumbers.value.join(','),
+    questions: sortedSelectedQuestionNumbers.value.join(','),
+  }
+  let sequence = conditionSequence.value
+
+  if (order === 'random') {
+    const seed = createPracticeSeed()
+    sequence = shufflePracticeSequence(sequence, seed)
+    query.order = order
+    query.seed = String(seed)
+  }
+
+  const firstPosition = sequence[0]
+  if (!firstPosition) return
+
+  navigateTo({
+    path: `/practice/${firstPosition.examNumber}/${firstPosition.questionNumber}`,
+    query,
+  })
 }
+
+watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
+  const previouslySelectedAll = (
+    previousExamNumbers.length > 0
+    && previousExamNumbers.every(examNumber => selectedExamNumbers.value.includes(examNumber))
+  )
+  selectedExamNumbers.value = previouslySelectedAll
+    ? [...examNumbers]
+    : selectedExamNumbers.value.filter(examNumber => examNumbers.includes(examNumber))
+})
+
 </script>
 
 <template>
@@ -75,7 +151,7 @@ const startConditionalPractice = async (order: PracticeOrder) => {
             <span>問題演習を始める</span>
           </h2>
         </div>
-        <p>セットを選ぶか、取り組みたい問題番号を指定して始められます。回答するたびに採点と解説を確認できます。</p>
+        <p>模擬試験を選ぶか、出題ジャンルを指定して始められます。</p>
       </div>
 
       <div class="launcher-tabs" role="tablist" aria-label="問題演習の開始方法">
@@ -89,7 +165,7 @@ const startConditionalPractice = async (order: PracticeOrder) => {
           @click="launcherMode = 'exam'"
         >
           <UIcon name="i-lucide-files" />
-          セットを選ぶ
+          模試を選ぶ
         </button>
         <button
           id="conditions-mode-tab"
@@ -113,25 +189,21 @@ const startConditionalPractice = async (order: PracticeOrder) => {
         aria-labelledby="exam-mode-tab"
       >
         <div class="exam-grid-heading">
-          <p v-if="!catalogLoading && !catalogError"><strong>全{{ catalogExams.length }}セット</strong><span>合計{{ totalQuestionCount }}問</span></p>
+          <p><strong>全{{ EXAM_CATALOG.length }}回</strong><span>各{{ QUESTIONS_PER_EXAM }}問</span></p>
           <NuxtLink v-if="!hasFullAccess" class="premium-info-link" to="/premium">
             <UIcon name="i-lucide-lock-keyhole" />
             模擬試験{{ FREE_EXAM_MAX + 1 }}以降はプレミアム会員向けです
           </NuxtLink>
         </div>
-        <p v-if="catalogLoading" role="status">公開中の模擬試験を読み込んでいます。</p>
-        <p v-else-if="catalogError" role="alert">模擬試験を読み込めませんでした。<button class="secondary-link" type="button" @click="() => refreshCatalog()">再読み込み</button></p>
-        <p v-else-if="!catalogExams.length">公開中の模擬試験はありません。</p>
-        <div v-else class="exam-grid">
+        <div class="exam-grid">
           <NuxtLink
-            v-for="exam in catalogExams"
+            v-for="exam in EXAM_CATALOG"
             :key="exam.exam_number"
             class="exam-card"
-            :to="examTarget(exam)"
-            :aria-label="examIsLocked(exam.exam_number) ? `${exam.title}はプレミアム会員向けです` : `${exam.title}・${exam.question_numbers.length}問を始める`"
+            :to="examTarget(exam.exam_number)"
+            :aria-label="examIsLocked(exam.exam_number) ? `模擬試験${exam.exam_number}はプレミアム会員向けです` : `模擬試験${exam.exam_number}を始める`"
           >
-            <strong>{{ exam.title }}</strong>
-            <span>{{ exam.groups?.length ? `${exam.groups.length}大問・` : '' }}{{ exam.published_question_count ?? exam.question_numbers.length }}問</span>
+            <strong>{{ exam.exam_number }}</strong>
             <UIcon v-if="examIsLocked(exam.exam_number)" name="i-lucide-lock-keyhole" aria-hidden="true" />
           </NuxtLink>
         </div>
@@ -146,8 +218,31 @@ const startConditionalPractice = async (order: PracticeOrder) => {
       >
         <form class="condition-form" @submit.prevent="startConditionalPractice('sequential')">
           <div class="condition-fields">
+            <fieldset class="condition-fieldset study-fieldset">
+              <legend>出題ジャンル</legend>
+              <p v-if="studyError" role="alert">出題ジャンルを読み込めませんでした。<button type="button" @click="() => refreshStudy()">再読み込み</button></p>
+              <p v-else-if="!studyCatalog" role="status">出題ジャンルを読み込んでいます。</p>
+              <template v-else>
+                <p class="condition-help">大分類・小分類を選べます。未選択の場合は絞り込みません。</p>
+                <div class="study-presets" role="group" aria-label="受験科目のプリセット">
+                  <label><input type="checkbox" :checked="presetSelectionState(parts, selectedCategories, 'world').checked" :indeterminate="presetSelectionState(parts, selectedCategories, 'world').indeterminate" :disabled="!presetCategoryCodes(parts, 'world').length" @change="togglePreset('world', ($event.target as HTMLInputElement).checked)"><span>受験世界史</span></label>
+                  <label><input type="checkbox" :checked="presetSelectionState(parts, selectedCategories, 'japanese').checked" :indeterminate="presetSelectionState(parts, selectedCategories, 'japanese').indeterminate" :disabled="!presetCategoryCodes(parts, 'japanese').length" @change="togglePreset('japanese', ($event.target as HTMLInputElement).checked)"><span>受験日本史</span></label>
+                  <button class="secondary-link" type="button" @click="selectedCategories = []">絞り込みを解除</button>
+                </div>
+                <p class="condition-help">プリセットをオンにすると対象範囲に切り替わります。両方をオンにすると範囲を合わせて選べます。</p>
+                <div class="genre-groups">
+                  <section v-for="part in parts" :key="part.code" class="genre-group">
+                    <label class="genre-parent"><input type="checkbox" :aria-label="part.label" :checked="categorySelectionState(selectedCategories, categoryLeafCodes(part)).checked" :indeterminate="categorySelectionState(selectedCategories, categoryLeafCodes(part)).indeterminate" @change="toggleGroup(part, ($event.target as HTMLInputElement).checked)"><strong>{{ part.label }}</strong></label>
+                    <div v-if="part.children.length" class="genre-children">
+                      <label v-for="section in part.children" :key="section.code" :class="{ selected: selectedCategories.includes(section.code) }"><input v-model="selectedCategories" type="checkbox" name="study-category-codes" :value="section.code"><span>{{ section.label }}<small v-if="section.subtitle">{{ section.subtitle }}</small></span></label>
+                    </div>
+                  </section>
+                </div>
+              </template>
+            </fieldset>
+
             <fieldset class="condition-fieldset">
-              <legend>対象セット</legend>
+              <legend>対象模擬試験</legend>
               <div class="condition-field-heading">
                 <p>複数選択できます</p>
                 <label class="all-selector">
@@ -171,35 +266,34 @@ const startConditionalPractice = async (order: PracticeOrder) => {
                     name="exam-numbers"
                     :value="exam.exam_number"
                   >
-                  <span>{{ exam.title }}<small>{{ exam.question_numbers.length }}問</small></span>
+                  <span>模擬試験{{ exam.exam_number }}</span>
                 </label>
               </div>
             </fieldset>
 
-            <div class="condition-fieldset condition-scope-note"><h3>出題範囲</h3><p>選んだ模擬試験の公開小問を、大問の順に演習できます。ランダム出題も選べます。</p></div>
+
           </div>
 
+          <p v-if="hasStudyFilter && selectedQuestionCount === 0" class="practice-start-error" role="status">この条件に合う公開問題はまだありません。出題ジャンルや対象模擬試験を変更してください。</p>
           <div class="condition-submit">
-            <p v-if="catalogLoading" role="status">出題範囲を確認しています。</p>
-            <p v-else-if="catalogError" role="alert">出題範囲を確認できませんでした。</p>
-            <p v-else-if="hasConditionSelection">
+            <p v-if="conditionSequence.length && studyCatalog && !studyError">
               <span>選択中</span>
-              {{ sortedSelectedExamNumbers.length }}セットから
+              {{ sortedSelectedExamNumbers.length }}模試から
               <strong>全{{ selectedQuestionCount }}問</strong>
             </p>
             <p v-else class="selection-required">
               <span>選択内容を確認してください</span>
-              対象の模擬試験を1つ以上選択してください
+              対象模擬試験を1つ以上選択してください
             </p>
             <div class="condition-actions">
-              <button class="primary-link" type="submit" :disabled="!hasConditionSelection || starting">
+              <button class="primary-link" type="submit" :disabled="!hasConditionSelection">
                 <UIcon name="i-lucide-list-ordered" />
-                大問の順に始める
+                順番に始める
               </button>
               <button
                 class="secondary-link"
                 type="button"
-                :disabled="!hasConditionSelection || starting"
+                :disabled="!hasConditionSelection"
                 @click="startConditionalPractice('random')"
               >
                 <UIcon name="i-lucide-shuffle" />
@@ -246,12 +340,31 @@ const startConditionalPractice = async (order: PracticeOrder) => {
 </template>
 
 <style scoped>
-.home-main { min-width: 0; background: #f8faf9; }
+.condition-fields > .condition-fieldset { grid-column: 1 / -1; }
+.condition-help { margin: 0 0 14px; color: var(--muted); line-height: 1.7; }
+.study-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-bottom: 12px; }
+.study-presets label, .genre-parent { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.study-presets input, .genre-groups input { accent-color: var(--teal); width: 16px; height: 16px; flex: 0 0 16px; }
+.genre-groups { display: grid; gap: 16px; }
+.genre-group { min-width: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.genre-parent { padding: 14px; background: var(--surface-tint); }
+.genre-children { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 12px; }
+.genre-children label { min-width: 0; display: flex; align-items: flex-start; gap: 8px; padding: 10px; border: 1px solid transparent; border-radius: 5px; cursor: pointer; }
+.genre-children label.selected { background: var(--surface-selected); border-color: var(--line-strong); }
+.genre-children input { margin-top: 4px; }
+.genre-children span { min-width: 0; overflow-wrap: anywhere; }
+.genre-children small { display: block; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.practice-start-error { margin: 0; padding: 16px 22px; color: var(--muted); }
+.number-checkbox-grid.exam-number-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.number-checkbox-grid.exam-number-grid label { flex-direction: row; justify-content: flex-start; gap: 8px; padding: 12px; }
+@media (max-width: 640px) { .genre-children { grid-template-columns: minmax(0, 1fr); } }
+
+.home-main { min-width: 0; background: var(--surface-soft); }
 .practice-launcher {
   scroll-margin-top: calc(var(--site-navigation-height, var(--header-height)) + 20px);
   padding: 52px clamp(28px, 6vw, 86px) 58px;
   border-top: 1px solid #d4dfde;
-  background: #eef4f3;
+  background: var(--surface-tint);
 }
 .launcher-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; }
 .launcher-heading h2 { margin: 0; font-size: 30px; line-height: 1.3; }
@@ -293,10 +406,10 @@ const startConditionalPractice = async (order: PracticeOrder) => {
 .exam-grid-heading p { display: flex; align-items: baseline; gap: 10px; margin: 0; }
 .exam-grid-heading strong { font-size: 16px; }
 .exam-grid-heading span { color: var(--muted); font-size: 13px; font-weight: 700; }
-.exam-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.exam-grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 8px; }
 .exam-card {
   position: relative;
-  min-height: 96px;
+  height: 68px;
   display: grid;
   place-items: center;
   padding: 8px;
@@ -307,9 +420,8 @@ const startConditionalPractice = async (order: PracticeOrder) => {
   text-decoration: none;
   transition: border-color .15s, background .15s, transform .15s;
 }
-.exam-card:hover { border-color: var(--teal); background: #f9ffff; transform: translateY(-1px); }
-.exam-card strong { min-width: 0; color: var(--teal-dark); font-size: 17px; line-height: 1.5; text-align: center; overflow-wrap: anywhere; }
-.exam-card > span { color: var(--muted); font-size: 13px; font-weight: 700; }
+.exam-card:hover { border-color: var(--teal); background: var(--surface-soft); transform: translateY(-1px); }
+.exam-card strong { color: var(--teal-dark); font-size: 20px; line-height: 1; transform: translateY(-1px); }
 .exam-card :deep(.iconify) { position: absolute; top: 7px; right: 7px; width: 13px; height: 13px; color: #677b81; }
 .premium-info-link { display: inline-flex; align-items: center; gap: 5px; color: var(--teal-dark); font-size: 13px; font-weight: 800; }
 .condition-form { border: 1px solid #c7d4d5; border-radius: 8px; background: #fff; }
@@ -333,7 +445,7 @@ const startConditionalPractice = async (order: PracticeOrder) => {
   padding: 6px 10px;
   border: 1px solid #bdcbcd;
   border-radius: 5px;
-  background: #f8faf9;
+  background: var(--surface-soft);
   color: #344951;
   font-size: 13px;
   font-weight: 800;
@@ -358,11 +470,8 @@ const startConditionalPractice = async (order: PracticeOrder) => {
   transition: border-color .15s, background .15s;
 }
 .number-checkbox-grid label:hover { border-color: var(--teal); }
-.number-checkbox-grid label.selected { border-color: var(--teal); background: #eaf6f5; color: var(--teal-dark); }
+.number-checkbox-grid label.selected { border-color: var(--teal); background: var(--surface-selected); color: var(--teal-dark); }
 .number-checkbox-grid input { width: 16px; height: 16px; flex: 0 0 16px; margin: 0; accent-color: var(--teal); }
-.number-checkbox-grid.exam-number-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.exam-number-grid label span { min-width: 0; overflow-wrap: anywhere; text-align: center; }
-.exam-number-grid small { display: block; margin-top: 3px; font-size: 12px; font-weight: 500; }
 .question-number-grid label { gap: 4px; padding-inline: 4px; }
 .question-number-grid label span { white-space: nowrap; }
 .condition-submit {
@@ -373,7 +482,7 @@ const startConditionalPractice = async (order: PracticeOrder) => {
   gap: 20px;
   padding: 16px 26px;
   border-top: 1px solid #d8e1e2;
-  background: #f4f7f6;
+  background: var(--surface-soft);
 }
 .condition-submit p { margin: 0; color: #40545b; font-weight: 800; }
 .condition-submit p span { display: block; margin-bottom: 3px; color: var(--muted); font-size: 11px; }
@@ -397,7 +506,7 @@ const startConditionalPractice = async (order: PracticeOrder) => {
 .home-section { padding: 62px clamp(28px, 6vw, 86px); }
 .section-title { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; }
 .section-title h2 { margin: 0; font-size: 30px; }
-.updates-section { background: #f1f5f4; }
+.updates-section { background: var(--surface-soft); }
 .update-list { border-top: 1px solid #cbd7d9; }
 .update-list article { min-height: 68px; display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 18px; border-bottom: 1px solid #cbd7d9; }
 .update-list time { color: var(--teal-dark); font-weight: 800; }
@@ -435,7 +544,7 @@ const startConditionalPractice = async (order: PracticeOrder) => {
 .usage-premium-link :deep(.iconify) { flex: 0 0 16px; width: 16px; height: 16px; }
 
 @media (max-width: 1100px) {
-  .exam-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .exam-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
 
 @media (max-width: 1200px) {
@@ -454,9 +563,8 @@ const startConditionalPractice = async (order: PracticeOrder) => {
   .launcher-heading > p { font-size: 14px; }
   .launcher-tabs { width: 100%; margin-top: 24px; }
   .exam-grid-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
-  .exam-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
-  .exam-card { min-height: 92px; }
-  .exam-card strong { font-size: 15px; }
+  .exam-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }
+  .exam-card { height: 68px; }
   .condition-fields { padding: 20px; }
   .condition-field-heading { align-items: flex-end; }
   .number-checkbox-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }

@@ -1,3 +1,4 @@
+import { validateStudyFilter } from './study-categories.ts'
 import { hasPaidAccess, type User } from '../core/auth.ts'
 import { configuration, freeExamMax, paymentsEnabled } from '../core/config.ts'
 import { getDatabase, Prisma, query, record, transaction, type Database } from '../core/db.ts'
@@ -93,6 +94,7 @@ export async function nextQuestion(params: Record<string, unknown>, user: User |
     if (present(params.after_question_number) || present(params.question_number)) fail(400, 'bad_request', 'exam_numberを指定してください')
     if (!await hasPaidAccess(user, db)) where.AND = [{ exam_number: { lte: freeExamMax } }]
   }
+  if (await validateStudyFilter(params, db)) return notFound()
   const rows = record(await db.question.findMany({ where, include: { group: { select: { group_number: true } } } }))
   rows.sort((a, b) => a.exam_number - b.exam_number || (a.group?.group_number ?? 0) - (b.group?.group_number ?? 0) ||
     (a.group_question_number ?? a.question_number) - (b.group_question_number ?? b.question_number) || a.question_number - b.question_number)

@@ -1,7 +1,6 @@
 import { EXAM_CONFIG, type ExamConfiguration } from '../utils/examConfig.ts'
-import type { QuestionInput, Block } from '../../shared/schemas/content.ts'
+import type { QuestionInput } from '../../shared/schemas/content.ts'
 import { choiceLabelsForQuestion } from '../../shared/schemas/exam.ts'
-import type { PassageReference, GroupPassage } from '../../shared/types/learning.ts'
 
 export type ContentBlockType =
   | 'text'
@@ -13,7 +12,19 @@ export type ContentBlockType =
   | 'fill_in_quote'
   | 'fill_in_choice'
 
-export type ContentBlock = Block
+export type ContentBlock = {
+  id?: string
+  inlines?: import('../../shared/schemas/content.ts').PassageInline[]
+  type: ContentBlockType
+  text?: string
+  source?: string
+  title?: string
+  code?: string
+  headers?: string[]
+  rows?: string[][]
+  items?: { title: string, code: string }[]
+  cells?: string[]
+}
 
 export type AdminChoice = {
   id?: number
@@ -26,10 +37,6 @@ export type AdminChoice = {
 export type AdminQuestionInput = {
   exam_number: number
   question_number: number
-  group_id?: number | null
-  group_question_number?: number | null
-  passage_references?: PassageReference[]
-  lock_version?: number
   content_blocks: ContentBlock[]
   major_category_code: string
   category_code: string
@@ -43,8 +50,6 @@ export type AdminQuestion = AdminQuestionInput & {
   id: number
   created_at: string
   updated_at: string
-  shared_passages?: GroupPassage[]
-  question_version?: number
 }
 
 export type AdminQuestionSummary = {
@@ -73,9 +78,6 @@ export type PaginatedApiResponse<T> = {
 export const createEmptyQuestion = (config: ExamConfiguration = EXAM_CONFIG): AdminQuestionInput => ({
   exam_number: 1,
   question_number: 1,
-  group_id: null,
-  group_question_number: null,
-  passage_references: [],
   content_blocks: [{ type: 'text', text: '' }],
   major_category_code: config.categories.minor[0]!.major_category_value,
   category_code: config.categories.minor[0]!.value,
