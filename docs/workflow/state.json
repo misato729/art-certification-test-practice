@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 83,
-  "updated_at": "2026-11-04T11:55:25.373Z",
+  "revision": 86,
+  "updated_at": "2026-11-04T12:07:57.576Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T11-55-25-373Z-r83.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T12-07-57-576Z-r86.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1374,40 +1374,44 @@
       "id": "art_world_ui_release",
       "context": "operations",
       "title": "世界史式UIと復習をcommit pushし自動停止のまま手動配信",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "art_world_ui_review"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-04 ユーザー明示依頼: ここまでの変更をコミットpushして手動デプロイ。自動デプロイは停止したまま。",
-      "next_action": "期待値修正を追加pushし、全CIの成功後に手動配信する",
+      "next_action": "完了記録のみ同期後、追加依頼を待つ。自動ビルドは停止のまま。",
       "evidence": [
         "docs/deployment.md",
         "docs/verification.md"
       ],
-      "last_verified_at": null,
-      "verification_scope": "未検証。既存コード差分30パス/実装の前回検証を照合し、秘密値/原本を送信しない。",
+      "last_verified_at": "2026-11-04T12:07:56Z",
+      "verification_scope": "cf4347c/d09b787をmainへpush/remote一致、追加CI41824958247全3success(軽量162/API125/front139/PC-SP32)。Fly既存VM/nrt/1CPU1GB/env-fileshash維持でgit-d09b787 rolling成功。Netlify静的112/manual6aeb1f4e8f449c0ed2642dcd ready公開、stop_builds=trueと自動増分0。公開HTTP/匿名PC-SP/85問23大問41分類/正答非開示/401、HTML一致を確認。公開会員作成/回答送信なし、独立最終レビュー合格。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "依頼差分のみcommit/pushしremoteとCI成功を確認、FlyとNetlifyを手動配信し公開HTTP/PC-SPと自動停止維持を確認する",
           "verification": "明示ステージ/資料保護/remote/CI、Fly設定維持、生成物検査、Netlify stop_buildsと手動deploy/HTTP/ブラウザ",
-          "status": "failed",
+          "status": "passed",
           "evidence": [
+            "docs/deployment.md",
             "docs/verification.md"
           ],
-          "checked_at": null
+          "checked_at": "2026-11-04T12:07:56Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "別担当が送信対象、公開差分と検証範囲、秘密/原資料保護を確認し未解決指摘なし",
           "verification": "読取専用の独立レビュー",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/deployment.md",
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-04T12:07:56Z",
+          "reviewer": "art_questions"
         }
       ],
       "execution": {
@@ -1423,6 +1427,13 @@
               "checks",
               "review"
             ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "追加CI全成功、Fly既存構成維持とNetlify手動配信/停止保持、公開HTTP・匿名PC-SPと独立レビューが合格",
+            "at": "2026-11-04T12:07:56.972Z",
+            "failed_criteria": []
           }
         ]
       }

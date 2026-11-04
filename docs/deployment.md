@@ -70,4 +70,4 @@ Git連携時にはNetlifyがビルドを有効化するため、連携後にUI�
 
 ## サイドバー・静的トップ・誤答復習の更新
 
-2026年11月4日の追加依頼で、確認済み変更をmainへ送信してFly APIとNetlify画面を手動再配信します。自動ビルドは停止のまま維持します。DBモデル/マイグレーションの追加はなく、既存の問題・分類・履歴は保持します。GitHub Actionsの確認後、静的ファイルのみをNetlify CLIのno-build/production指定でアップロードし、Flyは既存の地域/容量/環境設定を維持します。最新の配信結果と確認範囲はdocs/verification.mdへ記録します。
+2026年11月4日の追加依頼で、実装cf4347cと検査期待値修正d09b787をmainへpushし、CI41824958247の全3ジョブ成功後に手動再配信しました。Netlifyの公開deployは6aeb1f4e8f449c0ed2642dcd、Fly imageはregistry.fly.io/art-history-practice:git-d09b787です。Netlify CLIのno-build/production指定で静的112ファイルのみをアップロードし、Git連携とstop_builds=trueを維持しました。今回の履歴増分は手動1件だけで自動配信0です。Flyは同じmachine 82d1315b246478/nrt/shared1CPU/1024MBと環境/注入ファイルを保持しています。DBモデル/マイグレーションの追加はありません。公開HTTPと匿名PC/SPの確認は成功し、会員作成/回答送信は隔離CIの検証と区別します。詳しくはdocs/verification.mdを参照します。

@@ -486,3 +486,14 @@ art_questionsの送信前レビューは未解決指摘なしです。資料・�
 実装34ファイルをcf4347c39396f2bcfb3c9fa094408560829be71eでmainへpushし、remote一致・分岐0/0を確認しました。push後もNetlify stop_builds=true、公開版維持・自動deploy増分0です。手動配信用の静的生成は112ファイルで、リダイレクト一致・静的カード/復習タブ・秘密/保護資料の混入0を確認しました。
 
 GitHub Actions run41824204644はharness/verify成功、browserは32件中28件成功・4件失敗でした。従来のmock-exam検査に残ったトップの数値だけのラベル、固定の問1 URLと85問表示、サイドバーの空白入りラベルへの期待が新UIと不一致です。期待値を模擬試験1/開始時解決URL/静的な大問案内へ合わせ、全85問の本文・採点・4/6択境界・正答非開示と順番/ランダム条件の本来の検証を保持します。アプリ処理やDBに追加変更は行わず、追加push後のCIを確認してから手動配信します。
+
+
+期待値修正4ファイルをd09b787a05804bb1c2f0817ca57874d1cf2a23e0としてmainへ追加pushしました。art_questionsが差分とremote mainを独立照合し、全85問検査の維持を確認しました。新しい[GitHub Actions run41824958247](https://github.com/misato729/art-certification-test-practice/actions/runs/41824958247)はharness・verify・browserの全3ジョブが成功しました。内訳は軽量162件、API/DB125件、フロント139件、PC/SP32件が成功です。先行CIの失敗記録は保持しています。
+
+Flyは新しいimage registry.fly.io/art-history-practice:git-d09b787（digest f79d51fab9b55024a0fcfdcc3b944f975656a06ac35cbc466ce2f2a592f9197c）を作成し、CI成功後に既存VMへrolling手動配信しました。既存の移行確認release commandが成功し、同一machine 82d1315b246478/nrt/shared1CPU/1024MBでhealth checkが成功しました。配信前後の環境設定・注入ファイルのハッシュも一致しています。新規SQLや問題/分類/履歴の移行・取込はありません。
+
+Netlifyは検査済み112静的ファイルをno-build/productionで手動配信し、deploy 6aeb1f4e8f449c0ed2642dcdがready/公開中であることをAPI確認しました。repo/main連携とstop_builds=trueを維持し、履歴2→3件の増分はこの手動1件だけです。自動配信の増分は0です。公開トップHTMLはローカル配信物と完全一致しました。原資料/秘密値/DB接続設定は配信していません。
+
+Fly直接・Netlify経由でhealth200、1模試85問/23大問・分類41件、有効な未関連分類のカタログ0件、回答前の正答/解説非開示、匿名review/admin401を確認しました。公開ブラウザも新しい匿名コンテキストを使い、PCと390pxで初回カタログ通信なし・サイドバー開閉/23大問/先頭問題4択と解説非表示・世界史13/併用23/解除85・復習のログイン案内・横はみ出しなしを確認しました。会員作成、回答送信、履歴編集は公開環境では行っていません。会員の誤答保存/復習一巡/再周回/残数0は上記の隔離CI32件の結果です。確認画像と非秘密メタデータはlocal-only/art-world-ui-releaseへ保存しています。
+
+art_questionsが配信前後のFly構成ハッシュ・Netlify停止/手動増分・CI件数・公開HTTP/匿名PC-SPと隔離CIの区別を最終レビューし、未解決指摘なしでした。最後は完了記録だけを[skip ci]/[skip netlify]で同期し、コードの再配信は行わずremoteと停止状態を再確認します。
