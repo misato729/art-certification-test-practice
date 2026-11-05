@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 92,
-  "updated_at": "2026-11-05T13:37:39.926Z",
+  "revision": 94,
+  "updated_at": "2026-11-05T13:41:56.145Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T13-37-39-926Z-r92.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T13-41-56-145Z-r94.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1508,41 +1508,56 @@
       "id": "art_full_sources_rebuild_push",
       "context": "operations",
       "title": "改訂した模擬試験1の85問とPDF・サイト用データをコミットpushする",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "art_full_sources_rebuild"
       ],
       "authorization": "requested",
       "request_ref": "ユーザーの同一模試作成に関する明示指示「終わったらコミット・push」を、2026-11-05の全体作り直しにも継続。既存DB・公開配信は含めない。",
-      "next_action": "明示ステージ・資料保護・差分検査後に通常pushし、remote HEADと一致を確認する",
-      "evidence": [],
-      "last_verified_at": null,
-      "verification_scope": "コミット・pushとremoteの一致確認。配信・既存DBは対象外。",
+      "next_action": "完了記録のみ同期し、追加依頼を待つ。既存DB・本番配信は変更しない。",
+      "evidence": [
+        "docs/verification.md",
+        "content/mock-exams/mock-01/README.md"
+      ],
+      "last_verified_at": "2026-11-05T13:41:54.284Z",
+      "verification_scope": "独立レビュー38/38、明示ステージ、資料保護/差分検査成功、c51e0bf391d4fdea71b933feacd726af0ec36556をmainへ通常pushしremote HEAD一致・差分なし。追加CIはharness成功/他実行中。配信・既存DBは未変更。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "依頼差分を明示ステージし資料保護・差分検査とremote一致を確認",
           "verification": "git diff --check、check-private-sources、ステージ一覧、通常pushとremote HEAD照合",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-05T13:41:54.284Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "別担当が送信対象と原資料・秘密値の除外、検証記録を確認",
           "verification": "独立した読取専用の送信差分レビュー",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-05T13:41:54.284Z",
+          "reviewer": "integration_audit"
         }
       ],
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "独立レビュー済み38ファイルだけを通常コミットpushし、mainとremote HEADのc51e0bf一致を確認。原資料保護・差分検査に合格。既存DB・公開サイトは未変更。",
+            "at": "2026-11-05T13:41:54.787Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]

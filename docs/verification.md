@@ -530,3 +530,11 @@ art_questionsが配信前後のFly構成ハッシュ・Netlify停止/手動増�
 ### Git送信前の確認
 
 独立送信レビュー（integration_audit）は合格。元の.gitattributesとセキュリティ用patch設定を保持し、原資料・OCR・画像・一時環境設定は送信対象外。検証用コンテナart-rebuild-test-dbと一時envを削除し、E2E生成DB残数0を確認。停止中の配信設定に触れず、従来の同一模試のコミットpush指示に従って通常pushする。
+
+### コミット・push完了
+
+改訂教材・PDF・設定・関連検査・資料保護・記録の38ファイルを明示ステージし、別担当が38/38の対象パス、原資料・環境設定・作業用データの除外、最終JSON/PDFハッシュを確認した。Markdown末尾の余分な空行を整えた後、git diff --cached --check・資料保護・教材一致検査が成功。既存フック設定を変更せず、通常commit/pushを実施した。
+
+変更コミットは c51e0bf391d4fdea71b933feacd726af0ec36556（公式資料全体に基づく模擬試験1の再作成）。origin/mainへ通常pushし、git ls-remoteのHEADと完全一致・作業ツリー差分なしを確認した。原本・抽出物・作問途中データは送信していない。自動配信の再開や、本番DB/公開サイトへの反映は実施していない。
+
+追加GitHub Actions 42037821588は、この記録時点でharness成功、browser/verify実行中。ローカルの成功を追加CIの全成功とは表現しない。CIは[この実行](https://github.com/misato729/art-certification-test-practice/actions/runs/42037821588)を参照。この完了記録はskip ci/skip netlifyを付けた文書のみの別コミットで同期する。
