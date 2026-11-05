@@ -37,7 +37,7 @@ export const STATIC_EXAM_GROUPS: Record<number, ExamCatalogGroup[]> = {
     {
       "id": 4,
       "group_number": 4,
-      "title": "17・18世紀の美術の広がり",
+      "title": "近世の風景と暮らし",
       "question_numbers": [
         11,
         12,
@@ -141,7 +141,7 @@ export const STATIC_EXAM_GROUPS: Record<number, ExamCatalogGroup[]> = {
     {
       "id": 14,
       "group_number": 14,
-      "title": "平安時代の像と物語",
+      "title": "仏像と物語絵画",
       "question_numbers": [
         45,
         46,
@@ -268,7 +268,7 @@ export const STATIC_EXAM_GROUPS: Record<number, ExamCatalogGroup[]> = {
     {
       "id": 27,
       "group_number": 27,
-      "title": "画材の記録と作品ラベルの照合",
+      "title": "同じ主題の作品を比較する",
       "question_numbers": [
         81
       ]
@@ -276,7 +276,7 @@ export const STATIC_EXAM_GROUPS: Record<number, ExamCatalogGroup[]> = {
     {
       "id": 28,
       "group_number": 28,
-      "title": "光と色材の混色を区別する",
+      "title": "連作にみる光と色彩を読み取る",
       "question_numbers": [
         82
       ]
@@ -284,7 +284,7 @@ export const STATIC_EXAM_GROUPS: Record<number, ExamCatalogGroup[]> = {
     {
       "id": 29,
       "group_number": 29,
-      "title": "表装の形式と鑑賞の順序",
+      "title": "画面の形と表装の記録を照合する",
       "question_numbers": [
         83
       ]
@@ -292,7 +292,7 @@ export const STATIC_EXAM_GROUPS: Record<number, ExamCatalogGroup[]> = {
     {
       "id": 30,
       "group_number": 30,
-      "title": "交流の年代と影響関係の推論",
+      "title": "構図の比較と影響関係の推論",
       "question_numbers": [
         84
       ]
@@ -300,7 +300,7 @@ export const STATIC_EXAM_GROUPS: Record<number, ExamCatalogGroup[]> = {
     {
       "id": 31,
       "group_number": 31,
-      "title": "作品名と材質表記から読み取れる情報",
+      "title": "人物の手元と暮らしの場面を読む",
       "question_numbers": [
         85
       ]

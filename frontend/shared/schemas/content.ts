@@ -16,6 +16,9 @@ const blockMessage = '表示ブロックの内容の形式が不正です'
 const blockKindMessage = '表示ブロックの種類が正しくありません'
 const publicBlockMessage = '公開する問題の本文・解説・選択肢に空または不正な表示ブロックがあります'
 const tableMessage = '表の列数を確認してください'
+const imageMessage = '図版の保存先・代替テキストを確認してください'
+/** Only curated same-origin raster assets can be rendered, including in draft previews. */
+export const artworkImagePathSchema = z.string({ error: imageMessage }).max(180, { error: imageMessage }).regex(/^\/images\/artworks\/[a-z0-9]+(?:-[a-z0-9]+)*\.(?:jpg|jpeg|png|webp)$/, { error: imageMessage }).refine(value => value === value.trim(), { error: imageMessage })
 const text = (message = blockMessage) => z.string({ error: message })
 const optionalText = text().nullable().optional()
 const strings = z.array(text(), { error: blockMessage })
@@ -57,10 +60,15 @@ function createRawBlockSchema(context: BlockContext, strict: boolean) {
   })
   const group = object({ type: z.literal('code_group'), items: z.array(object({ code: text(), title: optionalText }), { error: blockMessage }) })
   const fillChoice = object({ type: z.literal('fill_in_choice'), cells: strings })
+  const image = object({ type: z.literal('image'),
+    src: z.union([z.literal(''), artworkImagePathSchema], { error: imageMessage }),
+    alt: z.string({ error: imageMessage }).max(250, { error: imageMessage }),
+    label: z.string({ error: imageMessage }).max(40, { error: imageMessage }).optional(),
+  })
   const options = {
-    question: [plain, quote, table, code, group, fillText, fillQuote],
-    explanation: [plain, quote, table, code],
-    choice: [plain, table, fillChoice],
+    question: [plain, quote, table, code, group, fillText, fillQuote, image],
+    explanation: [plain, quote, table, code, image],
+    choice: [plain, table, fillChoice, image],
   } as const
   return z.discriminatedUnion('type', options[context], { error: blockKindMessage })
 }
@@ -86,6 +94,7 @@ function blockSchema(context: BlockContext, preserveOptionalAttributes: boolean,
     const result = { ...block } as Block
     if (result.type !== 'quote' || result.source === undefined || (!preserveOptionalAttributes && !nonblank(result.source))) delete result.source
     if (result.type !== 'code' || result.title === undefined || (!preserveOptionalAttributes && !nonblank(result.title))) delete result.title
+    if (result.type === 'image' && !preserveOptionalAttributes && !nonblank(result.label)) delete result.label
     if (result.type === 'code_group') result.items = result.items!.map(item => ({
       ...(item.title !== undefined && (preserveOptionalAttributes || nonblank(item.title)) ? { title: item.title } : {}), code: item.code,
     }))
@@ -99,6 +108,7 @@ function completeBlock(block: Block): boolean {
     case 'code': return nonblank(block.code)
     case 'fill_in_choice': return Boolean(block.cells?.length && block.cells.every(nonblank))
     case 'code_group': return Boolean(block.items && block.items.length >= 2 && block.items.every(item => nonblank(item.code)))
+    case 'image': return artworkImagePathSchema.safeParse(block.src).success && nonblank(block.alt)
     case 'table': return Boolean(block.headers?.length && block.rows?.length && block.headers.some(nonblank) && block.rows.flat().some(nonblank))
     default: return false
   }

@@ -48,6 +48,8 @@ const blankLabels = ['①', '②', '③', '④', '⑤', '⑥']
         </table>
       </div>
 
+      <ArtworkImage v-else-if="block.type === 'image'" :src="block.src" :alt="block.alt" :label="block.label" />
+
       <figure v-else-if="block.type === 'code'" class="code-panel">
         <figcaption v-if="block.title">{{ block.title }}</figcaption>
         <pre><code>{{ block.code }}</code></pre>

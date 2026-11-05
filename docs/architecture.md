@@ -129,11 +129,14 @@ Prisma Migrateがマイグレーションの排他ロックと履歴を管理し
 | `quote` | 引用文。`text`、任意の`source` |
 | `fill_in_text`・`fill_in_quote` | 空欄付き本文。`text`内に`{{①}}`等を記載 |
 | `table` | 表。文字列配列の`headers`、同じ列数の`rows` |
+| `image` | 権利確認済み図版。`src`・中立的な`alt`、任意の`label` |
 | `code` | プログラム。`code`、任意の`title` |
 | `code_group` | 複数プログラムの比較。`items`に`code`と任意の`title` |
 | `fill_in_choice` | 空欄に対応する選択肢の語句。文字列配列の`cells` |
 
-問題本文は上記のうち`fill_in_choice`以外、解説は`text`・`quote`・`table`・`code`、選択肢は`text`・`table`・`fill_in_choice`を利用できます。穴埋めの空欄ラベルと、全選択肢のセル数をそろえます。
+問題本文は上記のうち`fill_in_choice`以外、解説は`text`・`quote`・`table`・`code`・`image`、選択肢は`text`・`table`・`fill_in_choice`・`image`を利用できます。穴埋めの空欄ラベルと、全選択肢のセル数をそろえます。
+
+図版の`src`は`/images/artworks/`直下の英小文字・数字・ハイフンによるファイル名と、jpg/jpeg/png/webp拡張子に限定します。外部URL、SVG、階層移動、クエリは受け付けません。管理フォームは配備済み画像の保存先を編集し、ファイルのアップロードは行いません。作品名・作者・出典は解説と`source_text`へ置き、回答前の`alt`・ラベル・ファイル名へ正答情報を記載しません。表示は縦横比を保ち、キーボードで開閉できる拡大表示を利用します。既存のJSONB保存・アーカイブと編集時の内容バージョン検査を共有します。
 
 ## 初期データ・アーカイブ
 

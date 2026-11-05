@@ -86,33 +86,18 @@
       ]
     },
     "4": {
-      "topic": "国際ゴシックと装飾写本",
-      "difficulty": "advanced",
+      "topic": "中世末期の聖母子像と自然な表現",
+      "difficulty": "standard",
       "group": {
         "title": "古代から中世へ、作品と役割",
         "passage": "古代から中世の造形は、信仰や社会のあり方を映している。制作の目的、作品の時代、表現の媒体をそれぞれ区別して考える。"
       },
       "group_number": 1,
       "group_question_number": 4,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 59,
-          "printed_page": 57,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 60,
-          "printed_page": 58,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 63,
-          "printed_page": 61,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-01"
       ]
     },
     "5": {
@@ -140,7 +125,7 @@
       ]
     },
     "6": {
-      "topic": "初期ルネサンスの作品と作者",
+      "topic": "ルネサンス絵画の聖人の図像",
       "difficulty": "standard",
       "group": {
         "title": "ルネサンスの仕事場",
@@ -148,47 +133,29 @@
       },
       "group_number": 2,
       "group_question_number": 2,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 64,
-          "printed_page": 62,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 65,
-          "printed_page": 63,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-02"
       ]
     },
     "7": {
-      "topic": "ボッティチェリと神話主題",
-      "difficulty": "basic",
+      "topic": "フィレンツェの肖像画とボッティチェリ",
+      "difficulty": "advanced",
       "group": {
         "title": "ルネサンスの仕事場",
         "passage": "建築家・彫刻家・画家たちは、都市や注文主の要望に応えながら新しい表現を探った。作者、作品、地域の特徴を関連付けて答える。"
       },
       "group_number": 2,
       "group_question_number": 3,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 65,
-          "printed_page": 63,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 118,
-          "printed_page": 116,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-03"
       ]
     },
     "8": {
-      "topic": "ヴェネツィア派の色彩",
+      "topic": "ルネサンスの肖像画にみる色彩と質感",
       "difficulty": "standard",
       "group": {
         "title": "ルネサンスの仕事場",
@@ -196,35 +163,14 @@
       },
       "group_number": 2,
       "group_question_number": 4,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 58,
-          "printed_page": 56,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 59,
-          "printed_page": 57,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 65,
-          "printed_page": 63,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 67,
-          "printed_page": 65,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-04"
       ]
     },
     "9": {
-      "topic": "ホルバインの知識人肖像",
+      "topic": "北方ルネサンスの肖像画",
       "difficulty": "standard",
       "group": {
         "title": "16世紀の異なる表現",
@@ -232,19 +178,10 @@
       },
       "group_number": 3,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 67,
-          "printed_page": 65,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 68,
-          "printed_page": 66,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-05"
       ]
     },
     "10": {
@@ -278,101 +215,56 @@
       ]
     },
     "11": {
-      "topic": "アンニバーレ・カラッチ",
+      "topic": "風景画の奥行きと空気遠近法",
       "difficulty": "standard",
       "group": {
-        "title": "17・18世紀の美術の広がり",
-        "passage": "王侯や教会だけでなく、都市の市民も美術の重要な担い手になった。作品の主題と制作された地域、画家の専門を結び付ける。"
+        "title": "近世の風景と暮らし",
+        "passage": "近世のヨーロッパでは、風景、宗教的な物語、室内の日常などがさまざまに描かれた。作品の主題、空間の組み立て方、制作や鑑賞の場に注目して考えなさい。"
       },
       "group_number": 4,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 70,
-          "printed_page": 68,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 71,
-          "printed_page": 69,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 72,
-          "printed_page": 70,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 73,
-          "printed_page": 71,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-06"
       ]
     },
     "12": {
-      "topic": "プッサンとフランス古典主義",
-      "difficulty": "basic",
+      "topic": "歴史画とキリスト教の主題",
+      "difficulty": "standard",
       "group": {
-        "title": "17・18世紀の美術の広がり",
-        "passage": "王侯や教会だけでなく、都市の市民も美術の重要な担い手になった。作品の主題と制作された地域、画家の専門を結び付ける。"
+        "title": "近世の風景と暮らし",
+        "passage": "近世のヨーロッパでは、風景、宗教的な物語、室内の日常などがさまざまに描かれた。作品の主題、空間の組み立て方、制作や鑑賞の場に注目して考えなさい。"
       },
       "group_number": 4,
       "group_question_number": 2,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 70,
-          "printed_page": 68,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 71,
-          "printed_page": 69,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 73,
-          "printed_page": 71,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 77,
-          "printed_page": 75,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-07"
       ]
     },
     "13": {
-      "topic": "オランダ絵画の分野と画家",
+      "topic": "オランダ絵画の室内と光",
       "difficulty": "standard",
       "group": {
-        "title": "17・18世紀の美術の広がり",
-        "passage": "王侯や教会だけでなく、都市の市民も美術の重要な担い手になった。作品の主題と制作された地域、画家の専門を結び付ける。"
+        "title": "近世の風景と暮らし",
+        "passage": "近世のヨーロッパでは、風景、宗教的な物語、室内の日常などがさまざまに描かれた。作品の主題、空間の組み立て方、制作や鑑賞の場に注目して考えなさい。"
       },
       "group_number": 4,
       "group_question_number": 3,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 72,
-          "printed_page": 70,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-08"
       ]
     },
     "14": {
       "topic": "ベラスケスの活動地域と作品",
       "difficulty": "standard",
       "group": {
-        "title": "17・18世紀の美術の広がり",
-        "passage": "王侯や教会だけでなく、都市の市民も美術の重要な担い手になった。作品の主題と制作された地域、画家の専門を結び付ける。"
+        "title": "近世の風景と暮らし",
+        "passage": "近世のヨーロッパでは、風景、宗教的な物語、室内の日常などがさまざまに描かれた。作品の主題、空間の組み立て方、制作や鑑賞の場に注目して考えなさい。"
       },
       "group_number": 4,
       "group_question_number": 4,
@@ -398,7 +290,7 @@
       ]
     },
     "15": {
-      "topic": "シャルダンと18世紀の日常",
+      "topic": "18世紀の風俗画と日常の行為",
       "difficulty": "basic",
       "group": {
         "title": "18世紀の主題と都市",
@@ -406,61 +298,25 @@
       },
       "group_number": 5,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 74,
-          "printed_page": 72,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 76,
-          "printed_page": 74,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 95,
-          "printed_page": 93,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 96,
-          "printed_page": 94,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-09"
       ]
     },
     "16": {
-      "topic": "カナレットとピラネージ",
-      "difficulty": "advanced",
+      "topic": "18世紀の都市景観画",
+      "difficulty": "standard",
       "group": {
         "title": "18世紀の主題と都市",
         "passage": "画家の活動は、宮廷の装飾から市民の生活、旅行者が求める都市景観へと広がった。主題と作者、表現の媒体を対応させる。"
       },
       "group_number": 5,
       "group_question_number": 2,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 75,
-          "printed_page": 73,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 81,
-          "printed_page": 79,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 87,
-          "printed_page": 85,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-10"
       ]
     },
     "17": {
@@ -518,7 +374,7 @@
       ]
     },
     "19": {
-      "topic": "アングルの線描",
+      "topic": "19世紀の肖像画と線の表現",
       "difficulty": "standard",
       "group": {
         "title": "19世紀の美術と社会の変化",
@@ -526,47 +382,14 @@
       },
       "group_number": 6,
       "group_question_number": 2,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 77,
-          "printed_page": 75,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 79,
-          "printed_page": 77,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 82,
-          "printed_page": 80,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 86,
-          "printed_page": 84,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 95,
-          "printed_page": 93,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 96,
-          "printed_page": 94,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-11"
       ]
     },
     "20": {
-      "topic": "コンスタブルとターナー",
+      "topic": "ターナーと光の表現",
       "difficulty": "standard",
       "group": {
         "title": "19世紀の美術と社会の変化",
@@ -574,13 +397,10 @@
       },
       "group_number": 6,
       "group_question_number": 3,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 80,
-          "printed_page": 78,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-12"
       ]
     },
     "21": {
@@ -608,7 +428,7 @@
       ]
     },
     "22": {
-      "topic": "ドーミエと同時代の生活",
+      "topic": "ドーミエと身近な人物の表現",
       "difficulty": "standard",
       "group": {
         "title": "新しい都市と美術家たち",
@@ -616,59 +436,29 @@
       },
       "group_number": 7,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 78,
-          "printed_page": 76,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 79,
-          "printed_page": 77,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 82,
-          "printed_page": 80,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-13"
       ]
     },
     "23": {
-      "topic": "マネと落選者展",
-      "difficulty": "basic",
+      "topic": "マネの都市風景と画面構成",
+      "difficulty": "standard",
       "group": {
         "title": "新しい都市と美術家たち",
         "passage": "19世紀後半の美術家たちは、自然や都市生活、身近な人物をそれぞれの方法で表した。集団に共通する傾向と個々の作家の違いを区別する。"
       },
       "group_number": 7,
       "group_question_number": 2,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 84,
-          "printed_page": 82,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 85,
-          "printed_page": 83,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 86,
-          "printed_page": 84,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-14"
       ]
     },
     "24": {
-      "topic": "19世紀彫刻の作品と作者",
+      "topic": "近代彫刻と人体の動き",
       "difficulty": "standard",
       "group": {
         "title": "新しい都市と美術家たち",
@@ -676,19 +466,10 @@
       },
       "group_number": 7,
       "group_question_number": 3,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 78,
-          "printed_page": 76,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 87,
-          "printed_page": 85,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-15"
       ]
     },
     "25": {
@@ -716,7 +497,7 @@
       ]
     },
     "26": {
-      "topic": "象徴主義の作品と作者",
+      "topic": "ルドンの花の絵と色彩",
       "difficulty": "standard",
       "group": {
         "title": "世紀末の表現の分岐",
@@ -724,19 +505,10 @@
       },
       "group_number": 8,
       "group_question_number": 2,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 90,
-          "printed_page": 88,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 91,
-          "printed_page": 89,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-16"
       ]
     },
     "27": {
@@ -1286,35 +1058,33 @@
       ]
     },
     "45": {
-      "topic": "一木造と翻波式衣文",
-      "difficulty": "standard",
+      "topic": "仏像の姿と尊格",
+      "difficulty": "basic",
       "group": {
-        "title": "平安時代の像と物語",
-        "passage": "平安時代には、信仰をかたちにする彫刻とともに、文学や説話を表す絵画も発達した。同じ時代に生まれた作品でも、材料の扱い方や、見る人へ時間・感情を伝える方法は一様ではない。"
+        "title": "仏像と物語絵画",
+        "passage": "日本の仏教美術と物語絵画を取り上げる。仏像の姿と信仰上の役割、物語を描くための画面や場面の構成に注目して考えなさい。"
       },
       "group_number": 14,
       "group_question_number": 1,
       "source_refs": [
         {
           "source": "textbook",
-          "pdf_page": 187,
-          "printed_page": 185,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 271,
-          "printed_page": 269,
+          "pdf_page": 270,
+          "printed_page": 268,
           "role": "fact"
         }
+      ],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-17"
       ]
     },
     "46": {
       "topic": "絵巻の時間表現",
       "difficulty": "standard",
       "group": {
-        "title": "平安時代の像と物語",
-        "passage": "平安時代には、信仰をかたちにする彫刻とともに、文学や説話を表す絵画も発達した。同じ時代に生まれた作品でも、材料の扱い方や、見る人へ時間・感情を伝える方法は一様ではない。"
+        "title": "仏像と物語絵画",
+        "passage": "日本の仏教美術と物語絵画を取り上げる。仏像の姿と信仰上の役割、物語を描くための画面や場面の構成に注目して考えなさい。"
       },
       "group_number": 14,
       "group_question_number": 2,
@@ -1337,8 +1107,8 @@
       "topic": "平安絵巻の叙情と説話",
       "difficulty": "advanced",
       "group": {
-        "title": "平安時代の像と物語",
-        "passage": "平安時代には、信仰をかたちにする彫刻とともに、文学や説話を表す絵画も発達した。同じ時代に生まれた作品でも、材料の扱い方や、見る人へ時間・感情を伝える方法は一様ではない。"
+        "title": "仏像と物語絵画",
+        "passage": "日本の仏教美術と物語絵画を取り上げる。仏像の姿と信仰上の役割、物語を描くための画面や場面の構成に注目して考えなさい。"
       },
       "group_number": 14,
       "group_question_number": 3,
@@ -1382,7 +1152,7 @@
       ]
     },
     "49": {
-      "topic": "本地垂迹と垂迹画",
+      "topic": "印相と阿弥陀信仰",
       "difficulty": "standard",
       "group": {
         "title": "中世の信仰と表現",
@@ -1393,10 +1163,14 @@
       "source_refs": [
         {
           "source": "textbook",
-          "pdf_page": 195,
-          "printed_page": 193,
+          "pdf_page": 271,
+          "printed_page": 269,
           "role": "fact"
         }
+      ],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-18"
       ]
     },
     "50": {
@@ -1418,7 +1192,7 @@
       ]
     },
     "51": {
-      "topic": "詩画軸の鑑賞",
+      "topic": "中世絵画の筆墨と水の表現",
       "difficulty": "basic",
       "group": {
         "title": "中世の信仰と表現",
@@ -1426,41 +1200,14 @@
       },
       "group_number": 15,
       "group_question_number": 4,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 194,
-          "printed_page": 192,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 195,
-          "printed_page": 193,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 199,
-          "printed_page": 197,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 200,
-          "printed_page": 198,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 268,
-          "printed_page": 266,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-19"
       ]
     },
     "52": {
-      "topic": "狩野派と土佐派の絵巻",
+      "topic": "花鳥画と建築空間",
       "difficulty": "standard",
       "group": {
         "title": "中世の信仰と表現",
@@ -1468,23 +1215,14 @@
       },
       "group_number": 15,
       "group_question_number": 5,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 200,
-          "printed_page": 198,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 201,
-          "printed_page": 199,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-20"
       ]
     },
     "53": {
-      "topic": "近世初期の風俗画の画題",
+      "topic": "古典文学と装飾的絵画",
       "difficulty": "standard",
       "group": {
         "title": "近世初期の都市と住まい",
@@ -1492,13 +1230,10 @@
       },
       "group_number": 16,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 205,
-          "printed_page": 203,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-21"
       ]
     },
     "54": {
@@ -1538,7 +1273,7 @@
       ]
     },
     "55": {
-      "topic": "南画と文人文化",
+      "topic": "筆墨と文人画",
       "difficulty": "standard",
       "group": {
         "title": "江戸時代の学びと出版",
@@ -1546,37 +1281,10 @@
       },
       "group_number": 17,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 210,
-          "printed_page": 208,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 211,
-          "printed_page": 209,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 209,
-          "printed_page": 207,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 214,
-          "printed_page": 212,
-          "role": "fact"
-        },
-        {
-          "source": "problems",
-          "pdf_page": 141,
-          "printed_page": 139,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-22"
       ]
     },
     "56": {
@@ -1610,7 +1318,7 @@
       ]
     },
     "57": {
-      "topic": "錦絵の技法と制作分担",
+      "topic": "浮世絵の画面形式",
       "difficulty": "basic",
       "group": {
         "title": "江戸時代の学びと出版",
@@ -1618,35 +1326,14 @@
       },
       "group_number": 17,
       "group_question_number": 3,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 212,
-          "printed_page": 210,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 250,
-          "printed_page": 248,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 264,
-          "printed_page": 262,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 221,
-          "printed_page": 219,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-23"
       ]
     },
     "58": {
-      "topic": "浮世絵の風景連作",
+      "topic": "風景版画の構図と名所絵",
       "difficulty": "standard",
       "group": {
         "title": "江戸時代の学びと出版",
@@ -1654,19 +1341,10 @@
       },
       "group_number": 17,
       "group_question_number": 4,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 212,
-          "printed_page": 210,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 250,
-          "printed_page": 248,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-24"
       ]
     },
     "59": {
@@ -2024,27 +1702,18 @@
       ]
     },
     "73": {
-      "topic": "北宋の山水画と画論",
-      "difficulty": "advanced",
+      "topic": "南宋の馬遠と余白の構成",
+      "difficulty": "standard",
       "group": {
         "title": "アジアの物語・山水・交流",
         "passage": "アジアの美術では、物語が図像の主題となり、山水の表現が理論としてまとめられ、王朝や交易の変化が造形に表れた。異なる文化圏の事物を一つの時代にまとめず、それぞれの背景と対応させなさい。"
       },
       "group_number": 23,
       "group_question_number": 2,
-      "source_refs": [
-        {
-          "source": "problems",
-          "pdf_page": 183,
-          "printed_page": 181,
-          "role": "fact"
-        },
-        {
-          "source": "problems",
-          "pdf_page": 185,
-          "printed_page": 183,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-25"
       ]
     },
     "74": {
@@ -2138,27 +1807,18 @@
       ]
     },
     "78": {
-      "topic": "アール・デコの形態と言葉",
-      "difficulty": "basic",
+      "topic": "ポスターの色面・文字とリトグラフ",
+      "difficulty": "standard",
       "group": {
         "title": "工芸の制作と近代デザイン",
         "passage": "工芸の特徴は装飾の見た目だけで決まらない。技法、工房と産業の関係、輸出や生活環境との結び付きにも注目し、制作と社会の関係を整理しなさい。"
       },
       "group_number": 24,
       "group_question_number": 4,
-      "source_refs": [
-        {
-          "source": "problems",
-          "pdf_page": 191,
-          "printed_page": 189,
-          "role": "fact"
-        },
-        {
-          "source": "problems",
-          "pdf_page": 193,
-          "printed_page": 191,
-          "role": "fact"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-26"
       ]
     },
     "79": {
@@ -2198,126 +1858,68 @@
       ]
     },
     "81": {
-      "topic": "画材の記録と作品ラベルの照合",
+      "topic": "同じ主題の作品を比較する",
       "difficulty": "standard",
       "group": null,
       "group_number": 27,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 260,
-          "printed_page": 258,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 261,
-          "printed_page": 259,
-          "role": "fact"
-        },
-        {
-          "source": "problems",
-          "pdf_page": 209,
-          "printed_page": 207,
-          "role": "format"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-27",
+        "mock01-img-28"
       ]
     },
     "82": {
-      "topic": "光と色材の混色を区別する",
+      "topic": "連作にみる光と色彩を読み取る",
       "difficulty": "standard",
       "group": null,
       "group_number": 28,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 259,
-          "printed_page": 257,
-          "role": "fact"
-        },
-        {
-          "source": "problems",
-          "pdf_page": 209,
-          "printed_page": 207,
-          "role": "format"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-29",
+        "mock01-img-30"
       ]
     },
     "83": {
-      "topic": "表装の形式と鑑賞の順序",
+      "topic": "画面の形と表装の記録を照合する",
       "difficulty": "standard",
       "group": null,
       "group_number": 29,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 267,
-          "printed_page": 265,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 268,
-          "printed_page": 266,
-          "role": "fact"
-        },
-        {
-          "source": "problems",
-          "pdf_page": 209,
-          "printed_page": 207,
-          "role": "format"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-22",
+        "mock01-img-31"
       ]
     },
     "84": {
-      "topic": "交流の年代と影響関係の推論",
+      "topic": "構図の比較と影響関係の推論",
       "difficulty": "advanced",
       "group": null,
       "group_number": 30,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "problems",
-          "pdf_page": 185,
-          "printed_page": 183,
-          "role": "fact"
-        },
-        {
-          "source": "problems",
-          "pdf_page": 209,
-          "printed_page": 207,
-          "role": "format"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-32",
+        "mock01-img-33"
       ]
     },
     "85": {
-      "topic": "作品名と材質表記から読み取れる情報",
+      "topic": "人物の手元と暮らしの場面を読む",
       "difficulty": "standard",
       "group": null,
       "group_number": 31,
       "group_question_number": 1,
-      "source_refs": [
-        {
-          "source": "textbook",
-          "pdf_page": 266,
-          "printed_page": 264,
-          "role": "fact"
-        },
-        {
-          "source": "textbook",
-          "pdf_page": 272,
-          "printed_page": 270,
-          "role": "fact"
-        },
-        {
-          "source": "problems",
-          "pdf_page": 209,
-          "printed_page": 207,
-          "role": "format"
-        }
+      "source_refs": [],
+      "image_required": true,
+      "image_ids": [
+        "mock01-img-34",
+        "mock01-img-35"
       ]
     }
   },
@@ -2353,7 +1955,7 @@
         "group_number": 4,
         "first_question_number": 11,
         "last_question_number": 14,
-        "title": "17・18世紀の美術の広がり",
+        "title": "近世の風景と暮らし",
         "question_count": 4,
         "shared_passage_count": 1
       },
@@ -2433,7 +2035,7 @@
         "group_number": 14,
         "first_question_number": 45,
         "last_question_number": 47,
-        "title": "平安時代の像と物語",
+        "title": "仏像と物語絵画",
         "question_count": 3,
         "shared_passage_count": 1
       },
@@ -2537,7 +2139,7 @@
         "group_number": 27,
         "first_question_number": 81,
         "last_question_number": 81,
-        "title": "画材の記録と作品ラベルの照合",
+        "title": "同じ主題の作品を比較する",
         "question_count": 1,
         "shared_passage_count": 0
       },
@@ -2545,7 +2147,7 @@
         "group_number": 28,
         "first_question_number": 82,
         "last_question_number": 82,
-        "title": "光と色材の混色を区別する",
+        "title": "連作にみる光と色彩を読み取る",
         "question_count": 1,
         "shared_passage_count": 0
       },
@@ -2553,7 +2155,7 @@
         "group_number": 29,
         "first_question_number": 83,
         "last_question_number": 83,
-        "title": "表装の形式と鑑賞の順序",
+        "title": "画面の形と表装の記録を照合する",
         "question_count": 1,
         "shared_passage_count": 0
       },
@@ -2561,7 +2163,7 @@
         "group_number": 30,
         "first_question_number": 84,
         "last_question_number": 84,
-        "title": "交流の年代と影響関係の推論",
+        "title": "構図の比較と影響関係の推論",
         "question_count": 1,
         "shared_passage_count": 0
       },
@@ -2569,12 +2171,13 @@
         "group_number": 31,
         "first_question_number": 85,
         "last_question_number": 85,
-        "title": "作品名と材質表記から読み取れる情報",
+        "title": "人物の手元と暮らしの場面を読む",
         "question_count": 1,
         "shared_passage_count": 0
       }
     ]
   },
-  "revision": "full-sources-20261105",
-  "source_refs_note": "printed_page is book pagination; pdf_page is 1-based page index in supplied scanned file. fact and format are separate reference roles."
+  "revision": "cleared-figures-20261106",
+  "source_refs_note": "printed_page is book pagination; pdf_page is 1-based page index in supplied scanned file. fact and format are separate reference roles.",
+  "image_review_note": "図版31問を追加。source_refsの書籍ページ参照と、採用図版・新設問の根拠となる所蔵館記録は別管理。image-manifest.jsonで日本の保護期間・画像利用条件・原問題集との作品不一致を確認。"
 }

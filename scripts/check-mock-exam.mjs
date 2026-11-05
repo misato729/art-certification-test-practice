@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { createHash } from 'node:crypto'
+import { artworkImagePathSchema } from '../frontend/shared/schemas/content.ts'
 import assert from 'node:assert/strict'
 import { parseExamConfig, choiceLabelsForQuestion } from '../frontend/shared/schemas/exam.ts'
 import { parseContentDocument } from '../frontend/shared/schemas/structure.ts'
@@ -84,10 +86,51 @@ function main() {
   assert.equal(sharedLeadQuestions, manifest.hierarchy.questions_with_shared_passage)
   assert.deepEqual(counts, manifest.allocation)
   assert.deepEqual(Object.values(correctLabels).sort(), [20, 20, 20, 20])
+  const imageManifest = read('image-manifest.json')
+  const assets = imageManifest.assets
+  assert.equal(assets.length, 35)
+  const bySource = new Map(assets.map(asset => [asset.src, asset]))
+  assert.equal(bySource.size, assets.length)
+  const imageQuestions = document.questions.filter(question => question.content_blocks.some(block => block.type === 'image'))
+  assert.equal(imageQuestions.length, 31)
+  assert.equal(imageQuestions.filter(question => question.question_number <= 80).length, 26)
+  assert.equal(imageQuestions.filter(question => question.question_number > 80).length, 5)
+  const imageAllocation = {}
+  let occurrences = 0
+  for (const question of imageQuestions) {
+    const blocks = question.content_blocks.filter(block => block.type === 'image')
+    occurrences += blocks.length
+    assert.equal(editorial.questions[question.question_number].image_required, true)
+    assert.deepEqual(editorial.questions[question.question_number].image_ids, blocks.map(block => bySource.get(block.src)?.id))
+    if (question.question_number <= 80) imageAllocation[question.major_category_code] = (imageAllocation[question.major_category_code] ?? 0) + 1
+    for (const block of blocks) {
+      const asset = bySource.get(block.src)
+      assert(asset)
+      assert(asset.question_numbers.includes(question.question_number))
+      assert(!/https?:|(?:Giotto|Raphael|Monet|Botticelli|Hokusai|Utamaro|広重|北斎|歌麿|宗達|元信)/i.test(block.alt))
+      assert(question.source_text.includes(asset.source_page))
+    }
+  }
+  assert.deepEqual(imageAllocation, { western: 16, japanese: 8, asian: 1, design: 1 })
+  assert.equal(occurrences, 36)
+  for (const asset of assets) {
+    assert(artworkImagePathSchema.safeParse(asset.src).success)
+    assert.match(asset.src, /^\/images\/artworks\/mock01-img-\d{2}\.jpg$/)
+    assert.equal(asset.license, 'CC0-1.0')
+    assert.equal(asset.official_problem_book_reuse, false)
+    assert(asset.rights_review?.japan_term_expired || asset.rights_review?.japan_ordinary_term_expired)
+    assert(asset.source_page.startsWith('https://'))
+    assert(asset.policy_url.startsWith('https://'))
+    assert(asset.width > 100 && asset.height > 100 && Math.max(asset.width, asset.height) <= 1800)
+    const bytes = readFileSync(resolve('frontend/public', asset.src.slice(1)))
+    assert.equal(bytes.readUInt16BE(0), 0xffd8)
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), asset.sha256)
+    assert.deepEqual(asset.question_numbers, imageQuestions.filter(q => q.content_blocks.some(b => b.type === 'image' && b.src === asset.src)).map(q => q.question_number))
+  }
   // Print only safe aggregate results; never question bodies, keys, or explanations.
   console.log(JSON.stringify({ status: 'passed', questions: document.questions.length,
     groups: document.groups.length, shared_passages: passages.size, shared_lead_questions: sharedLeadQuestions,
-    history: 80, application: 5, minutes: manifest.duration_minutes,
+    history: 80, application: 5, minutes: manifest.duration_minutes, image_questions: imageQuestions.length, images: assets.length,
     schema: 'frontend/shared/schemas', categories: Object.keys(counts).length }))
 }
 

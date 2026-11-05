@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 94,
-  "updated_at": "2026-11-05T13:41:56.145Z",
+  "revision": 100,
+  "updated_at": "2026-11-05T15:37:29.204Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T13-41-56-145Z-r94.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T15-37-29-204Z-r100.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1558,6 +1558,160 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "art_figure_mock",
+      "context": "product",
+      "title": "公式問題集の図版頻度を踏まえ別作品の画像で模擬試験1を改訂",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-05 ユーザー依頼: 公式問題集と同程度の頻度で図版を用い、別作品へ変更する。著作権未消滅作品は掲載せずアプリの限界と明記。既存の模試/PDF/サイト統合とコミットpush指示を継続。",
+      "next_action": "コミットpushの送信対象を確認する",
+      "evidence": [
+        "docs/verification.md",
+        "content/mock-exams/mock-01/image-manifest.json"
+      ],
+      "last_verified_at": "2026-11-05T15:36:45.811Z",
+      "verification_scope": "今回の図版導入と問題改訂。原資料送信・既存DB・公開サイト配信は含めない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "全356史問題と活用13小問の図版分類から頻度を算出し85問の範囲で再構成。作品を変更し、全画像の日本での保護期間/提供条件/出典・画質とPDF・データを照合",
+          "verification": "共有スキーマ・関連単体/API・教材/権利台帳の照合、PC/SPとPDF画像/文字の確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/mock-01/image-manifest.json"
+          ],
+          "checked_at": "2026-11-05T15:36:45.811Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が原資料との重複なし、画像問題の正答一意・誤答、権利根拠と全冊子を確認",
+          "verification": "別担当の独立レビューと画像を見た解答・出典確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/mock-01/image-manifest.json"
+          ],
+          "checked_at": "2026-11-05T15:36:45.811Z",
+          "reviewer": "artwork_sourcing + figure_inventory + image_runtime(PDF)"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "図版31問・35作品、作品変更と権利台帳、独立試解、PDF全76ページ、PC/SP全85問を確認",
+            "at": "2026-11-05T15:37:11.860Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_image_support",
+      "context": "development",
+      "title": "共有表示ブロックに安全な図版表示・拡大・編集を追加",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-05 ユーザー依頼: 公式問題集と同程度の頻度で図版を用い、別作品へ変更する。著作権未消滅作品は掲載せずアプリの限界と明記。既存の模試/PDF/サイト統合とコミットpush指示を継続。",
+      "next_action": "既存DBと公開配信は変更せずGit送信へ進む",
+      "evidence": [
+        "docs/verification.md",
+        "content/mock-exams/mock-01/image-manifest.json"
+      ],
+      "last_verified_at": "2026-11-05T15:36:45.811Z",
+      "verification_scope": "今回の図版導入と問題改訂。原資料送信・既存DB・公開サイト配信は含めない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "共有Zodの画像形式・ローカル安全パス・取込書出し・回答前情報非開示とPC/SPの表示拡大を検証",
+          "verification": "共有スキーマ・関連単体/API・教材/権利台帳の照合、PC/SPとPDF画像/文字の確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/mock-01/image-manifest.json"
+          ],
+          "checked_at": "2026-11-05T15:36:45.811Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が既存ブロック/履歴/選択肢/認証の維持と画像の表示編集を確認",
+          "verification": "別担当の独立レビューと画像を見た解答・出典確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/mock-01/image-manifest.json"
+          ],
+          "checked_at": "2026-11-05T15:36:45.811Z",
+          "reviewer": "artwork_sourcing + root"
+        }
+      ],
+      "execution": {
+        "worker": "image_runtime",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "共有画像ブロック・安全な保存先・採点前非開示・編集・拡大を単体32件/DB20件/PCSP20件と独立監査で確認",
+            "at": "2026-11-05T15:37:21.588Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_figure_delivery",
+      "context": "operations",
+      "title": "図版付き模試と対応コードをコミットpush",
+      "status": "doing",
+      "depends_on": [
+        "art_figure_mock",
+        "art_image_support"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-05 ユーザー依頼: 公式問題集と同程度の頻度で図版を用い、別作品へ変更する。著作権未消滅作品は掲載せずアプリの限界と明記。既存の模試/PDF/サイト統合とコミットpush指示を継続。",
+      "next_action": "最終送信対象の独立確認・通常push・remote照合を行う",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "今回の図版導入と問題改訂。原資料送信・既存DB・公開サイト配信は含めない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "明示ステージ・原資料保護・差分検査・通常push・remote一致を確認",
+          "verification": "共有スキーマ・関連単体/API・教材/権利台帳の照合、PC/SPとPDF画像/文字の確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が送信対象と原本/秘密値の除外、利用許諾台帳と検証記録を確認",
+          "verification": "別担当の独立レビューと画像を見た解答・出典確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]

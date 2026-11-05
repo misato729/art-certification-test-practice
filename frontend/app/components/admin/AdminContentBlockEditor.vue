@@ -24,6 +24,7 @@ const blockLabel = (type: ContentBlockType) => ({
   text: '通常文',
   quote: '枠付き引用文',
   table: '表',
+  image: '図版',
   code: 'プログラム',
   code_group: 'プログラム比較',
   fill_in_text: '穴埋め問題文',
@@ -111,6 +112,12 @@ const removeCodeItem = (block: ContentBlock, index: number) => {
         <template v-else-if="block.type === 'quote'">
           <div class="admin-field"><label :for="fieldId('quote-text', index)">引用文</label><textarea :id="fieldId('quote-text', index)" v-model="block.text" required /></div>
           <div class="admin-field compact-field"><label :for="fieldId('quote-source', index)">引用元（任意）</label><input :id="fieldId('quote-source', index)" v-model="block.source" type="text"></div>
+        </template>
+
+        <template v-else-if="block.type === 'image'">
+          <div class="admin-field compact-field"><label :for="fieldId('image-src', index)">図版の保存先</label><input :id="fieldId('image-src', index)" v-model="block.src" type="text" required placeholder="/images/artworks/mock01-img-01.jpg"><small>権利確認済みの図版の保存先を指定します。</small></div>
+          <div class="admin-field compact-field"><label :for="fieldId('image-alt', index)">代替テキスト</label><input :id="fieldId('image-alt', index)" v-model="block.alt" type="text" required maxlength="250"><small>見える内容を簡潔に記し、解答となる作者名や作品名は含めません。</small></div>
+          <div class="admin-field compact-field"><label :for="fieldId('image-label', index)">図版ラベル（任意）</label><input :id="fieldId('image-label', index)" v-model="block.label" type="text" maxlength="40" placeholder="図A"></div>
         </template>
 
         <template v-else-if="block.type === 'table'">

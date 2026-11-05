@@ -11,11 +11,15 @@ export type ContentBlockType =
   | 'fill_in_text'
   | 'fill_in_quote'
   | 'fill_in_choice'
+  | 'image'
 
 export type ContentBlock = {
   id?: string
   inlines?: import('../../shared/schemas/content.ts').PassageInline[]
   type: ContentBlockType
+  src?: string
+  alt?: string
+  label?: string
   text?: string
   source?: string
   title?: string

@@ -9,6 +9,7 @@ const blockOptions = {
     { value: 'fill_in_text', label: '穴埋め問題文' },
     { value: 'fill_in_quote', label: '穴埋め引用文' },
     { value: 'table', label: '表' },
+    { value: 'image', label: '図版' },
     { value: 'code', label: 'プログラム' },
     { value: 'code_group', label: 'プログラム比較' },
   ],
@@ -16,11 +17,13 @@ const blockOptions = {
     { value: 'text', label: '通常文' },
     { value: 'quote', label: '枠付き引用文' },
     { value: 'table', label: '表' },
+    { value: 'image', label: '図版' },
     { value: 'code', label: 'プログラム' },
   ],
   choice: [
     { value: 'text', label: '通常文' },
     { value: 'table', label: '表' },
+    { value: 'image', label: '図版' },
     { value: 'fill_in_choice', label: '穴埋め選択肢' },
   ],
 } as const
@@ -28,6 +31,7 @@ const blockOptions = {
 export const getAdminContentBlockOptions = (context: AdminContentBlockContext) => blockOptions[context]
 
 export const createAdminContentBlock = (type: ContentBlockType): ContentBlock => {
+  if (type === 'image') return { type, src: '', alt: '', label: '' }
   if (type === 'table') return { type, headers: ['見出し1', '見出し2'], rows: [['', '']] }
   if (type === 'code') return { type, title: '', code: '' }
   if (type === 'code_group') return { type, items: [{ title: 'プログラムA', code: '' }, { title: 'プログラムB', code: '' }] }

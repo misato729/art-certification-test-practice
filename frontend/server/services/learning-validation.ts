@@ -37,6 +37,7 @@ export function excerptFrom(blocks: Block[]): string {
   const value = nonblank(text)
     ? text.replace(/\{\{([^{}]+)\}\}/g, '$1').replace(/\s+/g, ' ').trim()
     : (blocks.find(block => block.type === 'fill_in_choice')?.cells ?? []).join(' / ')
+      || blocks.filter(block => block.type === 'image').map(block => block.alt?.trim() || block.label?.trim() || '図版').join(' / ')
   const characters = Array.from(value)
   return characters.length > 120 ? `${characters.slice(0, 117).join('')}...` : value
 }

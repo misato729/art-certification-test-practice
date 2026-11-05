@@ -37,11 +37,25 @@ async function assertBlockTextShown(locator: Locator, blocks: Block[]) {
   const rendered = compact(await locator.innerText())
   const values = blocks.flatMap(block => block.type === 'table'
     ? [...(block.headers ?? []), ...(block.rows ?? []).flat()]
+    : block.type === 'image' ? [block.label ?? '']
     : block.type === 'fill_in_choice' ? block.cells ?? []
     : block.inlines ? block.inlines.map(inline => inline.type === 'blank' ? inline.label : inline.text)
     : [(block.text ?? '').replace(/\{\{([^}]+)\}\}/g, '$1')])
   // Boolean comparisons keep authored question bodies out of failure logs.
   expect(values.filter(Boolean).every(value => rendered.includes(compact(value))), 'visible block text matches the fixture').toBe(true)
+  for (const block of blocks.filter(block => block.type === 'image')) {
+    const images = locator.locator('img.artwork-thumbnail')
+    const index = await images.evaluateAll((nodes, expected) => nodes.findIndex(node => node.getAttribute('src') === expected.src && node.getAttribute('alt') === expected.alt), { src: block.src, alt: block.alt })
+    expect(index >= 0, 'curated artwork image is rendered').toBe(true)
+    const renderedImage = images.nth(Math.max(index, 0))
+    expect(await renderedImage.getAttribute('alt') === block.alt, 'neutral image alternative matches the fixture').toBe(true)
+    expect(await renderedImage.getAttribute('title') === null, 'image has no answer-bearing title attribute').toBe(true)
+    await expect.poll(() => renderedImage.evaluate(element => { const image = element as HTMLImageElement; return image.complete && image.naturalWidth > 0 && image.naturalHeight > 0 }), { message: 'curated artwork image is decoded' }).toBe(true)
+    await renderedImage.scrollIntoViewIfNeeded()
+    await renderedImage.evaluate(async element => { await (element as HTMLImageElement).decode() })
+    await expect(renderedImage).toBeVisible()
+    await locator.page().evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))))
+  }
 }
 
 async function showQuestion(page: Page, question: QuestionInput, action: () => Promise<unknown>): Promise<PublicQuestion> {
@@ -133,7 +147,7 @@ async function finishSequence(page: Page) {
 
 async function screenshot(page: Page, testInfo: TestInfo, name: string) {
   const path = testInfo.outputPath(name)
-  await page.screenshot({ path, fullPage: true, animations: 'disabled' })
+  await page.screenshot({ path, fullPage: await page.locator('dialog[open]').count() === 0, animations: 'disabled' })
   await testInfo.attach(name, { path, contentType: 'image/png' })
 }
 
@@ -158,6 +172,12 @@ test('all 85 four-choice questions and shared passages hide answers, render and 
   await expect(page.locator('.exam-grid-heading')).toContainText('大問の順に演習')
   await assertSingleExamName(page)
   await screenshot(page, testInfo, 'mock-home.png')
+  await page.goto('/exam-overview')
+  await expect(page.getByRole('heading', { name: '図版の掲載範囲', exact: true })).toBeVisible()
+  const overviewText = compact(await page.locator('main').innerText())
+  expect(config.site.overview.every(section => overviewText.includes(compact(section.body))), 'overview explains the image scope and application limitations').toBe(true)
+  await assertFitsViewport(page)
+  await screenshot(page, testInfo, 'mock-image-scope.png')
   for (const [index, question] of questions.entries()) {
     const payload = await showQuestion(page, question, () => index === 0
       ? page.goto(`/practice/1/${question.question_number}`)
@@ -303,5 +323,62 @@ test('editing an existing four-choice question retains every ID and input throug
   await page.getByRole('button', { name: '編集内容を保存', exact: true }).click()
   await expect(page.getByText('合成の保存拒否', { exact: true }).first()).toBeVisible()
   expect(saves).toBe(1)
+  await assertFitsViewport(page)
+})
+
+function firstFigureQuestion() {
+  return questions.find(question => {
+    const group = fixtureDocument.groups.find(group => group.id === question.group_id)
+    const required = new Set((question.passage_references ?? []).map(reference => reference.passage_id))
+    return [...question.content_blocks, ...question.choices.flatMap(choice => choice.content_blocks),
+      ...(group?.passages ?? []).filter(passage => required.has(passage.id)).flatMap(passage => passage.content_blocks)]
+      .some(block => block.type === 'image')
+  })
+}
+
+test('artwork figures load, enlarge by keyboard, show full detail and restore focus without submitting', async ({ page }, testInfo) => {
+  const question = firstFigureQuestion()
+  expect(Boolean(question), 'the authored mock includes artwork figures').toBe(true)
+  await showQuestion(page, question!, () => page.goto(`/practice/${question!.exam_number}/${question!.question_number}`))
+  const trigger = page.locator('.artwork-enlarge').first()
+  await trigger.focus()
+  await page.keyboard.press('Enter')
+  const dialog = page.locator('dialog.artwork-dialog[open]')
+  await expect(dialog).toBeVisible()
+  const enlarged = dialog.locator('img.artwork-full')
+  await expect.poll(() => enlarged.evaluate(element => { const image = element as HTMLImageElement; return image.complete && image.naturalWidth > 0 })).toBe(true)
+  await assertFitsViewport(page)
+  await dialog.getByRole('button', { name: '細部を拡大', exact: true }).click()
+  await expect(dialog.getByRole('button', { name: '細部を拡大', exact: true })).toHaveAttribute('aria-pressed', 'true')
+  expect(await enlarged.evaluate(element => { const image = element as HTMLImageElement; return Math.abs(image.getBoundingClientRect().width - image.naturalWidth) < 1 }), 'detail mode preserves the full image dimensions').toBe(true)
+  await assertFitsViewport(page)
+  await screenshot(page, testInfo, 'artwork-detail-dialog.png')
+  await page.keyboard.press('Escape')
+  await expect(dialog).toHaveCount(0)
+  await expect(trigger).toBeFocused()
+  await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0)
+  await expect(page.getByRole('button', { name: '回答する', exact: true })).toBeDisabled()
+})
+
+test('the admin image editor preserves a curated path and neutral metadata in its preview', async ({ page }) => {
+  await mockAdmin(page)
+  const question = firstFigureQuestion()!
+  const group = fixtureDocument.groups.find(group => group.id === question.group_id)
+  const required = new Set((question.passage_references ?? []).map(reference => reference.passage_id))
+  const image = [...question.content_blocks, ...question.choices.flatMap(choice => choice.content_blocks),
+    ...(group?.passages ?? []).filter(passage => required.has(passage.id)).flatMap(passage => passage.content_blocks)].find(block => block.type === 'image')!
+  await page.goto('/admin/questions/new')
+  const editor = page.getByRole('group', { name: '問題文', exact: true })
+  await editor.getByLabel('追加する表示ブロック', { exact: true }).selectOption('image')
+  await editor.getByRole('button', { name: '表示ブロックを追加', exact: true }).click()
+  await editor.getByLabel('図版の保存先', { exact: true }).fill(image.src!)
+  await editor.getByLabel('代替テキスト', { exact: true }).fill('合成の図版説明')
+  await editor.getByLabel('図版ラベル（任意）', { exact: true }).fill('図A')
+  await page.getByRole('button', { name: 'プレビュー', exact: true }).click()
+  const rendered = page.locator('.preview-panel img.artwork-thumbnail')
+  await expect(rendered).toHaveCount(1)
+  expect(await rendered.getAttribute('src') === image.src, 'admin preview retains the curated image path').toBe(true)
+  await expect(rendered).toHaveAttribute('alt', '合成の図版説明')
+  await expect.poll(() => rendered.evaluate(element => { const image = element as HTMLImageElement; return image.complete && image.naturalWidth > 0 })).toBe(true)
   await assertFitsViewport(page)
 })

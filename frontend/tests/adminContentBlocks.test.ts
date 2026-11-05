@@ -3,9 +3,9 @@ import test from 'node:test'
 import { createAdminContentBlock, FILL_IN_CHOICE_COLUMN_COUNTS, FILL_IN_CHOICE_LABELS, getAdminContentBlockOptions, resizeFillInChoiceCells } from '../app/utils/adminContentBlocks.ts'
 
 test('each editor offers exactly the block types allowed by its API context', () => {
-  assert.deepEqual(getAdminContentBlockOptions('question').map(option => option.value), ['text', 'quote', 'fill_in_text', 'fill_in_quote', 'table', 'code', 'code_group'])
-  assert.deepEqual(getAdminContentBlockOptions('choice').map(option => option.value), ['text', 'table', 'fill_in_choice'])
-  assert.deepEqual(getAdminContentBlockOptions('explanation').map(option => option.value), ['text', 'quote', 'table', 'code'])
+  assert.deepEqual(getAdminContentBlockOptions('question').map(option => option.value), ['text', 'quote', 'fill_in_text', 'fill_in_quote', 'table', 'image', 'code', 'code_group'])
+  assert.deepEqual(getAdminContentBlockOptions('choice').map(option => option.value), ['text', 'table', 'image', 'fill_in_choice'])
+  assert.deepEqual(getAdminContentBlockOptions('explanation').map(option => option.value), ['text', 'quote', 'table', 'image', 'code'])
 })
 
 test('new fill-in blocks use the existing text and cells API shapes', () => {
@@ -61,4 +61,8 @@ test('all existing non-fill-in block defaults remain available', () => {
   assert.deepEqual(createAdminContentBlock('quote'), { type: 'quote', text: '', source: '' })
   assert.deepEqual(createAdminContentBlock('code'), { type: 'code', title: '', code: '' })
   assert.deepEqual(createAdminContentBlock('code_group'), { type: 'code_group', items: [{ title: 'プログラムA', code: '' }, { title: 'プログラムB', code: '' }] })
+})
+
+test('new image blocks start with editable neutral fields', () => {
+  assert.deepEqual(createAdminContentBlock('image'), { type: 'image', src: '', alt: '', label: '' })
 })

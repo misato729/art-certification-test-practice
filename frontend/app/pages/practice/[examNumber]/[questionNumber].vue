@@ -8,17 +8,7 @@ import {
   type PracticePosition,
 } from '~/utils/practiceSequence'
 
-type ContentBlock = {
-  type: 'text' | 'quote' | 'fill_in_text' | 'fill_in_quote' | 'fill_in_choice' | 'table' | 'code' | 'code_group'
-  text?: string
-  source?: string
-  title?: string
-  code?: string
-  headers?: string[]
-  rows?: string[][]
-  items?: { title: string, code: string }[]
-  cells?: string[]
-}
+type ContentBlock = import('../../../../shared/types/learning').LearningBlock
 
 type Choice = {
   id: number
