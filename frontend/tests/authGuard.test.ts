@@ -67,3 +67,13 @@ test('SSR documents containing a resolved application user cannot be shared or s
   await serverGuard()
   assert.equal(cacheControl.value, 'public, max-age=300')
 })
+
+test('prerender leaves session resolution to hydration without calling the backend', async () => {
+  const source = readFileSync(new URL('../app/middleware/session.global.ts', import.meta.url), 'utf8')
+    .replaceAll('import.meta.prerender', 'true').replaceAll('import.meta.server', 'true')
+  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ESNext } }).outputText
+  const { default: prerenderGuard } = await import('data:text/javascript;base64,' + Buffer.from(compiled).toString('base64'))
+  globals.useAuth = () => { throw new Error('Prerender must not resolve sessions') }
+  globals.useResponseHeader = () => { throw new Error('Prerender must not access request headers') }
+  assert.equal(await prerenderGuard(), undefined)
+})
