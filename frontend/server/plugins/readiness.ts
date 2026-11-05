@@ -5,6 +5,8 @@ import { closeDatabase, getDatabase } from '../core/db.ts'
 import { closeRateLimitStore } from '../core/rate-limit.ts'
 
 export default defineNitroPlugin(async (nitro) => {
+  // Static HTML generation does not run the separately deployed backend.
+  if (import.meta.prerender) return
   authSecret()
   authBaseURL()
   authTrustedOrigins()
