@@ -5,6 +5,8 @@ export default defineNuxtConfig({
   ...e2eBuildConfiguration(),
   compatibilityDate: '2024-07-03',
   devtools: { enabled: false },
+  // Static hosting does not need SSR source maps in the build cache.
+  sourcemap: { server: false },
   ui: { fonts: false, colorMode: false },
   modules: ['@nuxt/ui'],
   // Nitro resolves shared modules after the intermediate SSR build. Keep their

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 121,
-  "updated_at": "2026-11-05T23:06:08.581Z",
+  "revision": 125,
+  "updated_at": "2026-11-05T23:39:54.716Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T23-06-08-581Z-r121.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T23-39-54-716Z-r125.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1933,11 +1933,12 @@
       "title": "模擬試験2〜5とサイト組込をコミットpushしCIを確認",
       "status": "doing",
       "depends_on": [
-        "art_mocks_02_05_integration"
+        "art_mocks_02_05_integration",
+        "art_netlify_generated_map_scan"
       ],
       "authorization": "requested",
-      "request_ref": "同一会話のユーザー明示指示「終わったらコミット・pushしてください」を継続し、最新の「模試2〜5も作成してください」で追加された成果物を送信する。過去のstate記録から権限を拡張するものではない。公開配信・既存DB反映は別範囲。",
-      "next_action": "対象の明示ステージ、独立監査、通常commit/pushとCI全3ジョブを確認する",
+      "request_ref": "同一会話のユーザー明示指示「終わったらコミット・pushしてください」を継続し、最新の「模試2〜5も作成してください」で追加された成果物を送信する。過去のstate記録から権限を拡張するものではない。公開配信・既存DB反映は別範囲。 追加提示されたNetlifyビルドエラーの修正を同じ送信に含め、修正後コミットのCIを確認する。",
+      "next_action": "Nuxt設定2行と根拠・状態7ファイルを独立ステージ監査後に通常commit/pushする",
       "evidence": [],
       "last_verified_at": null,
       "verification_scope": "今回の模試2〜5と425問の演習組込、検証記録のGit送信。原資料・秘密値・既存DB・本番配信・停止中の自動ビルド再開を含めない。",
@@ -1966,6 +1967,64 @@
         "worker": "root",
         "max_attempts": 3,
         "attempts": []
+      }
+    },
+    {
+      "id": "art_netlify_generated_map_scan",
+      "context": "development",
+      "title": "Netlifyの生成ソースマップに対するlikely-secret検出を解消",
+      "status": "done",
+      "depends_on": [
+        "art_mocks_02_05_integration"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ユーザーがNetlifyビルド失敗ログ（api_で始まるlikely secret、生成server.mjs.map/.map.jsonの2箇所）を提示。現在の追加依頼として原因調査と修正を継続し、同会話のコミットpush指示に従う。",
+      "next_action": "依頼済みdeliveryで修正コードを通常pushし、当該コミットのCI全3ジョブを確認する",
+      "evidence": [
+        "docs/verification.md",
+        "frontend/nuxt.config.ts"
+      ],
+      "last_verified_at": "2026-11-05T23:39:53.756Z",
+      "verification_scope": "Nuxt生成識別子の独立来歴確認、修正前とwarm-cache修正後の空dotenv static生成、512テキスト中の候補0、179画像SHA/HTML参照、型検査と独立適用後レビュー。Netlify本体のスキャナ再実行・配信・既存DBは含めない。修正コミットCIは後続deliveryで実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "空dotenv/合成設定の新規static生成で問題のserver map2種の不生成、HTML/JS/CSS/リダイレクトと全5模試ナビ・図版を確認し、元資料/秘密の送信除外を保つ",
+          "verification": "Node24空dotenv・static条件の修正前/warm-cache修正後generate、候補/図版/HTML参照の実生成検査、型と系列・資料保護。修正コミットのCI全3ジョブは後続deliveryで確認し依存循環を避ける。",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "frontend/nuxt.config.ts"
+          ],
+          "checked_at": "2026-11-05T23:39:53.756Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が自動生成変数の来歴、正式なNuxt設定、スキャンと実行機能の保持、最終差分を確認",
+          "verification": "原因の独立調査と適用後の設定/生成証拠レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "frontend/nuxt.config.ts"
+          ],
+          "checked_at": "2026-11-05T23:39:53.756Z",
+          "reviewer": "netlify_scan_audit / nuxt_maps_semantics"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "第1評価合格。修正前とwarm-cache修正後のstatic生成で2map消失、候補512テキスト中0・179画像SHA/HTML参照保持、型・系列・独立適用レビュー成功。秘密スキャナは維持しNetlify本体の再実行は未実施。",
+            "at": "2026-11-05T23:39:53.951Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]

@@ -661,3 +661,18 @@ rootは模試1全85問の本文・正答内容・図版の焦点を確認した�
 最終単体147/147、API/DB127/127、型検査、進捗/資料保護162/162が成功。全5回の原稿・公開系列・共有Schema・テンプレート・依存修正適用・差分・原資料保護の11検査を再確認し成功した。通常操作の60秒を保ち、425問の初期一括取込2操作のみ180秒にした初回不合格/修正記録は保持している。
 
 証拠と94枚の画面記録は保護領域 `local-only/mock-exams-02-05/integration-final/` に保存した。集約証拠SHA-256は `67a1141253983c74740c703f61029dd2da837c3c34830057e89ec3a5a10859bc`。使い捨てE2E DBの残数0を確認して今回専用コンテナを削除し、以前からあるE2Eビルドは保持した。既存DB・本番配信・自動配信停止設定は変更していない。次は明示済みのコミット/pushと今回CIを確認する。
+
+
+### 追加依頼：Netlifyのlikely-secret検出に対応（2026-11-06）
+
+ユーザー提示ログは、秘密値0件・likely secret 1件で、Nuxt生成のserver.mjs.mapと.map.jsonを指した。公開ソースと生成物を独立調査し、APIプラグインの変数名を相対パスから生成する式と、map内唯一の候補のSHAが一致した（候補SHA `28d84d159f73221da5a4a9296e8ae812f1aadca4be1036b08f586855fe528de9`）。候補は秘密値ではなくimport用の自動生成識別子。Netlifyログの値はマスクされているため、その実値との直接照合はしていない。
+
+Nuxt公式設定の `sourcemap: { server: false }` のみを追加し、不要なSSRデバッグmapの生成を停止した。秘密スキャンの停止・除外、環境秘密値の読取り、API/認証/DB/配信先の変更は行っていない。Nuxt CLI generateはbuildDirのdistを前段で掃除するため、追加の一括削除処理は不要だった。
+
+- Node24・空dotenv・独立出力先・NITRO_PRESET=staticで修正前generateが39.8秒で成功し、問題の2mapと同じ形式の候補を実生成した。
+- 同一の出力先と既存cacheを使った修正後generateは42.7秒で成功し、2mapとも不在。生成テキスト512ファイルに候補0件、公開source map0件、HTML19/JS58/CSS23を確認した。全5模試ラベルとindex/200/404/redirectsを保持し、179図版のSHAは元ファイルと完全一致、HTML参照assetの欠落0件。
+- 型検査29.8秒、425問の系列/共有Zod、差分と資料保護の検査成功。別担当の設定適用後レビューPASS、未解決重大指摘0件。Netlifyサービス上の専用スキャナ再実行/再配信はこの確認に含まない。修正コミットの全3CIは後続deliveryで確認する。
+
+調査・生成ログ・集約証拠は保護領域 `local-only/mock-exams-02-05/netlify-scan/` に保存。集約証拠SHAは `5749f0219708a65e0a7818d4cd5eacefd044fe0ba88ac9df53cd6a1d6040e9f4`。なお模試追加の元実装コミット9495c343dda91422874fffef65e7adaba7bd7f39は[Actions 42127580859](https://github.com/misato729/art-history-practice/actions/runs/42127580859)のharness/verify/browser全3ジョブ成功、PC/SP50/50、API127/127・単体147/147を実ログから確認済み。
+
+参考： [Netlify公式の生成ファイルを含む秘密検査仕様](https://docs.netlify.com/build/environment-variables/secrets-controller/#secret-scanning-process)。
