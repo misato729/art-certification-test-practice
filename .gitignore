@@ -26,3 +26,6 @@
 # User-supplied exam references remain local.
 **/[pP][aA][sS][tT]-[eE][xX][aA][mM]/
 .neon
+
+# Supplied official textbook remains local.
+**/[tT][eE][xX][tT][bB][oO][oO][kK].*

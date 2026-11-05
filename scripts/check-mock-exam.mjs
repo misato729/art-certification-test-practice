@@ -35,7 +35,7 @@ function main() {
     const section = manifest.sections.filter(section => n >= section.first && n <= section.last)
     assert.equal(section.length, 1)
     assert.deepEqual(choiceLabelsForQuestion(config, question.exam_number, n), section[0].choice_labels)
-    assert.equal(question.choices.length, n <= 80 ? 4 : 6)
+    assert.equal(question.choices.length, 4)
     assert.equal(question.question_number, n)
     assert.equal(question.exam_number, 1)
     assert.equal(question.publication_status, 'published')

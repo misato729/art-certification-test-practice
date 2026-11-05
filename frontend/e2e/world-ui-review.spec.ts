@@ -43,7 +43,7 @@ test('static home, desktop collapse, mobile accordion and group navigation match
   }
   await sidebar.getByRole('button', { name: '模擬試験1の大問を開く', exact: true }).click()
   const links = sidebar.getByRole('navigation', { name: '模擬試験1の大問一覧' }).getByRole('link')
-  await expect(links).toHaveCount(23)
+  await expect(links).toHaveCount(content.groups.length)
   const group = content.groups.at(-1)
   const first = content.questions.find((q: any) => q.group_id === group.id).question_number
   await links.last().click()

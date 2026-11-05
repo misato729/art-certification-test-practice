@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 86,
-  "updated_at": "2026-11-04T12:07:57.576Z",
+  "revision": 92,
+  "updated_at": "2026-11-05T13:37:39.926Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-04T12-07-57-576Z-r86.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T13-37-39-926Z-r92.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1436,6 +1436,113 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "art_full_sources_rebuild",
+      "context": "product",
+      "title": "公式テキストと公式問題集全体を参照し模擬試験1全85問を作り直す",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-05 ユーザー依頼: textbook.pdfと2級公式問題集.pdfを参考に模試1回分を丸ごと作成し直す。従来の名称は模擬試験1。",
+      "next_action": "資料保護と送信差分を独立レビューし、承認済みのコミットpushを行う",
+      "evidence": [
+        "docs/verification.md",
+        "content/mock-exams/mock-01/README.md"
+      ],
+      "last_verified_at": "2026-11-05T13:37:02.546Z",
+      "verification_scope": "全85問を独立に再作成し全4択340選択肢。全体構成と126事実確認ページ・221参照、独立盲解85/85、関連単体18/資料保護40/DB18、PC-SP14+再2全成功(170回答)、PDF49ページ全目視・本文グリフ境界・MD3部一致。既存DB・本番未変更。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "共有スキーマで85問の構造、根拠ページ、正答一意、PDFと配信用データ一致・表示を検証",
+          "verification": "共有Zod・既存関連テスト、PDF全文対応とレンダリング、サイト表示の関連検証",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/mock-01/README.md"
+          ],
+          "checked_at": "2026-11-05T13:37:02.546Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が出題設計、根拠照合、盲解と誤答の妥当性、最終データ・PDFを確認",
+          "verification": "資料分析担当以外を含む独立レビューと解答を隠した全85問の試解",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/mock-01/README.md"
+          ],
+          "checked_at": "2026-11-05T13:37:02.546Z",
+          "reviewer": "integration_audit and textbook_analysis"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回評価でPDF大問見出し孤立と問84の改稿後の誤答解説不一致を検出。構造・独立試解・単体・DB検査は確認したが、PDF修正後の最終目視とPC/SP検証を継続。",
+            "at": "2026-11-05T13:27:48.393Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "全85問の出典照合・独立盲解と誤答レビュー、関連単体/DB/PC-SP170回答、最終PDF全49ページ・MD3部の照合が合格。初回のPDFとテスト期待値を修正済み。",
+            "at": "2026-11-05T13:37:03.030Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_full_sources_rebuild_push",
+      "context": "operations",
+      "title": "改訂した模擬試験1の85問とPDF・サイト用データをコミットpushする",
+      "status": "doing",
+      "depends_on": [
+        "art_full_sources_rebuild"
+      ],
+      "authorization": "requested",
+      "request_ref": "ユーザーの同一模試作成に関する明示指示「終わったらコミット・push」を、2026-11-05の全体作り直しにも継続。既存DB・公開配信は含めない。",
+      "next_action": "明示ステージ・資料保護・差分検査後に通常pushし、remote HEADと一致を確認する",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "コミット・pushとremoteの一致確認。配信・既存DBは対象外。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "依頼差分を明示ステージし資料保護・差分検査とremote一致を確認",
+          "verification": "git diff --check、check-private-sources、ステージ一覧、通常pushとremote HEAD照合",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が送信対象と原資料・秘密値の除外、検証記録を確認",
+          "verification": "独立した読取専用の送信差分レビュー",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]

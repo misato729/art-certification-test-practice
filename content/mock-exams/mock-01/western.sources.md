@@ -1,51 +1,49 @@
-# 西洋美術史34問の一次資料確認
+# 改訂版の参照ページ（41問）
 
-確認日：2026年10月30日。作成担当：author_western。
-一次資料の公開ページ本文・検索結果本文を確認し、中心事実を照合。図版・過去問の文言は転載していない。
+確認日：2026年11月5日。書籍のノンブルと提供PDFのページ番号を区別しています。ページは事実確認の根拠であり、原設問の転載元ではありません。
 
-## 配分
-古代4／中世3／イタリア・北方ルネサンスとマニエリスム7／バロック・ロココ4／19世紀8／20世紀8。
-当初案から20世紀の空白を修正し、フォーヴィスム、ブリュッケ、未来派、抽象、ポップ・アートを追加した。
-近接する技法・様式・作家を誤答に採用し、無関係・極端な誤答を改稿した。
+| 問 | 確認事項 | 公式テキスト（本文ページ／PDFページ） | 公式問題集（本文ページ／PDFページ） |
+| ---: | --- | --- | --- |
+| 1 | エジプトの墓と死生観 | 50/52、51/53 | — |
+| 2 | ギリシア建築の柱頭 | 115/117 | — |
+| 3 | モザイクの制作方法 | 56/58、57/59、259/261、261/263、262/264 | — |
+| 4 | 国際ゴシックと装飾写本 | 57/59、58/60、61/63 | — |
+| 5 | ブルネレスキの大円蓋 | 62/64、120/122 | — |
+| 6 | 初期ルネサンスの作品と作者 | 62/64、63/65 | — |
+| 7 | ボッティチェリと神話主題 | 63/65、116/118 | — |
+| 8 | ヴェネツィア派の色彩 | 56/58、57/59、63/65、65/67 | — |
+| 9 | ホルバインの知識人肖像 | 65/67、66/68 | — |
+| 10 | ジャンボローニャと多視点 | 66/68、67/69、122/124 | — |
+| 11 | アンニバーレ・カラッチ | 68/70、69/71、70/72、71/73 | — |
+| 12 | プッサンとフランス古典主義 | 68/70、69/71、71/73、75/77 | — |
+| 13 | オランダ絵画の分野と画家 | 70/72 | — |
+| 14 | ベラスケスの活動地域と作品 | 69/71、70/72、71/73 | — |
+| 15 | シャルダンと18世紀の日常 | 72/74、74/76、93/95、94/96 | — |
+| 16 | カナレットとピラネージ | 73/75、79/81、85/87 | — |
+| 17 | ホガースとイギリスの風刺 | 72/74、73/75 | — |
+| 18 | 新古典主義と古代発掘 | 74/76、75/77、85/87 | — |
+| 19 | アングルの線描 | 75/77、77/79、80/82、84/86、93/95、94/96 | — |
+| 20 | コンスタブルとターナー | 78/80 | — |
+| 21 | 水晶宮と産業技術 | 79/81、85/87 | — |
+| 22 | ドーミエと同時代の生活 | 76/78、77/79、80/82 | — |
+| 23 | マネと落選者展 | 82/84、83/85、84/86 | — |
+| 24 | 19世紀彫刻の作品と作者 | 76/78、85/87 | — |
+| 25 | ナビ派の絵画観 | 87/89、89/91 | — |
+| 26 | 象徴主義の作品と作者 | 88/90、89/91 | — |
+| 27 | アール・ヌーヴォーとギマール | 74/76、90/92、99/101 | — |
+| 28 | ルオーとフォーヴィスム | 92/94 | — |
+| 29 | キュビスムとパピエ・コレ | 93/95、94/96、262/264、263/265 | — |
+| 30 | ブリュッケと青騎士 | 89/91、94/96、95/97 | — |
+| 31 | ロシア前衛の二つの動向 | 95/97、98/100、99/101 | — |
+| 32 | シュヴィッタースのメルツ | 97/99、263/265 | — |
+| 33 | ブランクーシの形の単純化 | 96/98、101/103、108/110 | — |
+| 34 | バウハウスの教育理念 | 102/104、103/105、140/142 | — |
+| 35 | アンフォルメルとフォートリエ | 87/89、88/90、95/97、104/106、105/107、145/147 | — |
+| 36 | ロスコとカラーフィールド | 87/89、105/107、106/108、107/109、142/144 | — |
+| 37 | ジャスパー・ジョーンズとネオ・ダダ | 105/107、106/108 | — |
+| 38 | ヌーヴォー・レアリスムの方法 | 106/108、107/109 | — |
+| 39 | オプ・アートと視覚効果 | 104/106、107/109、108/110、109/111、145/147 | — |
+| 40 | カルダーとティンゲリー | 107/109、108/110 | — |
+| 41 | 概念と場所を重視する美術 | 107/109、109/111、144/146、145/147 | — |
 
-| 問 | 確認事項 | 資料 |
-| --- | --- | --- |
-| 1 | 古代エジプトの人物表現 | [Australian Museum: The Painter in ancient Egypt](https://australian.museum/learn/cultures/international-collection/ancient-egyptian/the-painter-in-ancient-egypt/) |
-| 2 | ギリシア美術の時代区分 | [The Met: Greek Art in the Archaic Period](https://www.metmuseum.org/de/essays/greek-art-in-the-archaic-period) / [The Met: Art of the Hellenistic Age and the Hellenistic Tradition](https://www.metmuseum.org/de/essays/art-of-the-hellenistic-age-and-the-hellenistic-tradition) |
-| 3 | 赤像式陶器の技法 | [The Met: Athenian Vase Painting: Black- and Red-Figure Techniques](https://www.metmuseum.org/fr/essays/athenian-vase-painting-black-and-red-figure-techniques) |
-| 4 | ローマ共和政期の肖像 | [The Met: Roman Portrait Sculpture: The Stylistic Cycle](https://www.metmuseum.org/de/essays/roman-portrait-sculpture-the-stylistic-cycle) |
-| 5 | ビザンティンのイコン | [The Met: Icons and Iconoclasm in Byzantium](https://www.metmuseum.org/essays/icons-and-iconoclasm-in-byzantium) |
-| 6 | 中世建築の様式比較 | [The Met: Gothic Art](https://www.metmuseum.org/fr/essays/gothic-art) |
-| 7 | ゴシック大聖堂の構造 | [The Met: Gothic Art](https://www.metmuseum.org/fr/essays/gothic-art) |
-| 8 | フレスコの制作工程 | [National Gallery: Fresco](https://www.nationalgallery.org.uk/paintings/glossary/fresco) |
-| 9 | 線遠近法と空間表現 | [National Gallery: Perspective](https://www.nationalgallery.org.uk/paintings/glossary/perspective) |
-| 10 | レオナルドのスフマート | [The Met: Leonardo da Vinci (1452–1519)](https://www.metmuseum.org/fr/essays/leonardo-da-vinci-1452-1519) |
-| 11 | 盛期ルネサンスの作者と作品 | [Vatican Museums: Ceiling](https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/cappella-sistina/volta.html) / [Vatican Museums: School of Athens](https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/stanze-di-raffaello/stanza-della-segnatura/scuola-di-atene.html) |
-| 12 | 初期ネーデルラント絵画 | [The Met: Jan van Eyck (ca. 1390–1441)](https://www.metmuseum.org/essays/jan-van-eyck-ca-1390-1441) |
-| 13 | デューラーと版画 | [The Met: Albrecht Dürer (1471–1528)](https://www.metmuseum.org/essays/albrecht-durer-1471-1528) |
-| 14 | マニエリスムの表現 | [The Met: Mannerism: Bronzino and his Contemporaries](https://www.metmuseum.org/essays/mannerism-bronzino-1503-1572-and-his-contemporaries) |
-| 15 | カラヴァッジョの明暗 | [National Gallery: Chiaroscuro](https://www.nationalgallery.org.uk/paintings/glossary/chiaroscuro) |
-| 16 | ベルニーニと総合的な空間 | [The Met: Baroque Rome](https://www.metmuseum.org/essays/baroque-rome) |
-| 17 | フェルメールの室内画 | [The Met: Johannes Vermeer (1632–1675)](https://www.metmuseum.org/essays/johannes-vermeer-1632-1675) |
-| 18 | ロココと雅宴画 | [The Met: Antoine Watteau (1684–1721)](https://www.metmuseum.org/essays/antoine-watteau-1684-1721) |
-| 19 | ダヴィッドと新古典主義 | [The Met: The Legacy of Jacques Louis David (1748–1825)](https://www.metmuseum.org/pt/essays/the-legacy-of-jacques-louis-david-1748-1825) |
-| 20 | ロマン主義と歴史的事件 | [Musée du Louvre: Romantisme, actualité et sensualité](https://www.louvre.fr/decouvrir/les-parcours-de-visite/chefs-d-oeuvre-du-louvre/romantisme-actualite-et-sensualite) |
-| 21 | ロマン主義の風景 | [Hamburger Kunsthalle: Audiotour Caspar David Friedrich](https://www.hamburger-kunsthalle.org/de/audiotour-caspar-david-friedrich) |
-| 22 | クールベと主題の序列 | [Musée d’Orsay: Un enterrement à Ornans](https://www.musee-orsay.fr/en/artworks/un-enterrement-ornans-924) |
-| 23 | モネの連作 | [The Met: Claude Monet (1840–1926)](https://www.metmuseum.org/ja/essays/claude-monet-1840-1926) |
-| 24 | スーラと色彩分割 | [The Met: Georges Seurat (1859–1891) and Neo-Impressionism](https://www.metmuseum.org/essays/georges-seurat-1859-1891-and-neo-impressionism) |
-| 25 | セザンヌの画面構成 | [The Met: Paul Cézanne (1839–1906)](https://www.metmuseum.org/essays/paul-cezanne-1839-1906) |
-| 26 | 象徴主義の志向 | [The Met: Symbolism](https://www.metmuseum.org/essays/symbolism) |
-| 27 | フォーヴィスムとドイツ表現主義 | [The Met: Fauvism](https://www.metmuseum.org/ja/essays/fauvism) / [MoMA: German Expressionism Styles: Brücke](https://www.moma.org/s/ge/curated_ge/styles/brucke.html) |
-| 28 | 未来派の彫刻 | [MoMA: Futurism](https://www.moma.org/collection/terms/futurism) |
-| 29 | 抽象絵画の複数の方向 | [MoMA: Vasily Kandinsky](https://www.moma.org/artists/2981-vasily-kandinsky) / [SFMOMA: Piet Mondrian](https://www.sfmoma.org/artist/Piet_Mondrian/) |
-| 30 | デュシャンのレディメイド | [MoMA: Marcel Duchamp, Bicycle Wheel](https://www.moma.org/collection/works/81631) |
-| 31 | シュルレアリスムと無意識 | [National Galleries of Scotland: Automatism](https://www.nationalgalleries.org/art-and-artists/glossary-terms/automatism) / [The Met: Georges Seurat (1859–1891) and Neo-Impressionism](https://www.metmuseum.org/essays/georges-seurat-1859-1891-and-neo-impressionism) / [National Gallery: Chiaroscuro](https://www.nationalgallery.org.uk/paintings/glossary/chiaroscuro) / [National Gallery: Grisaille](https://www.nationalgallery.org.uk/paintings/glossary/grisaille) |
-| 32 | ポロックの制作行為 | [The Met: Abstract Expressionism](https://www.metmuseum.org/essays/abstract-expressionism) / [MoMA: Frottage](https://www.moma.org/collection/terms/frottage) / [National Galleries of Scotland: Grattage](https://www.nationalgalleries.org/art-and-artists/glossary-terms/grattage) |
-| 33 | ポップ・アートと複製文化 | [MoMA: Pop Art](https://www.moma.org/momaorg/shared/flattened_pages/moma_learning/themes/pop-art/) |
-| 34 | ミニマリズムの材料と反復 | [MoMA: The Materials of Minimalism](https://www.moma.org/collection/terms/minimalism/the-materials-of-minimalism) / [MoMA: Dan Flavin, untitled (to the innovator of Wheeling Peachblow)](https://www.moma.org/collection/works/80758) |
-
-難易度は編集上の想定で実測値ではない。原資料の抜粋だけから公式出題比率を推定していない。
-取得できなかったMetの旧URLは採用していない。
-
-最終独立レビューで、問31のオートマティスムと個別の自動技法の包含関係を指摘された。自動記述の総称を問う形にし、誤答を別の表現原理へ変更して一意化した。
+出典の補足URLは各問の `source_text` と解答冊子に記載しています。全設問は独自作成、原資料・図版・抽出物は非公開です。

@@ -1,12 +1,13 @@
 import { readFileSync } from 'node:fs'
 import { test, expect, type Page, type Locator, type TestInfo } from '@playwright/test'
 import { loadE2EFixture } from '../scripts/e2e-fixture.mjs'
-import { contentDocumentSchema, parseQuestionArchiveEntries, type Block, type QuestionInput } from '../shared/schemas/content.ts'
+import { type Block, type QuestionInput } from '../shared/schemas/content.ts'
+import { parseContentDocument } from '../shared/schemas/structure.ts'
 import { choiceLabelsForQuestion } from '../shared/schemas/exam.ts'
 
 const { config } = loadE2EFixture()
-const fixtureDocument = contentDocumentSchema.parse(JSON.parse(readFileSync(new URL('../../content/questions.json', import.meta.url), 'utf8')))
-const questions = parseQuestionArchiveEntries(fixtureDocument.questions, config)
+const fixtureDocument = parseContentDocument(JSON.parse(readFileSync(new URL('../../content/questions.json', import.meta.url), 'utf8')), config)
+const questions = fixtureDocument.questions
   .filter(question => question.publication_status === 'published')
   .sort((left, right) => left.exam_number - right.exam_number || left.question_number - right.question_number)
 
@@ -36,7 +37,9 @@ async function assertBlockTextShown(locator: Locator, blocks: Block[]) {
   const rendered = compact(await locator.innerText())
   const values = blocks.flatMap(block => block.type === 'table'
     ? [...(block.headers ?? []), ...(block.rows ?? []).flat()]
-    : [block.text ?? ''])
+    : block.type === 'fill_in_choice' ? block.cells ?? []
+    : block.inlines ? block.inlines.map(inline => inline.type === 'blank' ? inline.label : inline.text)
+    : [(block.text ?? '').replace(/\{\{([^}]+)\}\}/g, '$1')])
   // Boolean comparisons keep authored question bodies out of failure logs.
   expect(values.filter(Boolean).every(value => rendered.includes(compact(value))), 'visible block text matches the fixture').toBe(true)
 }
@@ -64,7 +67,7 @@ async function showQuestion(page: Page, question: QuestionInput, action: () => P
   expect(payload.question_number).toBe(question.question_number)
   expect(sameData(payload.content_blocks, question.content_blocks), 'API question blocks match the fixture').toBe(true)
   const expectedLabels = choiceLabelsForQuestion(config, question.exam_number, question.question_number)
-  expect(expectedLabels.length).toBe(question.question_number <= 80 ? 4 : 6)
+  expect(expectedLabels.length).toBe(4)
   expect(payload.choices.map((choice: PublicQuestion['choices'][number]) => choice.choice_label).join('') === expectedLabels.join(''), 'question uses its configured labels').toBe(true)
   expect(payload.choices.every((choice: PublicQuestion['choices'][number], index: number) =>
     sameData(choice.content_blocks, question.choices[index]?.content_blocks)), 'API choices match the fixture').toBe(true)
@@ -73,6 +76,21 @@ async function showQuestion(page: Page, question: QuestionInput, action: () => P
   await expect(page.getByRole('radio')).toHaveCount(expectedLabels.length)
   await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toHaveCount(0)
   await expect(page.getByRole('button', { name: '回答する', exact: true })).toBeDisabled()
+  const group = fixtureDocument.groups.find(group => group.id === question.group_id)
+  const required = new Set((question.passage_references ?? []).map(reference => reference.passage_id))
+  const expectedPassages = (group?.passages ?? []).filter(passage => required.has(passage.id)).sort((left, right) => left.display_order - right.display_order)
+  const publicPassages = payload.shared_passages ?? []
+  expect(publicPassages.length).toBe(expectedPassages.length)
+  expect(publicPassages.every((passage: { label: string; display_order: number; content_blocks: Block[] }, index: number) => {
+    const expected = expectedPassages[index]
+    return Boolean(expected && passage.label === expected.label && passage.display_order === expected.display_order && sameData(passage.content_blocks, expected.content_blocks))
+  }), 'API shared passages match the fixture without relying on remapped database IDs').toBe(true)
+  await expect(page.locator('.shared-reading')).toHaveCount(expectedPassages.length ? 1 : 0)
+  for (const [index, passage] of expectedPassages.entries()) {
+    const renderedPassage = page.locator('.shared-reading > div').nth(index)
+    expect(compact(await renderedPassage.locator('h3').innerText()) === compact(`【${passage.label}】`), 'shared passage label matches the fixture').toBe(true)
+    await assertBlockTextShown(renderedPassage.locator('.content-blocks'), passage.content_blocks)
+  }
   await assertBlockTextShown(page.locator('.question-text'), question.content_blocks)
   for (const [index, choice] of question.choices.entries()) {
     await assertBlockTextShown(page.locator('.choice-content').nth(index), choice.content_blocks)
@@ -129,11 +147,11 @@ async function assertSingleExamName(page: Page) {
   if (isMobile) await mobileToggle.click()
 }
 
-test('all 85 questions hide answers, render and grade across the four/six-choice boundary', async ({ page }, testInfo) => {
+test('all 85 four-choice questions and shared passages hide answers, render and grade across the history/application boundary', async ({ page }, testInfo) => {
   test.setTimeout(240000)
   expect(questions.length).toBe(85)
   expect(questions.every(question => question.exam_number === 1)).toBe(true)
-  expect(questions.reduce((total, question) => total + question.choices.length, 0)).toBe(350)
+  expect(questions.reduce((total, question) => total + question.choices.length, 0)).toBe(340)
   await page.goto('/')
   await expect(page.locator('.exam-card')).toHaveCount(1)
   await expect(page.locator('.exam-card strong')).toHaveText('模擬試験1')
@@ -209,7 +227,7 @@ async function mockAdmin(page: Page) {
   } }))
 }
 
-test('admin can create and preview six choices and receives field errors without saving', async ({ page }, testInfo) => {
+test('admin can create and preview four choices and receives field errors without saving', async ({ page }, testInfo) => {
   await mockAdmin(page)
   let saves = 0
   await page.route('**/api/v1/admin/questions', async route => {
@@ -218,7 +236,7 @@ test('admin can create and preview six choices and receives field errors without
     const input = route.request().postDataJSON().question
     expect(input.exam_number).toBe(1)
     expect(input.question_number).toBe(81)
-    expect(input.choices.length).toBe(6)
+    expect(input.choices.length).toBe(4)
     expect(input.choices.filter((choice: { is_correct: boolean }) => choice.is_correct).length).toBe(1)
     await route.fulfill({ status: 422, json: { error: { code: 'validation_error', message: '入力内容を確認してください', details: { question_number: ['は同じ試験セット内で既に使用されています'] } } } })
   })
@@ -226,28 +244,24 @@ test('admin can create and preview six choices and receives field errors without
   await expect(page.locator('.choice-editor')).toHaveCount(4)
   await page.getByLabel('試験ナンバー', { exact: true }).fill('1')
   await page.getByLabel('問番号', { exact: true }).fill('81')
-  await expect(page.locator('.choice-editor')).toHaveCount(6)
-  await expect(page.locator('.choice-editor > header .choice-label')).toHaveText(['ア', 'イ', 'ウ', 'エ', 'オ', 'カ'])
+  await expect(page.locator('.choice-editor')).toHaveCount(4)
+  await expect(page.locator('.choice-editor > header .choice-label')).toHaveText(['ア', 'イ', 'ウ', 'エ'])
   await page.locator('.choice-editor textarea').first().fill('合成の入力保持')
-  await page.locator('.choice-editor').nth(4).locator('textarea').first().fill('合成の追加選択肢5')
-  await page.locator('.choice-editor').nth(5).locator('textarea').first().fill('合成の追加選択肢6')
-  await page.locator('.choice-editor .correct-control').nth(5).click()
-  await expect(page.locator('.choice-editor input[name="correct-choice"]').nth(5)).toBeChecked()
+  await page.locator('.choice-editor').nth(3).locator('textarea').first().fill('合成の選択肢4')
+  await page.locator('.choice-editor .correct-control').nth(3).click()
+  await expect(page.locator('.choice-editor input[name="correct-choice"]').nth(3)).toBeChecked()
   await page.getByLabel('問番号', { exact: true }).fill('80')
   await expect(page.locator('.choice-editor')).toHaveCount(4)
-  await expect(page.locator('input[name="correct-choice"]:checked')).toHaveCount(0)
   await page.getByLabel('問番号', { exact: true }).fill('81')
-  await expect(page.locator('.choice-editor')).toHaveCount(6)
+  await expect(page.locator('.choice-editor')).toHaveCount(4)
   expect(await page.locator('.choice-editor textarea').first().inputValue() === '合成の入力保持', 'new form retains shared-label input').toBe(true)
-  expect(await page.locator('.choice-editor').nth(4).locator('textarea').first().inputValue() === '合成の追加選択肢5', 'new form restores the fifth input after the round trip').toBe(true)
-  expect(await page.locator('.choice-editor').nth(5).locator('textarea').first().inputValue() === '合成の追加選択肢6', 'new form restores the sixth input after the round trip').toBe(true)
-  await expect(page.locator('input[name="correct-choice"]:checked')).toHaveCount(0)
-  await page.locator('.choice-editor .correct-control').first().click()
-  await expect(page.locator('.choice-editor input[name="correct-choice"]').first()).toBeChecked()
+  expect(await page.locator('.choice-editor').nth(3).locator('textarea').first().inputValue() === '合成の選択肢4', 'new form retains the fourth input across section coordinates').toBe(true)
+  await expect(page.locator('input[name="correct-choice"]:checked')).toHaveCount(1)
+  await expect(page.locator('.choice-editor input[name="correct-choice"]').nth(3)).toBeChecked()
   await page.getByRole('button', { name: 'プレビュー', exact: true }).click()
-  await expect(page.locator('.preview-choices > div')).toHaveCount(6)
+  await expect(page.locator('.preview-choices > div')).toHaveCount(4)
   await assertFitsViewport(page)
-  await screenshot(page, testInfo, 'admin-six-choice-preview.png')
+  await screenshot(page, testInfo, 'admin-four-choice-preview.png')
   await page.getByRole('button', { name: '問題を保存', exact: true }).click()
   await expect(page.locator('.admin-question-form .form-field-error').filter({ hasText: '問番号は同じ試験セット内で既に使用されています' })).toBeVisible()
   expect(saves).toBe(1)
@@ -257,11 +271,11 @@ test('admin can create and preview six choices and receives field errors without
   expect(saves).toBe(1)
 })
 
-test('editing an existing six-choice question retains every ID and input through temporary four-choice coordinates', async ({ page }) => {
+test('editing an existing four-choice question retains every ID and input through temporary coordinates', async ({ page }) => {
   await mockAdmin(page)
   const base = questions.find(question => question.exam_number === 1 && question.question_number === 81)!
   const initial = { ...base, id: 900101, publication_status: 'draft', created_at: '2026-01-01T00:00:00Z', updated_at: '2026-01-01T00:00:00Z',
-    choices: base.choices.map((choice, index) => ({ ...choice, id: 900201 + index, is_correct: index === 5, content_blocks: [{ type: 'text', text: `合成選択肢${index + 1}` }] })) }
+    choices: base.choices.map((choice, index) => ({ ...choice, id: 900201 + index, is_correct: index === 3, content_blocks: [{ type: 'text', text: `合成選択肢${index + 1}` }] })) }
   let saves = 0
   await page.route('**/api/v1/admin/questions/900101', async route => {
     if (route.request().method() === 'GET') return route.fulfill({ json: { data: initial } })
@@ -269,23 +283,23 @@ test('editing an existing six-choice question retains every ID and input through
     const input = route.request().postDataJSON().question
     expect(input.exam_number).toBe(1)
     expect(input.question_number).toBe(82)
-    expect(input.choices.length).toBe(6)
+    expect(input.choices.length).toBe(4)
     expect(input.choices.every((choice: { id?: number, content_blocks: { text?: string }[] }, index: number) =>
       choice.id === initial.choices[index]?.id && choice.content_blocks[0]?.text === `合成選択肢${index + 1}`), 'shared choice IDs and inputs are preserved').toBe(true)
-    expect(input.choices.every((choice: { is_correct: boolean }, index: number) => choice.is_correct === (index === 5)), 'existing correct choice is preserved').toBe(true)
+    expect(input.choices.every((choice: { is_correct: boolean }, index: number) => choice.is_correct === (index === 3)), 'existing correct choice is preserved').toBe(true)
     await route.fulfill({ status: 422, json: { error: { code: 'validation_error', message: '合成の保存拒否', details: {} } } })
   })
   await page.goto('/admin/questions/900101/edit')
-  await expect(page.locator('.choice-editor')).toHaveCount(6)
+  await expect(page.locator('.choice-editor')).toHaveCount(4)
   await page.getByLabel('問番号', { exact: true }).fill('8')
-  await expect(page.locator('.choice-editor')).toHaveCount(6)
+  await expect(page.locator('.choice-editor')).toHaveCount(4)
   await page.getByLabel('問番号', { exact: true }).fill('82')
-  await expect(page.locator('.choice-editor')).toHaveCount(6)
-  for (let index = 0; index < 6; index += 1) {
+  await expect(page.locator('.choice-editor')).toHaveCount(4)
+  for (let index = 0; index < 4; index += 1) {
     expect(await page.locator('.choice-editor').nth(index).locator('textarea').first().inputValue() === `合成選択肢${index + 1}`, 'existing input survives coordinate editing').toBe(true)
   }
   await expect(page.locator('input[name="correct-choice"]:checked')).toHaveCount(1)
-  await expect(page.locator('.choice-editor input[name="correct-choice"]').nth(5)).toBeChecked()
+  await expect(page.locator('.choice-editor input[name="correct-choice"]').nth(3)).toBeChecked()
   await page.getByRole('button', { name: '編集内容を保存', exact: true }).click()
   await expect(page.getByText('合成の保存拒否', { exact: true }).first()).toBeVisible()
   expect(saves).toBe(1)

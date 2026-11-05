@@ -7,7 +7,7 @@ import { parseContentDocument, parseQuestionGroupInput } from '../shared/schemas
 import { ContentValidationError, parseBlocks, parseQuestionInput } from '../shared/schemas/content.ts'
 const bundled = JSON.parse(readFileSync(new URL('../../content/questions.json', import.meta.url), 'utf8'))
 function sample() {
-  const question = structuredClone(bundled.questions[0])
+  const question = { ...structuredClone(bundled.questions[0]), group_id: 1, group_question_number: 1, passage_references: [{ passage_id: 1, anchor_id: null }] }
   return { schema_version: 2, groups: [{ id: 1, exam_number: 1, group_number: 1, title: 'Synthetic group', planned_question_count: 1,
     publication_status: 'published', passages: [{ id: 1, label: 'A', display_order: 1, content_blocks: [{ type: 'text', text: 'Synthetic context' }] }] }], questions: [question] }
 }

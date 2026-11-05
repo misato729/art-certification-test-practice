@@ -5,6 +5,8 @@
       "local-only",
       "past-exam"
     ],
-    "filename_prefixes": []
+    "filename_prefixes": [
+      "textbook."
+    ]
   }
 }

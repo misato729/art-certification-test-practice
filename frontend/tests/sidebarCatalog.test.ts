@@ -14,7 +14,7 @@ test('static group navigation matches the bundled public groups and their exact 
   }
   const staticRows = createSidebarExamCatalog(null, false, true)
   assert.deepEqual(staticRows[0]!.question_numbers, [])
-  assert.equal(catalogGroupLinks(staticRows[0]!).length, 23)
+  assert.equal(catalogGroupLinks(staticRows[0]!).length, content.groups.length)
 })
 
 test('live group links use only published sparse positions and active membership', () => {

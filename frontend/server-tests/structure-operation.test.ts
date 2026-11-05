@@ -55,7 +55,7 @@ test('structural conversion requires its exact confirmation before reading a pat
 
 test('85 matching legacy questions acquire structure without losing IDs, dates, versions, histories or favorites; repeated conversion does nothing', integration, () => legacyFixture(async (db, before, owner) => {
   assert.equal(before.length, 85)
-  assert.equal(before.reduce((sum, question) => sum + question.choices.length, 0), 350)
+  assert.equal(before.reduce((sum, question) => sum + question.choices.length, 0), document.questions.reduce((sum, question) => sum + question.choices.length, 0))
   const oldQuestion = before[0]!
   const answer = await answerQuestion(oldQuestion.id, oldQuestion.choices.find((choice: any) => choice.is_correct).id, owner, db)
   await putFavorite(oldQuestion.id, owner, db)
@@ -64,7 +64,7 @@ test('85 matching legacy questions acquire structure without losing IDs, dates, 
   // A structural conversion must not resume a deliberately hidden parent.
   await db.examSet.update({ where: { exam_number: oldQuestion.exam_number }, data: { publication_status: 'private' } })
   const parentBefore = await db.examSet.findMany({ orderBy: { exam_number: 'asc' } })
-  assert.deepEqual(await applyContentStructure(undefined, STRUCTURE_CONFIRMATION, db), { status: 'applied', question_count: 85, group_count: 23, passage_count: 12 })
+  assert.deepEqual(await applyContentStructure(undefined, STRUCTURE_CONFIRMATION, db), { status: 'applied', question_count: 85, group_count: document.groups.length, passage_count: passages.size })
   const after = record(await db.question.findMany({ orderBy: { question_number: 'asc' }, include: { choices: { orderBy: { display_order: 'asc' } }, passage_references: { orderBy: { display_order: 'asc' } } } }))
   const savedPassages = record(await db.groupPassage.findMany())
   for (const [index, question] of after.entries()) {
@@ -82,7 +82,7 @@ test('85 matching legacy questions acquire structure without losing IDs, dates, 
   assert.deepEqual(await db.favorite.findUnique({ where: { id: favorite.id } }), favorite)
   assert.deepEqual(await db.examSet.findMany({ orderBy: { exam_number: 'asc' } }), parentBefore)
   const snapshot = await domainSnapshot(db)
-  assert.deepEqual(await applyContentStructure(undefined, STRUCTURE_CONFIRMATION, db), { status: 'unchanged', question_count: 85, group_count: 23, passage_count: 12 })
+  assert.deepEqual(await applyContentStructure(undefined, STRUCTURE_CONFIRMATION, db), { status: 'unchanged', question_count: 85, group_count: document.groups.length, passage_count: passages.size })
   assert.equal(await domainSnapshot(db), snapshot)
 }))
 

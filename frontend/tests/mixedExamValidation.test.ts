@@ -11,7 +11,7 @@ const mock = JSON.parse(readFileSync(new URL('../../content/mock-exams/mock-01/q
 test('the only catalog set contains exactly the 85 authored mock questions', () => {
   const parsed = parseQuestionArchiveEntries(content.questions, EXAM_CONFIG)
   assert.equal(parsed.length, 85)
-  assert.equal(parsed.reduce((n,q)=>n+q.choices.length,0),350)
+  assert.equal(parsed.reduce((n,q)=>n+q.choices.length,0),340)
   assert.equal(EXAM_CONFIG.exam.set_count,1)
   for (const q of mock.questions) {
     const integrated=parsed.find(p=>p.exam_number===1 && p.question_number===q.question_number)
@@ -23,20 +23,33 @@ test('the only catalog set contains exactly the 85 authored mock questions', () 
   assert.equal(questionCountForExam(EXAM_CONFIG,3),0)
   assert.equal(choiceLabelsForQuestion(EXAM_CONFIG,1,9).length,4)
   assert.equal(choiceLabelsForQuestion(EXAM_CONFIG,1,80).length,4)
-  assert.equal(choiceLabelsForQuestion(EXAM_CONFIG,1,81).length,6)
-  assert.equal(choiceLabelsForQuestion(EXAM_CONFIG,1,85).length,6)
+  assert.equal(choiceLabelsForQuestion(EXAM_CONFIG,1,81).length,4)
+  assert.equal(choiceLabelsForQuestion(EXAM_CONFIG,1,85).length,4)
 })
 test('question and choice boundaries follow the set and section on every shared input path', () => {
   for (const [exam,number] of [[1,86],[2,1],[0,1],[3,1]]) {
     assert.throws(()=>parseQuestionInput({...structuredClone(content.questions[0]),exam_number:exam,question_number:number},EXAM_CONFIG),ContentValidationError)
   }
-  const six=structuredClone(content.questions.find((q:any)=>q.exam_number===1 && q.question_number===81))
-  assert.throws(()=>parseQuestionInput({...six,question_number:80},EXAM_CONFIG),ContentValidationError)
-  assert.throws(()=>parseQuestionInput({...six,choices:six.choices.slice(0,4)},EXAM_CONFIG),ContentValidationError)
-  const wrong=structuredClone(six);wrong.choices[5].choice_label='キ'
+  const application=structuredClone(content.questions.find((q:any)=>q.exam_number===1 && q.question_number===81))
+  assert.equal(parseQuestionInput({...application,question_number:80},EXAM_CONFIG).choices.length,4)
+  assert.throws(()=>parseQuestionInput({...application,choices:application.choices.slice(0,3)},EXAM_CONFIG),ContentValidationError)
+  const wrong=structuredClone(application);wrong.choices[3].choice_label='オ'
   assert.throws(()=>parseQuestionInput(wrong,EXAM_CONFIG),ContentValidationError)
-  const four=structuredClone(content.questions[0]);four.question_number=81
-  assert.throws(()=>parseQuestionArchiveEntries([four],EXAM_CONFIG),ContentValidationError)
+  const duplicated=structuredClone(application);duplicated.choices[0].is_correct=true;duplicated.choices[1].is_correct=true
+  assert.throws(()=>parseQuestionInput(duplicated,EXAM_CONFIG),ContentValidationError)
+})
+test('shared schemas retain mixed four/six-choice support independently of this all-four-choice mock', () => {
+  const raw=structuredClone(EXAM_CONFIG)
+  raw.exam.sets![0]!.sections![1]!.choice_labels=['ア','イ','ウ','エ','オ','カ']
+  const config=parseExamConfig(raw)
+  const six=structuredClone(content.questions.find((q:any)=>q.question_number===81))
+  six.choices=[...six.choices, ...['オ','カ'].map((choice_label,index)=>({choice_label,display_order:index+5,is_correct:false,content_blocks:[{type:'text',text:'Synthetic extra choice '+index}]}))]
+  assert.equal(parseQuestionInput(six,config).choices.length,6)
+  assert.throws(()=>parseQuestionInput(six,EXAM_CONFIG),ContentValidationError)
+  assert.throws(()=>parseQuestionInput({...six,question_number:80},config),ContentValidationError)
+  assert.throws(()=>parseQuestionInput({...six,choices:six.choices.slice(0,4)},config),ContentValidationError)
+  assert.equal(choiceLabelsForQuestion(config,1,80).length,4)
+  assert.equal(choiceLabelsForQuestion(config,1,81).length,6)
 })
 test('set definitions reject missing sets, overlaps, gaps, out-of-range sections and duplicate labels', () => {
   const changes=[
