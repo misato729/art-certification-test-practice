@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-11-06",
+  "title": "美術検定2級 模擬試験1〜5（非公式）",
+  "sets": [
+    {
+      "exam_number": 1,
+      "title": "模擬試験1",
+      "question_count": 85,
+      "question_sha256": "89dcf8c6339cd005230f86b20ccf85ea90b18d7822fbd787ecd3ece7cb872c43",
+      "pdf_sha256": {
+        "questions": "3ea7fa83438f44e04e150756b53ae6f947c5f9b8b4c60a809333011795fa39b3",
+        "answers": "f016d25efcfb290b7d6b101d284f50130f23c70c3895937b31150b00a87ea404"
+      },
+      "reading_characters": {
+        "western": 5833,
+        "japanese": 3780,
+        "contemporary": 1077,
+        "asian": 469,
+        "design": 602,
+        "museum": 402,
+        "application": 1590
+      },
+      "difficulty": {
+        "basic": 19,
+        "advanced": 13,
+        "standard": 53
+      },
+      "image_questions": 31,
+      "image_assets": 35,
+      "image_occurrences": 36
+    },
+    {
+      "exam_number": 2,
+      "title": "模擬試験2",
+      "question_count": 85,
+      "question_sha256": "b6b4ce14d8af26b7e8eae01e8b06e0688b0284247b40d0fb0d9d198e64309648",
+      "pdf_sha256": {
+        "questions": "232655a95fc0dd86aa34c056b8f1cb47a5e7cfecaefdfaf1d7cfaaec660e4624",
+        "answers": "47e802039bd997125fa3ff1ee1faae7335b0882101998c781d09eb98d218ab6c"
+      },
+      "reading_characters": {
+        "western": 6700,
+        "japanese": 3552,
+        "contemporary": 1023,
+        "asian": 402,
+        "design": 579,
+        "museum": 352,
+        "application": 1477
+      },
+      "difficulty": {
+        "basic": 19,
+        "advanced": 13,
+        "standard": 53
+      },
+      "image_questions": 31,
+      "image_assets": 36,
+      "image_occurrences": 36
+    },
+    {
+      "exam_number": 3,
+      "title": "模擬試験3",
+      "question_count": 85,
+      "question_sha256": "7940a4fa6b6283aabdabfb40be56e3b0ed4a9c6eb8604fc95d1f89026968d52d",
+      "pdf_sha256": {
+        "questions": "c85ce8fc15b6bdfe7aabfe02718344bf865ad304905ce3e6ec88c0ecd49b7092",
+        "answers": "7aeba31b134f248cf7e5f646256b00223d1561e51e017c78aedae46584ecbfc9"
+      },
+      "reading_characters": {
+        "western": 6667,
+        "japanese": 3547,
+        "contemporary": 1064,
+        "asian": 404,
+        "design": 591,
+        "museum": 344,
+        "application": 1517
+      },
+      "difficulty": {
+        "basic": 19,
+        "advanced": 13,
+        "standard": 53
+      },
+      "image_questions": 31,
+      "image_assets": 36,
+      "image_occurrences": 36
+    },
+    {
+      "exam_number": 4,
+      "title": "模擬試験4",
+      "question_count": 85,
+      "question_sha256": "d56d3d1adde622a6415217419dd9b3418579aa929e4812fdde379734aa2aa05e",
+      "pdf_sha256": {
+        "questions": "46106ccc18596269e3ccb985efc046a1e97ac6129e414e1d41d4fb2c3fdf21cd",
+        "answers": "5938efe2d119b3da1c84a29a84d58eabbfec7a9afcd940df005937382c2961d8"
+      },
+      "reading_characters": {
+        "western": 6438,
+        "japanese": 3531,
+        "contemporary": 920,
+        "asian": 406,
+        "design": 535,
+        "museum": 408,
+        "application": 1470
+      },
+      "difficulty": {
+        "basic": 19,
+        "advanced": 13,
+        "standard": 53
+      },
+      "image_questions": 31,
+      "image_assets": 36,
+      "image_occurrences": 36
+    },
+    {
+      "exam_number": 5,
+      "title": "模擬試験5",
+      "question_count": 85,
+      "question_sha256": "23855a44fcb48ddfcbdf9ef8b57c9fc7e8b57158a054aa08c46e860d3d4b9725",
+      "pdf_sha256": {
+        "questions": "6df6be3d465db671d3563d7c3e52f4abd4483a053e8419d52b9d1e708b09e4a1",
+        "answers": "4a52d1e83615d29a638ac3af0f57f2dfe6a3551c6aa0a4538c79d99f88353570"
+      },
+      "reading_characters": {
+        "western": 6606,
+        "japanese": 3340,
+        "contemporary": 1060,
+        "asian": 456,
+        "design": 679,
+        "museum": 352,
+        "application": 1460
+      },
+      "difficulty": {
+        "basic": 19,
+        "advanced": 13,
+        "standard": 53
+      },
+      "image_questions": 31,
+      "image_assets": 36,
+      "image_occurrences": 36
+    }
+  ],
+  "calibration_adjustments": {
+    "4-7": {
+      "from": "advanced",
+      "to": "standard",
+      "reason": "実図の頭部・眼差し・手を近い条件で比較する標準の視覚課題と評価。"
+    },
+    "4-12": {
+      "from": "standard",
+      "to": "advanced",
+      "reason": "近接する17世紀の肖像家から帰属を判別し、継承関係と実画の人物表現を結ぶ。"
+    }
+  },
+  "preserved_mock01_files": {
+    "content/mock-exams/mock-01/japanese.sources.md": "83a2be003d89614282d63a13b94ea38ea2fd053dbd1c610c4f5dc077a49932c9",
+    "content/mock-exams/mock-01/other.sources.md": "1d2919a77051350cfd818166a9a22e948d61c2c0c59f7f1e65021e3a28e45437",
+    "content/mock-exams/mock-01/answers.md": "6130086fa79ba2b35f1b987a6bc8b5f68c2b041c3455a2d100b4a6d4979bb75c",
+    "content/mock-exams/mock-01/questions.json": "89dcf8c6339cd005230f86b20ccf85ea90b18d7822fbd787ecd3ece7cb872c43",
+    "content/mock-exams/mock-01/README.md": "81e878882c7e941ca64a3123be98b5cc74457787ba947fbd5588bec0ecd595ac",
+    "content/mock-exams/mock-01/image-manifest.json": "7bf30c5aae6b08651d9f4e50034795e05c64997a18e3eb78094342057e7eeeb1",
+    "content/mock-exams/mock-01/manifest.json": "50ef7e96ead51e9b11d94e2c92fdbfa16e187ac20402dd09f0065a68d182f393",
+    "content/mock-exams/mock-01/editorial.json": "3d0f6a0b5bc2d1465c2524c8d02b453538109306ab8248e845c79bcca09814f9",
+    "content/mock-exams/mock-01/questions.md": "33f7eff3e10188f5760680107f7f8dc0342612eb86ed0e481e24cffdeb2ffc0b",
+    "content/mock-exams/mock-01/answer-sheet.md": "960929e8cf1f84106b13c2fd484f7996b587926203b5d179dc103f45492cd7ff",
+    "content/mock-exams/mock-01/western.sources.md": "fbee6312c808f18d3825fed951c42049c62cd1ec403f97dbd031f77377135a95",
+    "output/pdf/art-grade2-mock-01-answers.pdf": "f016d25efcfb290b7d6b101d284f50130f23c70c3895937b31150b00a87ea404",
+    "output/pdf/art-grade2-mock-01-questions.pdf": "3ea7fa83438f44e04e150756b53ae6f947c5f9b8b4c60a809333011795fa39b3"
+  },
+  "format": {
+    "sets": 5,
+    "questions_per_set": 85,
+    "history": 80,
+    "application": 5,
+    "minutes": 60,
+    "choice_count": 4,
+    "practical_included": false
+  },
+  "review_note": "全時代・分野を各回で扱い、原作と具体的な出題焦点を分ける。難度は知識・判断・近接誤答・図版と読む量による編集評価で、受験者による統計的等化は未実施。各回の分野・難度配分を共通とする。",
+  "reading_method": "問題本文と4肢、表の全セルを合計。画像alt、解説、出典、共通リードは除外。",
+  "structure_check_limit": "固有キーや本文・画像ハッシュの検査と、意味上の重複・正誤・難度の独立レビューを区別する。",
+  "rubric_normalizations": {
+    "3-61": {
+      "fields": {
+        "knowledge_specificity": {
+          "from": 3,
+          "to": 2
+        },
+        "distractor_proximity": {
+          "from": 3,
+          "to": 2
+        }
+      },
+      "reason": "内部原稿の上位区分3を、共通の公開ordinal尺度0〜2の最上位2へ正規化する。設問・advanced区分・実際の判断段階と難度理由は変更しない。"
+    },
+    "5-61": {
+      "fields": {
+        "knowledge_specificity": {
+          "from": 3,
+          "to": 2
+        },
+        "distractor_proximity": {
+          "from": 3,
+          "to": 2
+        }
+      },
+      "reason": "内部原稿の上位区分3を、共通の公開ordinal尺度0〜2の最上位2へ正規化する。設問・advanced区分・実際の判断段階と難度理由は変更しない。"
+    }
+  },
+  "rubric_scale": {
+    "minimum": 0,
+    "maximum": 2,
+    "interpretation": "低・中・高の順序尺度。段階数の実測値ではない。"
+  }
+}

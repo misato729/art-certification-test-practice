@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { isDeepStrictEqual } from 'node:util'
 import { randomUUID } from 'node:crypto'
 import { mkdtemp, readFile, lstat, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
@@ -8,7 +9,7 @@ import { verifyPassword } from 'better-auth/crypto'
 import { configuration } from '../server/core/config.ts'
 import { ApiError } from '../server/core/errors.ts'
 import { isolatedTransaction, query, closeDatabase, type Database } from '../server/core/db.ts'
-import { createArchive, validateArchive, validateQuestions, digest, importArchive, importContent, exportArchive, seedContent, defaultContentPath, IMPORT_CONFIRMATION, OperationError } from '../server/operations/content.ts'
+import { createArchive, validateArchive, validateQuestions, digest, importArchive, importContent, exportArchive, seedContent, defaultContentPath, IMPORT_CONFIRMATION, CONTENT_IMPORT_TIMEOUT_MS, OperationError } from '../server/operations/content.ts'
 import { createAdmin, grantVerification, revokeVerification } from '../server/operations/accounts.ts'
 import { auditOperations, expirePendingForUser } from '../server/operations/audit.ts'
 import { restoreDrillConnection, normalizeConstraintDefinition } from '../server/operations/restore-drill.ts'
@@ -39,7 +40,7 @@ async function isolated(action: (db: Database) => Promise<void>) {
     await db.apiRateLimitBucket.deleteMany()
     await db.rateLimiterFlexible.deleteMany()
     await action(db)
-  })
+  }, { timeout: CONTENT_IMPORT_TIMEOUT_MS })
 }
 const countQuestions = async (db: Database) => Number((await query<{ total: number }>('SELECT count(*) AS total FROM questions', [], db))[0]!.total)
 async function user(db: Database) {
@@ -53,7 +54,7 @@ test('archives preserve Rails canonical checksums regardless of object attribute
   const document = archive()
   assert.equal(document.question_count, content.questions.length)
   assert.equal(document.choice_count, content.questions.reduce((total: number, question: { choices: unknown[] }) => total + question.choices.length, 0))
-  assert.deepEqual(validateArchive(document), document)
+  assert.equal(isDeepStrictEqual(validateArchive(document), document), true, 'archive validation retains every field')
   const optional = structuredClone(content.questions)
   optional[0].content_blocks = [{ type: 'code', title: '', code: 'value = 1' }]
   assert.equal(validateQuestions(optional)[0]!.content_blocks[0]!.title, '')
@@ -110,7 +111,7 @@ test('JSON import and development seed never overwrite existing questions', inte
   const before = await query('SELECT * FROM questions ORDER BY id', [], db)
   assert.deepEqual(await seedContent({ db, mode: 'development' }), { status: 'skipped' })
   await assert.rejects(importContent(undefined, IMPORT_CONFIRMATION, db), OperationError)
-  assert.deepEqual(await query('SELECT * FROM questions ORDER BY id', [], db), before)
+  assert.equal(isDeepStrictEqual(await query('SELECT * FROM questions ORDER BY id', [], db), before), true, 'nonempty seeding retains all records')
 }))
 
 test('an incomplete public set fails as one transaction and persists no imported rows', integration, async () => isolated(async db => {
@@ -135,7 +136,7 @@ test('archive export has private permissions, excludes all user data and rejects
     assert.equal((await lstat(file)).mode & 0o777, 0o600)
     assert.equal(validateArchive(JSON.parse(encoded)).sha256, report.sha256)
     await assert.rejects(exportArchive(file, db), OperationError)
-    assert.equal(await readFile(file, 'utf8'), encoded)
+    assert.equal((await readFile(file, 'utf8')) === encoded, true, 'rejected export retains the exact file without logging its content')
   } finally { await rm(directory, { recursive: true, force: true }) }
 }))
 
@@ -190,11 +191,11 @@ test('audit reports aggregate anomalies and pending checkout expiration uses the
 test('grouped archive round-trip preserves every child, lead and relation in a fresh question domain', integration, () => isolated(async db => {
   const initial = archive()
   assert.equal(initial.version, 2)
-  assert.equal(initial.question_count, 85)
+  assert.equal(initial.question_count, content.questions.length)
   assert.equal(initial.groups!.length, content.groups.length)
   assert.equal(initial.groups!.reduce((sum, group) => sum + group.passages.length, 0), content.groups.reduce((sum: number, group: { passages: unknown[] }) => sum + group.passages.length, 0))
   await importArchive(initial, IMPORT_CONFIRMATION, db)
-  assert.equal(await db.question.count(), 85)
+  assert.equal(await db.question.count(), content.questions.length)
   assert.equal(await db.questionChoice.count(), initial.choice_count)
   assert.equal(await db.questionGroup.count(), initial.groups!.length)
   assert.equal(await db.groupPassage.count(), initial.groups!.reduce((sum, group) => sum + group.passages.length, 0))
@@ -205,8 +206,8 @@ test('grouped archive round-trip preserves every child, lead and relation in a f
     const exported = validateArchive(JSON.parse(await readFile(file, 'utf8')))
     assert.equal(exported.version, 2)
     assert.equal(exported.groups!.length, initial.groups!.length)
-    assert.deepEqual(exported.questions, initial.questions)
-    assert.deepEqual(exported.groups, initial.groups)
+    assert.equal(digest(exported.questions), digest(initial.questions), 'exported questions match without logging their content')
+    assert.equal(digest(exported.groups), digest(initial.groups), 'exported groups match without logging their content')
     assert.deepEqual(exported.exam_sets, initial.exam_sets)
   } finally { await rm(directory, { recursive: true, force: true }) }
 }))
@@ -216,7 +217,7 @@ test('empty-question import cannot overwrite an existing private group or its le
   const group = await db.questionGroup.create({ data: { exam_number: 1, group_number: 1, title: 'Preserved private group', planned_question_count: 1, publication_status: 'private' } })
   const lead = await db.groupPassage.create({ data: { group_id: group.id, label: 'A', display_order: 1, content_blocks: [{ type: 'text', text: 'Preserved private context' }] } })
   await assert.rejects(importArchive(archive(), IMPORT_CONFIRMATION, db), OperationError)
-  assert.deepEqual(await db.groupPassage.findUnique({ where: { id: lead.id } }), lead)
+  assert.equal(isDeepStrictEqual(await db.groupPassage.findUnique({ where: { id: lead.id } }), lead), true, 'shared lead retains every field')
   assert.equal(await db.question.count(), 0)
 }))
 

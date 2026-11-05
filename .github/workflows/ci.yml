@@ -47,7 +47,7 @@ jobs:
   browser:
     needs: harness
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 40
     services:
       postgres:
         image: postgres:16-alpine
@@ -77,6 +77,13 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - name: Install dependencies
         run: npm ci
+      - name: Validate all five mock datasets, artwork files and PDF fingerprints
+        working-directory: .
+        run: |
+          for mock_number in 01 02 03 04 05; do
+            node --experimental-strip-types scripts/check-mock-exam.mjs "content/mock-exams/mock-$mock_number"
+          done
+          node --experimental-strip-types scripts/check-mock-series.mjs
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Generate Prisma Client and validate database schema

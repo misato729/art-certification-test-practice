@@ -30,7 +30,8 @@ export default defineConfig({
     command: 'node scripts/e2e-server.mjs',
     url: `${settings.origin}/api/v1/health`,
     reuseExistingServer: false,
-    timeout: 120000,
+    // The fresh catalog import must finish before browser interactions start.
+    timeout: 240000,
     gracefulShutdown: { signal: 'SIGTERM', timeout: 15000 },
     stdout: 'pipe', stderr: 'pipe',
   },

@@ -18,7 +18,7 @@ node --experimental-strip-types scripts/check-template.mjs
 
 セットごとに件数が異なる場合は、`config/exam.json`の`exam.sets`で全セットを番号順に定義します。各セットの`question_count`を指定し、選択肢が途中で変わる場合は`sections`に`title`・`first`・`last`・`choice_labels`を指定します。区分は問1から最終問までを連続して網羅する必要があります。`sets`を省略した従来形式は共通の`questions_per_exam`と`choice_labels`を使用します。アプリ・管理フォーム・API・取込・公開セット検査は同じ共有ヘルパーで解決します。
 
-このサービスは試験番号1の「模擬試験1」1セット・全85問です。問1〜85はすべて4択です。`frontend/e2e/mock-exam.spec.ts`は全85問の表示・採点、回答前の正答非公開、美術史から活用問題への区分境界と共通本文の一致、条件出題、管理フォームをPCとスマートフォンで確認します。サイトは1問ずつ採点する演習形式で、60分の一括受験・一括採点セッションは対象に含みません。
+このサービスは試験番号1〜5の「模擬試験1」〜「模擬試験5」、計425問です。各回の問1〜85はすべて4択です。`frontend/e2e/mock-exam.spec.ts`は全5回425問の表示・採点、回答前の正答非公開、美術史から活用問題への区分境界と共通本文の一致、条件出題、管理フォームをPCとスマートフォンで確認します。サイトは1問ずつ採点する演習形式で、60分の一括受験・一括採点セッションは対象に含みません。
 
 ```bash
 npm --prefix frontend run schema:generate
@@ -105,9 +105,12 @@ GitHub Actionsの`harness`ジョブで先に資料保護とこの回帰検査を
 
 共有スキーマでv1互換、v2の所属・参照・インラインID・未知属性・公開整合を検査します。DB/APIでは同一模試・大問の制約、公開親による直接取得・採点の制限、編集競合、本文変更後の古い回答拒否、履歴の保持、取込・書出しの往復、同一問題への階層付与と反復時の無変更を確認します。
 
-Playwrightの`mock-exam.spec.ts`は全85問の表示・採点、回答前の正答非公開、共通本文のAPI・画面との一致と80→81問の区分境界を確認します。現在の共通本文は問題上部に表示します。管理フォームはこの模試の4択で入力保持・プレビュー・項目別エラーを確認し、汎用の4択・6択切替は`mixedExamNavigation.test.ts`・`mixedExamValidation.test.ts`と合成設定のAPI/DBテストで維持します。いずれも独立したテストDBと合成会員を使用します。条件・利用者の変更による本文状態の破棄と古い非同期応答の拒否は`practicePassageState.test.ts`でも確認します。
+Playwrightの`mock-exam.spec.ts`は各回85問、全5回425問の表示・採点、回答前の正答非公開、共通本文のAPI・画面との一致と80→81問の区分境界を確認します。現在の共通本文は問題上部に表示します。管理フォームはこの模試の4択で入力保持・プレビュー・項目別エラーを確認し、汎用の4択・6択切替は`mixedExamNavigation.test.ts`・`mixedExamValidation.test.ts`と合成設定のAPI/DBテストで維持します。いずれも独立したテストDBと合成会員を使用します。条件・利用者の変更による本文状態の破棄と古い非同期応答の拒否は`practicePassageState.test.ts`でも確認します。
 
 
 ## 静的トップ・大問サイドバー・誤答復習
 
 関連単体は`examSidebarLayout.test.ts`・`sidebarCatalog.test.ts`・`mixedExamNavigation.test.ts`、API/DBは`incorrect-review.test.ts`・`study-categories.test.ts`と学習/ルート検査を使用します。`world-ui-review.spec.ts`は通常の隔離ハーネスで、静的入口の初回カタログ通信なし、PC折畳み/スマホ展開、静的大問入口の公開位置解決、疎な位置の次問、カタログ再試行、最新誤答・一巡・残数/0件・完了時通信失敗・ログイン期限切れを検証します。通常の`study-categories.spec.ts`も併せてジャンルと受験科目プリセットを確認します。いずれも既存DBや公開サイトを検証用会員・履歴で変更しません。
+
+
+模試原稿の整合は、リポジトリ直下で各回の`node --experimental-strip-types scripts/check-mock-exam.mjs content/mock-exams/mock-0N`（N=1〜5）と`node --experimental-strip-types scripts/check-mock-series.mjs`を使います。共有Zod、85問/4択、分野・難度・図版配分、画像の安全パスとハッシュ、単独原稿と同梱425問の一致、模試1の保持、PDFの確定版ハッシュを確認します。これは内容の正確性・近接誤答・図版必須性・実際の難度を自動証明するものではなく、独立レビューと別に扱います。ブラウザCIでも全5回とPDFの指紋を点検します。

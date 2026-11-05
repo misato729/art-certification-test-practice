@@ -88,3 +88,21 @@ test('new six-choice input restores hidden content without restoring a removed c
   const withExplicitAnswer = reconcileQuestionChoices(four, ['ア', 'イ', 'ウ', 'エ', 'オ', 'カ'], { cachedChoices })
   assert.deepEqual(withExplicitAnswer.filter(choice => choice.is_correct).map(choice => choice.choice_label), ['イ'])
 })
+
+
+test('the real five-set catalog preserves all 425 positions, every set boundary and the shuffled membership', () => {
+  const catalog = createExamCatalog(EXAM_CONFIG)
+  const exams = [1, 2, 3, 4, 5]
+  const positions = createPracticeSequence(exams, questionNumbersForExams(exams, catalog), catalog)
+  const key = (position: { examNumber: number, questionNumber: number }) => `${position.examNumber}/${position.questionNumber}`
+  assert.equal(positions.length, 425)
+  assert.equal(new Set(positions.map(key)).size, 425)
+  assert.deepEqual(positions[0], { examNumber: 1, questionNumber: 1 })
+  assert.deepEqual(positions.at(-1), { examNumber: 5, questionNumber: 85 })
+  for (const exam of [1, 2, 3, 4]) assert.deepEqual(positions.slice(exam * 85 - 1, exam * 85 + 1), [
+    { examNumber: exam, questionNumber: 85 }, { examNumber: exam + 1, questionNumber: 1 },
+  ])
+  const shuffled = shufflePracticeSequence(positions, 296420)
+  assert.equal(new Set(shuffled.map(key)).size, 425)
+  assert.deepEqual(shuffled.map(key).sort(), positions.map(key).sort())
+})

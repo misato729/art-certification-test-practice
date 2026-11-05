@@ -4,7 +4,8 @@ import { mkdir } from 'node:fs/promises'
 import { test, expect } from '@playwright/test'
 
 const content = JSON.parse(readFileSync(new URL('../../content/questions.json', import.meta.url), 'utf8'))
-const fixture = (number: number) => content.questions.find((q: any) => q.question_number === number)
+const fixture = (number: number) => content.questions.find((q: any) => q.exam_number === 1 && q.question_number === number)
+const mock1Groups = content.groups.filter((group: any) => group.exam_number === 1)
 const screenshotDir = new URL('../../local-only/art-world-ui/', import.meta.url).pathname
 
 test('practice can retry a failed public catalog without a page reload', async ({ page }) => {
@@ -30,7 +31,7 @@ test('static home, desktop collapse, mobile accordion and group navigation match
   await page.getByRole('tab', { name: '間違えた問題', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'ログインして復習する', exact: true })).toBeVisible()
   await page.getByRole('tab', { name: '模試を選ぶ', exact: true }).click()
-  await expect(page.locator('.exam-card')).toHaveAttribute('href', '/practice/start?exams=1')
+  await expect(page.locator('.exam-card[href="/practice/start?exams=1"]')).toHaveAttribute('href', '/practice/start?exams=1')
   const sidebar = page.getByRole('complementary', { name: '模擬試験一覧' })
   if (isMobile) {
     await page.getByRole('button', { name: '模擬試験を開く', exact: true }).click()
@@ -43,8 +44,8 @@ test('static home, desktop collapse, mobile accordion and group navigation match
   }
   await sidebar.getByRole('button', { name: '模擬試験1の大問を開く', exact: true }).click()
   const links = sidebar.getByRole('navigation', { name: '模擬試験1の大問一覧' }).getByRole('link')
-  await expect(links).toHaveCount(content.groups.length)
-  const group = content.groups.at(-1)
+  await expect(links).toHaveCount(mock1Groups.length)
+  const group = mock1Groups.at(-1)
   const first = content.questions.find((q: any) => q.group_id === group.id).question_number
   await links.last().click()
   await expect(page).toHaveURL(new RegExp(`/practice/1/${first}$`))
@@ -55,7 +56,7 @@ test('static home, desktop collapse, mobile accordion and group navigation match
   await mkdir(screenshotDir, { recursive: true })
   await page.screenshot({ path: `${screenshotDir}sidebar-${info.project.name}.png` })
   await page.goto('/')
-  await page.locator('.exam-card').click()
+  await page.locator('.exam-card[href="/practice/start?exams=1"]').click()
   await expect(page).toHaveURL(/\/practice\/1\/1\?exams=1$/)
   await expect(page.getByRole('heading', { name: '問1', exact: true })).toBeVisible()
 })

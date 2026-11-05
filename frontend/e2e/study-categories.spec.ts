@@ -20,7 +20,7 @@ test('exam presets select the exact genre children, combine independently, and c
   const checkedChildren = () => page.locator('input[name="study-category-codes"]:checked')
   await expect(page.locator('legend').filter({ hasText: /^出題ジャンル$/ })).toHaveCount(1)
   await expect(page.locator('legend').filter({ hasText: /^分野$/ })).toHaveCount(0)
-  await expect(count).toHaveText('全85問')
+  await expect(count).toHaveText('全425問')
 
   await world.check()
   await expect(genreParent(western.label)).toBeChecked()
@@ -51,7 +51,7 @@ test('exam presets select the exact genre children, combine independently, and c
 
   await page.getByRole('button', { name: '絞り込みを解除', exact: true }).click()
   await expect(checkedChildren()).toHaveCount(0)
-  await expect(count).toHaveText('全85問')
+  await expect(count).toHaveText('全425問')
   await expect(start).toBeEnabled()
   await genreParent(other.label).check()
   await expect(checkedChildren()).toHaveCount(3)

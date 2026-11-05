@@ -184,19 +184,19 @@ test('HTTP administrator checks read current roles while preserving the library 
   await query("UPDATE users SET role='admin' WHERE id=$1", [session.user.id])
   assert.equal((await request('/admin/questions', { cookie: session.cookie })).status, 200)
   const expanded = structuredClone(original)
-  expanded.exam.set_count = 3
+  expanded.exam.set_count = original.exam.set_count + 1
   delete expanded.exam.sets
   setConfigurationForTesting(expanded)
   try {
   const content = JSON.parse(await readFile(new URL('../../content/questions.json', import.meta.url), 'utf8'))
   const { group_id: _group, group_question_number: _number, passage_references: _references, ...standalone } = content.questions[0]
-  const created = await request('/admin/questions', { method: 'POST', cookie: session.cookie, body: { question: { ...standalone, exam_number: 3, publication_status: 'draft' } } })
+  const created = await request('/admin/questions', { method: 'POST', cookie: session.cookie, body: { question: { ...standalone, exam_number: expanded.exam.set_count, publication_status: 'draft' } } })
   assert.equal(created.status, 201)
   const id = created.body.data.id
   questionIds.push(id)
-  const updated = await request(`/admin/questions/${id}`, { method: 'PATCH', cookie: session.cookie, body: { question: { ...standalone, exam_number: 3, publication_status: 'draft' } } })
+  const updated = await request(`/admin/questions/${id}`, { method: 'PATCH', cookie: session.cookie, body: { question: { ...standalone, exam_number: expanded.exam.set_count, publication_status: 'draft' } } })
   assert.equal(updated.body.data.id, id)
-  const replaced = await request(`/admin/questions/${id}`, { method: 'PUT', cookie: session.cookie, body: { question: { ...standalone, exam_number: 3, publication_status: 'draft' } } })
+  const replaced = await request(`/admin/questions/${id}`, { method: 'PUT', cookie: session.cookie, body: { question: { ...standalone, exam_number: expanded.exam.set_count, publication_status: 'draft' } } })
   assert.equal(replaced.status, 200)
   assert.equal(replaced.body.data.id, id)
   assert.equal((await request(`/admin/questions/${id}`, { method: 'DELETE', cookie: session.cookie })).status, 204)

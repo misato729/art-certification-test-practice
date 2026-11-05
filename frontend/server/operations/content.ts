@@ -13,6 +13,8 @@ export class OperationError extends Error {}
 export const ARCHIVE_FORMAT = 'exam-practice-question-archive'
 export const IMPORT_CONFIRMATION = 'IMPORT_INTO_EMPTY_DATABASE'
 export const MAX_CONTENT_BYTES = 64 * 1024 * 1024
+// Initial catalog imports contain five complete sets and retain one atomic transaction.
+export const CONTENT_IMPORT_TIMEOUT_MS = 180_000
 export const QUESTION_LOCK = 71514345
 export const defaultContentPath = fileURLToPath(new URL('../../../content/questions.json', import.meta.url))
 export function canonical(value: unknown): unknown {
@@ -114,7 +116,7 @@ export async function importArchive(document: unknown, confirmation: string | un
     const publishedSets = new Set(archive.questions.filter(question => question.publication_status === 'published').map(question => question.exam_number))
     for (const exam of publishedSets) await validateCompleteExam(exam, connection)
     return summary(archive)
-  }, db)
+  }, db, { timeout: CONTENT_IMPORT_TIMEOUT_MS })
 }
 export async function importContent(path = defaultContentPath, confirmation?: string, db?: Database) {
   let document
@@ -137,7 +139,7 @@ export async function seedContent(options: { path?: string, db?: Database, mode?
     if (total !== 0) return { status: 'skipped' as const }
     const report = await importContent(options.path, IMPORT_CONFIRMATION, connection)
     return { status: 'imported' as const, ...report }
-  }, options.db)
+  }, options.db, { timeout: CONTENT_IMPORT_TIMEOUT_MS })
 }
 
 export async function exportArchive(path: string, db?: Database) {

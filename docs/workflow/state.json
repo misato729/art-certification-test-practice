@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 102,
-  "updated_at": "2026-11-05T15:49:07.705Z",
+  "revision": 121,
+  "updated_at": "2026-11-05T23:06:08.581Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T15-49-07-705Z-r102.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T23-06-08-581Z-r121.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1726,6 +1726,246 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "art_mocks_02_05_design",
+      "context": "product",
+      "title": "模擬試験2〜5の非重複設計と共通難度基準を確定",
+      "status": "done",
+      "depends_on": [],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ユーザー: OKです。範囲が被らないように、また難易度のブレが起こらないように模試2〜5も作成してください。模試1と同形式の図版・85問・問題/解答PDF・サイト用データを継承。",
+      "next_action": "340問の作問・原典・全肢理由・独立試解を進める",
+      "evidence": [
+        "docs/verification.md"
+      ],
+      "last_verified_at": "2026-11-05T18:41:44.537Z",
+      "verification_scope": "模試2〜5の新規作成・PDF・アプリ用データ。既存DBと本番配信は含めない。Git送信は現在の作成作業と区別する。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "模試1含む425問の具体的な焦点と図版題材を割当て、各85問/同配分/19基礎53標準13発展/図版31問の設計を検査。個別の画像・権利・完成本文は後続作問で検証する。",
+          "verification": "共有Zod・設問/出典/権利台帳・全系列の重複/配分/難度と読量・PDF描画/文字/画像・隔離PC/SP検査",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-05T18:41:44.537Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が同じ正答事実・作品・言換えの重複と難度逸脱を点検",
+          "verification": "作成者と異なる担当の独立試解・根拠確認・誤答肢/難度比較・全回横断レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-05T18:41:44.537Z",
+          "reviewer": "figure_inventory + image_runtime"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "340件の固有焦点と各85問/配分/難度を照合し、相互レビューで重複候補を修正",
+            "at": "2026-11-05T18:41:49.213Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_mocks_02_05_authoring",
+      "context": "product",
+      "title": "模擬試験2〜5の340問・図版・出典・別冊PDF8冊を作成",
+      "status": "done",
+      "depends_on": [
+        "art_mocks_02_05_design"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ユーザー: OKです。範囲が被らないように、また難易度のブレが起こらないように模試2〜5も作成してください。模試1と同形式の図版・85問・問題/解答PDF・サイト用データを継承。",
+      "next_action": "依頼済みのサイト組込を開始し既存模試1を保って5セット425問を検証する",
+      "evidence": [
+        "docs/verification.md",
+        "content/mock-exams/series.json"
+      ],
+      "last_verified_at": "2026-11-05T22:11:39.601Z",
+      "verification_scope": "最終340問・1360肢/理由・144新図版、既存模試1保持、全文/MD対応と8PDF全348頁の独立画像確認。サイト425問の隔離PC/SPは後続integrationで実施。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "340問1360肢と全肢理由、出典、全図版の日本での期間満了/画像条件/実物とPDF・Markdown対応を照合",
+          "verification": "共有Zod・設問/出典/権利台帳・全系列の重複/配分/難度と読量・PDF描画/文字/画像。隔離PC/SPは後続integrationタスクで検証し依存循環を避ける。",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/series.json"
+          ],
+          "checked_at": "2026-11-05T22:11:39.601Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "独立試解・全誤答肢・根拠・図版必須性・4回相互の難度と全冊子の目視を確認",
+          "verification": "作成者と異なる担当の独立試解・根拠確認・誤答肢/難度比較・全回横断レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/series.json"
+          ],
+          "checked_at": "2026-11-05T22:11:39.601Z",
+          "reviewer": "final_japanese_audit / final_western_audit / final_other_audit"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回独立試解340/340一致。ただし図版必須性・誤答肢の近さ・発展枠の実負荷の条件に不適合があり修正する。",
+            "at": "2026-11-05T19:52:38.856Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "failed",
+            "summary": "第2独立試解340/340一致。ただし日本4問の画像必須性/判断負荷、活用の重なり、肖像の代替文と出典精度に修正が必要なため第2総合評価は不合格。各報告と凍結版を保持。",
+            "at": "2026-11-05T21:47:46.204Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 3,
+            "outcome": "passed",
+            "summary": "第3評価合格。対象修正後の独立再確認と6問再試解、全MD/JSONと図版・既存模試1保持の系列検査、最終8PDF全文検査と全348頁の別担当画像確認が成功。",
+            "at": "2026-11-05T22:11:57.132Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_mocks_02_05_integration",
+      "context": "development",
+      "title": "模試1を保持して模擬試験1〜5の425問を演習へ組み込む",
+      "status": "done",
+      "depends_on": [
+        "art_mocks_02_05_authoring"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ユーザー: OKです。範囲が被らないように、また難易度のブレが起こらないように模試2〜5も作成してください。模試1と同形式の図版・85問・問題/解答PDF・サイト用データを継承。",
+      "next_action": "依頼済みのGit送信を別タスクで実施する",
+      "evidence": [
+        "docs/verification.md",
+        "content/mock-exams/series.json"
+      ],
+      "last_verified_at": "2026-11-05T23:05:25.695Z",
+      "verification_scope": "全5回425問/1700肢の同梱・静的ナビ、単体147/147、API127/127、型/進捗162件、PC/SP全50件850回答、別担当の実コード/代表画面レビュー。既存DBと本番配信は変更しない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "模試1の問題/出典/画像/PDFを保持し5セット/425問を構造・安全パス・API前非開示・PC/SPで確認",
+          "verification": "共有Zod・設問/出典/権利台帳・全系列の重複/配分/難度と読量・PDF描画/文字/画像・隔離PC/SP検査",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/series.json"
+          ],
+          "checked_at": "2026-11-05T23:05:25.695Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当がセット/大問/分類/画像/採点と既存データ非変更を点検",
+          "verification": "作成者と異なる担当の独立試解・根拠確認・誤答肢/難度比較・全回横断レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/series.json"
+          ],
+          "checked_at": "2026-11-05T23:05:25.695Z",
+          "reviewer": "final_other_audit + integration_tests_review"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "初回API/DB127件は125成功・2失敗・skip0。425問の取込/書出しを包む60秒トランザクションが期限超過し、一括取込向けの限定的な時間枠修正が必要。初回証拠を保持。",
+            "at": "2026-11-05T22:28:24.899Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "第2評価合格。初期一括取込の時間枠修正後、単体147・API127・型・進捗162・PCSP50件/850回答と独立コード/代表68画面レビューが成功。初回失敗証拠を保持。",
+            "at": "2026-11-05T23:05:52.833Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_mocks_02_05_delivery",
+      "context": "operations",
+      "title": "模擬試験2〜5とサイト組込をコミットpushしCIを確認",
+      "status": "doing",
+      "depends_on": [
+        "art_mocks_02_05_integration"
+      ],
+      "authorization": "requested",
+      "request_ref": "同一会話のユーザー明示指示「終わったらコミット・pushしてください」を継続し、最新の「模試2〜5も作成してください」で追加された成果物を送信する。過去のstate記録から権限を拡張するものではない。公開配信・既存DB反映は別範囲。",
+      "next_action": "対象の明示ステージ、独立監査、通常commit/pushとCI全3ジョブを確認する",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "今回の模試2〜5と425問の演習組込、検証記録のGit送信。原資料・秘密値・既存DB・本番配信・停止中の自動ビルド再開を含めない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "明示ステージ・差分・原資料保護・通常push・remote一致・今回CI全3ジョブの成功を確認",
+          "verification": "git diff --check、原資料保護、staged一覧/統計と通常push、fetch後の分岐件数、GitHub今回runのharness/verify/browser結果",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "実装担当と異なる担当が送信対象、提供原本/作業資料/秘密値の除外と検証根拠を確認",
+          "verification": "対象差分と保護ルール・成果物・最終検証記録の独立点検",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]

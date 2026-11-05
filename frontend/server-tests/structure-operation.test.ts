@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
+import { isDeepStrictEqual } from 'node:util'
 import { randomUUID } from 'node:crypto'
+import { fileURLToPath } from 'node:url'
 import { readFile } from 'node:fs/promises'
 import { after, test } from 'node:test'
 import { configuration } from '../server/core/config.ts'
@@ -7,14 +9,16 @@ import { closeDatabase, getDatabase, record, type Database } from '../server/cor
 import type { User } from '../server/core/auth.ts'
 import { parseContentDocument } from '../shared/schemas/structure.ts'
 import { applyContentStructure, STRUCTURE_CONFIRMATION } from '../server/operations/structure.ts'
-import { defaultContentPath, OperationError, digest } from '../server/operations/content.ts'
+import { OperationError, digest } from '../server/operations/content.ts'
 import { answerQuestion, putFavorite } from '../server/services/learning.ts'
 import { saveQuestion, materialDigest } from '../server/services/learning-writer.ts'
 
 process.env.APP_ENV = 'test'
 if (process.env.TEST_DATABASE_URL) process.env.DATABASE_URL = process.env.TEST_DATABASE_URL
 const integration = { skip: !process.env.DATABASE_URL }
-const document = parseContentDocument(JSON.parse(await readFile(defaultContentPath, 'utf8')), configuration)
+// Preserve the original 85-question structural conversion regression independently of catalog growth.
+const legacyContentPath = fileURLToPath(new URL('../../content/mock-exams/mock-01/questions.json', import.meta.url))
+const document = parseContentDocument(JSON.parse(await readFile(legacyContentPath, 'utf8')), configuration)
 const passages = new Map(document.groups.flatMap(group => group.passages.map(passage => [passage.id, passage] as const)))
 after(closeDatabase)
 
@@ -64,14 +68,14 @@ test('85 matching legacy questions acquire structure without losing IDs, dates, 
   // A structural conversion must not resume a deliberately hidden parent.
   await db.examSet.update({ where: { exam_number: oldQuestion.exam_number }, data: { publication_status: 'private' } })
   const parentBefore = await db.examSet.findMany({ orderBy: { exam_number: 'asc' } })
-  assert.deepEqual(await applyContentStructure(undefined, STRUCTURE_CONFIRMATION, db), { status: 'applied', question_count: 85, group_count: document.groups.length, passage_count: passages.size })
+  assert.deepEqual(await applyContentStructure(legacyContentPath, STRUCTURE_CONFIRMATION, db), { status: 'applied', question_count: 85, group_count: document.groups.length, passage_count: passages.size })
   const after = record(await db.question.findMany({ orderBy: { question_number: 'asc' }, include: { choices: { orderBy: { display_order: 'asc' } }, passage_references: { orderBy: { display_order: 'asc' } } } }))
   const savedPassages = record(await db.groupPassage.findMany())
   for (const [index, question] of after.entries()) {
     const prior = before[index]!
     assert.equal(question.id, prior.id)
     assert.equal(question.question_number, prior.question_number)
-    assert.deepEqual(question.choices, prior.choices)
+    assert.equal(isDeepStrictEqual(question.choices, prior.choices), true, 'conversion retains every choice')
     assert.deepEqual(question.created_at, prior.created_at)
     assert.deepEqual(question.updated_at, prior.updated_at)
     assert.equal(question.content_version, prior.content_version)
@@ -82,7 +86,7 @@ test('85 matching legacy questions acquire structure without losing IDs, dates, 
   assert.deepEqual(await db.favorite.findUnique({ where: { id: favorite.id } }), favorite)
   assert.deepEqual(await db.examSet.findMany({ orderBy: { exam_number: 'asc' } }), parentBefore)
   const snapshot = await domainSnapshot(db)
-  assert.deepEqual(await applyContentStructure(undefined, STRUCTURE_CONFIRMATION, db), { status: 'unchanged', question_count: 85, group_count: document.groups.length, passage_count: passages.size })
+  assert.deepEqual(await applyContentStructure(legacyContentPath, STRUCTURE_CONFIRMATION, db), { status: 'unchanged', question_count: 85, group_count: document.groups.length, passage_count: passages.size })
   assert.equal(await domainSnapshot(db), snapshot)
 }))
 
@@ -90,14 +94,14 @@ test('mismatching legacy content and an already edited hierarchy are refused wit
   const original = before[0]!
   await db.question.update({ where: { id: original.id }, data: { content_blocks: [{ type: 'text', text: 'An intentionally different synthetic prompt' }] } })
   const mismatched = await domainSnapshot(db)
-  await assert.rejects(applyContentStructure(undefined, STRUCTURE_CONFIRMATION, db), OperationError)
+  await assert.rejects(applyContentStructure(legacyContentPath, STRUCTURE_CONFIRMATION, db), OperationError)
   assert.equal(await domainSnapshot(db), mismatched)
   assert.equal(await db.questionGroup.count(), 0)
   await db.question.update({ where: { id: original.id }, data: { content_blocks: original.content_blocks } })
-  await applyContentStructure(undefined, STRUCTURE_CONFIRMATION, db)
+  await applyContentStructure(legacyContentPath, STRUCTURE_CONFIRMATION, db)
   const group = await db.questionGroup.findFirstOrThrow()
   await db.questionGroup.update({ where: { id: group.id }, data: { title: 'Independently edited hierarchy title' } })
   const edited = await domainSnapshot(db)
-  await assert.rejects(applyContentStructure(undefined, STRUCTURE_CONFIRMATION, db), OperationError)
+  await assert.rejects(applyContentStructure(legacyContentPath, STRUCTURE_CONFIRMATION, db), OperationError)
   assert.equal(await domainSnapshot(db), edited)
 }))

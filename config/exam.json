@@ -5,7 +5,7 @@
     "name": "美術史ラボ",
     "short_name": "美術史ラボ",
     "exam_name": "美術検定2級・早慶歴史対策",
-    "description": "美術検定2級に向けて、美術史80問・知識と情報の活用5問の模擬試験1を、解説と出典付きで学べます。",
+    "description": "美術検定2級に向けて、各85問の模擬試験1〜5を、図版・解説・出典付きで学べます。",
     "tagline": "美術検定2級・早慶歴史対策",
     "logo_path": "/images/logo.svg",
     "primary_color": "#356f91",
@@ -17,7 +17,7 @@
       },
       {
         "title": "演習セット",
-        "body": "「模擬試験1」として85問を掲載しています。美術史80問と知識・情報の活用5問で構成し、共通リード文や表を必要な小問から参照できます。60分は学習の目安で、別枠の実践問題は含みません。"
+        "body": "「模擬試験1」〜「模擬試験5」の5セット・計425問を掲載しています。各回とも美術史80問と知識・情報の活用5問で構成し、全時代・各分野を扱います。作品や問う知識の焦点を各回で変えています。1回60分は学習の目安で、別枠の実践問題は含みません。"
       },
       {
         "title": "学習方法",
@@ -30,7 +30,7 @@
     ]
   },
   "exam": {
-    "set_count": 1,
+    "set_count": 5,
     "questions_per_exam": 85,
     "choice_labels": [
       "ア",
@@ -42,6 +42,122 @@
       {
         "exam_number": 1,
         "title": "模擬試験1",
+        "question_count": 85,
+        "sections": [
+          {
+            "title": "美術史問題",
+            "first": 1,
+            "last": 80,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ]
+          },
+          {
+            "title": "知識・情報の活用問題",
+            "first": 81,
+            "last": 85,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ]
+          }
+        ]
+      },
+      {
+        "exam_number": 2,
+        "title": "模擬試験2",
+        "question_count": 85,
+        "sections": [
+          {
+            "title": "美術史問題",
+            "first": 1,
+            "last": 80,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ]
+          },
+          {
+            "title": "知識・情報の活用問題",
+            "first": 81,
+            "last": 85,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ]
+          }
+        ]
+      },
+      {
+        "exam_number": 3,
+        "title": "模擬試験3",
+        "question_count": 85,
+        "sections": [
+          {
+            "title": "美術史問題",
+            "first": 1,
+            "last": 80,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ]
+          },
+          {
+            "title": "知識・情報の活用問題",
+            "first": 81,
+            "last": 85,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ]
+          }
+        ]
+      },
+      {
+        "exam_number": 4,
+        "title": "模擬試験4",
+        "question_count": 85,
+        "sections": [
+          {
+            "title": "美術史問題",
+            "first": 1,
+            "last": 80,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ]
+          },
+          {
+            "title": "知識・情報の活用問題",
+            "first": 81,
+            "last": 85,
+            "choice_labels": [
+              "ア",
+              "イ",
+              "ウ",
+              "エ"
+            ]
+          }
+        ]
+      },
+      {
+        "exam_number": 5,
+        "title": "模擬試験5",
         "question_count": 85,
         "sections": [
           {

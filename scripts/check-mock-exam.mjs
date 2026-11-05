@@ -12,6 +12,8 @@ function main() {
   const read = name => JSON.parse(readFileSync(resolve(dir, name), 'utf8'))
   const manifest = read('manifest.json')
   const editorial = read('editorial.json')
+  const examNumber = manifest.exam_number ?? Number(manifest.id.match(/mock-(\d+)$/)?.[1])
+  assert.ok(Number.isInteger(examNumber) && examNumber >= 1 && examNumber <= 5)
   const config = parseExamConfig(manifest.validation_config)
   // Runtime, operational imports and this editorial check share one document parser.
   const document = parseContentDocument(read('questions.json'), config)
@@ -39,7 +41,7 @@ function main() {
     assert.deepEqual(choiceLabelsForQuestion(config, question.exam_number, n), section[0].choice_labels)
     assert.equal(question.choices.length, 4)
     assert.equal(question.question_number, n)
-    assert.equal(question.exam_number, 1)
+    assert.equal(question.exam_number, examNumber)
     assert.equal(question.publication_status, 'published')
     assert.equal(question.major_category_code === 'application', n > 80)
     const choices = question.choices.map(choice => JSON.stringify(choice.content_blocks))
@@ -86,9 +88,20 @@ function main() {
   assert.equal(sharedLeadQuestions, manifest.hierarchy.questions_with_shared_passage)
   assert.deepEqual(counts, manifest.allocation)
   assert.deepEqual(Object.values(correctLabels).sort(), [20, 20, 20, 20])
+  const difficultyCounts = {}
+  for (const meta of Object.values(editorial.questions)) {
+    difficultyCounts[meta.difficulty] = (difficultyCounts[meta.difficulty] ?? 0) + 1
+    if (examNumber > 1) {
+      assert.ok(meta.focus_key && meta.focus_claim && meta.difficulty_reason)
+      assert.deepEqual(Object.keys(meta.choice_reasons).sort(), ['ア', 'イ', 'ウ', 'エ'].sort())
+      assert.ok(Object.values(meta.choice_reasons).every(reason => reason.trim().length > 0))
+    }
+  }
+  assert.deepEqual(difficultyCounts, { basic: 19, advanced: 13, standard: 53 })
   const imageManifest = read('image-manifest.json')
   const assets = imageManifest.assets
-  assert.equal(assets.length, 35)
+  assert.equal(assets.length, manifest.figures.distinct_images)
+  assert.equal(assets.length, examNumber === 1 ? 35 : 36)
   const bySource = new Map(assets.map(asset => [asset.src, asset]))
   assert.equal(bySource.size, assets.length)
   const imageQuestions = document.questions.filter(question => question.content_blocks.some(block => block.type === 'image'))
@@ -115,7 +128,7 @@ function main() {
   assert.equal(occurrences, 36)
   for (const asset of assets) {
     assert(artworkImagePathSchema.safeParse(asset.src).success)
-    assert.match(asset.src, /^\/images\/artworks\/mock01-img-\d{2}\.jpg$/)
+    assert.match(asset.src, new RegExp(`^/images/artworks/mock${String(examNumber).padStart(2, '0')}-img-\\d{2}\\.jpg$`))
     assert.equal(asset.license, 'CC0-1.0')
     assert.equal(asset.official_problem_book_reuse, false)
     assert(asset.rights_review?.japan_term_expired || asset.rights_review?.japan_ordinary_term_expired)
@@ -128,7 +141,7 @@ function main() {
     assert.deepEqual(asset.question_numbers, imageQuestions.filter(q => q.content_blocks.some(b => b.type === 'image' && b.src === asset.src)).map(q => q.question_number))
   }
   // Print only safe aggregate results; never question bodies, keys, or explanations.
-  console.log(JSON.stringify({ status: 'passed', questions: document.questions.length,
+  console.log(JSON.stringify({ status: 'passed', exam: examNumber, difficulty: difficultyCounts, questions: document.questions.length,
     groups: document.groups.length, shared_passages: passages.size, shared_lead_questions: sharedLeadQuestions,
     history: 80, application: 5, minutes: manifest.duration_minutes, image_questions: imageQuestions.length, images: assets.length,
     schema: 'frontend/shared/schemas', categories: Object.keys(counts).length }))

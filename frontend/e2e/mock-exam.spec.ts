@@ -86,7 +86,7 @@ async function showQuestion(page: Page, question: QuestionInput, action: () => P
   expect(payload.choices.every((choice: PublicQuestion['choices'][number], index: number) =>
     sameData(choice.content_blocks, question.choices[index]?.content_blocks)), 'API choices match the fixture').toBe(true)
   await expect(page.getByRole('heading', { name: `問${question.question_number}`, exact: true })).toBeVisible()
-  await expect(page.locator('.practice-head .exam-label')).toHaveText('模擬試験 1')
+  await expect(page.locator('.practice-head .exam-label')).toHaveText(`模擬試験 ${question.exam_number}`)
   await expect(page.getByRole('radio')).toHaveCount(expectedLabels.length)
   await expect(page.getByRole('heading', { name: '解答解説', exact: true })).toHaveCount(0)
   await expect(page.getByRole('button', { name: '回答する', exact: true })).toBeDisabled()
@@ -151,54 +151,55 @@ async function screenshot(page: Page, testInfo: TestInfo, name: string) {
   await testInfo.attach(name, { path, contentType: 'image/png' })
 }
 
-async function assertSingleExamName(page: Page) {
+async function assertExamCatalog(page: Page) {
   const mobileToggle = page.locator('.mobile-exam-toggle')
   const isMobile = await mobileToggle.isVisible()
   if (isMobile) await mobileToggle.click()
-  await expect(page.locator('.exam-sidebar .exam-link')).toHaveCount(1)
-  await expect(page.locator('.exam-sidebar .exam-link')).toHaveText('模擬試験1')
-  await expect(page.locator('.exam-sidebar .exam-link')).toBeVisible()
+  await expect(page.locator('.exam-sidebar .exam-link')).toHaveCount(5)
+  await expect(page.locator('.exam-sidebar .exam-link')).toHaveText([1,2,3,4,5].map(exam => `模擬試験${exam}`))
   if (isMobile) await mobileToggle.click()
 }
 
-test('all 85 four-choice questions and shared passages hide answers, render and grade across the history/application boundary', async ({ page }, testInfo) => {
-  test.setTimeout(240000)
-  expect(questions.length).toBe(85)
-  expect(questions.every(question => question.exam_number === 1)).toBe(true)
-  expect(questions.reduce((total, question) => total + question.choices.length, 0)).toBe(340)
-  await page.goto('/')
-  await expect(page.locator('.exam-card')).toHaveCount(1)
-  await expect(page.locator('.exam-card strong')).toHaveText('模擬試験1')
-  await expect(page.locator('.exam-grid-heading')).toContainText('大問の順に演習')
-  await assertSingleExamName(page)
-  await screenshot(page, testInfo, 'mock-home.png')
-  await page.goto('/exam-overview')
-  await expect(page.getByRole('heading', { name: '図版の掲載範囲', exact: true })).toBeVisible()
-  const overviewText = compact(await page.locator('main').innerText())
-  expect(config.site.overview.every(section => overviewText.includes(compact(section.body))), 'overview explains the image scope and application limitations').toBe(true)
-  await assertFitsViewport(page)
-  await screenshot(page, testInfo, 'mock-image-scope.png')
-  for (const [index, question] of questions.entries()) {
-    const payload = await showQuestion(page, question, () => index === 0
-      ? page.goto(`/practice/1/${question.question_number}`)
-      : page.getByRole('button', { name: '次の問題', exact: true }).click())
-    if ([80, 81, 82, 85].includes(question.question_number)) {
-      await screenshot(page, testInfo, `mock-question-${question.question_number}.png`)
+for (const exam of [1,2,3,4,5]) {
+  test(`mock ${exam}: all 85 questions hide answers, render figures and grade across the history/application boundary`, async ({ page }, testInfo) => {
+    test.setTimeout(300000)
+    const examQuestions = questions.filter(question => question.exam_number === exam)
+    expect(examQuestions.length).toBe(85)
+    expect(examQuestions.reduce((total, question) => total + question.choices.length, 0)).toBe(340)
+    await page.goto('/')
+    await expect(page.locator('.exam-card')).toHaveCount(5)
+    await expect(page.locator('.exam-card strong')).toHaveText([1,2,3,4,5].map(number => `模擬試験${number}`))
+    await expect(page.locator('.exam-grid-heading')).toContainText('大問の順に演習')
+    await assertExamCatalog(page)
+    if (exam === 1) {
+      await screenshot(page, testInfo, 'mock-home.png')
+      await page.goto('/exam-overview')
+      await expect(page.getByRole('heading', { name: '図版の掲載範囲', exact: true })).toBeVisible()
+      const overviewText = compact(await page.locator('main').innerText())
+      expect(config.site.overview.every(section => overviewText.includes(compact(section.body))), 'overview explains the image scope and application limitations').toBe(true)
+      await assertFitsViewport(page)
+      await screenshot(page, testInfo, 'mock-image-scope.png')
     }
-    await answerCorrectly(page, question, payload)
-    if (question.question_number === 85) await screenshot(page, testInfo, 'mock-answer-85.png')
-  }
-  await finishSequence(page)
-  await expect(page).toHaveURL('/practice/1/85')
-})
+    for (const [index, question] of examQuestions.entries()) {
+      const payload = await showQuestion(page, question, () => index === 0
+        ? page.goto(`/practice/${exam}/${question.question_number}`)
+        : page.getByRole('button', { name: '次の問題', exact: true }).click())
+      if ([45,78,80,81,83,84,85].includes(question.question_number)) await screenshot(page, testInfo, `mock-${exam}-question-${question.question_number}.png`)
+      await answerCorrectly(page, question, payload)
+      if (question.question_number === 85) await screenshot(page, testInfo, `mock-${exam}-answer-85.png`)
+    }
+    await finishSequence(page)
+    await expect(page).toHaveURL(`/practice/${exam}/85`)
+  })
+}
 
 async function chooseAllQuestions(page: Page) {
   await page.goto('/')
-  await expect(page.locator('.exam-card')).toHaveCount(1)
+  await expect(page.locator('.exam-card')).toHaveCount(5)
   await expect(page.locator('.exam-card[href="/practice/start?exams=1"]')).toBeVisible()
-  await expect(page.locator('.exam-card strong')).toHaveText('模擬試験1')
+  await expect(page.locator('.exam-card strong')).toHaveText([1,2,3,4,5].map(exam => `模擬試験${exam}`))
   await page.getByRole('tab', { name: '条件を指定', exact: true }).click()
-  await expect(page.locator('.condition-submit strong')).toHaveText('全85問')
+  await expect(page.locator('.condition-submit strong')).toHaveText('全425問')
   await assertFitsViewport(page)
 }
 
@@ -207,30 +208,32 @@ test('unfiltered conditions use published positions in sequential and random ord
   for (const order of ['sequential', 'random']) {
     await chooseAllQuestions(page)
     await page.getByRole('button', { name: order === 'random' ? 'ランダムに始める' : '順番に始める', exact: true }).click()
-    const visited = new Set<number>()
+    const visited = new Set<string>()
     for (let index = 0; index < 3; index += 1) {
-      await expect(page.locator('.practice-progress')).toHaveText(`${order === 'random' ? 'ランダム ' : ''}${index + 1} / 85`)
+      await expect(page.locator('.practice-progress')).toHaveText(`${order === 'random' ? 'ランダム ' : ''}${index + 1} / 425`)
       await expect(page.getByRole('heading', { name: /^問[0-9]+$/ })).toBeVisible()
       const url = new URL(page.url())
-      expect(url.pathname.startsWith('/practice/1/')).toBe(true)
+      expect(/^\/practice\/[1-5]\//.test(url.pathname)).toBe(true)
       expect(url.searchParams.get('order') === 'random').toBe(order === 'random')
       const number = Number(url.pathname.split('/').at(-1))
-      expect(visited.has(number)).toBe(false)
-      visited.add(number)
-      const question = questions.find(question => question.exam_number === 1 && question.question_number === number)!
+      const exam = Number(url.pathname.split('/')[2])
+      const position = `${exam}:${number}`
+      expect(visited.has(position)).toBe(false)
+      visited.add(position)
+      const question = questions.find(question => question.exam_number === exam && question.question_number === number)!
       // Read the same public endpoint to validate each chosen position independently.
-      const response = await page.request.get(`/api/v1/questions/next?exam_number=1&question_number=${number}`)
+      const response = await page.request.get(`/api/v1/questions/next?exam_number=${exam}&question_number=${number}`)
       expect(response.status()).toBe(200)
       const payload = (await response.json()).data
-      expect(payload.exam_number).toBe(1)
+      expect(payload.exam_number).toBe(exam)
       expect(payload.question_number).toBe(number)
       await answerCorrectly(page, question, payload)
       if (index < 2) await page.getByRole('button', { name: '次の問題', exact: true }).click()
     }
     expect(visited.size).toBe(3)
-    expect([...visited].every(number => number >= 1 && number <= 85)).toBe(true)
+    expect([...visited].every(position => { const [exam, number] = position.split(':').map(Number); return exam! >= 1 && exam! <= 5 && number! >= 1 && number! <= 85 })).toBe(true)
   }
-  for (const path of ['/practice/1/86', '/practice/2/1']) {
+  for (const path of ['/practice/1/86', '/practice/6/1']) {
     await page.goto(path)
     await expect(page.getByRole('heading', { name: '問題を表示できません', exact: true })).toBeVisible()
   }
@@ -336,11 +339,19 @@ function firstFigureQuestion() {
   })
 }
 
-test('artwork figures load, enlarge by keyboard, show full detail and restore focus without submitting', async ({ page }, testInfo) => {
-  const question = firstFigureQuestion()
+for (const scope of ['original', 'new-tall-pair'] as const) {
+test(`artwork figures (${scope}) load, enlarge by keyboard, show full detail and restore focus without submitting`, async ({ page }, testInfo) => {
+  const question = scope === 'original' ? firstFigureQuestion() : questions.find(question => question.exam_number === 2 && question.question_number === 83)
   expect(Boolean(question), 'the authored mock includes artwork figures').toBe(true)
   await showQuestion(page, question!, () => page.goto(`/practice/${question!.exam_number}/${question!.question_number}`))
-  const trigger = page.locator('.artwork-enlarge').first()
+  const figures = page.locator('.question-text img.artwork-thumbnail')
+  let figureIndex = 0
+  if (scope === 'new-tall-pair') {
+    await expect(figures).toHaveCount(2)
+    figureIndex = await figures.evaluateAll(nodes => nodes.findIndex(node => { const image = node as HTMLImageElement; return image.naturalHeight > 4 * image.naturalWidth }))
+    expect(figureIndex >= 0, 'the new pair retains its uncropped narrow hanging scroll').toBe(true)
+  }
+  const trigger = page.locator('.artwork-enlarge').nth(figureIndex)
   await trigger.focus()
   await page.keyboard.press('Enter')
   const dialog = page.locator('dialog.artwork-dialog[open]')
@@ -352,13 +363,19 @@ test('artwork figures load, enlarge by keyboard, show full detail and restore fo
   await expect(dialog.getByRole('button', { name: '細部を拡大', exact: true })).toHaveAttribute('aria-pressed', 'true')
   expect(await enlarged.evaluate(element => { const image = element as HTMLImageElement; return Math.abs(image.getBoundingClientRect().width - image.naturalWidth) < 1 }), 'detail mode preserves the full image dimensions').toBe(true)
   await assertFitsViewport(page)
-  await screenshot(page, testInfo, 'artwork-detail-dialog.png')
+  if (scope === 'new-tall-pair') {
+    const scrolling = await dialog.evaluate(element => [...element.querySelectorAll('*')].some(node => { const item = node as HTMLElement; return item.scrollHeight > item.clientHeight + 10 && ['auto','scroll'].includes(getComputedStyle(item).overflowY) }))
+    expect(scrolling, 'tall-image detail mode permits vertical scrolling').toBe(true)
+  }
+  await screenshot(page, testInfo, `artwork-${scope}-detail-dialog.png`)
   await page.keyboard.press('Escape')
   await expect(dialog).toHaveCount(0)
   await expect(trigger).toBeFocused()
   await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0)
   await expect(page.getByRole('button', { name: '回答する', exact: true })).toBeDisabled()
 })
+
+}
 
 test('the admin image editor preserves a curated path and neutral metadata in its preview', async ({ page }) => {
   await mockAdmin(page)
@@ -381,4 +398,46 @@ test('the admin image editor preserves a curated path and neutral metadata in it
   await expect(rendered).toHaveAttribute('alt', '合成の図版説明')
   await expect.poll(() => rendered.evaluate(element => { const image = element as HTMLImageElement; return image.complete && image.naturalWidth > 0 })).toBe(true)
   await assertFitsViewport(page)
+})
+
+
+test('new mock cards and their final group links open the requested set on desktop and mobile', async ({ page, isMobile }) => {
+  test.setTimeout(90000)
+  for (const exam of [2, 3, 4, 5]) {
+    await page.goto('/')
+    const sidebar = page.getByRole('complementary', { name: '模擬試験一覧' })
+    if (isMobile) await page.getByRole('button', { name: '模擬試験を開く', exact: true }).click()
+    await sidebar.getByRole('button', { name: `模擬試験${exam}の大問を開く`, exact: true }).click()
+    const links = sidebar.getByRole('navigation', { name: `模擬試験${exam}の大問一覧` }).getByRole('link')
+    await expect(links).toHaveCount(31)
+    await links.last().click()
+    await expect(page).toHaveURL(new RegExp(`/practice/${exam}/85$`))
+    await expect(page.getByRole('heading', { name: '問85', exact: true })).toBeVisible()
+    await expect(page.locator('.practice-head .exam-label')).toHaveText(`模擬試験 ${exam}`)
+    await assertFitsViewport(page)
+    await page.goto('/')
+    await page.locator(`.exam-card[href="/practice/start?exams=${exam}"]`).click()
+    await expect(page).toHaveURL(new RegExp(`/practice/${exam}/1\\?exams=${exam}$`))
+    await expect(page.getByRole('heading', { name: '問1', exact: true })).toBeVisible()
+  }
+})
+
+test('mixed 425-position practice crosses all four set boundaries and finishes at the final position', async ({ page }) => {
+  test.setTimeout(120000)
+  const suffix = '?exams=1,2,3,4,5'
+  for (const exam of [1, 2, 3, 4]) {
+    const current = questions.find(question => question.exam_number === exam && question.question_number === 85)!
+    const next = questions.find(question => question.exam_number === exam + 1 && question.question_number === 1)!
+    const payload = await showQuestion(page, current, () => page.goto(`/practice/${exam}/85${suffix}`))
+    await expect(page.locator('.practice-progress')).toHaveText(`${exam * 85} / 425`)
+    await answerCorrectly(page, current, payload)
+    await showQuestion(page, next, () => page.getByRole('button', { name: '次の問題', exact: true }).click())
+    await expect(page.locator('.practice-progress')).toHaveText(`${exam * 85 + 1} / 425`)
+  }
+  const last = questions.find(question => question.exam_number === 5 && question.question_number === 85)!
+  const payload = await showQuestion(page, last, () => page.goto(`/practice/5/85${suffix}`))
+  await expect(page.locator('.practice-progress')).toHaveText('425 / 425')
+  await answerCorrectly(page, last, payload)
+  await finishSequence(page)
+  expect(new URL(page.url()).pathname).toBe('/practice/5/85')
 })

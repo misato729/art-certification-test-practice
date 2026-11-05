@@ -73,17 +73,17 @@ export function isUniqueViolation(error: unknown): boolean {
   }
   return false
 }
-export async function transaction<T>(action: (db: Database) => Promise<T>, existing?: Database): Promise<T> {
+export async function transaction<T>(action: (db: Database) => Promise<T>, existing?: Database, options: { timeout?: number } = {}): Promise<T> {
   if (existing) return action(existing)
-  return getDatabase().$transaction(action, { timeout: 60_000, maxWait: 10_000 })
+  return getDatabase().$transaction(action, { timeout: options.timeout ?? 60_000, maxWait: 10_000 })
 }
 /** Test fixtures use a migrated, isolated database and always roll back. */
-export async function isolatedTransaction<T>(action: (db: Database) => Promise<T>): Promise<T> {
+export async function isolatedTransaction<T>(action: (db: Database) => Promise<T>, options: { timeout?: number } = {}): Promise<T> {
   if (process.env.APP_ENV !== 'test') throw new Error('Isolated transactions require APP_ENV=test')
   const rollback = new Error('test transaction rollback')
   let value: T
   try {
-    await getDatabase().$transaction(async db => { value = await action(db); throw rollback }, { timeout: 60_000, maxWait: 10_000 })
+    await getDatabase().$transaction(async db => { value = await action(db); throw rollback }, { timeout: options.timeout ?? 60_000, maxWait: 10_000 })
   } catch (error) { if (error !== rollback) throw error }
   return value!
 }

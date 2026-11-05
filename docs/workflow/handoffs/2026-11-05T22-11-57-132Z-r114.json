@@ -1,0 +1,781 @@
+{
+  "schema_version": 1,
+  "revision": 114,
+  "state_hash": "b63ed1f9ab8103224e46f6ce8db782f4fbd6c70eab3ef6ebe2514da04b041afd",
+  "recorded_at": "2026-11-05T22:11:57.132Z",
+  "timezone": "UTC",
+  "context": "product",
+  "task": "art_mocks_02_05_authoring",
+  "summary": "第3評価合格。対象修正後の独立再確認と6問再試解、全MD/JSONと図版・既存模試1保持の系列検査、最終8PDF全文検査と全348頁の別担当画像確認が成功。",
+  "next_action": "内容作成を完了し5回425問のサイト組込と隔離PC/SP検証へ進む",
+  "missing_local_files": [],
+  "git": {
+    "available": true,
+    "head": "480b076b903dada32b5d60dfcac1cd71515f9ca3",
+    "changes": [
+      {
+        "status": " M",
+        "path": "docs/verification.md"
+      },
+      {
+        "status": " M",
+        "path": "scripts/check-mock-exam.mjs"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-02/answer-sheet.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-02/answers.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-02/editorial.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-02/image-manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-02/manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-02/questions.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-02/questions.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-03/answer-sheet.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-03/answers.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-03/editorial.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-03/image-manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-03/manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-03/questions.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-03/questions.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-04/answer-sheet.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-04/answers.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-04/editorial.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-04/image-manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-04/manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-04/questions.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-04/questions.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-05/answer-sheet.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-05/answers.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-05/editorial.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-05/image-manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-05/manifest.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-05/questions.json"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/mock-05/questions.md"
+      },
+      {
+        "status": "??",
+        "path": "content/mock-exams/series.json"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-01.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-02.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-03.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-04.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-05.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-06.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-07.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-08.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-09.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-10.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-11.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-12.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-13.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-14.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-15.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-16.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-17.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-18.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-19.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-20.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-21.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-22.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-23.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-24.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-25.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-26.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-27.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-28.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-29.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-30.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-31.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-32.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-33.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-34.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-35.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock02-img-36.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-01.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-02.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-03.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-04.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-05.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-06.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-07.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-08.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-09.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-10.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-11.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-12.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-13.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-14.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-15.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-16.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-17.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-18.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-19.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-20.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-21.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-22.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-23.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-24.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-25.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-26.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-27.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-28.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-29.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-30.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-31.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-32.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-33.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-34.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-35.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock03-img-36.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-01.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-02.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-03.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-04.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-05.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-06.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-07.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-08.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-09.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-10.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-11.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-12.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-13.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-14.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-15.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-16.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-17.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-18.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-19.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-20.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-21.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-22.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-23.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-24.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-25.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-26.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-27.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-28.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-29.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-30.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-31.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-32.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-33.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-34.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-35.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock04-img-36.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-01.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-02.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-03.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-04.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-05.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-06.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-07.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-08.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-09.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-10.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-11.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-12.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-13.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-14.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-15.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-16.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-17.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-18.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-19.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-20.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-21.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-22.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-23.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-24.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-25.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-26.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-27.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-28.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-29.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-30.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-31.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-32.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-33.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-34.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-35.jpg"
+      },
+      {
+        "status": "??",
+        "path": "frontend/public/images/artworks/mock05-img-36.jpg"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-02-answers.pdf"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-02-questions.pdf"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-03-answers.pdf"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-03-questions.pdf"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-04-answers.pdf"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-04-questions.pdf"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-05-answers.pdf"
+      },
+      {
+        "status": "??",
+        "path": "output/pdf/art-grade2-mock-05-questions.pdf"
+      },
+      {
+        "status": "??",
+        "path": "scripts/check-mock-series.mjs"
+      }
+    ]
+  },
+  "file_hashes": {
+    "AGENTS.md": "4824b8c34a5ce59d3076123deb93f2343040d81ad34238759505160ff6ec66f9",
+    "README.md": "fdaf1ebd590c0a16317b54dca417c072bea7236ce7b466b3ea582d72668d716b",
+    "docs/testing.md": "32dd58910ea48a1bffe82b8d2e6957687f8c65b11d4ea8e36cc95f1708487f53",
+    "docs/workflow/README.md": "ce35c134e34be8261e2478091460df30cd2a2546fba658ba38f25e8411a9f8f8",
+    "docs/workflow/policy.json": "0ddce3bc8f3a8a2548e1d2a4d93134d190f93e5c862dd3c3ee8a68982ec07949",
+    "docs/workflow/task.example.json": "4bf161efce99b7d0a26798e3445d1f142505e512eedd591ea11cfb194d67da9f",
+    "docs/workflow/contexts/product.md": "5b4dc6160f73804cbaab9aadcdb977eb23c3e64f0fb3fac2e43ef770e9f4fcf2",
+    "docs/workflow/contexts/development.md": "6236fb55933849a9c2e091fc4b199cbbc44b710502c6613346f1783703a6b25a",
+    "docs/workflow/contexts/operations.md": "d02de6eb127496e226953dc031aad39fb129c2a09e64bc3dcb4b91b0ab9c1efb",
+    "scripts/context.mjs": "3828c41d1cc5a6977b8444035e094e61e1c9895fcaa9451ecb1919e799ecaffc",
+    "scripts/context.test.mjs": "125f184ecd2d34b8a4dc93a8d1edd2b6c527c0de8a46f39c8c92de265ebccc66",
+    "scripts/workflow-policy.mjs": "60535f2c9bf42203c059ca39a0b254c168b7cfb2468904a3842725fe3797141e",
+    "scripts/workflow-policy.test.mjs": "394287e7d1e84756a3ac8833918f964ee66f0ef2c34934d121d055fb37af4782",
+    "scripts/workspace-policy.mjs": "cd575bdc0a83e37ed28f4004c311c2415d895ce9d63b8fe8552ad674269cd219",
+    "scripts/workspace-policy.test.mjs": "22c2dce0ba9006d3266c2628a61e19acae48eb851c34f5a2fdd1d600cfb7944f",
+    "scripts/check-private-sources.mjs": "1d28447b51b39591d42151f236b837b33d695662168ee5c71500205aa0de96af",
+    "scripts/check-private-sources.test.mjs": "db6afd47e6f6e6de3405437960721f037068da4181eb7a81d7ba11477c7d69fb",
+    ".gitignore": "5100f07fdbe286d112925b81be1767ea12f734bf5b9b788cdd460eb3ccb34220",
+    ".dockerignore": "41edbcbdb5a3e429212f51f31bfb501eb847abd0ed0e711ed67960c0de778f58",
+    ".githooks/pre-push": "3529b300f7a655102ad899ab31fa8b2c404ec37479d1195aa9bcd3efa97bf90c"
+  },
+  "attempt": {
+    "outcome": "passed",
+    "number": 3
+  },
+  "verification_note": "ハッシュ・Git・記録済み完了条件の確認であり、テストや出典照合の自動再実行ではない。依頼・権限は最新のユーザー指示とAGENTS.mdに従う。"
+}
