@@ -676,3 +676,16 @@ Nuxt公式設定の `sourcemap: { server: false }` のみを追加し、不要�
 調査・生成ログ・集約証拠は保護領域 `local-only/mock-exams-02-05/netlify-scan/` に保存。集約証拠SHAは `5749f0219708a65e0a7818d4cd5eacefd044fe0ba88ac9df53cd6a1d6040e9f4`。なお模試追加の元実装コミット9495c343dda91422874fffef65e7adaba7bd7f39は[Actions 42127580859](https://github.com/misato729/art-history-practice/actions/runs/42127580859)のharness/verify/browser全3ジョブ成功、PC/SP50/50、API127/127・単体147/147を実ログから確認済み。
 
 参考： [Netlify公式の生成ファイルを含む秘密検査仕様](https://docs.netlify.com/build/environment-variables/secrets-controller/#secret-scanning-process)。
+
+
+### 模擬試験2〜5と追加ビルド修正のGit送信完了（2026-11-06）
+
+元実装9495c343dda91422874fffef65e7adaba7bd7f39の230ファイルと、追加修正 `1a8f7b805b8fa2123da997d4f7a042e38b01f549` の7ファイルを独立ステージ監査後に通常pushした。初回監査指紋は `be59134d3cee33975a4c4e068b6fcd30380864cd59ef7a04db05eb4b6fd3e838`、追加7ファイルは `bb0ed090a962ad3ef48fc6be69682ad396c271f38b2e91f21a1357e24565818f`。実cachedバイト・許可一覧・公開台帳と8PDFの対応、既存模試1の保持、元資料/秘密値の除外で独立担当delivery_auditがPASSとした。
+
+追加修正の最初のpushは、別途PR12がmainへ入ったためfetch-firstで拒否された。remoteの4ファイルを実読し、静的生成中のセッション/DB初期化を省く変更を保ったまま、未送信の自分の1コミットだけを載せ直した。審査済み7ファイルのパッチ指紋不変とremote親 `18c0484dbd47cf9b85ec0d892d82dd7192233daf` の保持を独立確認し、統合後の単体・静的生成・型も再確認した。他者の4ファイルを今回の作成物として数えていない。
+
+最新コード `1a8f7b805b8fa2123da997d4f7a042e38b01f549` の[GitHub Actions 42132089437](https://github.com/misato729/art-history-practice/actions/runs/42132089437)はharness・verify・browserの全3ジョブが成功した。共有Schema/全5回データ/画像/PDF指紋、API/セキュリティ、単体/型/本番形式ビルドとPC/SP50件を確認した。元実装の[Actions 42127580859](https://github.com/misato729/art-history-practice/actions/runs/42127580859)の全3成功とは区別し、追加設定と取り込んだ変更を含む最新コミットでも確認した結果である。
+
+通常push後にfetch・remote HEAD一致・分岐件数0/0・作業ツリー差分なしを確認した。元テキスト/公式問題集/原図版/OCR/独立答案/一時生成物/秘密値は送信せず、保護領域に証拠を保持。今回専用のDB/コンテナと生成ビルドは片付け、既存の検証ビルドを保持した。Netlify本体の秘密スキャナ再実行/本番再配信、既存DB登録、配信停止設定の変更は実施していない。
+
+この完了記録・状態・引き継ぎのみを `[skip ci] [skip netlify]` の別コミットで同期する。CI成功は上記の実装コミットを対象とし、記録のみの後続コミットを同じCI結果として表示しない。

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 125,
-  "updated_at": "2026-11-05T23:39:54.716Z",
+  "revision": 127,
+  "updated_at": "2026-11-06T00:02:05.453Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-05T23-39-54-716Z-r125.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-06T00-02-05-453Z-r127.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -1931,42 +1931,59 @@
       "id": "art_mocks_02_05_delivery",
       "context": "operations",
       "title": "模擬試験2〜5とサイト組込をコミットpushしCIを確認",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "art_mocks_02_05_integration",
         "art_netlify_generated_map_scan"
       ],
       "authorization": "requested",
       "request_ref": "同一会話のユーザー明示指示「終わったらコミット・pushしてください」を継続し、最新の「模試2〜5も作成してください」で追加された成果物を送信する。過去のstate記録から権限を拡張するものではない。公開配信・既存DB反映は別範囲。 追加提示されたNetlifyビルドエラーの修正を同じ送信に含め、修正後コミットのCIを確認する。",
-      "next_action": "Nuxt設定2行と根拠・状態7ファイルを独立ステージ監査後に通常commit/pushする",
-      "evidence": [],
-      "last_verified_at": null,
-      "verification_scope": "今回の模試2〜5と425問の演習組込、検証記録のGit送信。原資料・秘密値・既存DB・本番配信・停止中の自動ビルド再開を含めない。",
+      "next_action": "文書のみの記録を通常pushし、最終remote一致と作業ツリーを確認して報告する",
+      "evidence": [
+        "docs/verification.md",
+        "content/mock-exams/series.json"
+      ],
+      "last_verified_at": "2026-11-06T00:02:04.951Z",
+      "verification_scope": "元230件/追加7件の独立ステージ監査、資料保護、他者PR12保持・審査済パッチ不変、通常pushとremote一致、最新コード1a8f7b805b8fa2123da997d4f7a042e38b01f549のActions42132089437全3ジョブ成功。完了記録のみ後続commit。Netlify実scan/配信/既存DB更新は含めない。",
       "acceptance": [
         {
           "id": "checks",
           "kind": "automated",
           "description": "明示ステージ・差分・原資料保護・通常push・remote一致・今回CI全3ジョブの成功を確認",
           "verification": "git diff --check、原資料保護、staged一覧/統計と通常push、fetch後の分岐件数、GitHub今回runのharness/verify/browser結果",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/series.json"
+          ],
+          "checked_at": "2026-11-06T00:02:04.951Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "実装担当と異なる担当が送信対象、提供原本/作業資料/秘密値の除外と検証根拠を確認",
           "verification": "対象差分と保護ルール・成果物・最終検証記録の独立点検",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "content/mock-exams/series.json"
+          ],
+          "checked_at": "2026-11-06T00:02:04.951Z",
+          "reviewer": "delivery_audit / netlify_scan_audit"
         }
       ],
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "第1評価合格。元230件と追加7件の独立送信監査、他者変更保持、通常push/remote0対0、最新1a8f7b8のCI全3成功を確認。新CIのAPI127/単体150/PCSP50成功。原本/秘密/本番DB/配信設定は変更なし。",
+            "at": "2026-11-06T00:02:05.137Z",
+            "failed_criteria": []
+          }
+        ]
       }
     },
     {
