@@ -733,3 +733,10 @@ Fly公開APIの全425問をGETし、5回各85問・全4択、原稿/旧控えと
 
 
 今回専用の合成データ用PGコンテナと生成ビルドを片付け、事前から存在した検証ビルドを保持した。接続設定・原資料・検証PNG・登録の控えは保護領域に保持し、送信対象は配信結果とworkflowの記録だけとする。アプリ・config・content・scriptsは検証済み1a8f7b8と一致しており、記録同期による再ビルド/再配信は行わない。
+
+
+### 配信記録のGit同期と最終公開状態（2026-11-06）
+
+配信結果3資料とr128〜140の引き継ぎ13件を、独立cached byte監査（manifest `31fa3a465b57002b32ced714a54518fdadbf35abaeab85cefa50e87bd92ccf67`）後に `707713fcd83b727a8c1b2de7b14c1916dfd0daf2` でmainへ通常commit/pushした。fetch後のremote HEAD一致・分岐0/0・作業ツリー差分なしを確認した。秘密/原資料/控え/PNG/操作スクリプトは送信していない。コードは全3CI成功済み1a8f7b8から不変、今回の記録コミットはskip ci/skip netlifyとしている。
+
+push後の公開Netlifyはdeploy6aed37cc260745bcba14c2aa ready/publishedを保持し、provider設定の一致、health200、5回各85問のcatalog200を再確認した。記録タスクの受入条件を合格とし、残る完了状態の記録だけを同期する。アプリの再ビルド・再配信は行わない。保護証拠集約SHA `d0d3638f7f4f9f801424090dc7fd5b98d21a43ee540d291433b1dcea5ba0888f`。

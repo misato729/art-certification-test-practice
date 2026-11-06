@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 140,
-  "updated_at": "2026-11-06T02:33:41.833Z",
+  "revision": 142,
+  "updated_at": "2026-11-06T02:40:21.742Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-06T02-33-41-833Z-r140.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-06T02-40-21-742Z-r142.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -2238,15 +2238,18 @@
       "id": "art_series_release_record",
       "context": "operations",
       "title": "本番配信と既存保持の完了記録を同期",
-      "status": "doing",
+      "status": "done",
       "depends_on": [
         "art_series_netlify_release"
       ],
       "authorization": "requested",
       "request_ref": "2026-11-06 ユーザー「netlifyにデプロイしてください」に続き、公開APIには模試1の85問のみで新模試を解くにはAPI配信/本番問題登録も必要と説明した確認に「API配信・問題登録も進める」と明示回答。既存ID・履歴と秘密値を保持して既存Fly/Neon/Netlifyへ反映する。 最終指定「全て85問で活用問題は4択にしてください」に従い、新規2〜5は既承認85全4のまま、旧本番1の活用5問だけ4択へ整理する。",
-      "next_action": "専用fixtureのみ片付け、資料保護・差分・明示stage監査後にmetadata-only commit/pushする",
-      "evidence": [],
-      "last_verified_at": null,
+      "next_action": "完了記録だけcommitpushしremote0/0/clean確認後に成果物と公開URLを報告",
+      "evidence": [
+        "docs/deployment.md",
+        "docs/verification.md"
+      ],
+      "last_verified_at": "2026-11-06T02:40:21.359Z",
       "verification_scope": "配信・登録の実証拠とGitの記録同期。新コード改変は範囲外で、追加不具合が判明した場合は別タスクへ分ける。",
       "acceptance": [
         {
@@ -2254,25 +2257,39 @@
           "kind": "automated",
           "description": "source protection/diff/明示stage・通常commitpush/remote0対0・残差分なしと公開状態最終確認",
           "verification": "限定メタデータ/原稿指紋/隔離生成・登録の反復/配信・公開APIとPCSPの実確認",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null
+          "status": "passed",
+          "evidence": [
+            "docs/deployment.md",
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-06T02:40:21.359Z"
         },
         {
           "id": "review",
           "kind": "review",
           "description": "別担当が実結果と記録・送信対象を照合",
           "verification": "実行担当以外のコード/対象/保持条件/実結果レビュー",
-          "status": "pending",
-          "evidence": [],
-          "checked_at": null,
-          "reviewer": null
+          "status": "passed",
+          "evidence": [
+            "docs/deployment.md",
+            "docs/verification.md"
+          ],
+          "checked_at": "2026-11-06T02:40:21.359Z",
+          "reviewer": "release_metadata_audit"
         }
       ],
       "execution": {
         "worker": "root",
         "max_attempts": 3,
-        "attempts": []
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "独立監査済みmetadata16件を707713fで通常push、remote一致0/0/clean・sourceprotection成功。公開deploy保持、health200/catalog5x85を再確認し、実コードはCI全3成功1a8から不変。",
+            "at": "2026-11-06T02:40:21.496Z",
+            "failed_criteria": []
+          }
+        ]
       }
     }
   ]
