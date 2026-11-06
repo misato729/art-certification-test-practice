@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "revision": 127,
-  "updated_at": "2026-11-06T00:02:05.453Z",
+  "revision": 140,
+  "updated_at": "2026-11-06T02:33:41.833Z",
   "workspace_relative_to_repo": ".",
   "active_context": "operations",
-  "last_checkpoint": "docs/workflow/handoffs/2026-11-06T00-02-05-453Z-r127.json",
+  "last_checkpoint": "docs/workflow/handoffs/2026-11-06T02-33-41-833Z-r140.json",
   "gate_policy": {
     "version": 1,
     "legacy_task_ids": []
@@ -2042,6 +2042,237 @@
             "failed_criteria": []
           }
         ]
+      }
+    },
+    {
+      "id": "art_series_release_prepare",
+      "context": "operations",
+      "title": "模試2〜5の本番反映を既存データ保持で準備",
+      "status": "done",
+      "depends_on": [
+        "art_mocks_02_05_delivery"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ユーザー「netlifyにデプロイしてください」に続き、公開APIには模試1の85問のみで新模試を解くにはAPI配信/本番問題登録も必要と説明した確認に「API配信・問題登録も進める」と明示回答。既存ID・履歴と秘密値を保持して既存Fly/Neon/Netlifyへ反映する。 最終指定「全て85問で活用問題は4択にしてください」に従い、新規2〜5は既承認85全4のまま、旧本番1の活用5問だけ4択へ整理する。",
+      "next_action": "既存Flyへ最新APIを配信して健康状態を確認し、検証済み1 transaction登録を実行する",
+      "evidence": [
+        "docs/verification.md",
+        "frontend/fly.toml",
+        "netlify.toml"
+      ],
+      "last_verified_at": "2026-11-06T01:13:13.741Z",
+      "verification_scope": "既存対象/提供接続を使用し、content限定backup、既存1の美術史80問保持と活用5問の4択化（正答・残4choiceID/問題ID保持、対象履歴0と余剰参照0のtxguard）、新340問追加を隔離検証。個人記録/秘密値は出力せず、UI/API/DB/Netlifyの承認範囲だけ反映。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "既存85問content限定snapshot、対象app5の正答を保つ4択plan/独立試解、対象history/余剰参照0guard、既存history80完全保持と新340追加のrollback/再実行0変更、配信artifactと対象を確認",
+          "verification": "限定メタデータ/原稿指紋/隔離生成・登録の反復/配信・公開APIとPCSPの実確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "frontend/fly.toml",
+            "netlify.toml"
+          ],
+          "checked_at": "2026-11-06T01:13:13.741Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が活用4択plan・対象履歴0でのshape変換・既存80非変更・新340共通writer追加と配信先を確認",
+          "verification": "実行担当以外のコード/対象/保持条件/実結果レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "frontend/fly.toml",
+            "netlify.toml"
+          ],
+          "checked_at": "2026-11-06T01:13:13.741Z",
+          "reviewer": "delivery_audit / legacy_app_conversion.blind_four_choice"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "第1評価合格。旧活用5の4択plan独立確認、型0件、隔離8ケースとREAD ONLY再実行、既存content限定控え/本番read-only前提、291静的ファイル/179図版/対象の最終独立監査が成功。実配信/本番書込は後続。",
+            "at": "2026-11-06T01:13:14.117Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_series_backend_release",
+      "context": "operations",
+      "title": "Fly APIと模試2〜5の340問を本番へ反映",
+      "status": "done",
+      "depends_on": [
+        "art_series_release_prepare"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ユーザー「netlifyにデプロイしてください」に続き、公開APIには模試1の85問のみで新模試を解くにはAPI配信/本番問題登録も必要と説明した確認に「API配信・問題登録も進める」と明示回答。既存ID・履歴と秘密値を保持して既存Fly/Neon/Netlifyへ反映する。 最終指定「全て85問で活用問題は4択にしてください」に従い、新規2〜5は既承認85全4のまま、旧本番1の活用5問だけ4択へ整理する。",
+      "next_action": "検証済static publicを既存Netlifyへ手動production配信",
+      "evidence": [
+        "docs/verification.md",
+        "frontend/fly.toml"
+      ],
+      "last_verified_at": "2026-11-06T02:13:11.224Z",
+      "verification_scope": "既存Fly最新API、Neonで既存1の活用5問のみ4択化と新2〜5計340問追加。旧1の美術史80本文/choices/ID/履歴は非変更、app5は問題ID・残す正答含む4choiceIDを保持し履歴/余剰参照0でだけ実行。認証/会員/他サービス/課金設定は非変更。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "Fly image/release/health保持、tx内の対象history/余剰参照0と旧1history80不変、旧活用5の4択/版更新、新340全項目一致、再実行0変更、公開5回425問/全4択・非開示と図版を確認",
+          "verification": "限定メタデータ/原稿指紋/隔離生成・登録の反復/配信・公開APIとPCSPの実確認",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "frontend/fly.toml"
+          ],
+          "checked_at": "2026-11-06T02:13:11.224Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が実API・登録結果・既存保持の証拠とrollback境界を確認",
+          "verification": "実行担当以外のコード/対象/保持条件/実結果レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/verification.md",
+            "frontend/fly.toml"
+          ],
+          "checked_at": "2026-11-06T02:13:11.224Z",
+          "reviewer": "delivery_audit"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "failed",
+            "summary": "第1評価は本番登録900秒上限付近で中断。READ ONLYで原本85/350完全一致と新question/group/set0・対象履歴0を確認し全rollback。API配信は成功保持。",
+            "at": "2026-11-06T01:41:16.529Z",
+            "failed_criteria": [
+              "checks",
+              "review"
+            ]
+          },
+          {
+            "number": 2,
+            "outcome": "passed",
+            "summary": "第2評価成功。API配信保持、980秒commitで新340追加/旧活用5を4択化、READONLY再実行unchanged、公開425問全4択/原稿/既存ID保持/非開示と独立実結果監査PASS。",
+            "at": "2026-11-06T02:13:11.434Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_series_netlify_release",
+      "context": "operations",
+      "title": "Netlifyへ既存サイトの最新画面・図版を本番配信",
+      "status": "done",
+      "depends_on": [
+        "art_series_backend_release"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ユーザー「netlifyにデプロイしてください」に続き、公開APIには模試1の85問のみで新模試を解くにはAPI配信/本番問題登録も必要と説明した確認に「API配信・問題登録も進める」と明示回答。既存ID・履歴と秘密値を保持して既存Fly/Neon/Netlifyへ反映する。",
+      "next_action": "配信記録の明示stage/独立監査/通常commitpushとremote一致を確認",
+      "evidence": [
+        "docs/deployment.md",
+        "docs/verification.md",
+        "netlify.toml"
+      ],
+      "last_verified_at": "2026-11-06T02:33:41.028Z",
+      "verification_scope": "既存Netlifyサイトedf75882-5328-468f-857f-04d65dfc83b7へ確認済static publicのみ手動prod配信。事前観測stop_builds=falseを含むprovider設定を変更しない。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "配信対象指紋/公開ファイル限定/最新deploy ready・published一致、公開HTTP/assets/APIproxy/answer hidingとPCSPの新4回表示/拡大/境界・全catalogを確認",
+          "verification": "限定メタデータ/原稿指紋/隔離生成・登録の反復/配信・公開APIとPCSPの実確認",
+          "status": "passed",
+          "evidence": [
+            "docs/deployment.md",
+            "docs/verification.md",
+            "netlify.toml"
+          ],
+          "checked_at": "2026-11-06T02:33:41.028Z"
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が公開PCSP画像とprovider/HTTP結果・対象/秘密除外を確認",
+          "verification": "実行担当以外のコード/対象/保持条件/実結果レビュー",
+          "status": "passed",
+          "evidence": [
+            "docs/deployment.md",
+            "docs/verification.md",
+            "netlify.toml"
+          ],
+          "checked_at": "2026-11-06T02:33:41.028Z",
+          "reviewer": "delivery_audit / production_ui_check"
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": [
+          {
+            "number": 1,
+            "outcome": "passed",
+            "summary": "Netlify実公開ready、179図版/19HTML全SHAと40proxy一致、PCSP66画面/拡大8/補足2の機能合格と独立50PNGレビュー。初回広域HTTP監視failedは保持し、既存初期0/-1の400を機能合格と区別して記録。",
+            "at": "2026-11-06T02:33:41.368Z",
+            "failed_criteria": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "art_series_release_record",
+      "context": "operations",
+      "title": "本番配信と既存保持の完了記録を同期",
+      "status": "doing",
+      "depends_on": [
+        "art_series_netlify_release"
+      ],
+      "authorization": "requested",
+      "request_ref": "2026-11-06 ユーザー「netlifyにデプロイしてください」に続き、公開APIには模試1の85問のみで新模試を解くにはAPI配信/本番問題登録も必要と説明した確認に「API配信・問題登録も進める」と明示回答。既存ID・履歴と秘密値を保持して既存Fly/Neon/Netlifyへ反映する。 最終指定「全て85問で活用問題は4択にしてください」に従い、新規2〜5は既承認85全4のまま、旧本番1の活用5問だけ4択へ整理する。",
+      "next_action": "専用fixtureのみ片付け、資料保護・差分・明示stage監査後にmetadata-only commit/pushする",
+      "evidence": [],
+      "last_verified_at": null,
+      "verification_scope": "配信・登録の実証拠とGitの記録同期。新コード改変は範囲外で、追加不具合が判明した場合は別タスクへ分ける。",
+      "acceptance": [
+        {
+          "id": "checks",
+          "kind": "automated",
+          "description": "source protection/diff/明示stage・通常commitpush/remote0対0・残差分なしと公開状態最終確認",
+          "verification": "限定メタデータ/原稿指紋/隔離生成・登録の反復/配信・公開APIとPCSPの実確認",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null
+        },
+        {
+          "id": "review",
+          "kind": "review",
+          "description": "別担当が実結果と記録・送信対象を照合",
+          "verification": "実行担当以外のコード/対象/保持条件/実結果レビュー",
+          "status": "pending",
+          "evidence": [],
+          "checked_at": null,
+          "reviewer": null
+        }
+      ],
+      "execution": {
+        "worker": "root",
+        "max_attempts": 3,
+        "attempts": []
       }
     }
   ]
