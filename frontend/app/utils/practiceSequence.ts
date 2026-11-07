@@ -19,10 +19,10 @@ export const createPracticeSequence = (
 
 export const createPracticeSeed = () => Math.floor(Math.random() * 0x100000000)
 
-export const shufflePracticeSequence = (
-  positions: readonly PracticePosition[],
+export const shufflePracticeSequence = <T,>(
+  positions: readonly T[],
   seed: number,
-): PracticePosition[] => {
+): T[] => {
   const shuffled = [...positions]
   let state = seed >>> 0
   const random = () => {

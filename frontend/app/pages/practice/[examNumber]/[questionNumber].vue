@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import type { LocationQueryRaw } from 'vue-router'
+import { EXAM_CONFIG } from '~/utils/examConfig'
+import { MATERIAL_RANDOM_UNIT, artQuestionSection, isApplicationQuestion, applicationPeerNumbers, shuffleArtPracticeSequence } from '~/utils/artPracticeFormat'
+import type { PassageReference } from '../../../../shared/types/learning'
 import { EXAM_CATALOG, QUESTIONS_PER_EXAM, FREE_EXAM_MAX } from '~/utils/examCatalog'
 import {
   createPracticeSequence,
@@ -18,7 +21,9 @@ type Choice = {
 }
 
 type Question = {
-  shared_passages?: { id: number; label: string; content_blocks: ContentBlock[] }[]
+  shared_passages?: { id: number; label: string; display_order?: number; content_blocks: ContentBlock[] }[]
+  passage_references?: PassageReference[]
+  group?: { id: number; group_number: number; title: string; question_numbers: number[] } | null
   question_version?: number
   id: number
   exam_number: number
@@ -123,7 +128,9 @@ const isRandomPractice = computed(() => (
 ))
 const practiceSequence = computed<PracticePosition[]>(() => (
   isIncorrectReview.value ? (reviewReady.value ? reviewPositions.value : []) : isRandomPractice.value
-    ? shufflePracticeSequence(basePracticeSequence.value, practiceSeed.value!)
+    ? (route.query.random_unit === MATERIAL_RANDOM_UNIT
+      ? shuffleArtPracticeSequence(basePracticeSequence.value, practiceSeed.value!, publicPracticeCatalog.value ?? [], EXAM_CONFIG)
+      : shufflePracticeSequence(basePracticeSequence.value, practiceSeed.value!))
     : basePracticeSequence.value
 ))
 const currentPracticeIndex = computed(() => practiceSequence.value.findIndex(position => (
@@ -146,6 +153,7 @@ const practiceNavigationQuery = computed(() => {
     if (isRandomPractice.value) {
       query.order = 'random'
       query.seed = String(practiceSeed.value)
+      if (route.query.random_unit === MATERIAL_RANDOM_UNIT) query.random_unit = MATERIAL_RANDOM_UNIT
     }
     return query
   }
@@ -191,6 +199,15 @@ const question = computed(() => {
   const loaded = questionResponse.value?.data
   if (!loaded || loaded.exam_number !== examNumber.value || loaded.question_number !== questionNumber.value) return null
   return loaded
+})
+
+const currentSection = computed(() => artQuestionSection(EXAM_CONFIG, examNumber.value, questionNumber.value))
+const applicationQuestion = computed(() => isApplicationQuestion(EXAM_CONFIG, examNumber.value, questionNumber.value))
+const relatedApplicationNumbers = computed(() => applicationPeerNumbers(question.value, practiceSequence.value, EXAM_CONFIG))
+const materialScopeKey = computed(() => {
+  const context = applicationQuestion.value && question.value?.group
+    ? `group:${question.value.group.id}` : `question:${question.value?.id ?? questionNumber.value}`
+  return `${sessionVersion.value}:${examNumber.value}:${context}`
 })
 
 const selectedChoiceId = ref<number | null>(null)
@@ -271,6 +288,7 @@ watch(
     route.query.questions,
     route.query.order,
     route.query.seed,
+    route.query.random_unit,
     route.query.review,
     sessionVersion.value,
     incorrectReview.sessionKey.value,
@@ -466,6 +484,15 @@ onMounted(() => window.addEventListener('keydown', handleFavoriteModalKeydown))
 onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalKeydown))
 </script>
 
+<style scoped>
+.practice-section-label { margin: 8px 0 0; color: var(--teal-dark); font-size: .875rem; line-height: 1.6; }
+.shared-question-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 20px; }
+.shared-question-nav > span { width: 100%; font-weight: 700; }
+.shared-question-nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); text-decoration: none; }
+.shared-question-nav a[aria-current='page'] { border-color: var(--teal); background: var(--surface-tint); font-weight: 700; }
+.shared-question-nav a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+</style>
+
 <template>
   <div class="page-wrap practice-wrap">
     <div v-if="isIncorrectReview && (!reviewReady || reviewError)" class="state-panel" aria-live="polite">
@@ -507,6 +534,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
             <span v-if="practiceProgress" class="practice-progress">{{ practiceProgress }}</span>
           </div>
           <h1>問{{ question.question_number }}</h1>
+          <p v-if="currentSection" class="practice-section-label">{{ currentSection.title }}</p>
         </div>
         <div class="practice-meta">
           <button
@@ -525,11 +553,14 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleFavoriteModalK
         </div>
       </header>
 
-      <section v-if="question.shared_passages?.length" class="question-panel shared-reading" aria-label="共通本文">
-        <h2>共通本文</h2>
-        <div v-for="passage in question.shared_passages" :key="passage.id"><h3>【{{ passage.label }}】</h3><QuestionContentBlocks :blocks="passage.content_blocks" /></div>
-      </section>
+      <nav v-if="relatedApplicationNumbers.length > 1" class="shared-question-nav" aria-label="同じ問題群の設問">
+        <span>同じ問題群の設問</span>
+        <NuxtLink v-for="number in relatedApplicationNumbers" :key="number" :to="{ path: `/practice/${examNumber}/${number}`, query: practiceNavigationQuery }" :aria-current="number === questionNumber ? 'page' : undefined">問{{ number }}</NuxtLink>
+      </nav>
+      <PracticeMaterials v-if="applicationQuestion && question.shared_passages?.length" :passages="question.shared_passages" :references="question.passage_references" :scope-key="materialScopeKey" shared />
       <section class="question-panel">
+        <!-- Existing references are essential data, even for an ordinary question. -->
+        <PracticeMaterials v-if="!applicationQuestion && question.shared_passages?.length" :passages="question.shared_passages" :references="question.passage_references" :scope-key="materialScopeKey" />
         <div class="question-text">
           <QuestionContentBlocks :blocks="question.content_blocks" />
         </div>

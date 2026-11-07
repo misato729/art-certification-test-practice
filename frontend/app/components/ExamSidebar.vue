@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { createSidebarExamCatalog, catalogExamLabel, catalogExamStartNumber, catalogGroupLabel, catalogGroupLinks, isCatalogGroupActive, type ExamCatalogEntry, type ExamCatalogGroup, type SidebarExamCatalogEntry } from '~/utils/examCatalog'
-import { hasFullExamAccess } from '~/utils/examConfig'
+import { createSidebarExamCatalog, catalogExamLabel, catalogExamStartNumber, type SidebarExamCatalogEntry } from '~/utils/examCatalog'
+import { EXAM_CONFIG, hasFullExamAccess } from '~/utils/examConfig'
+import { artSectionLinks, isArtSectionActive, type ArtSectionLink } from '~/utils/artPracticeFormat'
 
 const props = withDefaults(defineProps<{ desktopOpen?: boolean }>(), { desktopOpen: true })
 const emit = defineEmits<{ 'toggle-desktop': [] }>()
@@ -13,7 +14,7 @@ const { user } = useAuth()
 const catalogEnabled = computed(() => /^\/practice(?:\/|$)/.test(route.path) || (route.path === '/' && Boolean(user.value)))
 const { data: publicCatalog, status: catalogStatus, error: catalogError, refresh: refreshCatalog } = usePracticeCatalog(catalogEnabled)
 const exams = computed(() => createSidebarExamCatalog(publicCatalog.value, catalogEnabled.value, hasFullExamAccess(user.value))
-  .map(exam => ({ ...exam, groupLinks: catalogGroupLinks(exam) })))
+  .map(exam => ({ ...exam, sectionLinks: artSectionLinks(exam, EXAM_CONFIG) })))
 const isLoading = computed(() => catalogEnabled.value && (catalogStatus.value === 'pending' || catalogStatus.value === 'idle'))
 const hasAccessError = computed(() => Boolean(catalogError.value))
 const retryCatalog = () => refreshCatalog()
@@ -37,7 +38,7 @@ const closeSidebarOnEscape = () => {
 
 watch(() => route.fullPath, closeMobileList)
 
-const isCurrentGroup = (exam: ExamCatalogEntry, group: ExamCatalogGroup) => route.path.startsWith('/practice/') && isCatalogGroupActive(exam, group, Number(route.params.examNumber), Number(route.params.questionNumber))
+const isCurrentSection = (section: ArtSectionLink) => route.path.startsWith('/practice/') && isArtSectionActive(section, Number(route.params.examNumber), Number(route.params.questionNumber))
 
 // A static paid row can remain visible after the free catalog has loaded.
 const isStaticExamLocked = (exam: SidebarExamCatalogEntry) => exam.isStatic && exam.access === 'paid_membership_required'
@@ -121,14 +122,14 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
               type="button"
               :aria-expanded="openExam === exam.exam_number"
               :aria-controls="`exam-${exam.exam_number}-groups`"
-              :title="openExam === exam.exam_number ? `${catalogExamLabel(exam.exam_number)}の${exam.groupLinks.length ? '大問' : 'メニュー'}を閉じる` : `${catalogExamLabel(exam.exam_number)}の${exam.groupLinks.length ? '大問' : 'メニュー'}を開く`"
+              :title="openExam === exam.exam_number ? `${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分' : 'メニュー'}を閉じる` : `${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分' : 'メニュー'}を開く`"
               @click="toggleExam(exam.exam_number)"
             >
               <UIcon
                 :name="openExam === exam.exam_number ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
               />
               <span class="sr-only">
-                {{ openExam === exam.exam_number ? `${catalogExamLabel(exam.exam_number)}の${exam.groupLinks.length ? '大問' : 'メニュー'}を閉じる` : `${catalogExamLabel(exam.exam_number)}の${exam.groupLinks.length ? '大問' : 'メニュー'}を開く` }}
+                {{ openExam === exam.exam_number ? `${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分' : 'メニュー'}を閉じる` : `${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分' : 'メニュー'}を開く` }}
               </span>
             </button>
           </div>
@@ -138,20 +139,20 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
               v-if="openExam === exam.exam_number"
               :id="`exam-${exam.exam_number}-groups`"
               class="group-list"
-              :aria-label="`${catalogExamLabel(exam.exam_number)}の${exam.groupLinks.length ? '大問一覧' : 'メニュー'}`"
+              :aria-label="`${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分一覧' : 'メニュー'}`"
             >
-              <NuxtLink v-if="!exam.groupLinks.length" :to="examTarget(exam)" @click="closeMobileList">
+              <NuxtLink v-if="!exam.sectionLinks.length" :to="examTarget(exam)" @click="closeMobileList">
                 {{ isStaticExamLocked(exam) ? 'プレミアム会員で利用' : '演習を開始' }}
               </NuxtLink>
               <NuxtLink
-                v-for="entry in exam.groupLinks"
-                :key="entry.group.id"
+                v-for="entry in exam.sectionLinks"
+                :key="entry.id"
                 :to="entry.to"
-                :class="{ active: isCurrentGroup(exam, entry.group) }"
-                :aria-current="isCurrentGroup(exam, entry.group) ? 'location' : undefined"
+                :class="{ active: isCurrentSection(entry) }"
+                :aria-current="isCurrentSection(entry) ? 'location' : undefined"
                 @click="closeMobileList"
               >
-                {{ catalogGroupLabel(entry.group) }}
+                {{ entry.label }}
               </NuxtLink>
             </nav>
           </Transition>

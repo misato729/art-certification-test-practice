@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { categoryLeafCodes, categorySelectionState, toggleCategoryCodes, presetCategoryCodes, presetSelectionState, toggleStudyPreset, type StudyPreset } from '~/utils/studyCategorySelection'
 import type { StudyCategoryNode } from '../../shared/schemas/study-categories'
+import { EXAM_CONFIG } from '~/utils/examConfig'
+import { MATERIAL_RANDOM_UNIT, shuffleArtPracticeSequence } from '~/utils/artPracticeFormat'
 import { EXAM_CATALOG, FREE_EXAM_MAX, QUESTIONS_PER_EXAM, catalogExamLabel, catalogExamStartNumber, type ExamCatalogEntry } from '~/utils/examCatalog'
 import {
   createPracticeSeed,
   createPracticeSequence,
-  shufflePracticeSequence,
   type PracticeOrder,
 } from '~/utils/practiceSequence'
 
@@ -108,9 +109,10 @@ const startConditionalPractice = (order: PracticeOrder) => {
 
   if (order === 'random') {
     const seed = createPracticeSeed()
-    sequence = shufflePracticeSequence(sequence, seed)
+    sequence = shuffleArtPracticeSequence(sequence, seed, publicCatalog.value ?? [], EXAM_CONFIG)
     query.order = order
     query.seed = String(seed)
+    query.random_unit = MATERIAL_RANDOM_UNIT
   }
 
   const firstPosition = sequence[0]
@@ -159,8 +161,10 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
             <span>問題演習を始める</span>
           </h2>
         </div>
-        <p>模擬試験を選ぶか、出題ジャンルを指定して始められます。</p>
+        <p>通常の美術史問題と、知識・情報の活用問題を1問ずつ演習できます。</p>
       </div>
+      <p class="condition-help">通常問題の必要な資料は設問内に表示し、活用問題では共通資料を参照できます。別枠の実践問題は含みません。本試験の構成を完全に再現するものではありません。</p>
+      <p class="condition-help">ランダム演習では、活用問題に登録された同じ問題群をまとめて出題します。</p>
 
       <div class="launcher-tabs" role="tablist" aria-label="問題演習の開始方法">
         <button
@@ -201,7 +205,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         <p v-else-if="catalogError" role="alert">模擬試験を読み込めませんでした。<button type="button" @click="refreshCatalog()">再読み込み</button></p>
         <p v-else-if="catalogEnabled && !catalogExams.length" role="status">現在利用できる公開問題はありません。</p>
         <div class="exam-grid-heading">
-          <p><strong>{{ catalogEnabled ? `公開中 ${catalogExams.length}回` : `模擬試験 全${EXAM_CATALOG.length}回` }}</strong><span>大問の順に演習</span></p>
+          <p><strong>{{ catalogEnabled ? `公開中 ${catalogExams.length}回` : `模擬試験 全${EXAM_CATALOG.length}回` }}</strong><span>1問ずつ演習</span></p>
           <NuxtLink v-if="!hasFullAccess" class="premium-info-link" to="/premium">
             <UIcon name="i-lucide-lock-keyhole" />
             模擬試験{{ FREE_EXAM_MAX + 1 }}以降はプレミアム会員向けです
@@ -215,7 +219,7 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
             :to="examTarget(exam)"
             :aria-label="examIsLocked(exam.exam_number) ? `模擬試験${exam.exam_number}はプレミアム会員向けです` : `模擬試験${exam.exam_number}を始める`"
           >
-            <span class="exam-card-copy"><strong>{{ catalogExamLabel(exam.exam_number) }}</strong><span v-if="catalogEnabled">{{ exam.groups?.length ? `${exam.groups.length}大問・` : '' }}{{ exam.question_numbers.length }}問収録</span><span v-else>{{ examIsLocked(exam.exam_number) ? 'プレミアム会員向け' : '無料で演習' }}</span></span>
+            <span class="exam-card-copy"><strong>{{ catalogExamLabel(exam.exam_number) }}</strong><span v-if="catalogEnabled">{{ exam.question_numbers.length }}問収録</span><span v-else>{{ examIsLocked(exam.exam_number) ? 'プレミアム会員向け' : '無料で演習' }}</span></span>
             <UIcon :name="examIsLocked(exam.exam_number) ? 'i-lucide-lock-keyhole' : 'i-lucide-arrow-right'" aria-hidden="true" />
           </NuxtLink>
         </div>
