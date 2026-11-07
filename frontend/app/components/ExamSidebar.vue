@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { createSidebarExamCatalog, catalogExamLabel, catalogExamStartNumber, type SidebarExamCatalogEntry } from '~/utils/examCatalog'
+import { EXAM_CATALOG } from '~/utils/examCatalog'
 import { EXAM_CONFIG, hasFullExamAccess } from '~/utils/examConfig'
-import { artSectionLinks, isArtSectionActive, type ArtSectionLink } from '~/utils/artPracticeFormat'
+import { createStaticExamNavigation, staticPracticePosition } from '~/utils/staticExamNavigation'
 
 const props = withDefaults(defineProps<{ desktopOpen?: boolean }>(), { desktopOpen: true })
 const emit = defineEmits<{ 'toggle-desktop': [] }>()
@@ -11,13 +11,18 @@ const mobileOpen = ref(false)
 const mobileToggle = ref<HTMLButtonElement | null>(null)
 const desktopToggle = ref<HTMLButtonElement | null>(null)
 const { user } = useAuth()
-const catalogEnabled = computed(() => /^\/practice(?:\/|$)/.test(route.path) || (route.path === '/' && Boolean(user.value)))
-const { data: publicCatalog, status: catalogStatus, error: catalogError, refresh: refreshCatalog } = usePracticeCatalog(catalogEnabled)
-const exams = computed(() => createSidebarExamCatalog(publicCatalog.value, catalogEnabled.value, hasFullExamAccess(user.value))
-  .map(exam => ({ ...exam, sectionLinks: artSectionLinks(exam, EXAM_CONFIG) })))
-const isLoading = computed(() => catalogEnabled.value && (catalogStatus.value === 'pending' || catalogStatus.value === 'idle'))
-const hasAccessError = computed(() => Boolean(catalogError.value))
-const retryCatalog = () => refreshCatalog()
+
+// All configured questions are published together. Navigation must not wait for Fly.io.
+// No catalog request on mount, accordion expansion, hover or focus.
+const exams = computed(() => createStaticExamNavigation(EXAM_CATALOG, {
+  paymentsEnabled: EXAM_CONFIG.payments.enabled,
+  freeExamCount: EXAM_CONFIG.payments.free_exam_count,
+  fullAccess: hasFullExamAccess(user.value),
+}))
+const currentPosition = computed(() => staticPracticePosition(route.path))
+const isCurrentQuestion = (exam: number, question: number) => (
+  currentPosition.value?.examNumber === exam && currentPosition.value.questionNumber === question
+)
 
 const toggleExam = (exam: number) => {
   openExam.value = openExam.value === exam ? null : exam
@@ -37,16 +42,9 @@ const closeSidebarOnEscape = () => {
 }
 
 watch(() => route.fullPath, closeMobileList)
-
-const isCurrentSection = (section: ArtSectionLink) => route.path.startsWith('/practice/') && isArtSectionActive(section, Number(route.params.examNumber), Number(route.params.questionNumber))
-
-// A static paid row can remain visible after the free catalog has loaded.
-const isStaticExamLocked = (exam: SidebarExamCatalogEntry) => exam.isStatic && exam.access === 'paid_membership_required'
-const examTarget = (exam: SidebarExamCatalogEntry) => (
-  isStaticExamLocked(exam) ? '/premium'
-    : exam.isStatic ? { path: '/practice/start', query: { exams: String(exam.exam_number) } }
-    : `/practice/${exam.exam_number}/${catalogExamStartNumber(exam)}`
-)
+watch(() => currentPosition.value?.examNumber, exam => {
+  openExam.value = exam !== undefined && exams.value.some(entry => entry.examNumber === exam) ? exam : null
+}, { immediate: true })
 </script>
 
 <template>
@@ -59,7 +57,7 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
     <div class="sidebar-heading">
       <span class="sidebar-title">
         <UIcon name="i-lucide-files" />
-        <span>模擬試験</span>
+        <span>試験セット</span>
       </span>
       <button
         ref="desktopToggle"
@@ -81,78 +79,53 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
       type="button"
       :aria-expanded="mobileOpen"
       aria-controls="exam-sidebar-content"
-      :title="mobileOpen ? '模擬試験を閉じる' : '模擬試験を開く'"
-      :aria-label="mobileOpen ? '模擬試験を閉じる' : '模擬試験を開く'"
+      :title="mobileOpen ? '試験セットを閉じる' : '試験セットを開く'"
+      :aria-label="mobileOpen ? '試験セットを閉じる' : '試験セットを開く'"
       @click="mobileOpen = !mobileOpen"
     >
       <UIcon name="i-lucide-files" />
-      <span>模擬試験</span>
+      <span>試験セット</span>
       <UIcon :name="mobileOpen ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'" />
     </button>
 
     <div id="exam-sidebar-content" class="sidebar-content">
-      <div v-if="isLoading" class="sidebar-loading" role="status" aria-live="polite">
-        <UIcon class="loading-spinner" name="i-lucide-loader-circle" />
-        <span>模擬試験を読み込んでいます</span>
-      </div>
-
-      <div v-else-if="hasAccessError" class="sidebar-loading sidebar-error" role="alert">
-        <UIcon name="i-lucide-circle-alert" />
-        <span>利用資格を確認できません</span>
-        <button type="button" @click="retryCatalog()">再確認</button>
-      </div>
-
-      <p v-else-if="!exams.length" class="sidebar-empty">利用できる模擬試験はありません</p>
-
-      <div v-else class="exam-groups" :class="{ 'single-set': exams.length === 1 }">
-        <section
-          v-for="exam in exams"
-          :key="exam.exam_number"
-          class="exam-group"
-        >
-          <div
-            class="exam-row"
-            :class="{ current: route.path.startsWith(`/practice/${exam.exam_number}/`) }"
-          >
-            <NuxtLink class="exam-link" :to="examTarget(exam)" @click="closeMobileList">
-              {{ catalogExamLabel(exam.exam_number) }}
-              <UIcon v-if="isStaticExamLocked(exam)" name="i-lucide-lock-keyhole" aria-label="プレミアム会員向け" />
+      <div class="exam-groups">
+        <section v-for="exam in exams" :key="exam.examNumber" class="exam-group">
+          <div class="exam-row" :class="{ current: currentPosition?.examNumber === exam.examNumber }">
+            <NuxtLink class="exam-link" :to="exam.to" no-prefetch @click="closeMobileList">
+              {{ exam.title }}
+              <UIcon v-if="exam.locked" name="i-lucide-lock-keyhole" aria-label="プレミアム会員向け" />
             </NuxtLink>
             <button
               type="button"
-              :aria-expanded="openExam === exam.exam_number"
-              :aria-controls="`exam-${exam.exam_number}-groups`"
-              :title="openExam === exam.exam_number ? `${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分' : 'メニュー'}を閉じる` : `${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分' : 'メニュー'}を開く`"
-              @click="toggleExam(exam.exam_number)"
+              :aria-expanded="openExam === exam.examNumber"
+              :aria-controls="`exam-${exam.examNumber}-questions`"
+              :title="`${exam.title}の問題一覧を${openExam === exam.examNumber ? '閉じる' : '開く'}`"
+              @click="toggleExam(exam.examNumber)"
             >
-              <UIcon
-                :name="openExam === exam.exam_number ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-              />
-              <span class="sr-only">
-                {{ openExam === exam.exam_number ? `${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分' : 'メニュー'}を閉じる` : `${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分' : 'メニュー'}を開く` }}
-              </span>
+              <UIcon :name="openExam === exam.examNumber ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'" />
+              <span class="sr-only">{{ exam.title }}の問題一覧を{{ openExam === exam.examNumber ? '閉じる' : '開く' }}</span>
             </button>
           </div>
 
-          <Transition name="groups">
+          <Transition name="questions">
             <nav
-              v-if="openExam === exam.exam_number"
-              :id="`exam-${exam.exam_number}-groups`"
-              class="group-list"
-              :aria-label="`${catalogExamLabel(exam.exam_number)}の${exam.sectionLinks.length ? '出題区分一覧' : 'メニュー'}`"
+              v-if="openExam === exam.examNumber"
+              :id="`exam-${exam.examNumber}-questions`"
+              class="question-list"
+              :aria-label="`${exam.title}の問題一覧`"
             >
-              <NuxtLink v-if="!exam.sectionLinks.length" :to="examTarget(exam)" @click="closeMobileList">
-                {{ isStaticExamLocked(exam) ? 'プレミアム会員で利用' : '演習を開始' }}
-              </NuxtLink>
               <NuxtLink
-                v-for="entry in exam.sectionLinks"
-                :key="entry.id"
+                v-for="entry in exam.questions"
+                :key="entry.number"
                 :to="entry.to"
-                :class="{ active: isCurrentSection(entry) }"
-                :aria-current="isCurrentSection(entry) ? 'location' : undefined"
+                no-prefetch
+                :class="{ active: isCurrentQuestion(exam.examNumber, entry.number) }"
+                :aria-current="isCurrentQuestion(exam.examNumber, entry.number) ? 'page' : undefined"
+                :aria-label="`${exam.title}・問${entry.number}${exam.locked ? '（プレミアム会員向け）' : ''}`"
                 @click="closeMobileList"
               >
-                {{ entry.label }}
+                問{{ entry.number }}
               </NuxtLink>
             </nav>
           </Transition>
@@ -200,44 +173,6 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
 .desktop-exam-toggle:hover { background: var(--surface-selected); }
 .mobile-exam-toggle { display: none; }
 
-.sidebar-loading {
-  min-height: 120px;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 10px;
-  color: var(--muted);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  text-align: center;
-}
-
-.sidebar-empty { margin: 0; padding: 18px 10px; color: var(--muted); font-size: .8125rem; line-height: 1.7; }
-
-.loading-spinner {
-  width: 28px;
-  height: 28px;
-  color: var(--teal-dark);
-  animation: sidebar-spin 1s linear infinite;
-}
-
-.sidebar-error :deep(svg) { width: 25px; height: 25px; color: #b54a3b; }
-.sidebar-error button {
-  min-height: 34px;
-  padding: 0 12px;
-  border: 1px solid var(--line-strong);
-  border-radius: 5px;
-  background: var(--surface);
-  color: var(--teal-dark);
-  font-weight: 800;
-  cursor: pointer;
-}
-.sidebar-error button:hover { background: var(--surface-soft); }
-
-@keyframes sidebar-spin {
-  to { transform: rotate(360deg); }
-}
-
 .exam-group + .exam-group {
   margin-top: 10px;
 }
@@ -276,9 +211,9 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
 }
 
 .exam-row button {
-  width: 38px;
-  height: 38px;
-  flex: 0 0 38px;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
   display: grid;
   place-items: center;
   border: 0;
@@ -293,19 +228,21 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
   background: var(--surface-selected);
 }
 
-.group-list {
+.question-list {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 5px;
-  padding: 10px 6px 4px;
+  padding: 10px 2px 4px;
 }
 
-.group-list a {
+.question-list a {
   min-width: 0;
   min-height: 44px;
-  padding: 10px 12px;
+  padding: 8px 2px;
   border: 1px solid transparent;
-  display: block;
+  display: grid;
+  place-items: center;
+  white-space: nowrap;
   border-radius: 5px;
   color: var(--muted);
   font-size: 0.8125rem;
@@ -315,14 +252,16 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
   overflow-wrap: anywhere;
 }
 
-.group-list a:hover,
-.group-list a.active {
+.question-list a:hover,
+.question-list a.active {
   background: var(--surface-selected);
   color: var(--teal-dark);
 }
 
-.group-list a.active { box-shadow: inset 0 0 0 2px var(--teal-dark); }
-.group-list a:focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
+.question-list a.active { box-shadow: inset 0 0 0 2px var(--teal-dark); }
+.question-list a:focus-visible,
+.exam-link:focus-visible,
+button:focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
 
 .sr-only {
   position: absolute;
@@ -336,13 +275,13 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
   border: 0;
 }
 
-.groups-enter-active,
-.groups-leave-active {
+.questions-enter-active,
+.questions-leave-active {
   transition: opacity 150ms ease, transform 180ms ease;
 }
 
-.groups-enter-from,
-.groups-leave-to {
+.questions-enter-from,
+.questions-leave-to {
   opacity: 0;
   transform: translateY(-6px);
 }
@@ -399,13 +338,11 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
   .mobile-exam-toggle > :last-child { width: 20px; height: 20px; }
 
   .sidebar-content {
-    --exam-row-height: 56px;
-    --exam-grid-gap: 8px;
     display: none;
     position: absolute;
     inset: 100% 0 auto;
-    max-height: min(calc(var(--exam-row-height) * 3 + var(--exam-grid-gap) * 2 + 25px), calc(100vh - var(--site-navigation-height) - 12px));
-    max-height: min(calc(var(--exam-row-height) * 3 + var(--exam-grid-gap) * 2 + 25px), calc(100dvh - var(--site-navigation-height) - 12px));
+    max-height: min(70vh, calc(100vh - var(--site-navigation-height, var(--header-height)) - 12px));
+    max-height: min(70dvh, calc(100dvh - var(--site-navigation-height, var(--header-height)) - 12px));
     padding: 12px;
     overflow-y: auto;
     scrollbar-gutter: stable;
@@ -416,51 +353,16 @@ const examTarget = (exam: SidebarExamCatalogEntry) => (
   }
 
   .mobile-open .sidebar-content { display: block; }
-
-  .exam-groups {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-    gap: var(--exam-grid-gap);
-  }
-
-  .exam-groups.single-set { grid-template-columns: minmax(0, 1fr); }
-  .exam-groups.single-set .group-list { width: 100%; }
-
+  .exam-groups { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .exam-group + .exam-group { margin-top: 0; }
   .exam-group { min-width: 0; }
+  .exam-row { min-height: 56px; gap: 6px; padding: 5px 6px 5px 12px; }
+  .exam-link { font-size: 0.875rem; }
+  .question-list { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 
-  .sidebar-loading {
-    min-height: 76px;
-  }
-
-  .exam-row {
-    height: var(--exam-row-height);
-    min-height: var(--exam-row-height);
-    gap: 4px;
-    padding: 5px 6px;
-  }
-
-  .exam-link { font-size: 0.8125rem; }
-
-  .exam-row button {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-  }
-
-  /* Keep both exam controls in place while groups span the row. */
-  .group-list {
-    width: calc(200% + var(--exam-grid-gap));
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .exam-group:nth-child(even) .group-list {
-    margin-left: calc(-100% - var(--exam-grid-gap));
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .exam-sidebar { transition: none; }
+  .exam-sidebar, .questions-enter-active, .questions-leave-active { transition: none; }
 }
 </style>

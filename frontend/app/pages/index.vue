@@ -24,14 +24,15 @@ useSeoMeta({
 
 const questionNumbers = Object.freeze(Array.from({ length: QUESTIONS_PER_EXAM }, (_, index) => index + 1))
 
-const { user, isLoggedIn } = useAuth()
+const { user } = useAuth()
 const launcherMode = ref<LauncherMode>('exam')
 const { $api: api } = useNuxtApp()
 const { data: studyCatalog, error: studyError, refresh: refreshStudy } = await useAsyncData('study-categories', () => api<{ data: { exam_scope: StudyCategoryNode[], study_outline: StudyCategoryNode[] } }>('/api/v1/study_categories'), { server: false, immediate: false })
 watch(launcherMode, mode => { if (mode === 'conditions' && !studyCatalog.value) void refreshStudy() })
-const catalogEnabled = computed(() => isLoggedIn.value || launcherMode.value === 'conditions')
+// Only the explicit conditions tab needs the live catalog. Ordinary navigation is static.
+const catalogEnabled = computed(() => launcherMode.value === 'conditions')
 const { data: publicCatalog, status: catalogStatus, error: catalogError, refresh: refreshCatalog } = usePracticeCatalog(catalogEnabled)
-const staticExams: ExamCatalogEntry[] = EXAM_CATALOG.map(exam => ({ exam_number: exam.exam_number, question_numbers: [] }))
+const staticExams: readonly ExamCatalogEntry[] = EXAM_CATALOG
 const catalogExams = computed(() => catalogEnabled.value ? publicCatalog.value ?? [] : staticExams)
 const selectedCategories = ref<string[]>([])
 const parts = computed(() => studyCatalog.value?.data.study_outline ?? [])
@@ -94,9 +95,7 @@ const hasConditionSelection = computed(() => Boolean(studyCatalog.value) && !stu
 
 const examIsLocked = (examNumber: number) => examNumber > FREE_EXAM_MAX && !hasFullAccess.value
 const examTarget = (exam: ExamCatalogEntry) => (
-  examIsLocked(exam.exam_number) ? '/premium' : catalogEnabled.value && catalogExamStartNumber(exam) !== undefined
-    ? `/practice/${exam.exam_number}/${catalogExamStartNumber(exam)}`
-    : { path: '/practice/start', query: { exams: String(exam.exam_number) } }
+  examIsLocked(exam.exam_number) ? '/premium' : `/practice/${exam.exam_number}/${catalogExamStartNumber(exam) ?? 1}`
 )
 const startConditionalPractice = (order: PracticeOrder) => {
   if (!hasConditionSelection.value) return
@@ -201,11 +200,8 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         role="tabpanel"
         aria-labelledby="exam-mode-tab"
       >
-        <p v-if="catalogEnabled && (catalogStatus === 'pending' || catalogStatus === 'idle')" role="status">模擬試験を読み込んでいます。</p>
-        <p v-else-if="catalogError" role="alert">模擬試験を読み込めませんでした。<button type="button" @click="refreshCatalog()">再読み込み</button></p>
-        <p v-else-if="catalogEnabled && !catalogExams.length" role="status">現在利用できる公開問題はありません。</p>
         <div class="exam-grid-heading">
-          <p><strong>{{ catalogEnabled ? `公開中 ${catalogExams.length}回` : `模擬試験 全${EXAM_CATALOG.length}回` }}</strong><span>1問ずつ演習</span></p>
+          <p><strong>模擬試験 全{{ staticExams.length }}回</strong><span>1問ずつ演習</span></p>
           <NuxtLink v-if="!hasFullAccess" class="premium-info-link" to="/premium">
             <UIcon name="i-lucide-lock-keyhole" />
             模擬試験{{ FREE_EXAM_MAX + 1 }}以降はプレミアム会員向けです
@@ -213,13 +209,14 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         </div>
         <div class="exam-grid">
           <NuxtLink
-            v-for="exam in catalogExams"
+            v-for="exam in staticExams"
             :key="exam.exam_number"
             class="exam-card"
             :to="examTarget(exam)"
+            no-prefetch
             :aria-label="examIsLocked(exam.exam_number) ? `模擬試験${exam.exam_number}はプレミアム会員向けです` : `模擬試験${exam.exam_number}を始める`"
           >
-            <span class="exam-card-copy"><strong>{{ catalogExamLabel(exam.exam_number) }}</strong><span v-if="catalogEnabled">{{ exam.question_numbers.length }}問収録</span><span v-else>{{ examIsLocked(exam.exam_number) ? 'プレミアム会員向け' : '無料で演習' }}</span></span>
+            <span class="exam-card-copy"><strong>{{ catalogExamLabel(exam.exam_number) }}</strong><span>{{ exam.question_numbers.length }}問収録{{ examIsLocked(exam.exam_number) ? '・プレミアム会員向け' : '' }}</span></span>
             <UIcon :name="examIsLocked(exam.exam_number) ? 'i-lucide-lock-keyhole' : 'i-lucide-arrow-right'" aria-hidden="true" />
           </NuxtLink>
         </div>
@@ -232,6 +229,8 @@ watch(availableExamNumbers, (examNumbers, previousExamNumbers) => {
         role="tabpanel"
         aria-labelledby="conditions-mode-tab"
       >
+        <p v-if="catalogStatus === 'pending' || catalogStatus === 'idle'" role="status">出題条件を読み込んでいます。</p>
+        <p v-else-if="catalogError" role="alert">問題一覧を読み込めませんでした。<button type="button" @click="refreshCatalog()">再読み込み</button></p>
         <form class="condition-form" @submit.prevent="startConditionalPractice('sequential')">
           <div class="condition-fields">
             <fieldset class="condition-fieldset study-fieldset">

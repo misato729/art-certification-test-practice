@@ -40,11 +40,12 @@ test('section entry validates publication and preserves a resolved subset', () =
   assert.match(start, /if \(!numbers.length\)/)
   assert.match(start, /exam.access !== 'paid_membership_required'/)
 })
-test('sidebar uses configured sections without listing all authoring groups', () => {
-  assert.match(sidebar, /artSectionLinks\(exam, EXAM_CONFIG\)/)
-  assert.match(sidebar, /v-for="entry in exam.sectionLinks"/)
+test('sidebar uses static question links while practice still renders material-aware content', () => {
+  assert.match(sidebar, /createStaticExamNavigation\(EXAM_CATALOG,/)
+  assert.match(sidebar, /v-for="entry in exam.questions"/)
+  assert.doesNotMatch(sidebar, /usePracticeCatalog\(/)
   assert.doesNotMatch(sidebar, /v-for="entry in exam.groupLinks"/)
-  assert.match(sidebar, /isArtSectionActive\(section,/)
+  assert.match(sidebar, /staticPracticePosition\(route.path\)/)
 })
 test('header distinguishes included application questions from excluded practical problems', () => {
   assert.match(home, /別枠の実践問題は含みません/)

@@ -14,44 +14,39 @@ test('one shared exam sidebar is rendered inside the sticky site header', () => 
   assert.match(header, /\.site-header\s*\{[^}]*position:\s*sticky;[^}]*top:\s*0;/)
 })
 
-test('mobile accordion starts closed and keeps a separate group accordion', () => {
+test('mobile menu starts closed and exams have separate question-list toggles', () => {
   assert.match(sidebar, /const mobileOpen = ref\(false\)/)
   assert.match(sidebar, /:aria-expanded="mobileOpen"/)
   assert.match(sidebar, /aria-controls="exam-sidebar-content"/)
   assert.match(sidebar, /id="exam-sidebar-content"/)
-  assert.match(sidebar, /:aria-expanded="openExam === exam.exam_number"/)
-  assert.match(sidebar, /mobileOpen \? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'/)
+  assert.match(sidebar, /:aria-expanded="openExam === exam.examNumber"/)
+  assert.match(sidebar, /:aria-controls="`exam-\$\{exam.examNumber\}-questions`"/)
   assert.match(sidebar, /\.mobile-open \.sidebar-content\s*\{ display: block; \}/)
 })
 
-test('navigation closes the mobile list and shares the published catalog', () => {
+test('navigation closes mobile menu, Escape restores focus, and no catalog is loaded', () => {
   assert.match(sidebar, /watch\(\(\) => route.fullPath, closeMobileList\)/)
-  assert.equal(sidebar.match(/@click="closeMobileList"/g)?.length, 3)
+  assert.equal(sidebar.match(/@click="closeMobileList"/g)?.length, 2)
   assert.match(sidebar, /@keydown.esc="closeSidebarOnEscape"/)
   assert.match(sidebar, /mobileToggle.value\?\.focus\(\)/)
-  assert.match(sidebar, /usePracticeCatalog\(/)
-  assert.doesNotMatch(sidebar, /\b(?:useFetch|useApi|\$fetch)\s*\(/)
+  assert.doesNotMatch(sidebar, /\b(?:usePracticeCatalog|useFetch|useAsyncData|useApi|\$fetch)\s*\(/)
+  assert.doesNotMatch(sidebar, /sidebar-loading|catalogStatus|catalogError/)
 })
 
-test('sidebar labels configured sections rather than treating every topic as a major question', () => {
-  assert.match(sidebar, /catalogExamLabel\(exam.exam_number\)/)
-  assert.match(sidebar, /artSectionLinks\(exam, EXAM_CONFIG\)/)
-  assert.match(sidebar, /v-for="entry in exam.sectionLinks"/)
-  assert.match(sidebar, /\{\{ entry.label \}\}/)
-  assert.match(sidebar, /isArtSectionActive\(section,/)
+test('sidebar renders number links and disables link prefetch', () => {
+  assert.match(sidebar, /createStaticExamNavigation\(EXAM_CATALOG,/)
+  assert.match(sidebar, /v-for="entry in exam.questions"/)
+  assert.match(sidebar, /問\{\{ entry.number \}\}/)
   assert.match(sidebar, /:to="entry.to"/)
-  assert.doesNotMatch(sidebar, /v-for="question in exam.question_numbers"/)
-  assert.doesNotMatch(sidebar, /exam.title\s*\|\|/)
-  assert.match(sidebar, /v-else-if="!exams.length"/)
-  assert.match(sidebar, /createSidebarExamCatalog\(/)
-  assert.doesNotMatch(sidebar, /v-if="exam.sectionLinks.length"/)
-  assert.match(sidebar, /プレミアム会員で利用/)
-  assert.match(sidebar, /演習を開始/)
+  assert.equal(sidebar.match(/\bno-prefetch\b/g)?.length, 2)
+  assert.match(sidebar, /:aria-current="isCurrentQuestion\(exam.examNumber, entry.number\) \? 'page' : undefined"/)
+  assert.doesNotMatch(sidebar, /sectionLinks|groupLinks|\/practice\/start/)
 })
 
-test('group titles wrap within the sidebar and keep comfortable link targets', () => {
-  assert.match(sidebar, /\.group-list a\s*\{[^}]*min-width:\s*0;[^}]*min-height:\s*44px;[^}]*overflow-wrap:\s*anywhere;/)
+test('number links keep comfortable targets and titles can wrap', () => {
+  assert.match(sidebar, /\.question-list a\s*\{[^}]*min-width:\s*0;[^}]*min-height:\s*44px;/)
   assert.match(sidebar, /\.exam-link\s*\{[^}]*min-width:\s*0;[^}]*overflow-wrap:\s*anywhere;/)
+  assert.match(sidebar, /button:focus-visible/)
 })
 
 test('home anchor leaves room for both mobile header rows', () => {
@@ -59,16 +54,20 @@ test('home anchor leaves room for both mobile header rows', () => {
   assert.match(source('pages/index.vue'), /scroll-margin-top: calc\(var\(--site-navigation-height, var\(--header-height\)\) \+ 20px\)/)
 })
 
-test('mobile exam grid shows two columns and reserves three compact rows', () => {
+test('mobile exam rows stack; question grids do not overlap adjacent rows', () => {
   const mobileStyles = sidebar.split('@media (max-width: 760px)')[1]
   assert.ok(mobileStyles)
-  assert.match(sidebar, /v-else class="exam-groups"/)
-  assert.match(mobileStyles, /\.exam-groups\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/)
-  assert.match(mobileStyles, /--exam-row-height: 56px/)
-  assert.match(mobileStyles, /var\(--exam-row-height\) \* 3 \+ var\(--exam-grid-gap\) \* 2 \+ 25px/)
-  assert.doesNotMatch(mobileStyles, /\.exam-group.expanded\s*\{[^}]*grid-column/)
-  assert.match(mobileStyles, /width: calc\(200% \+ var\(--exam-grid-gap\)\)/)
-  assert.match(mobileStyles, /\.exam-group:nth-child\(even\) \.group-list\s*\{\s*margin-left: calc\(-100% - var\(--exam-grid-gap\)\)/)
-  assert.match(mobileStyles, /\.group-list\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\)/)
+  assert.match(mobileStyles, /\.exam-groups\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\)/)
+  assert.match(mobileStyles, /\.question-list\s*\{[^}]*grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/)
   assert.match(mobileStyles, /overflow-y: auto/)
+  assert.match(mobileStyles, /100dvh/)
+  assert.doesNotMatch(mobileStyles, /width: calc\(200%|margin-left: calc\(-100%/)
+})
+
+test('question routes open the current exam and desktop collapse still belongs to the layout', () => {
+  assert.match(sidebar, /watch\(\(\) => currentPosition.value\?\.examNumber,/)
+  assert.match(sidebar, /\{ immediate: true \}/)
+  assert.match(sidebar, /emit\('toggle-desktop'\)/)
+  assert.match(sidebar, /desktopToggle.value\?\.focus\(\)/)
+  assert.match(sidebar, /\.desktop-collapsed \.sidebar-content \{ display: none; \}/)
 })
